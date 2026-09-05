@@ -408,6 +408,118 @@
     flex-shrink: 0;
   }
 
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(5,3,1,0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 20px;
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(18,16,10,0.96), rgba(8,6,3,0.96));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    color: var(--cream);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    transform: translateY(18px) scale(0.98);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .modal h3 {
+    font-family: 'Marcellus', serif;
+    font-size: 18px;
+    color: var(--gold-bright);
+    margin: 0 0 18px;
+    letter-spacing: 0.02em;
+  }
+
+  .modal label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-sub);
+    margin: 14px 0 6px;
+  }
+
+  .modal input,
+  .modal textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(20,18,14,0.7);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.25s ease;
+  }
+
+  .modal input:focus,
+  .modal textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .modal textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .modal .modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .modal button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(18,16,10,0.9), rgba(8,6,3,0.9));
+    color: var(--cream);
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.2s ease;
+  }
+
+  .modal button.primary {
+    border-color: var(--gold-dim);
+  }
+
+  .modal button:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+
+  .modal .hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--bronze);
+  }
+
   @media (max-width: 380px) {
     .page { padding: 36px 18px 48px; }
     .logo-glow { width: 300px; }
@@ -543,13 +655,13 @@
       <div class="section-content">
 
         <a class="link-plate" href="https://tr.ee/MmbhI74f_1" target="_blank" rel="noopener">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           <span class="link-label">Sadarbība</span>
           <span class="chevron">›</span>
         </a>
 
         <a class="link-plate" href="https://tr.ee/pieteikumaanketa" target="_blank" rel="noopener">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
           <span class="link-label">Rezervē sev konsultāciju vai mentoringu par kriptovalūtu</span>
           <span class="chevron">›</span>
         </a>
@@ -585,10 +697,101 @@
 
 </div>
 
-<a class="chat-widget" href="https://t.me/mracryptoo" target="_blank" rel="noopener">
+<a class="chat-widget" href="https://t.me/mracryptoo" target="_blank" rel="noopener" onclick="event.preventDefault(); document.getElementById('questionModal').classList.add('open');">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.9c-.3-.2-.7-.3-1.4 0L2.9 11.7c-.9.3-.9 1 .1 1.3l4.5 1.4 1.7 5.3c.2.6.4.8.7.8.2 0 .4-.1.6-.3l2.5-2.4 4.6 3.4c.5.4 1 .2 1.2-.4L22 5.9c.2-.6.1-1-.1-1z"/></svg>
   <span class="chat-label">Ir jautājums?</span>
 </a>
+
+<div class="modal-overlay" id="questionModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">Uzdod savu jautājumu</h3>
+    <form id="questionForm" novalidate>
+      <label for="qText">Jautājums</label>
+      <textarea id="qText" placeholder="Raksti šeit savu jautājumu..." required></textarea>
+
+      <label for="qContact">Kontakts — telefons, e-pasts vai Telegram @nick</label>
+      <input id="qContact" type="text" placeholder="piemērs: +371 ..., e-pasts, vai @nick" required />
+
+      <div class="modal-actions">
+        <button type="button" id="modalClose">Aizvērt</button>
+        <button type="submit" class="primary">Sūtīt</button>
+      </div>
+      <p class="hint">Sūtot, ziņa tiks aizsūtīta tieši Telegram un tu paliksi mājaslapā.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('questionModal');
+  const openBtn = document.querySelector('.chat-widget');
+  const closeBtn = document.getElementById('modalClose');
+  const form = document.getElementById('questionForm');
+  const BOT_USERNAME = 'andrejmracrypto_bot';
+  const CHAT = '1494676964';
+
+  function openModal() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = document.getElementById('qText').value.trim();
+    const contact = document.getElementById('qContact').value.trim();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    if (!text || !contact) {
+      alert('Lūdzu aizpildi jautājumu un kontaktu.');
+      return;
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sūtu...';
+    const message = encodeURIComponent('Jautājums no mracrypto.co:\n' + text + '\nKontakts: ' + contact);
+    const url = 'https://api.telegram.org/bot8985505842:AAEolJhvN0-fB8IyZ5q15Y9q8u-BOcyHpSk/sendMessage';
+    const payload = new URLSearchParams({ chat_id: '1494676964', text: message, parse_mode: 'HTML' });
+    fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload })
+      .then(r => r.json().catch(() => ({})))
+      .then(() => {
+        closeModal();
+        form.reset();
+        showToast('Paldies! Tavs jautājums ir nosūtīts.');
+      })
+      .catch(() => {
+        alert('Neizdevās nosūtīt. Pamēģini vēlreiz.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      });
+  });
+
+  function showToast(msg) {
+    let t = document.getElementById('formToast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'formToast';
+      t.textContent = msg;
+      Object.assign(t.style, {
+        position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
+        background: 'rgba(18,16,10,0.96)', color: '#fff', padding: '12px 18px', borderRadius: '10px',
+        border: '1px solid var(--gold-dim)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', zIndex: '60',
+        fontFamily: 'inherit', fontSize: '14px'
+      });
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.opacity = '1';
+    setTimeout(() => { t.style.opacity = '0'; }, 2500);
+  }
+</script>
 
 </body>
 </html>
