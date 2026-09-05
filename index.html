@@ -3,180 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@MrACrypto | Kripto Analītika & Mentorships</title>
-    
-    <!-- Google tag (gtag.js) - GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-451YN4C56S"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-451YN4C56S');
-    </script>
-
+    <title>@MrACrypto - Kripto Analītika & Mentorships</title>
     <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: rgba(20, 18, 14, 0.85);
+            --card-border: rgba(212, 175, 55, 0.35);
+            --card-border-hover: rgba(212, 175, 55, 0.8);
+            --text-main: #ffffff;
+            --text-sub: #d0c0a0;
+            --gold: #d4af37;
+            --gold-bright: #f3e5ab;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+
         body {
-            background-color: #0b0b0b;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
-            min-height: 100vh;
+            padding: 40px 20px 80px 20px;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* Fona attēls */
+        .bg-photo {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAPoAoADASIAAhEBAxEB/8QAHAAAAgMBAQEBAAAAAAAAAAAAAAMBAgQFBgcI/8QAURAAAgECBAMDCAcFBgQFAgUFAQIDABEEEiExBUFREyJhFDJScYGRktEGQlOhscHhFSNUYpMkM0Ny0vA0gqLxRGNzlLIlgwcWNWSEwuKjs9P/xAAaAQADAQEBAQAAAAAAAAAAAAAAAQIDBAUG/8QAMREAAgICAgEEAQMDAwUBAQAAAAECEQMhEjFBBBMiUWEycYGRofAUI7EFQsHh8dFS/9oADAMBAAIRAxEAPwD8qUVfJ/MvvoyfzL76AKUVbJ/MvvoyfzL76AK0VbJ/MvvoyfzL76AK0VJFt6igAooooAKKKKALK1r31B3FDLbUaqdjVasjZdCLqdxQBAq1s2o87pQ65dVN1OxqoOtAEUVcjPqPO5iqUAFFFFABVla2h2NVqaAJZcviDsabGyuMkhtbzW6fpS0OhBF1oZcuu4OxpDB0KMVYWIqlPjdXUJKDYeaRuPCmusMMhVu2DDwWix8b2ZKK2h4WBIM2gudFqO0w3Wf3LSt/Q+K+zFU861l8KdzP7lqhOG5Gb3CixcfyIYaXG1VrTfDW3m9wqR5OfrTDxIGlFhxM3KnQSgKY5bmIm/iD1FUkRo2s36EVU+FPsS0MnhMTC9iCLqw2YUqtEEyhOylBaIm+m6nqP961GIhMRANipF1YbEdaSfhja8oQDY3FXPf1Hnc/GqUA2qiQBIN6kjNqN+Yq1s+3ndOtUBsfGgCKKuQGFxvzFUoAKKKKAJqKm+lqigAooooAKKkb0HWgCKKKKACipFr60Hw2oAiiiigAooooAKKKKACiiigAooqaAIoqaigAooooAKKKKACiiigAooooAKKKKACiiigAooooAtkb0W91GRvRPuozt6R99GdvSPvoAMjeifdRkb0T7qM7ekffU529I++geiMjeifdUEEGxFqnO3pH301XEgySn/K3T9KAFA2FjtUEe6pdSjEMNaFNt9qBFaKswtttVaACiiigAooooAujZdxdTuKHW2q6qdjVKuj5bgi6ncUDKgkG43q5GcXHncxUOlgCDdTsaqNNaAIophAcXHncxS6BE27pOlSFJUnTSq1N9LcqAAVZG0sdVPKq2vWw4GVcMk7LZHvkNxrbfSk2l2NJvoskAEOIPZm8YBbMwuLnlWQlSbnNVQbG9DHMSTQkNu0TdP5qO5/NUKQL5hfSg2t40CJ/d/zfdRdP56qLc6igRf8Ad/zfdR3OWb21SimA+NwV7OXzeR9H9Ko6FHs33c6qDfQ++moQR2cpsOTdP0pdFdifVWnDTgIYpgTCxvpup6j/AHrSJEZGIbQ1A1oasSdMbLF2bDMbqdQw2I6ilMLbbU/DyjKYpgWiJvpup6j/AHrUTxNC2XRlIurDZh1FJPwymr2hA0pn95t5/wCNR2f7vNfXpVNqZPQAkHoRViMwuvtFXFpR/wCZ/wDL9aXqrdDQBWirkAi6j1iqUxE1FFFABRUki+gtUUAFFFTQBFFFFABU1FFAEkWNRU0UARRU1FABRRRQBNRU1FABRRRQAUUUUAFFTUUAFFFFABRU1FABRRRQAUUUUAFFTUUAFFFFABRRRQAUUUUAWuOhFxd6IqtFAFrodke9FodkRNFaALXDoyvRryNFY0AXRgyhJNuTdP0qskbRsVYa1Uix1p8MoI7OTzToGtfL+lLopb0xINt9qGFttQedWmjMb5W9YI2IqqkDQ') no-repeat center center;
+            background-size: cover;
+            opacity: 0.4;
+            filter: brightness(0.7);
+        }
+
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 1;
         }
-        .avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 2px solid #f3ba2f;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            background: #1a1a1a;
-            overflow: hidden;
-        }
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #ffffff;
+
+        /* Logo sadaļa */
+        .logo-container {
+            margin-bottom: 20px;
             text-align: center;
         }
+
+        .logo-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: var(--gold-bright);
+            margin-bottom: 5px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
         .subtitle {
-            font-size: 13px;
-            color: #f3ba2f;
+            font-size: 14px;
+            color: var(--gold);
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 30px;
             text-align: center;
             font-weight: 600;
         }
+
+        /* Kategoriju virsraksti */
         .section-title {
             width: 100%;
             font-size: 12px;
-            color: #888888;
+            color: var(--text-sub);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin: 25px 0 10px 5px;
-            text-align: left;
+            font-weight: bold;
         }
-        .link-button {
+
+        /* Saites / Pogas */
+        .link-card {
             width: 100%;
-            background-color: #141414;
-            border: 1px solid #f3ba2f;
-            color: #ffffff;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
             padding: 16px 20px;
             margin-bottom: 12px;
-            border-radius: 12px;
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .link-card:hover {
+            border-color: var(--card-border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
+            background: rgba(30, 26, 20, 0.9);
+        }
+
+        .link-icon {
+            font-size: 22px;
+            margin-right: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            min-width: 30px;
         }
-        .link-button:hover {
-            background-color: #f3ba2f;
-            color: #0b0b0b;
-            transform: translateY(-2px);
+
+        .link-content {
+            display: flex;
+            flex-direction: column;
         }
-        .bio-box {
+
+        .link-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .link-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-top: 3px;
+        }
+
+        /* Par mani bloks */
+        .about-card {
             width: 100%;
-            background-color: #141414;
-            border: 1px solid #333333;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 20px;
-            margin-top: 15px;
-            text-align: left;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
         }
-        .bio-box h3 {
-            font-size: 14px;
-            color: #f3ba2f;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+
+        .about-card h3 {
+            font-size: 16px;
+            color: var(--gold-bright);
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
-        .bio-box p {
-            font-size: 13px;
-            color: #cccccc;
-            line-height: 1.5;
+
+        .about-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-sub);
+        }
+
+        /* Apakšējā čata poga */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--gold);
+            padding: 10px 16px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .chat-widget:hover {
+            background: rgba(30, 26, 20, 0.95);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Logo / Avatar -->
-        <div class="avatar">
-            <img src="https://avatars.githubusercontent.com/u/104313264?v=4" alt="MrACrypto Logo">
-        </div>
+    <div class="bg-photo"></div>
 
+    <div class="container">
+        <!-- Logo un galvene -->
+        <div class="logo-container">
+            <img src="https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=150" alt="MrACrypto Logo">
+        </div>
         <h1>@MrACrypto</h1>
         <div class="subtitle">Kripto Analītika & Mentorships</div>
 
-        <!-- Galvenās saites -->
-        <a href="https://t.me/mracrypto" class="link-button" target="_blank">
-            🤝 1-uz-1 Mentorships (Telegram)
-        </a>
-        
-        <a href="https://forms.gle/piemērs" class="link-button" target="_blank">
-            ❓ Uzdod savu jautājumu (Google Forma)
+        <!-- Galvenās pogas -->
+        <a href="https://tr.ee/pieteikumaanketa" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">🤝</span>
+            <div class="link-content">
+                <span class="link-title">1-uz-1 Mentorships (Telegram)</span>
+                <span class="link-desc">Individuāla apmācība un konsultācijas</span>
+            </div>
         </a>
 
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScZS8Qa0fer328np3MWJFq78lvgedyNvFIBU90fy2JvHtTNYA/viewform?usp=publish-editor" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">❓</span>
+            <div class="link-content">
+                <span class="link-title">Uzdod savu jautājumu (Google Forma)</span>
+                <span class="link-desc">Saņem atbildi uz savu kripto jautājumu</span>
+            </div>
+        </a>
+
+        <a href="https://tr.ee/MmbhI74f_1" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">🤝</span>
+            <div class="link-content">
+                <span class="link-title">Sadarbība</span>
+                <span class="link-desc">Partnerības un sadarbības iespējas</span>
+            </div>
+        </a>
+
+        <a href="https://redirect.sale/tangem/?promocode=KRIPTONR1" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">💼</span>
+            <div class="link-content">
+                <span class="link-title">Tangem maka iegāde</span>
+                <span class="link-desc">Drošs aparatūras maks kriptovalūtām</span>
+            </div>
+        </a>
+
+        <a href="https://t.me/kriptonr1" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">🔒</span>
+            <div class="link-content">
+                <span class="link-title">Whitelist pieteikšanās</span>
+                <span class="link-desc">Kripto Nr.1 privātā grupa</span>
+            </div>
+        </a>
+
+        <a href="https://t.me/kriptonr1" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">🚀</span>
+            <div class="link-content">
+                <span class="link-title">KriptoNr1 Kopiena / Platforma</span>
+                <span class="link-desc">Ekskluzīva piekļuve signāliem un analītikai</span>
+            </div>
+        </a>
+
+        <!-- Kripto & Platformas -->
         <div class="section-title">Kripto & Platformas</div>
-        
-        <a href="https://example.com" class="link-button" target="_blank">
-            🚀 KriptoNr1 Kopiena / Platforma
+
+        <a href="https://t.co/43Jn4P0doT" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">💱</span>
+            <div class="link-content">
+                <span class="link-title">Kripto birža Crypto.com</span>
+                <span class="link-desc">Tava kripto birža</span>
+            </div>
         </a>
 
+        <a href="https://m.bitunix.com/register?vipCode=KRIPTONR1" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">💱</span>
+            <div class="link-content">
+                <span class="link-title">Kripto birža Bitunix</span>
+                <span class="link-desc">Tava kripto birža</span>
+            </div>
+        </a>
+
+        <a href="https://www.pionex.com/en-US/sign/ref/gxs6W89t" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">💱</span>
+            <div class="link-content">
+                <span class="link-title">Kripto birža Pionex</span>
+                <span class="link-desc">Tava kripto birža</span>
+            </div>
+        </a>
+
+        <!-- Sociālie Tīkli -->
         <div class="section-title">Sociālie Tīkli</div>
 
-        <a href="https://tiktok.com/@mracrypto" class="link-button" target="_blank">
-            🎵 TikTok (@mracrypto)
-        </a>
-        
-        <a href="https://instagram.com/mracrypto" class="link-button" target="_blank">
-            📸 Instagram (@mracrypto)
-        </a>
-        
-        <a href="https://youtube.com/@mracrypto" class="link-button" target="_blank">
-            ▶️ YouTube Kanāls
-        </a>
-        
-        <a href="https://twitter.com/mracrypto" class="link-button" target="_blank">
-            🛜 X / Twitter (@mracrypto)
+        <a href="https://tiktok.com/@mracrypto" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">🎵</span>
+            <div class="link-content">
+                <span class="link-title">TikTok (@mracrypto)</span>
+                <span class="link-desc">Īsie video un tirgus aktualitātes</span>
+            </div>
         </a>
 
-        <!-- Par mani lodziņš -->
-        <div class="bio-box">
+        <a href="https://www.instagram.com/mracrypto_?igsh=MW1wYmRwcGRkMW9zag%3D%3D" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">📸</span>
+            <div class="link-content">
+                <span class="link-title">Instagram (@mracrypto_)</span>
+                <span class="link-desc">Ikdienas ieskati un analīze</span>
+            </div>
+        </a>
+
+        <a href="https://youtube.com/@mracryptos?si=oBwZRCCkCShHe4b0" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">▶️</span>
+            <div class="link-content">
+                <span class="link-title">YouTube Kanāls</span>
+                <span class="link-desc">Padziļināti video un apskati</span>
+            </div>
+        </a>
+
+        <a href="https://x.com/mracrypto_?s=21" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">🌐</span>
+            <div class="link-content">
+                <span class="link-title">X / Twitter (@mracrypto_)</span>
+                <span class="link-desc">Operatīvās ziņas un viedokļi</span>
+            </div>
+        </a>
+
+        <a href="https://www.threads.com/@mracrypto_?igshid=NTc4MTIwNjQ2YQ==" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">🧵</span>
+            <div class="link-content">
+                <span class="link-title">Threads (@mracrypto_)</span>
+                <span class="link-desc">Papildus sociālie tīkli</span>
+            </div>
+        </a>
+
+        <!-- Telegram -->
+        <div class="section-title">Telegram</div>
+
+        <a href="https://t.me/mracryptoo" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">✈️</span>
+            <div class="link-content">
+                <span class="link-title">Telegram Personīgais konts</span>
+                <span class="link-desc">@mracryptoo</span>
+            </div>
+        </a>
+
+        <a href="https://t.me/kriptonr1" class="link-card" target="_blank" rel="noopener">
+            <span class="link-icon">✈️</span>
+            <div class="link-content">
+                <span class="link-title">Kripto Nr.1 Telegram</span>
+                <span class="link-desc">Latvijas lielākā kripto kopiena</span>
+            </div>
+        </a>
+
+        <!-- Par mani -->
+        <div class="about-card">
             <h3>👤 Par mani</h3>
             <p>Kriptovalūtu un pasīvo ienākumu investors kopš 2021. gada. Mana stiprā puse ir ātri pielāgoties mainīgajiem tirgus apstākļiem, kas palīdz veidot diversificētu un ilgtermiņā ilgtspējīgu investīciju portfeli. Man ir vairāk nekā 10 gadu pieredze pārdošanā un komandu vadībā, kas sniedz stratēģisku redzējumu biznesa attīstībā un partnerībās.</p>
         </div>
     </div>
+
+    <!-- Čata poga stūrī -->
+    <a href="https://t.me/mracryptoo" class="chat-widget" target="_blank" rel="noopener">
+        <span>Ir jautājums?</span>
+        <span>💬</span>
+    </a>
 
 </body>
 </html>
