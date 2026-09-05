@@ -716,7 +716,6 @@
         <button type="button" id="modalClose">Aizvērt</button>
         <button type="submit" class="primary">Sūtīt</button>
       </div>
-      <p class="hint">Sūtot, ziņa tiks aizsūtīta tieši Telegram un tu paliksi mājaslapā.</p>
     </form>
   </div>
 </div>
@@ -754,7 +753,7 @@
     }
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sūtu...';
-    const message = encodeURIComponent('Jautājums no mracrypto.co:\n' + text + '\nKontakts: ' + contact);
+    const message = 'Jautājums no mracrypto.co:\n' + text + '\nKontakts: ' + contact;
     const url = 'https://api.telegram.org/bot8985505842:AAEolJhvN0-fB8IyZ5q15Y9q8u-BOcyHpSk/sendMessage';
     const payload = new URLSearchParams({ chat_id: '1494676964', text: message, parse_mode: 'HTML' });
     fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload })
