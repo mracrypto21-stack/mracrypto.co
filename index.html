@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@MrACrypto | Saites & Kontakti</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-451YN4C56S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-451YN4C56S');
+
+      // Funkcija custom notikumu izsekošanai
+      function trackClick(category, label, url) {
+        gtag('event', 'click', {
+          'event_category': category,
+          'event_label': label,
+          'transport_type': 'beacon'
+        });
+        window.open(url, '_blank');
+        return false;
+      }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0b0704;
+            color: #F3E9D4;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* PROFILA SADAĻA */
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #F7931A;
+            margin-bottom: 15px;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(247, 147, 26, 0.35);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #FFC864;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #F7931A;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            color: #bfa882;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 20px 0 10px 0;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        /* SAITES & POGAS */
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(18, 12, 7, 0.9);
+            border: 1px solid #F7931A;
+            color: #F3E9D4;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .link-btn:hover {
+            background: #F7931A;
+            color: #0b0704;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(247, 147, 26, 0.4);
+        }
+
+        .link-btn.highlight {
+            background: linear-gradient(135deg, rgba(247, 147, 26, 0.3), rgba(11, 7, 4, 0.95));
+            border: 2px solid #FFC864;
+            box-shadow: 0 0 12px rgba(255, 200, 100, 0.2);
+        }
+
+        .link-btn.highlight:hover {
+            background: #FFC864;
+            color: #0b0704;
+        }
+
+        /* PAR MANI KORTELĒ */
+        .about-card {
+            background: rgba(18, 12, 7, 0.9);
+            border: 1px solid rgba(247, 147, 26, 0.4);
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 24px;
+            text-align: left;
+        }
+
+        .about-title {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: #FFC864;
+            margin-bottom: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .about-text {
+            font-size: 0.88rem;
+            color: #d1c2a5;
+            line-height: 1.55;
+            text-align: justify;
+        }
+
+        /* PELDOŠĀ ČATA POGA */
+        .floating-chat-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .chat-badge-text {
+            background: #1a120b;
+            border: 1px solid #F7931A;
+            color: #F3E9D4;
+            padding: 9px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            white-space: nowrap;
+        }
+
+        .chat-icon-circle {
+            width: 56px;
+            height: 56px;
+            background: #F7931A;
+            color: #0b0704;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: bold;
+            box-shadow: 0 4px 18px rgba(247, 147, 26, 0.55);
+            transition: transform 0.2s ease;
+        }
+
+        .floating-chat-btn:hover .chat-icon-circle {
+            transform: scale(1.12);
+        }
+
+        @media (max-width: 480px) {
+            .chat-badge-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profila bilde -->
+        <img src="PROFILA_BILDE.jpg" alt="@MrACrypto" class="profile-img">
+        
+        <h1>@MrACrypto</h1>
+        <div class="subtitle">Kripto Analītika & Mentorships</div>
+
+        <!-- Prioritārās saites -->
+        <a href="https://t.me/mracrypto" class="link-btn highlight" onclick="return trackClick('Mentorship', 'Telegram Contact', 'https://t.me/mracrypto')">
+            🎓 1-uz-1 Mentorships (Telegram)
+        </a>
+
+        <a href="https://forms.gle/peKuipu1yHLXWmhWA" class="link-btn" onclick="return trackClick('Forms', 'Google Form Main Button', 'https://forms.gle/peKuipu1yHLXWmhWA')">
+            ❓ Uzdod savu jautājumu (Google Forma)
+        </a>
+
+        <!-- Kripto & Partneru sadaļa -->
+        <div class="section-title">Kripto & Platformas</div>
+        <a href="https://kriptonr1.xyz" class="link-btn" onclick="return trackClick('Crypto', 'KriptoNr1', 'https://kriptonr1.xyz')">
+            🚀 KriptoNr1 Kopiena / Platforma
+        </a>
+
+        <!-- Sociālie tīkli -->
+        <div class="section-title">Sociālie Tīkli</div>
+
+        <a href="https://www.tiktok.com/@mracrypto" class="link-btn" onclick="return trackClick('Social', 'TikTok', 'https://www.tiktok.com/@mracrypto')">
+            🎵 TikTok (@mracrypto)
+        </a>
+
+        <a href="https://www.instagram.com/mracrypto" class="link-btn" onclick="return trackClick('Social', 'Instagram', 'https://www.instagram.com/mracrypto')">
+            📸 Instagram (@mracrypto)
+        </a>
+
+        <a href="https://www.youtube.com/@mracrypto" class="link-btn" onclick="return trackClick('Social', 'YouTube', 'https://www.youtube.com/@mracrypto')">
+            ▶️ YouTube Kanāls
+        </a>
+
+        <a href="https://x.com/mracrypto" class="link-btn" onclick="return trackClick('Social', 'Twitter/X', 'https://x.com/mracrypto')">
+            🐦 X / Twitter (@mracrypto)
+        </a>
+
+        <!-- Par mani karte -->
+        <div class="about-card">
+            <div class="about-title">
+                <span>👤</span> Par mani
+            </div>
+            <div class="about-text">
+                Kriptovalūtu un pasīvo ienākumu investors kopš 2021. gada. Mana stiprā puse ir ātri pielāgoties mainīgajiem tirgus apstākļiem, kas palīdz veidot diversificētu un ilgtermiņā ilgtspējīgu investīciju portfeli. Man ir vairāk nekā 10 gadu pieredze pārdošanā un komandu vadībā, kas sniedz stratēģisku redzējumu biznesa attīstībā un partnerībās.
+            </div>
+        </div>
+    </div>
+
+    <!-- Peldošā čata ikona apakšējā labajā stūrī -->
+    <a href="https://forms.gle/peKuipu1yHLXWmhWA" class="floating-chat-btn" title="Uzdod jautājumu" onclick="return trackClick('Forms', 'Floating Chat Badge', 'https://forms.gle/peKuipu1yHLXWmhWA')">
+        <span class="chat-badge-text">Ir jautājums? 💬</span>
+        <div class="chat-icon-circle">❓</div>
+    </a>
+
+</body>
+</html>
