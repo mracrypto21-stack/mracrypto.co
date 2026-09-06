@@ -711,8 +711,8 @@
 
   </div>
 
-  <div class="about-card">
-    <div class="about-header">
+  <div class="about-card" style="text-align:left;">
+    <div class="about-header" style="text-align:center; display:flex; justify-content:center;">
       <img class="avatar" src="assets/portrait.png" alt="MrACrypto">
       <h3>Par mani</h3>
     </div>
@@ -857,7 +857,24 @@
     t.style.opacity = '1';
     setTimeout(() => { t.style.opacity = '0'; }, 2500);
   }
+
+  // Accordion: close other sections when opening one
+  document.querySelectorAll('details.section-group').forEach(details => {
+    details.addEventListener('toggle', () => {
+      if (details.open) {
+        document.querySelectorAll('details.section-group').forEach(other => {
+          if (other !== details) other.open = false;
+        });
+      }
+    });
+  });
+
 </script>
+
+
+<div style="text-align:center; padding:20px; font-size:11px; color:#9c7442; opacity:0.7; max-width:800px; margin:0 auto;">
+  <p><strong>Atruna:</strong> Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava pašu atbildlība.</p>
+</div>
 
 </body>
 </html>
