@@ -60,18 +60,18 @@
 
   /* Ticker bar */
   .ticker-bar {
-    width: 100%;
-    margin-bottom: 16px;
-    padding: 12px 16px;
-    background: linear-gradient(180deg, rgba(18,16,10,0.92), rgba(8,6,3,0.92));
-    border: 1px solid rgba(232,168,60,0.35);
+    width: 92%;
+    margin: 0 auto 16px;
+    padding: 10px 14px;
+    background: linear-gradient(180deg, rgba(18,16,10,0.72), rgba(8,6,3,0.72));
+    border: 1px solid rgba(232,168,60,0.22);
     border-radius: 999px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.55);
-    backdrop-filter: blur(6px);
+    gap: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    backdrop-filter: blur(4px);
   }
 
   .ticker-item {
@@ -637,18 +637,18 @@
   
   /* Ticker bar */
   .ticker-bar {
-    width: 100%;
-    margin-bottom: 16px;
-    padding: 12px 16px;
-    background: linear-gradient(180deg, rgba(18,16,10,0.92), rgba(8,6,3,0.92));
-    border: 1px solid rgba(232,168,60,0.35);
+    width: 92%;
+    margin: 0 auto 16px;
+    padding: 10px 14px;
+    background: linear-gradient(180deg, rgba(18,16,10,0.72), rgba(8,6,3,0.72));
+    border: 1px solid rgba(232,168,60,0.22);
     border-radius: 999px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.55);
-    backdrop-filter: blur(6px);
+    gap: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    backdrop-filter: blur(4px);
   }
 
   .ticker-item {
@@ -742,7 +742,7 @@
     </div>
     <div class="ticker-divider"></div>
     <div class="ticker-item">
-      <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <svg class="ticker-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.45 10.26c-.19.77-.89 1.34-1.7 1.34-.37 0-.74-.09-1.09-.28l-2.46 1.26-.33 2.1-1.15-.56c-.3.09-.62.14-.94.14-1.54 0-2.79-1.25-2.79-2.79s1.25-2.79 2.79-2.79c.32 0 .63.05.93.14l1.14-.56.34-2.1 2.46 1.26c.35-.19.72-.28 1.09-.28.81 0 1.51.57 1.7 1.34l.42 1.68.42-1.68z"/></svg>
       <div class="ticker-info">
         <span class="ticker-label">ETH</span>
         <span class="ticker-price" id="ethPrice">---</span>
@@ -1047,12 +1047,24 @@
       const totalCap = globalData.data.total_market_cap.usd;
       const totalCapChange = globalData.data.market_cap_change_percentage_24h;
 
-      const fmtPrice = n => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const fmtPrice = n => {
+        const val = Number(n);
+        if (!Number.isFinite(val)) return '---';
+        return '$' + Math.round(val).toLocaleString('en-US');
+      };
       const fmtChange = n => {
         const val = Number(n);
+        if (!Number.isFinite(val)) return { text: '---', color: 'var(--cream)' };
         const sign = val > 0 ? '+' : '';
         const color = val > 0 ? '#4ade80' : val < 0 ? '#f87171' : 'var(--cream)';
         return { text: sign + val.toFixed(2) + '%', color: color };
+      };
+      const fmtCap = n => {
+        const val = Number(n);
+        if (!Number.isFinite(val)) return '---';
+        if (val >= 1e12) return '$' + (val / 1e12).toFixed(2) + 'T';
+        if (val >= 1e9) return '$' + (val / 1e9).toFixed(2) + 'B';
+        return '$' + Math.round(val).toLocaleString('en-US');
       };
 
       const btcEl = document.getElementById('btcPrice');
@@ -1062,16 +1074,30 @@
       const capEl = document.getElementById('totalCap');
       const capCh = document.getElementById('totalCapChange');
 
-      if (btcEl) { btcEl.textContent = fmtPrice(btc.usd); }
-      if (btcCh) { const c = fmtChange(btc.usd_24h_change); btcCh.textContent = c.text; btcCh.style.color = c.color; }
-      if (ethEl) { ethEl.textContent = fmtPrice(eth.usd); }
-      if (ethCh) { const c = fmtChange(eth.usd_24h_change); ethCh.textContent = c.text; ethCh.style.color = c.color; }
-      if (capEl) { capEl.textContent = '$' + Math.round(totalCap).toLocaleString('en-US') + 'B'; }
+      if (btcEl) btcEl.textContent = fmtPrice(btc?.usd);
+      if (btcCh) { const c = fmtChange(btc?.usd_24h_change); btcCh.textContent = c.text; btcCh.style.color = c.color; }
+      if (ethEl) ethEl.textContent = fmtPrice(eth?.usd);
+      if (ethCh) { const c = fmtChange(eth?.usd_24h_change); ethCh.textContent = c.text; ethCh.style.color = c.color; }
+      if (capEl) capEl.textContent = fmtCap(totalCap);
       if (capCh) { const c = fmtChange(totalCapChange); capCh.textContent = c.text; capCh.style.color = c.color; }
     } catch (e) {
       console.error('Ticker load error:', e);
     }
   }
+
+
+  // Accordion logic: close other sections when one opens
+  document.querySelectorAll('.section-group').forEach(group => {
+    group.addEventListener('toggle', () => {
+      if (group.open) {
+        document.querySelectorAll('.section-group').forEach(other => {
+          if (other !== group && other.open) {
+            other.open = false;
+          }
+        });
+      }
+    });
+  });
 
   loadTicker();
   setInterval(loadTicker, 60000);
