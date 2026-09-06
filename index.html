@@ -57,6 +57,79 @@
                 radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,0,0,0.15), transparent 60%);
   }
 
+
+  /* Ticker bar */
+  .ticker-bar {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, rgba(18,16,10,0.92), rgba(8,6,3,0.92));
+    border: 1px solid rgba(232,168,60,0.35);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+  }
+
+  .ticker-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .ticker-item .ticker-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+
+  .ticker-item .ticker-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+  }
+
+  .ticker-item .ticker-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold-dim);
+    font-weight: 600;
+  }
+
+  .ticker-item .ticker-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cream);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ticker-item .ticker-change {
+    font-size: 11px;
+    font-weight: 500;
+    color: #4ade80;
+  }
+
+  .ticker-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(232,168,60,0.25);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 380px) {
+    .ticker-bar { padding: 10px 12px; gap: 6px; }
+    .ticker-item .ticker-price { font-size: 13px; }
+  }
+
   .page {
     position: relative;
     z-index: 2;
@@ -561,7 +634,80 @@
   }
 
   @media (max-width: 380px) {
-    .page { padding: 36px 18px 48px; }
+  
+  /* Ticker bar */
+  .ticker-bar {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, rgba(18,16,10,0.92), rgba(8,6,3,0.92));
+    border: 1px solid rgba(232,168,60,0.35);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+  }
+
+  .ticker-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .ticker-item .ticker-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+
+  .ticker-item .ticker-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+  }
+
+  .ticker-item .ticker-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold-dim);
+    font-weight: 600;
+  }
+
+  .ticker-item .ticker-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cream);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ticker-item .ticker-change {
+    font-size: 11px;
+    font-weight: 500;
+    color: #4ade80;
+  }
+
+  .ticker-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(232,168,60,0.25);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 380px) {
+    .ticker-bar { padding: 10px 12px; gap: 6px; }
+    .ticker-item .ticker-price { font-size: 13px; }
+  }
+
+  .page { padding: 36px 18px 48px; }
     .logo-glow { width: 300px; }
     .chat-widget span.chat-label { display: none; }
     .chat-widget { padding: 12px; border-radius: 50%; }
@@ -584,7 +730,36 @@
 
   <div class="divider fade-up delay-2"></div>
 
-  <div class="links fade-up delay-3">
+  
+  <div class="ticker-bar fade-up delay-2" id="tickerBar">
+    <div class="ticker-item">
+      <svg class="ticker-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.24 10.56c-.31-1.98-1.84-3.56-3.82-3.56-2.09 0-3.76 1.68-3.82 3.56h11.64zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm7.36 13.12c-.41 2.18-2.18 3.88-4.56 3.88s-4.15-1.7-4.56-3.88h9.12z"/></svg>
+      <div class="ticker-info">
+        <span class="ticker-label">BTC</span>
+        <span class="ticker-price" id="btcPrice">---</span>
+        <span class="ticker-change" id="btcChange">---</span>
+      </div>
+    </div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-item">
+      <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <div class="ticker-info">
+        <span class="ticker-label">ETH</span>
+        <span class="ticker-price" id="ethPrice">---</span>
+        <span class="ticker-change" id="ethChange">---</span>
+      </div>
+    </div>
+    <div class="ticker-divider"></div>
+    <div class="ticker-item">
+      <svg class="ticker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      <div class="ticker-info">
+        <span class="ticker-label">TOTAL CAP</span>
+        <span class="ticker-price" id="totalCap">---</span>
+        <span class="ticker-change" id="totalCapChange">---</span>
+      </div>
+    </div>
+  </div>
+<div class="links fade-up delay-3">
 
     <details class="section-group fade-up delay-3">
       <summary class="section-header">
@@ -859,6 +1034,47 @@
     t.style.opacity = '1';
     setTimeout(() => { t.style.opacity = '0'; }, 2500);
   }
+
+  async function loadTicker() {
+    try {
+      const [coins, globalData] = await Promise.all([
+        fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true').then(r => r.json()),
+        fetch('https://api.coingecko.com/api/v3/global').then(r => r.json())
+      ]);
+
+      const btc = coins.bitcoin;
+      const eth = coins.ethereum;
+      const totalCap = globalData.data.total_market_cap.usd;
+      const totalCapChange = globalData.data.market_cap_change_percentage_24h;
+
+      const fmtPrice = n => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const fmtChange = n => {
+        const val = Number(n);
+        const sign = val > 0 ? '+' : '';
+        const color = val > 0 ? '#4ade80' : val < 0 ? '#f87171' : 'var(--cream)';
+        return { text: sign + val.toFixed(2) + '%', color: color };
+      };
+
+      const btcEl = document.getElementById('btcPrice');
+      const btcCh = document.getElementById('btcChange');
+      const ethEl = document.getElementById('ethPrice');
+      const ethCh = document.getElementById('ethChange');
+      const capEl = document.getElementById('totalCap');
+      const capCh = document.getElementById('totalCapChange');
+
+      if (btcEl) { btcEl.textContent = fmtPrice(btc.usd); }
+      if (btcCh) { const c = fmtChange(btc.usd_24h_change); btcCh.textContent = c.text; btcCh.style.color = c.color; }
+      if (ethEl) { ethEl.textContent = fmtPrice(eth.usd); }
+      if (ethCh) { const c = fmtChange(eth.usd_24h_change); ethCh.textContent = c.text; ethCh.style.color = c.color; }
+      if (capEl) { capEl.textContent = '$' + Math.round(totalCap).toLocaleString('en-US') + 'B'; }
+      if (capCh) { const c = fmtChange(totalCapChange); capCh.textContent = c.text; capCh.style.color = c.color; }
+    } catch (e) {
+      console.error('Ticker load error:', e);
+    }
+  }
+
+  loadTicker();
+  setInterval(loadTicker, 60000);
 </script>
 
 </body>
