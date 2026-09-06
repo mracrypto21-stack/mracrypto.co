@@ -10,6 +10,60 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-451YN4C56S');
+
+  async function loadTicker() {
+    try {
+      const [coins, globalData] = await Promise.all([
+        fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true').then(r => r.json()),
+        fetch('https://api.coingecko.com/api/v3/global').then(r => r.json())
+      ]);
+
+      const btc = coins.bitcoin;
+      const eth = coins.ethereum;
+      const totalCap = globalData.data.total_market_cap.usd;
+      const totalCapChange = globalData.data.market_cap_change_percentage_24h;
+
+      const fmtPrice = n => {
+        const val = Number(n);
+        if (!Number.isFinite(val)) return '---';
+        return '$' + Math.round(val).toLocaleString('en-US');
+      };
+      const fmtChange = n => {
+        const val = Number(n);
+        if (!Number.isFinite(val)) return { text: '---', color: 'var(--cream)' };
+        const sign = val > 0 ? '+' : '';
+        const color = val > 0 ? '#4ade80' : val < 0 ? '#f87171' : 'var(--cream)';
+        return { text: sign + val.toFixed(2) + '%', color: color };
+      };
+      const fmtCap = n => {
+        const val = Number(n);
+        if (!Number.isFinite(val)) return '---';
+        if (val >= 1e12) return '$' + (val / 1e12).toFixed(2) + 'T';
+        if (val >= 1e9) return '$' + (val / 1e9).toFixed(2) + 'B';
+        return '$' + Math.round(val).toLocaleString('en-US');
+      };
+
+      const btcEl = document.getElementById('btcPrice');
+      const btcCh = document.getElementById('btcChange');
+      const ethEl = document.getElementById('ethPrice');
+      const ethCh = document.getElementById('ethChange');
+      const capEl = document.getElementById('totalCap');
+      const capCh = document.getElementById('totalCapChange');
+
+      if (btcEl) btcEl.textContent = fmtPrice(btc?.usd);
+      if (btcCh) { const c = fmtChange(btc?.usd_24h_change); btcCh.textContent = c.text; btcCh.style.color = c.color; }
+      if (ethEl) ethEl.textContent = fmtPrice(eth?.usd);
+      if (ethCh) { const c = fmtChange(eth?.usd_24h_change); ethCh.textContent = c.text; ethCh.style.color = c.color; }
+      if (capEl) capEl.textContent = fmtCap(totalCap);
+      if (capCh) { const c = fmtChange(totalCapChange); capCh.textContent = c.text; capCh.style.color = c.color; }
+    } catch (e) {
+      console.error('Ticker load error:', e);
+    }
+  }
+
+  loadTicker();
+  setInterval(loadTicker, 60000);
+
 </script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Space+Grotesk:wght@400;500;600&display=swap');
