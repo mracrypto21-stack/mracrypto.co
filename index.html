@@ -178,6 +178,7 @@
     font-size: 20px;
     flex-shrink: 0;
     line-height: 1;
+    color: #E8A83C;
   }
 
   .section-title {
@@ -317,6 +318,14 @@
     font-size: 13.5px;
     line-height: 1.65;
     color: var(--bronze);
+    font-family: inherit;
+  }
+
+  .about-card ul {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--bronze);
+    font-family: inherit;
   }
 
   .contact-card {
@@ -705,7 +714,7 @@
     </ul>
   </div>
 
-  <a class="consultation-btn" href="https://tr.ee/pieteikumaanketa" target="_blank" rel="noopener">Pieteikties konsultācijai</a>
+  <a class="consultation-btn" href="#" onclick="event.preventDefault(); document.getElementById('questionModal').classList.add('open'); document.getElementById('modalTitle').textContent='Aprakstiet konsultācijas tēmu';">Pieteikties konsultācijai</a>
 
   <div class="contact-card">
     <h3>Sazinies ar mani</h3>
