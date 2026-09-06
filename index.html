@@ -542,17 +542,13 @@
 
   <div class="ticker-bar fade-up delay-2" id="tickerBar">
     <div class="ticker-item">
-      <span class="ticker-icon">
-        <span style="font-size:18px;font-weight:700;color:currentColor;">₿</span>
-      </span>
+      <span class="ticker-icon" style="font-size:18px;font-weight:700;">₿</span>
       <span class="ticker-label">BTC</span>
       <span class="ticker-price" id="btcPrice">---</span>
       <span class="ticker-change" id="btcChange">---</span>
     </div>
     <div class="ticker-item">
-      <span class="ticker-icon">
-        <span style="font-size:16px;font-weight:700;color:currentColor;">⬡</span>
-      </span>
+      <span class="ticker-icon" style="font-size:16px;font-weight:700;">⬡</span>
       <span class="ticker-label">ETH</span>
       <span class="ticker-price" id="ethPrice">---</span>
       <span class="ticker-change" id="ethChange">---</span>
@@ -877,24 +873,7 @@
   loadTicker();
   setInterval(loadTicker, 60000);
 
-
-  // Accordion: close other sections when opening one
-  document.querySelectorAll('details.section-group').forEach(details => {
-    details.addEventListener('toggle', () => {
-      if (details.open) {
-        document.querySelectorAll('details.section-group').forEach(other => {
-          if (other !== details) other.open = false;
-        });
-      }
-    });
-  });
-
 </script>
-
-
-<div style="text-align:center; padding:20px; font-size:11px; color:#9c7442; opacity:0.7; max-width:800px; margin:0 auto;">
-  <p><strong>Atruna:</strong> Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava pašu atbildlība.</p>
-</div>
 
 </body>
 </html>
