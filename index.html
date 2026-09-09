@@ -590,20 +590,31 @@
 .ticker-divider { width: 1px; height: 16px; background: rgba(232,168,60,0.25); }
 @media (max-width: 420px) { .price-ticker { padding: 10px 14px; gap: 8px 10px; } .ticker-item { font-size: 11px; } }
 
+/* Rotējoša / staigājoša gaismas apmale — aizsargā elementa pozīciju */
 .glow-border {
   position: relative;
-  z-index: 0;
+  isolation: isolate;
   overflow: visible;
 }
 .glow-border::before {
   content: "";
   position: absolute;
-  top: -2px; right: -2px; bottom: -2px; left: -2px;
+  inset: 0;
   border-radius: inherit;
+  padding: 2px;
   background: conic-gradient(from 0deg, transparent 0deg, transparent 250deg, #FFC864 300deg, #E8A83C 330deg, transparent 360deg);
-  z-index: -1;
+  z-index: 0;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
   animation: glow-rotate 3s linear infinite;
+  pointer-events: none;
 }
+/* Peldošā 'Ir jautājums?' poga drīkst palikt fixed */
+.chat-widget.glow-border { position: fixed !important; bottom: 20px !important; right: 20px !important; z-index: 10 !important; }
+/* 'Pieteikties konsultācijai' — centrēta, paliek pēc savas struktūras */
+#consultBtn.glow-border { position: relative !important; bottom: auto !important; right: auto !important; }
 @keyframes glow-rotate {
   to { transform: rotate(360deg); }
 }
