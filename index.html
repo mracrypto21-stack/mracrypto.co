@@ -967,9 +967,14 @@
   document.querySelectorAll('details.section-group').forEach(details => {
     details.addEventListener('toggle', () => {
       if (details.open) {
-        // aizver tikai citus ĀRĒJĀ līmeņa blokus, nevis iekšējo biržu dropdownu
+        // atvērts: aizver citus ārējā līmeņa blokus
         document.querySelectorAll('details.section-group').forEach(other => {
           if (other !== details) other.open = false;
+        });
+      } else {
+        // aizvērts: aizver arī sava iekšējo biržu dropdownu
+        details.querySelectorAll('details.exchange-group').forEach(inner => {
+          inner.open = false;
         });
       }
     });
