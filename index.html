@@ -589,6 +589,24 @@
 .ticker-change.negative { color: #F87171; }
 .ticker-divider { width: 1px; height: 16px; background: rgba(232,168,60,0.25); }
 @media (max-width: 420px) { .price-ticker { padding: 10px 14px; gap: 8px 10px; } .ticker-item { font-size: 11px; } }
+
+.glow-border {
+  position: relative;
+  z-index: 0;
+  overflow: visible;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  top: -2px; right: -2px; bottom: -2px; left: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 250deg, #FFC864 300deg, #E8A83C 330deg, transparent 360deg);
+  z-index: -1;
+  animation: glow-rotate 3s linear infinite;
+}
+@keyframes glow-rotate {
+  to { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body>
@@ -775,7 +793,7 @@
       <li>Excel konsultācijas un citas tēmas pēc vajadzības.</li>
     </ul>
 
-    <a class="chat-widget" href="#" id="consultBtn" aria-label="Pieteikties konsultācijai" style="position:static;display:flex;justify-content:center;">
+    <a class="chat-widget glow-border" href="#" id="consultBtn" aria-label="Pieteikties konsultācijai" style="position:static;display:flex;justify-content:center;">
       <img class="chat-logo" src="assets/m-logo.png" alt="M" style="width:28px;height:28px;border-radius:50%;display:block;border:2px solid var(--gold-dim);object-fit:cover;background:#000;">
       <span class="chat-label">Pieteikties konsultācijai</span>
     </a>
@@ -785,11 +803,11 @@
   <div class="contact-card">
     <h3>Sazinies ar mani</h3>
     <div class="contact-buttons">
-      <a class="contact-btn" href="https://t.me/mracryptoo" target="_blank" rel="noopener">
+      <a class="contact-btn glow-border" href="https://t.me/mracryptoo" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.9c-.3-.2-.7-.3-1.4 0L2.9 11.7c-.9.3-.9 1 .1 1.3l4.5 1.4 1.7 5.3c.2.6.4.8.7.8.2 0 .4-.1.6-.3l2.5-2.4 4.6 3.4c.5.4 1 .2 1.2-.4L22 5.9c.2-.6.1-1-.1-1z"/></svg>
         Telegram
       </a>
-      <a class="contact-btn" href="mailto:mracrypto21@gmail.com">
+      <a class="contact-btn glow-border" href="mailto:mracrypto21@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         E-pasts
       </a>
@@ -800,7 +818,7 @@
 
 </div>
 
-<a class="chat-widget" href="#" target="_blank" rel="noopener" onclick="event.preventDefault(); document.getElementById('qSource').value='Ir jautājums?'; document.getElementById('questionModal').classList.add('open');">
+<a class="chat-widget glow-border" href="#" target="_blank" rel="noopener" onclick="event.preventDefault(); document.getElementById('qSource').value='Ir jautājums?'; document.getElementById('questionModal').classList.add('open');">
   <img class="chat-logo" src="assets/m-logo.png" alt="M" style="width:36px;height:36px;border-radius:50%;display:block;border:2px solid var(--gold-dim);object-fit:cover;background:#000;">
   <span class="chat-label">Ir jautājums?</span>
 </a>
