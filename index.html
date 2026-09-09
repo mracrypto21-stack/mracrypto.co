@@ -964,19 +964,16 @@
     setTimeout(() => { t.style.opacity = '0'; }, 2500);
   }
 
-  function enableAccordion(selector) {
-    document.querySelectorAll(selector).forEach(details => {
-      details.addEventListener('toggle', () => {
-        if (details.open) {
-          document.querySelectorAll('details.section-group, details.exchange-group').forEach(other => {
-            if (other !== details) other.open = false;
-          });
-        }
-      });
+  document.querySelectorAll('details.section-group').forEach(details => {
+    details.addEventListener('toggle', () => {
+      if (details.open) {
+        // aizver tikai citus ĀRĒJĀ līmeņa blokus, nevis iekšējo biržu dropdownu
+        document.querySelectorAll('details.section-group').forEach(other => {
+          if (other !== details) other.open = false;
+        });
+      }
     });
-  }
-  enableAccordion('details.section-group');
-  enableAccordion('details.exchange-group');
+  });
 
 </script>
 
