@@ -642,6 +642,50 @@
 .exchange-group[open] > .exchange-header .chevron { transform: rotate(90deg); }
 .exchange-group[open] > .exchange-header { border-color: var(--gold-dim); }
 .exchange-content { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+/* Apakšgrupa: Starts kriptovalūtā (izglītojošs saturs) */
+.start-group { width: 100%; }
+.start-header {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  padding: 16px 20px;
+  background: linear-gradient(180deg, rgba(18,16,10,0.88), rgba(8,6,3,0.88));
+  border: 1px solid var(--line); border-radius: 10px;
+  cursor: pointer; list-style: none;
+  color: var(--cream); font-size: 15px; font-weight: 500; letter-spacing: 0.01em;
+}
+.start-header::-webkit-details-marker { display: none; }
+.start-header:hover { border-color: var(--gold); }
+.start-group[open] > .start-header .chevron { transform: rotate(90deg); }
+.start-group[open] > .start-header { border-color: var(--gold-dim); }
+.start-content {
+  margin-top: 14px; padding: 20px 20px 22px;
+  background: linear-gradient(180deg, rgba(18,16,10,0.78), rgba(8,6,3,0.78));
+  border: 1px solid var(--line); border-radius: 12px;
+  font-size: 13.5px; line-height: 1.7; color: #C9AF87;
+}
+.start-content p { margin: 0 0 10px; }
+.start-lead { font-size: 14px; color: #D9C19A; }
+.start-cta a { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 2px; }
+.start-cta a:hover { color: #FFE0A0; }
+.start-step {
+  font-family: 'Marcellus', serif; font-size: 15px; font-weight: 400;
+  color: var(--gold-bright); letter-spacing: 0.02em;
+  margin: 26px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line);
+}
+.start-sub { font-size: 13.5px; font-weight: 600; color: var(--gold); margin: 18px 0 8px; }
+.start-minihead { font-size: 13px; font-weight: 600; color: var(--gold); margin: 16px 0 8px; }
+.start-inline { font-size: 12.5px; color: #9c7442; margin: 0 0 10px; }
+.start-content ul { margin: 0 0 10px; padding-left: 20px; }
+.start-content ul ul { margin: 6px 0 4px; }
+.start-content li { margin-bottom: 6px; }
+.start-content strong { color: #D9C19A; font-weight: 600; }
+.start-content a { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 2px; }
+.start-content a:hover { color: #FFE0A0; }
+.start-tip, .start-gold {
+  background: rgba(232,168,60,0.08);
+  border-left: 3px solid var(--gold-dim);
+  padding: 10px 14px; border-radius: 6px;
+}
+.start-gold { border-left-color: var(--gold-bright); }
 </style>
 </head>
 <body>
@@ -739,6 +783,194 @@
 
             </div>
           </details>
+        <details class="start-group fade-up delay-3" data-ga="open_starts">
+          <summary class="start-header">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span class="link-label">Starts kriptovalūtā</span>
+            <span class="chevron">›</span>
+          </summary>
+          
+<div class="start-content">
+
+  <p class="start-lead">Sveiks! Kriptovalūtu pasaule var šķist sarežģīta, taču, sākot soli pa solim un ievērojot drošības pamatprincipus, visu var ātri apgūt. Šeit ir sakārtots soļu plāns, ienākot šajā pasaulē.</p>
+
+  <p class="start-cta">Nevēlies lasīt, bet ķerties uzreiz pie lietas? <a href="https://kriptonr1.xyz/#produkti" target="_blank" rel="noopener">Mācības, kas noderēs</a>.</p>
+
+  <h4 class="start-step">1. Posms — Kriptovalūtas un blokķēdes pamati</h4>
+
+  <h5 class="start-sub">Kas ir kriptovalūta?</h5>
+  <p>Kriptovalūta ir digitāla vai virtuāla valūta, kas izmanto kriptogrāfiju, lai nodrošinātu drošību. Atšķirībā no tradicionālajām valūtām (piemēram, eiro vai dolāra), kriptovalūtām parasti nav fiziskas formas, un tās netiek kontrolētas vai izdotas centrālās bankas vai valdības iestādes. Tās pastāv tikai digitālā formā. Kriptovalūtas darbojas uz blokķēdes tehnoloģijas (blockchain) pamata.</p>
+
+  <h5 class="start-sub">Kas ir blokķēde?</h5>
+  <p>Blokķēde (angļu valodā: blockchain) ir īpaša digitāla datubāze jeb ierakstu grāmata, kura tiek izplatīta (decentralizēta) un pastāvīgi papildināta. Tā ir tehnoloģija, kas atrodas kriptovalūtu, piemēram, Bitcoin vai Ethereum, pamatā, bet to var izmantot arī citos veidos.</p>
+
+  <h5 class="start-sub">Kā strādā blokķēde?</h5>
+  <ul>
+    <li><strong>Bloki (blocks):</strong> informācija tiek glabāta blokos — katrs bloks satur noteiktu datu apjomu (piemēram, darījumus).</li>
+    <li><strong>Ķēde (chain):</strong> katrs jauns bloks tiek piesaistīts iepriekšējam blokam, veidojot ķēdi — tāpēc arī nosaukums blokķēde.</li>
+    <li><strong>Decentralizācija:</strong> tā vietā, lai dati tiktu glabāti vienā centrālā serverī, blokķēde tiek kopēta un uzturēta daudzos datoros (mezglos) vienlaikus visā pasaulē.</li>
+    <li><strong>Nemainīgums (immutability):</strong> kad bloks ir pievienots ķēdei, to vairs nevar izmainīt vai izdzēst, neizmainot visus nākamos blokus — tas padara krāpšanu praktiski neiespējamu.</li>
+    <li><strong>Caurspīdīgums un pārbaudāmība:</strong> visi blokķēdes darījumi ir publiski redzami un pārbaudāmi (piemēram, Bitcoin gadījumā), bet lietotāju identitāte var palikt anonīma.</li>
+  </ul>
+
+  <h4 class="start-step">2. Posms — Iesācēja soļu plāns un drošība</h4>
+
+  <h5 class="start-sub">2.1. Izglītojies un saproti pamatlietas</h5>
+  <p>Pirms ieguldi kaut centu, iepazīsties ar pamatjēdzieniem. Tev nav jābūt programmētājam, bet ir jāsaprot, kur tu liec savu naudu. Noskaties video: <a href="https://www.youtube.com/watch?v=yvaWxu8CQ60" target="_blank" rel="noopener">Kripto pamati iesācējiem</a>.</p>
+  <ul>
+    <li><strong>Kas ir blokķēde (Blockchain)?</strong> Tā ir tehnoloģija, kas uztur visu kriptovalūtu drošību un darbību.</li>
+    <li><strong>Populārākās valūtas:</strong> sāc ar lielākajām un stabilākajām, piemēram, Bitcoin (BTC) un Ethereum (ETH). Tās ir drošākas nekā mazpazīstami mēmu monētu projekti.</li>
+  </ul>
+
+  <h5 class="start-sub">2.2. Izvēlies uzticamu kriptovalūtu biržu (Exchange)</h5>
+  <p>Lai nopirktu savu pirmo kriptovalūtu, tev būs nepieciešams starpnieks — birža. Drošākās un populārākās pasaules platformas vari atrast <a href="https://coinmarketcap.com/rankings/exchanges/" target="_blank" rel="noopener">CoinMarketCap biržu sarakstā</a>. Vai izvēlies kādu no <a href="https://kriptonr1.xyz/#partneri" target="_blank" rel="noopener">Kripto Nr.1 sadarbības biržām</a>.</p>
+  <ul>
+    <li><strong>Kas ir CEX?</strong> CEX ir saīsinājums no centralizēta birža (angļu val.: Centralized Exchange). Tā ir tiešsaistes platforma (Bybit, Bitunix, Binance u.c.), kur lietotāji var pirkt, pārdot un tirgot kriptovalūtas, izmantojot starpnieku — pašu biržu. Atšķirībā no DEX, CEX pārvalda lietotāju līdzekļus, uztur orderu grāmatu un nodrošina klientu apkalpošanu.</li>
+    <li><strong>Kas ir DEX?</strong> DEX ir saīsinājums no decentralizēta birža (angļu val.: Decentralized Exchange). Tā ir kriptovalūtu tirdzniecības platforma (Uniswap, PancakeSwap u.c.), kas darbojas bez centrālās autoritātes vai starpnieka (piemēram, bankas vai uzņēmuma). Lietotāji tirgo savas kriptovalūtas tieši savā starpā, izmantojot viedos līgumus (smart contracts) un blokķēdes tehnoloģiju.</li>
+  </ul>
+  <p class="start-tip"><strong>Padoms:</strong> Reģistrējoties tev būs jāiziet identitātes pārbaude (KYC), kas prasa personu apliecinoša dokumenta foto — tas ir normāls un obligāts drošības solis.</p>
+
+  <h5 class="start-sub">2.3. Ievēro dzelžainus drošības noteikumus</h5>
+  <p>Kriptovalūtu pasaulē nav klientu servisa, kas atgrieztu pazaudētu naudu, ja pieļausi kļūdu. Vienmēr ievēro šo:</p>
+  <ul>
+    <li><strong>Ieslēdz divu faktoru autentifikāciju (2FA):</strong> izmanto lietotnes (piemēram, Google Authenticator), nevis SMS.</li>
+    <li><strong>Nekad neatklāj savas paroles vai seed frāzes:</strong> ja kāds tās prasa, tie ir krāpnieki.</li>
+  </ul>
+
+  <h5 class="start-sub">2.4. Investē tikai tik, cik esi gatavs zaudēt</h5>
+  <p>Kriptovalūtu tirgus ir ļoti svārstīgs — cenas strauji kāpj un krīt.</p>
+  <ul>
+    <li>Sāc ar nelielām summām (tādu naudu, kuras zaudēšana neietekmēs tavu ikdienas dzīvi).</li>
+    <li>Neaizņemies naudu, lai pirktu kriptovalūtas.</li>
+  </ul>
+
+  <h5 class="start-sub">2.5. Veic savu pirmo pirkumu</h5>
+  <ul>
+    <li>Pievieno savu bankas kontu vai karti izvēlētajai biržai.</li>
+    <li>Veic nelielu depozītu (piemēram, EUR).</li>
+    <li>Nopērc savu pirmo Bitcoin vai Ethereum daļu (tev nav jāpērk pilns Bitcoin — var pirkt par 10 vai 20 eiro).</li>
+  </ul>
+  <p class="start-gold"><strong>Zelta likums iesācējam:</strong> sākumā koncentrējies uz Bitcoin un Ethereum uzkrāšanu un mācīšanos, nevis uz ātru peļņu ar riskantām altcoin monētām.</p>
+
+  <h4 class="start-step">3. Posms — Kriptovalūtas glabāšana un maki</h4>
+
+  <h5 class="start-sub">Kur glabāt kriptovalūtu?</h5>
+  <p>Kur glabāt kriptovalūtu, ir viens no svarīgākajiem lēmumiem, ko pieņem katrs kripto lietotājs. Zemāk ir pārskats ar dažādiem veidiem, kur vari droši glabāt savu kriptovalūtu.</p>
+
+  <p class="start-minihead">1) Kriptovalūtu maki (wallets) — self-custody maki (tu pats kontrolē privātās atslēgas)</p>
+  <ul>
+    <li><strong>a) Programmatūras maki (software wallets)</strong> (Rabby, Phantom, MetaMask)
+      <ul>
+        <li>Plusi: pilna kontrole, viegli lietot.</li>
+        <li>Mīnusi: pakļauti hakeriem, ja dators vai telefons ir apdraudēts.</li>
+      </ul>
+    </li>
+    <li><strong>b) Aparātmaki (hardware wallet)</strong> (Tangem, Trezor, Ledger) — <a href="https://tangem.com/en/pricing/?promocode=KRIPTONR1" target="_blank" rel="noopener">Tangem iegādāties šeit</a>.
+      <ul>
+        <li>Plusi: maksimāla drošība — privātās atslēgas nekad neatstāj ierīci.</li>
+        <li>Mīnusi: maksā aptuveni 50–200 €.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p class="start-minihead">2) Centralizētas biržas (CEX maki)</p>
+  <p class="start-inline">Binance, Bitunix, Bybit, Coinbase</p>
+  <ul>
+    <li>Plusi: viegli lietot, nav jāpārvalda privātās atslēgas.</li>
+    <li>Mīnusi: tu neesi īpašnieks savām monētām (not your keys, not your coins). Risks: hakeri, biržas bankroti (piemērs: FTX).</li>
+  </ul>
+
+  <p class="start-minihead">Ieteikumi</p>
+  <ul>
+    <li>Iesācējiem: Rabby vai MetaMask + backup frāze uz papīra.</li>
+    <li>Ilgtermiņa glabāšanai: Tangem (hardware wallet).</li>
+    <li>Nekad neliec lielas summas uz biržām — tikai tik daudz, cik plāno tirgot.</li>
+    <li>Saglabā savu seed phrase (12 vai 24 vārdi) drošā vietā. Ja to pazaudē, piekļuvi atgūt nav iespējams.</li>
+  </ul>
+
+  <h4 class="start-step">4. Posms — Kas ir seed phrase un drošība pret krāpniekiem</h4>
+
+  <h5 class="start-sub">Kas ir seed phrase?</h5>
+  <p>Seed phrase jeb atkopšanas frāze (bieži saukta par backup phrase) ir 12, 24 vai 36 vārdu gara frāze, kuru ģenerē tavs kriptovalūtas maks (piemēram, Rabby, Ledger, MetaMask), kad tu to izveido. Šie vārdi nav nejauši — tie ir izvēlēti no speciāla saraksta ar 2048 angļu valodā fiksētiem vārdiem (BIP-39 standarts).</p>
+
+  <h5 class="start-sub">Kāpēc seed phrase ir svarīga?</h5>
+  <ul>
+    <li>Tā ir vienīgā atslēga uz tavu maku.</li>
+    <li>Ja pazaudē telefonu vai datoru, tu vari atjaunot maku citā ierīcē tikai ar šo frāzi.</li>
+    <li>Ja kāds cits iegūst tavu seed phrase, viņš var nozagt visu tavu kriptovalūtu — pat bez tavas paroles.</li>
+  </ul>
+
+  <h5 class="start-sub">Kā pareizi glabāt seed phrase</h5>
+  <ul class="start-yesno">
+    <li><strong>Jā:</strong> pieraksti uz papīra un noliec drošā vietā (seifs, ugunsdrošs seifs).</li>
+    <li><strong>Jā:</strong> apsver iespēju glabāt vairākas kopijas drošās vietās.</li>
+    <li><strong>Jā:</strong> glabā ārpus tiešsaistes ierīcēm (cold storage).</li>
+    <li><strong>Nē:</strong> neievadi tos nejaušās mājaslapās vai scam makos.</li>
+    <li><strong>Nē:</strong> neveic ekrānuzņēmumu vai foto.</li>
+    <li><strong>Nē:</strong> nekopē tos uz Google Drive, e-pastiem vai mākoni.</li>
+  </ul>
+
+  <h5 class="start-sub">Papildu drošība — izplatītākie krāpniecības veidi (scams)</h5>
+  <ul>
+    <li><strong>Phishing (fišings):</strong> viltus mājaslapas vai saites, kas izskatās identiski īstajām biržām vai makiem. Vienmēr rūpīgi pārbaudi URL adreses.</li>
+    <li><strong>Direct Messages (DM) blēži:</strong> neviens oficiāls atbalsta dienests nekad pirmais nerakstīs tev sociālajos tīklos (Telegram, Discord) un neprasīs tavu seed frāzi.</li>
+    <li><strong>Viltus viedie līgumi (Scam Airdrops):</strong> piedāvājumi saņemt bezmaksas monētas, kur tev prasa savienot maku un apstiprināt darījumu, kas acumirklī iztukšo tavu maku.</li>
+  </ul>
+
+  <h4 class="start-step">5. Posms — Rīki un pamata teorija (Tools &amp; Basics)</h4>
+  <p class="start-inline">Tehniskie instrumenti un grafiku lasīšana.</p>
+
+  <h5 class="start-sub">5.1. Kas ir TradingView un tā lietošana</h5>
+  <ul>
+    <li><strong>Ko meklēt YouTube:</strong> TradingView tutorial for beginners, Kā lietot TradingView.</li>
+    <li><strong>Saturs:</strong> kā iestatīt grafiku, rīku josla, indikatori, laikrāži (timeframes).</li>
+  </ul>
+
+  <h5 class="start-sub">5.2. Sveces (Candlesticks)</h5>
+  <ul>
+    <li><strong>Ko meklēt YouTube:</strong> How to read candlestick charts, Candlestick patterns explained.</li>
+    <li><strong>Saturs:</strong> sveces uzbūve (Open, High, Low, Close), ko tās nozīmē un kā nolasīt pircēju un pārdevēju spēku.</li>
+  </ul>
+
+  <h4 class="start-step">6. Posms — Klasiskā tehniskā analīze (Basic Technical Analysis)</h4>
+  <p class="start-inline">Nākamais solis pēc pamatu apguves.</p>
+
+  <h5 class="start-sub">6.1. Atbalsta un pretestības līmeņi (Support &amp; Resistance)</h5>
+  <ul>
+    <li><strong>Ko meklēt YouTube:</strong> Support and Resistance basics, How to draw Support and Resistance.</li>
+  </ul>
+
+  <h5 class="start-sub">6.2. Grafika modeļi / patterni</h5>
+  <ul>
+    <li><strong>Ko meklēt YouTube:</strong> Chart patterns for beginners, Top reversal and continuation patterns.</li>
+  </ul>
+
+  <h4 class="start-step">7. Posms — Riska vadība un tirgus psiholoģija (Risk &amp; Psychology)</h4>
+  <p class="start-inline">Galvenās disciplīnas, kas pasargā kapitālu un prātu.</p>
+
+  <h5 class="start-sub">Riska vadība (Risk Management)</h5>
+  <ul>
+    <li><strong>Riska procenti no kapitāla (Risk per Trade):</strong> nekad neriskēt vairāk par 1–2% no kopējā konta balansa vienā darījumā. Piemēram: ja kontā ir 1000 €, maksimālais zaudējums vienā darījumā nedrīkst pārsniegt 10–20 €.</li>
+    <li><strong>Riska un ieguvuma attiecība (Risk to Reward Ratio, R:R):</strong> cik daudz tu plāno nopelnīt attiecībā pret to, cik riskē (piemēram, 1:2 vai 1:3). Ar R:R 1:3 tev var būt taisnība tikai 30–40% darījumu, un tu joprojām būsi plusos.</li>
+    <li><strong>Stop Loss (SL) un Take Profit (TP) novietošana:</strong> kur loģiski likt SL (aiz struktūras vai līmeņa, nevis nejaušā vietā) un kur ņemt peļņu. Izmanto daļējo peļņas fiksēšanu (Partial Profit Taking) un darījuma pārveidošanu bezriska pozīcijā (Breakeven).</li>
+    <li><strong>Dienas maksimālais zaudējums (Daily Drawdown Limit):</strong> zaudējumu limita noteikšana dienai (piemēram, maksimums 3% zaudējums dienā). Ja limits sasniegts, tirgošanās tajā dienā beidzas.</li>
+  </ul>
+
+  <h5 class="start-sub">Tirgus psiholoģija un emociju kontrole</h5>
+  <ul>
+    <li><strong>FOMO (Fear Of Missing Out — bailes palaist garām):</strong> nekad nedzenies pakaļ monētai, kas jau ir strauji uzlēkusi — tas bieži beidzas ar iepirkšanu pašā augšpunktā.</li>
+    <li><strong>Atriebības tirdzniecība (Revenge Trading):</strong> mēģinājumi atspēlēties pēc zaudēta darījuma. Ja esi sasniedzis dienas zaudējumu limitu, nekavējoties aizver platformu.</li>
+  </ul>
+
+  <h4 class="start-step">8. Posms — Papildu punkti (tirdzniecības žurnāls un nodokļi)</h4>
+  <ul>
+    <li><strong>Tirdzniecības žurnāls (Trading Journal):</strong> sāc pierakstīt savus darījumus (kāpēc atvēri, kāds bija R:R, kāds bija rezultāts), lai analizētu savas kļūdas un izaugsmi.</li>
+    <li><strong>Nodokļu pamati:</strong> atceries sekot līdzi un uzskaitīt visus darījumus. Peļņas gūšana un tās konvertēšana fiat naudā (EUR) vai izmantošana pirkumos var tikt aplikta ar iedzīvotāju ienākuma nodokli (IIN) saskaņā ar valsts likumdošanu.</li>
+  </ul>
+
+</div>
+
+        </details>
 
         </div>
     </details>
@@ -973,8 +1205,8 @@
           if (other !== details) other.open = false;
         });
       } else {
-        // aizvērts: aizver arī sava iekšējo biržu dropdownu
-        details.querySelectorAll('details.exchange-group').forEach(inner => {
+        // aizvērts: aizver arī savus iekšējos apakš-dropdownus
+        details.querySelectorAll('details.exchange-group, details.start-group').forEach(inner => {
           inner.open = false;
         });
       }
