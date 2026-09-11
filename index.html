@@ -1214,6 +1214,20 @@
     });
   });
 
+  // Iekšējie apakš-dropdowni aizver viens otru
+  document.querySelectorAll('details.exchange-group, details.start-group').forEach(details => {
+    details.addEventListener('toggle', () => {
+      if (details.open) {
+        const parent = details.closest('details.section-group');
+        if (parent) {
+          parent.querySelectorAll('details.exchange-group, details.start-group').forEach(other => {
+            if (other !== details) other.open = false;
+          });
+        }
+      }
+    });
+  });
+
 </script>
 
 <script>
