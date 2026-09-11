@@ -29,12 +29,25 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-451YN4C56S"></script>
 <script>
+  /* GA4 — ielādējas TIKAI pēc lietotāja piekrišanas (sīkdatņu politika) */
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-451YN4C56S');
+  window.GA_ID = 'G-451YN4C56S';
+  window.loadGA = function () {
+    if (window._gaLoaded) return;
+    window._gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_ID;
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', window.GA_ID);
+  };
+  /* Ja piekrišana jau dota iepriekš — ielādē uzreiz */
+  try {
+    if (localStorage.getItem('cookie_consent') === 'accepted') window.loadGA();
+  } catch (e) {}
 </script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Space+Grotesk:wght@400;500;600&display=swap');
@@ -732,6 +745,53 @@
   padding: 10px 14px; border-radius: 6px;
 }
 .start-gold { border-left-color: var(--gold-bright); }
+
+/* Sīkdatņu piekrišanas baneris */
+.cookie-consent {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 100;
+  width: calc(100% - 32px);
+  max-width: 448px;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, rgba(24,20,12,0.98), rgba(10,8,4,0.98));
+  border: 1px solid var(--gold-dim);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  color: #C9AF87;
+  font-size: 12.5px;
+  line-height: 1.55;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.cookie-consent.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.cookie-consent p { margin: 0 0 12px; }
+.cookie-consent a { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 2px; }
+.cookie-actions { display: flex; gap: 10px; }
+.cookie-actions button {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(18,16,10,0.9), rgba(8,6,3,0.9));
+  color: var(--cream);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.cookie-actions button:hover { transform: translateY(-1px); }
+#cookieAccept { border-color: var(--gold-dim); }
+#cookieAccept:hover { border-color: var(--gold); }
+#cookieDecline:hover { border-color: var(--bronze); }
 </style>
 </head>
 <body>
@@ -1337,6 +1397,39 @@
       if (d.open) track(d.getAttribute('data-ga'));
     });
   });
+})();
+</script>
+
+<div class="cookie-consent" id="cookieConsent" role="dialog" aria-label="Sīkdatņu piekrišana" aria-live="polite">
+  <p>Šī vietne izmanto sīkdatnes, lai analizētu apmeklējumu un uzlabotu saturu (Google Analytics). Vai piekrīti?</p>
+  <div class="cookie-actions">
+    <button type="button" id="cookieAccept">Piekrītu</button>
+    <button type="button" id="cookieDecline">Noraidīt</button>
+  </div>
+</div>
+
+<script>
+/* --- Sīkdatņu piekrišanas loģika --- */
+(function () {
+  var KEY = 'cookie_consent';
+  var box = document.getElementById('cookieConsent');
+  if (!box) return;
+  var choice = null;
+  try { choice = localStorage.getItem(KEY); } catch (e) {}
+
+  function decide(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) {}
+    box.classList.remove('show');
+    if (value === 'accepted' && typeof window.loadGA === 'function') window.loadGA();
+  }
+
+  if (!choice) {
+    // Parādīt pēc īsas aiztures
+    setTimeout(function () { box.classList.add('show'); }, 600);
+  }
+
+  document.getElementById('cookieAccept').addEventListener('click', function () { decide('accepted'); });
+  document.getElementById('cookieDecline').addEventListener('click', function () { decide('declined'); });
 })();
 </script>
 </body>
