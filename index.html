@@ -3,7 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@MRACRYPTO</title>
+<title>@MRACRYPTO — kripto konsultācijas, apmācības un kopiena</title>
+<meta name="description" content="Kripto Nr.1 ekosistēma latviešu valodā — konsultācijas, apmācības, drošības pamati un kopiena iesācējiem un pieredzējušiem. Sāc savu ceļu kripto pasaulē droši.">
+<meta name="theme-color" content="#0a0703">
+<link rel="canonical" href="https://mracrypto.co/">
+
+<!-- Open Graph (Telegram, WhatsApp, Facebook, X) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="@MRACRYPTO">
+<meta property="og:title" content="@MRACRYPTO — kripto konsultācijas, apmācības un kopiena">
+<meta property="og:description" content="Kripto Nr.1 ekosistēma latviešu valodā — konsultācijas, apmācības, drošības pamati un kopiena. Sāc savu ceļu kripto pasaulē droši.">
+<meta property="og:url" content="https://mracrypto.co/">
+<meta property="og:image" content="https://mracrypto.co/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="lv_LV">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@MRACRYPTO — kripto konsultācijas, apmācības un kopiena">
+<meta name="twitter:description" content="Kripto Nr.1 ekosistēma latviešu valodā — konsultācijas, apmācības un kopiena.">
+<meta name="twitter:image" content="https://mracrypto.co/assets/og-image.jpg">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-451YN4C56S"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -183,10 +208,23 @@
 
   .section-title {
     flex: 1;
+    margin: 0;
     font-family: 'Marcellus', serif;
     font-size: 15px;
+    font-weight: 400;
     color: var(--gold-bright);
     letter-spacing: 0.02em;
+    text-align: left;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .section-chevron {
@@ -256,6 +294,13 @@
   .link-label {
     flex: 1;
     text-align: left;
+  }
+  h3.link-label {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    letter-spacing: 0.01em;
   }
 
   .link-sub {
@@ -691,6 +736,8 @@
 </head>
 <body>
 
+<h1 class="sr-only">@MRACRYPTO — kripto konsultācijas, apmācības un kopiena latviešu valodā</h1>
+
 <div class="bg-photo"></div>
 <div class="bg-overlay"></div>
 
@@ -733,7 +780,7 @@
     <details class="section-group fade-up delay-3" data-ga="open_kripto">
       <summary class="section-header">
         <span class="section-emoji"><span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;color:#E8A83C">₿</span></span>
-        <span class="section-title">Kripto</span>
+        <h2 class="section-title">Kripto</h2>
         <span class="chevron section-chevron">›</span>
       </summary>
       <div class="section-content">
@@ -741,7 +788,7 @@
           <details class="start-group fade-up delay-3" data-ga="open_starts">
           <summary class="start-header">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span class="link-label">Starts kriptovalūtā</span>
+            <h3 class="link-label">Starts kriptovalūtā</h3>
             <span class="chevron">›</span>
           </summary>
           
@@ -936,7 +983,7 @@
           <details class="exchange-group" data-ga="open_birzas">
             <summary class="exchange-header">
               <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-              <span class="link-label">Kripto biržas</span>
+              <h3 class="link-label">Kripto biržas</h3>
               <span class="chevron">›</span>
             </summary>
             <div class="exchange-content">
@@ -981,7 +1028,7 @@
         <span class="section-emoji" style="display:flex;align-items:center;justify-content:center;width:22px;height:22px;color:#E8A83C">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </span>
-        <span class="section-title">Sociālie tīkli</span>
+        <h2 class="section-title">Sociālie tīkli</h2>
         <span class="chevron section-chevron">›</span>
       </summary>
       <div class="section-content">
@@ -1028,7 +1075,7 @@
     <details class="section-group fade-up delay-3" data-ga="open_sadarbiba_section">
       <summary class="section-header">
         <span class="section-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span>
-        <span class="section-title">Sadarbība un mentorings</span>
+        <h2 class="section-title">Sadarbība un mentorings</h2>
         <span class="chevron section-chevron">›</span>
       </summary>
       <div class="section-content">
