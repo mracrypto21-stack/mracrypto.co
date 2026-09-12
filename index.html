@@ -811,17 +811,16 @@
   margin:0 0 18px;
   text-shadow:0 2px 14px rgba(232,168,60,0.22);
 }
-.bubble-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  max-width:460px;
+.bubble-cluster{
+  position:relative;
+  width:100%;
+  height:300px;
+  max-width:440px;
   margin:0 auto;
 }
 /* iPhone Liquid Glass lode */
 .bubble{
-  position:relative;
-  aspect-ratio:1/1;
+  position:absolute;
   border-radius:50%;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
   background:
@@ -831,12 +830,18 @@
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.6),inset 0 -14px 28px rgba(0,0,0,0.35),0 10px 30px rgba(0,0,0,0.5),0 0 0 1px rgba(0,0,0,0.4);
   cursor:default;
   transition:transform .45s ease,box-shadow .35s ease,border-color .3s ease;
-  animation:bwFloat 8s ease-in-out infinite;
 }
 .bubble::after{content:"";position:absolute;top:13%;left:50%;transform:translateX(-50%);width:40%;height:20%;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,255,255,0.85),transparent 70%);opacity:.9;filter:blur(1px);pointer-events:none}
 .bubble .b-sym{position:relative;z-index:2;font-size:22px;font-weight:800;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
 .bubble .b-name{position:relative;z-index:2;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6)}
-.bubble:hover{animation-play-state:paused;transform:scale(1.1);z-index:5;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7),inset 0 -14px 28px rgba(0,0,0,0.3),0 10px 30px rgba(0,0,0,0.5),0 0 30px currentColor}
+.bubble:hover{animation-play-state:paused;transform:translate(-50%,-50%) scale(1.12);z-index:8;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7),inset 0 -14px 28px rgba(0,0,0,0.3),0 10px 30px rgba(0,0,0,0.5),0 0 30px currentColor}
+/* Izmēri + pozīcijas — organisks klasteris, pārklājas */
+.b-btc{width:130px;height:130px;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6}
+.b-eth{width:104px;height:104px;left:30%;top:42%;transform:translate(-50%,-50%);z-index:5}
+.b-cro{width:82px;height:82px;left:72%;top:38%;transform:translate(-50%,-50%);z-index:4}
+.b-arb{width:80px;height:80px;left:20%;top:78%;transform:translate(-50%,-50%);z-index:4}
+.b-op {width:74px;height:74px;left:60%;top:80%;transform:translate(-50%,-50%);z-index:4}
+.b-oth{width:92px;height:92px;left:88%;top:64%;transform:translate(-50%,-50%);z-index:3}
 /* Krāsu apmales */
 .bubble.b-btc{border-color:rgba(247,147,26,0.55)}
 .bubble.b-eth{border-color:rgba(98,126,234,0.5)}
@@ -844,14 +849,19 @@
 .bubble.b-arb{border-color:rgba(40,160,240,0.45)}
 .bubble.b-op {border-color:rgba(255,4,32,0.45)}
 .bubble.b-oth{border-color:rgba(176,138,85,0.5)}
+/* Peldēšana — katram savs ritms (viegla dūciena kustība) */
+.b-btc{animation:bwFloat 7s ease-in-out infinite}
+.b-eth{animation:bwFloat 8.5s ease-in-out infinite}
+.b-cro{animation:bwFloat 9s ease-in-out infinite}
+.b-arb{animation:bwFloat 7.5s ease-in-out infinite}
+.b-op {animation:bwFloat 8s ease-in-out infinite}
+.b-oth{animation:bwFloat 9.5s ease-in-out infinite}
 /* Tooltip */
 .bubble .tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);white-space:nowrap;background:rgba(12,9,5,0.95);border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:11px;color:var(--cream);letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:40;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
 .bubble:hover .tip{opacity:1;transform:translateX(-50%) translateY(0)}
-/* Peldošās animācijas — dažādi ritmi */
-@keyframes bwFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.bubble:nth-child(2n){animation-duration:9s;animation-delay:.4s}
-.bubble:nth-child(3n){animation-duration:7.5s;animation-delay:.8s}
-@media(max-width:420px){.bubble-grid{gap:8px}.bubble .b-sym{font-size:18px}.bubble .b-name{font-size:11px}}
+/* Peldošās animācijas — viegla, dabiska dūciena kustība */
+@keyframes bwFloat{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-8px)}}
+@media(max-width:420px){.bubble .b-sym{font-size:18px}.bubble .b-name{font-size:11px}.bubble-cluster{height:250px}.b-btc{width:110px;height:110px}.b-eth{width:90px;height:90px}}
 </style>
 </head>
 <body>
@@ -1242,25 +1252,25 @@
 
   <div class="bubble-window" data-ga="open_portfelis">
     <div class="bw-title">Manā portfelī atrodas</div>
-    <div class="bubble-grid">
+    <div class="bubble-cluster">
       <div class="bubble b-btc" style="color:#F7931A">
         <span class="b-sym" style="color:#F7931A">₿</span><span class="b-name">BTC</span>
         <span class="tip">Core Ecosystem Asset</span>
       </div>
       <div class="bubble b-eth" style="color:#627EEA">
-        <span class="b-sym" style="color:#a9b6ff">◆</span><span class="b-name">ETH</span>
+        <span class="b-sym"><svg viewBox="0 0 784.37 1277.39" width="22" height="22" style="display:block"><path fill="#b7c3ff" d="M392.07 0l-8.57 29.11v844.63l8.57 8.55 392.06-231.75L392.07 0z"/><path fill="#8ba0ff" d="M392.07 0L0 650.54l392.07 231.75V472.33L392.07 0z"/><path fill="#c9d2ff" d="M392.07 956.52l-4.83 5.89v300.86l4.83 14.11 392.3-552.47-392.3 231.61z"/><path fill="#aab6ff" d="M392.07 1277.38V956.52L0 724.91l392.07 552.47z"/><path fill="#7d94ff" d="M392.07 882.29l392.06-231.75-392.06-178.21v409.96z"/><path fill="#8ba0ff" d="M0 650.54l392.07 231.75V472.33L0 650.54z"/></svg></span><span class="b-name">ETH</span>
         <span class="tip">Smart Contract Leader</span>
       </div>
       <div class="bubble b-cro" style="color:#4a76e1">
-        <span class="b-sym" style="color:#8fb0ff">◆</span><span class="b-name">CRO</span>
+        <span class="b-sym"><svg viewBox="0 0 120.1 138.8" width="22" height="22" style="display:block"><path fill="#4c9aff" d="M60.1 0L0 34.7v69.4l60.1 34.7 60-34.7V34.7L60.1 0zM102.3 93.8l-42.3 24.4L17.8 93.8V45l42.3-24.4L102.3 45v48.8z"/><path fill="#a9ccff" d="M60.1 26.9L22.6 47.6v42.6l37.5 21.6 37.5-21.6V47.6L60.1 26.9z"/><path fill="#e6f2ff" d="M60.1 53.7l-15.9 9.2v18.4l15.9 9.2 15.9-9.2V62.9l-15.9-9.2z"/></svg></span><span class="b-name">CRO</span>
         <span class="tip">Exchange Ecosystem</span>
       </div>
       <div class="bubble b-arb" style="color:#28A0F0">
-        <span class="b-sym" style="color:#7cc8ff">◭</span><span class="b-name">ARB</span>
+        <span class="b-sym"><svg viewBox="0 0 2500 2500" width="22" height="22" style="display:block"><path fill="#213147" d="M226 760v980c0 63 33 120 88 152l849 490c54 31 121 31 175 0l849-490c54-31 88-89 88-152V760c0-63-33-120-88-152l-849-490c-54-31-121-31-175 0L314 608c-54 31-87 89-87 152z"/><path fill="#12AAFF" d="M1435 1440l-121 332c-3 9-3 19 0 29l208 571 241-139-289-793c-7-18-32-18-39 0z"/><path fill="#12AAFF" d="M1678 882c-7-18-32-18-39 0l-350 961 121 332c3 9 9 13 15 13 6 0 13-4 15-13l289-793-50-500z"/><path fill="#9DCCED" d="M1363 1150l-120 330 101 277 157 90 175-94-313-603z"/><path fill="#213147" d="M1296 1199l-55-55-105 140 65 65 95-150z"/><path fill="#12AAFF" d="M1210 1361l70 70 40-110-110 40z"/></svg></span><span class="b-name">ARB</span>
         <span class="tip">Layer-2 Scaling</span>
       </div>
       <div class="bubble b-op" style="color:#FF0420">
-        <span class="b-sym" style="color:#ff7a88">◮</span><span class="b-name">OP</span>
+        <span class="b-sym"><svg viewBox="0 0 1037 1037" width="22" height="22" style="display:block"><circle cx="518.5" cy="518.5" r="518.5" fill="#FF0420"/><path fill="#FAFAF9" d="M761.8 365.3H576.3l-43.7 309.6h88.8l10.5-75h101c91.2 0 136.7-36.6 147-114.9 8.7-80.7-29.5-119.7-120.1-119.7zM790 479.6c-3.6 33.3-22.7 47.8-60.9 47.8h-86.9l12.6-89.5h90.9c30.6 0 43.6 11.8 40.3 41.7zM357.4 358c-120.9 0-184.3 50.8-199.2 159.6-15.2 111.3 37 164.5 161 164.5 124 0 184-50.8 201-164.5 13.8-108.8-37.7-159.6-162.8-159.6zM357.8 470.5c31.8 0 40.9 18.4 36 49.4-4.7 31.4-18.2 45.5-49 45.5-30.3 0-40.9-16.7-36-49.3 4.4-29 20-45.6 49-45.6z"/></svg></span><span class="b-name">OP</span>
         <span class="tip">Layer-2 Scaling</span>
       </div>
       <div class="bubble b-oth" style="color:#b08a55">
