@@ -849,18 +849,24 @@
 .bubble.b-arb{border-color:rgba(40,160,240,0.45)}
 .bubble.b-op {border-color:rgba(255,4,32,0.45)}
 .bubble.b-oth{border-color:rgba(176,138,85,0.5)}
-/* Peldēšana — katram savs ritms (viegla dūciena kustība) */
-.b-btc{animation:bwFloat 7s ease-in-out infinite}
-.b-eth{animation:bwFloat 8.5s ease-in-out infinite}
-.b-cro{animation:bwFloat 9s ease-in-out infinite}
-.b-arb{animation:bwFloat 7.5s ease-in-out infinite}
-.b-op {animation:bwFloat 8s ease-in-out infinite}
-.b-oth{animation:bwFloat 9.5s ease-in-out infinite}
+/* Peldēšana — lēna, bezsvara kustība: augšā-lejā + nedaudz uz sāniem, katram savs ritms */
+.b-btc{animation:floatBtc 10s ease-in-out infinite}
+.b-eth{animation:floatEth 11s ease-in-out infinite}
+.b-cro{animation:floatCro 12s ease-in-out infinite}
+.b-arb{animation:floatArb 10.5s ease-in-out infinite}
+.b-op {animation:floatOp 11.5s ease-in-out infinite}
+.b-oth{animation:floatOth 12.5s ease-in-out infinite}
+@keyframes floatBtc{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(3px,-10px)}50%{transform:translate(-50%,-50%) translate(0,-6px)}75%{transform:translate(-50%,-50%) translate(-3px,-11px)}}
+@keyframes floatEth{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(-4px,-9px)}50%{transform:translate(-50%,-50%) translate(0,-5px)}75%{transform:translate(-50%,-50%) translate(4px,-10px)}}
+@keyframes floatCro{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(4px,-8px)}50%{transform:translate(-50%,-50%) translate(0,-4px)}75%{transform:translate(-50%,-50%) translate(-4px,-9px)}}
+@keyframes floatArb{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(3px,-9px)}50%{transform:translate(-50%,-50%) translate(0,-5px)}75%{transform:translate(-50%,-50%) translate(-3px,-10px)}}
+@keyframes floatOp{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(-3px,-8px)}50%{transform:translate(-50%,-50%) translate(0,-4px)}75%{transform:translate(-50%,-50%) translate(3px,-9px)}}
+@keyframes floatOth{0%,100%{transform:translate(-50%,-50%) translate(0,0)}25%{transform:translate(-50%,-50%) translate(4px,-7px)}50%{transform:translate(-50%,-50%) translate(0,-3px)}75%{transform:translate(-50%,-50%) translate(-4px,-8px)}}
 /* Tooltip */
 .bubble .tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);white-space:nowrap;background:rgba(12,9,5,0.95);border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:11px;color:var(--cream);letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:40;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
 .bubble:hover .tip{opacity:1;transform:translateX(-50%) translateY(0)}
 /* Peldošās animācijas — viegla, dabiska dūciena kustība */
-@keyframes bwFloat{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-8px)}}
+
 @media(max-width:420px){.bubble .b-sym{font-size:18px}.bubble .b-name{font-size:11px}.bubble-cluster{height:250px}.b-btc{width:110px;height:110px}.b-eth{width:90px;height:90px}}
 </style>
 </head>
