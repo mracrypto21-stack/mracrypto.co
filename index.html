@@ -836,12 +836,12 @@
 .bubble .b-name{position:relative;z-index:2;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6)}
 .bubble:hover{animation-play-state:paused;transform:translate(-50%,-50%) scale(1.12);z-index:8;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7),inset 0 -14px 28px rgba(0,0,0,0.3),0 10px 30px rgba(0,0,0,0.5),0 0 30px currentColor}
 /* Izmēri + pozīcijas — organisks klasteris, pārklājas */
-.b-btc{width:130px;height:130px;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6}
-.b-eth{width:104px;height:104px;left:30%;top:42%;transform:translate(-50%,-50%);z-index:5}
-.b-cro{width:82px;height:82px;left:72%;top:38%;transform:translate(-50%,-50%);z-index:4}
-.b-arb{width:80px;height:80px;left:20%;top:78%;transform:translate(-50%,-50%);z-index:4}
-.b-op {width:74px;height:74px;left:60%;top:80%;transform:translate(-50%,-50%);z-index:4}
-.b-oth{width:92px;height:92px;left:88%;top:64%;transform:translate(-50%,-50%);z-index:3}
+.b-btc{width:130px;height:130px;left:50%;top:40%;transform:translate(-50%,-50%);z-index:6}
+.b-eth{width:104px;height:104px;left:30%;top:32%;transform:translate(-50%,-50%);z-index:5}
+.b-cro{width:82px;height:82px;left:72%;top:30%;transform:translate(-50%,-50%);z-index:4}
+.b-arb{width:80px;height:80px;left:20%;top:66%;transform:translate(-50%,-50%);z-index:4}
+.b-op {width:74px;height:74px;left:60%;top:68%;transform:translate(-50%,-50%);z-index:4}
+.b-oth{width:92px;height:92px;left:86%;top:46%;transform:translate(-50%,-50%);z-index:3}
 /* Krāsu apmales */
 .bubble.b-btc{border-color:rgba(247,147,26,0.55)}
 .bubble.b-eth{border-color:rgba(98,126,234,0.5)}
@@ -850,18 +850,18 @@
 .bubble.b-op {border-color:rgba(255,4,32,0.45)}
 .bubble.b-oth{border-color:rgba(176,138,85,0.5)}
 /* Peldēšana — plaša, brīva bezsvara kustība pa visu horizontālo rāmi (neuzkāpj virsrakstam) */
-.b-btc{animation:floatBtc 11s ease-in-out infinite}
-.b-eth{animation:floatEth 12s ease-in-out infinite}
-.b-cro{animation:floatCro 13s ease-in-out infinite}
-.b-arb{animation:floatArb 11.5s ease-in-out infinite}
-.b-op {animation:floatOp 12.5s ease-in-out infinite}
-.b-oth{animation:floatOth 13.5s ease-in-out infinite}
+.b-btc{animation:floatBtc 15s ease-in-out infinite}
+.b-eth{animation:floatEth 16s ease-in-out infinite}
+.b-cro{animation:floatCro 17s ease-in-out infinite}
+.b-arb{animation:floatArb 15.5s ease-in-out infinite}
+.b-op {animation:floatOp 16.5s ease-in-out infinite}
+.b-oth{animation:floatOth 18s ease-in-out infinite}
 @keyframes floatBtc{0%,100%{transform:translate(-50%,-50%) translate(0,0) rotate(0deg)}30%{transform:translate(-50%,-50%) translate(52px,-22px) rotate(3deg)}60%{transform:translate(-50%,-50%) translate(-38px,30px) rotate(-2deg)}85%{transform:translate(-50%,-50%) translate(20px,18px) rotate(1deg)}}
 @keyframes floatEth{0%,100%{transform:translate(-50%,-50%) translate(0,0) rotate(0deg)}30%{transform:translate(-50%,-50%) translate(-58px,-18px) rotate(-4deg)}60%{transform:translate(-50%,-50%) translate(42px,26px) rotate(3deg)}85%{transform:translate(-50%,-50%) translate(-24px,20px) rotate(-1deg)}}
 @keyframes floatCro{0%,100%{transform:translate(-50%,-50%) translate(0,0) rotate(0deg)}30%{transform:translate(-50%,-50%) translate(48px,-24px) rotate(4deg)}60%{transform:translate(-50%,-50%) translate(-44px,28px) rotate(-3deg)}85%{transform:translate(-50%,-50%) translate(26px,16px) rotate(2deg)}}
 @keyframes floatArb{0%,100%{transform:translate(-50%,-50%) translate(0,0) rotate(0deg)}30%{transform:translate(-50%,-50%) translate(40px,-20px) rotate(-3deg)}60%{transform:translate(-50%,-50%) translate(-50px,32px) rotate(2deg)}85%{transform:translate(-50%,-50%) translate(-14px,22px) rotate(1deg)}}
 @keyframes floatOp{0%,100%{transform:translate(-50%,-50%) translate(0,0) rotate(0deg)}30%{transform:translate(-50%,-50%) translate(-48px,-18px) rotate(3deg)}60%{transform:translate(-50%,-50%) translate(46px,28px) rotate(-2deg)}85%{transform:translate(-50%,-50%) translate(30px,20px) rotate(1deg)}}
-@keyframes floatOth{0%,100%{transform:translate(-50%,-50%) translate(0,0) rotate(0deg)}30%{transform:translate(-50%,-50%) translate(60px,-14px) rotate(-4deg)}60%{transform:translate(-50%,-50%) translate(-40px,26px) rotate(3deg)}85%{transform:translate(-50%,-50%) translate(-28px,18px) rotate(-1deg)}}
+@keyframes floatOth{0%,100%{transform:translate(-50%,-50%) translate(0,0) rotate(0deg)}30%{transform:translate(-50%,-50%) translate(38px,-10px) rotate(-4deg)}60%{transform:translate(-50%,-50%) translate(-42px,26px) rotate(3deg)}85%{transform:translate(-50%,-50%) translate(-28px,18px) rotate(-1deg)}}
 /* Tooltip */
 .bubble .tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);white-space:nowrap;background:rgba(12,9,5,0.95);border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:11px;color:var(--cream);letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:40;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
 .bubble:hover .tip{opacity:1;transform:translateX(-50%) translateY(0)}
