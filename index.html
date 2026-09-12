@@ -792,6 +792,66 @@
 #cookieAccept { border-color: var(--gold-dim); }
 #cookieAccept:hover { border-color: var(--gold); }
 #cookieDecline:hover { border-color: var(--bronze); }
+
+/* ===== Portfeļa burbuļu klasteris ===== */
+.bubble-window{
+  width:100%;
+  margin-top:14px;
+  padding:20px 16px 24px;
+  background:linear-gradient(180deg, rgba(18,16,10,0.88), rgba(8,6,3,0.88));
+  border:1px solid var(--line);
+  border-radius:12px;
+  text-align:center;
+}
+.bubble-window .bw-title{
+  font-family:'Marcellus',serif;
+  font-size:18px;
+  color:var(--gold);
+  letter-spacing:.02em;
+  margin:0 0 18px;
+  text-shadow:0 2px 14px rgba(232,168,60,0.22);
+}
+.bubble-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  max-width:460px;
+  margin:0 auto;
+}
+/* iPhone Liquid Glass lode */
+.bubble{
+  position:relative;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.05) 40%, transparent 60%),
+    radial-gradient(120% 100% at 50% 20%, rgba(30,26,18,0.55), rgba(8,6,3,0.9) 75%);
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.6),inset 0 -14px 28px rgba(0,0,0,0.35),0 10px 30px rgba(0,0,0,0.5),0 0 0 1px rgba(0,0,0,0.4);
+  cursor:default;
+  transition:transform .45s ease,box-shadow .35s ease,border-color .3s ease;
+  animation:bwFloat 8s ease-in-out infinite;
+}
+.bubble::after{content:"";position:absolute;top:13%;left:50%;transform:translateX(-50%);width:40%;height:20%;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,255,255,0.85),transparent 70%);opacity:.9;filter:blur(1px);pointer-events:none}
+.bubble .b-sym{position:relative;z-index:2;font-size:22px;font-weight:800;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
+.bubble .b-name{position:relative;z-index:2;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6)}
+.bubble:hover{animation-play-state:paused;transform:scale(1.1);z-index:5;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7),inset 0 -14px 28px rgba(0,0,0,0.3),0 10px 30px rgba(0,0,0,0.5),0 0 30px currentColor}
+/* Krāsu apmales */
+.bubble.b-btc{border-color:rgba(247,147,26,0.55)}
+.bubble.b-eth{border-color:rgba(98,126,234,0.5)}
+.bubble.b-cro{border-color:rgba(74,118,225,0.45)}
+.bubble.b-arb{border-color:rgba(40,160,240,0.45)}
+.bubble.b-op {border-color:rgba(255,4,32,0.45)}
+.bubble.b-oth{border-color:rgba(176,138,85,0.5)}
+/* Tooltip */
+.bubble .tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);white-space:nowrap;background:rgba(12,9,5,0.95);border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:11px;color:var(--cream);letter-spacing:.03em;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:40;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+.bubble:hover .tip{opacity:1;transform:translateX(-50%) translateY(0)}
+/* Peldošās animācijas — dažādi ritmi */
+@keyframes bwFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.bubble:nth-child(2n){animation-duration:9s;animation-delay:.4s}
+.bubble:nth-child(3n){animation-duration:7.5s;animation-delay:.8s}
+@media(max-width:420px){.bubble-grid{gap:8px}.bubble .b-sym{font-size:18px}.bubble .b-name{font-size:11px}}
 </style>
 </head>
 <body>
@@ -1179,6 +1239,37 @@
     </a>
 
   </div>
+
+  <div class="bubble-window" data-ga="open_portfelis">
+    <div class="bw-title">Manā portfelī atrodas</div>
+    <div class="bubble-grid">
+      <div class="bubble b-btc" style="color:#F7931A">
+        <span class="b-sym" style="color:#F7931A">₿</span><span class="b-name">BTC</span>
+        <span class="tip">Core Ecosystem Asset</span>
+      </div>
+      <div class="bubble b-eth" style="color:#627EEA">
+        <span class="b-sym" style="color:#a9b6ff">◆</span><span class="b-name">ETH</span>
+        <span class="tip">Smart Contract Leader</span>
+      </div>
+      <div class="bubble b-cro" style="color:#4a76e1">
+        <span class="b-sym" style="color:#8fb0ff">◆</span><span class="b-name">CRO</span>
+        <span class="tip">Exchange Ecosystem</span>
+      </div>
+      <div class="bubble b-arb" style="color:#28A0F0">
+        <span class="b-sym" style="color:#7cc8ff">◭</span><span class="b-name">ARB</span>
+        <span class="tip">Layer-2 Scaling</span>
+      </div>
+      <div class="bubble b-op" style="color:#FF0420">
+        <span class="b-sym" style="color:#ff7a88">◮</span><span class="b-name">OP</span>
+        <span class="tip">Layer-2 Scaling</span>
+      </div>
+      <div class="bubble b-oth" style="color:#b08a55">
+        <span class="b-sym" style="color:#d9c19a">◈</span><span class="b-name">OTHERS</span>
+        <span class="tip">Diversified long-tail assets</span>
+      </div>
+    </div>
+  </div>
+
 
   <div class="contact-card">
     <h3>Sazinies ar mani</h3>
