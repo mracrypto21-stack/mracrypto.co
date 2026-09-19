@@ -868,6 +868,12 @@
 /* Peldošās animācijas — viegla, dabiska dūciena kustība */
 
 @media(max-width:420px){.bubble .b-sym{font-size:18px}.bubble .b-name{font-size:11px}.bubble-cluster{height:250px}.b-btc{width:110px;height:110px}.b-eth{width:90px;height:90px}}
+
+/* Piekrišanas checkbox */
+.consent-check{margin:2px 0 12px;text-align:left}
+.consent-label{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.4;color:#C9AF87;cursor:pointer}
+.consent-label input{width:16px;height:16px;accent-color:#E8A83C;margin:0;flex-shrink:0}
+.consent-label a{color:var(--gold-bright);text-decoration:underline;text-underline-offset:2px}
 </style>
 </head>
 <body>
@@ -1315,6 +1321,13 @@
       <input id="qContact" type="text" placeholder="piemērs: +371 ..., e-pasts, vai @nick" required />
       <input type="hidden" id="qSource" value="">
 
+      <div class="consent-check">
+        <label class="consent-label">
+          <input type="checkbox" id="qConsent" required>
+          <span>Es piekrītu, ka mani dati tiek apstrādāti saskaņā ar <a href="/privatuma-politika" target="_blank" rel="noopener">privātuma politiku</a>.</span>
+        </label>
+      </div>
+
       <div class="modal-actions">
         <button type="button" id="modalClose">Aizvērt</button>
         <button type="submit" class="primary">Sūtīt</button>
@@ -1354,6 +1367,12 @@
     const originalText = submitBtn.textContent;
     if (!text || !contact) {
       alert('Lūdzu aizpildi jautājumu un kontaktu.');
+      return;
+    }
+    const consent = document.getElementById('qConsent');
+    if (consent && !consent.checked) {
+      alert('Lūdzu atzīmē piekrišanu datu apstrādei (privātuma politika).');
+      consent.focus();
       return;
     }
     submitBtn.disabled = true;
@@ -1501,7 +1520,7 @@
 </script>
 
 <div class="cookie-consent" id="cookieConsent" role="dialog" aria-label="Sīkdatņu piekrišana" aria-live="polite">
-  <p>Šī vietne izmanto sīkdatnes, lai analizētu apmeklējumu un uzlabotu saturu (Google Analytics). Vai piekrīti?</p>
+  <p>Šī vietne izmanto sīkdatnes, lai analizētu apmeklējumu un uzlabotu saturu (Google Analytics). Vai piekrīti? Vairāk informācijas — <a href="/privatuma-politika" target="_blank" rel="noopener">privātuma politika</a>.</p>
   <div class="cookie-actions">
     <button type="button" id="cookieAccept">Piekrītu</button>
     <button type="button" id="cookieDecline">Noraidīt</button>
