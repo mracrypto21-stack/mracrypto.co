@@ -1294,7 +1294,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.9c-.3-.2-.7-.3-1.4 0L2.9 11.7c-.9.3-.9 1 .1 1.3l4.5 1.4 1.7 5.3c.2.6.4.8.7.8.2 0 .4-.1.6-.3l2.5-2.4 4.6 3.4c.5.4 1 .2 1.2-.4L22 5.9c.2-.6.1-1-.1-1z"/></svg>
         Telegram
       </a>
-      <a class="contact-btn glow-border" href="mailto:mracrypto21@gmail.com" data-ga="click_contact_epasts">
+      <a class="contact-btn glow-border" href="/cdn-cgi/l/email-protection#ff928d9e9c8d868f8b90cdcebf98929e9693d19c9092" data-ga="click_contact_epasts">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         E-pasts
       </a>
@@ -1336,7 +1336,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const modal = document.getElementById('questionModal');
   const openBtn = document.querySelector('.chat-widget');
   const closeBtn = document.getElementById('modalClose');
@@ -1397,7 +1397,7 @@
       })
       .catch(err => {
         console.error('Send error:', err);
-        alert('Neizdevās nosūtīt: ' + err.message);
+        showToast('Neizdevās nosūtīt. Piesaki, lūdzu, tieši pa e-pastu: mracrypto21@gmail.com vai mēģini vēlāk.');
       })
       .finally(() => {
         submitBtn.disabled = false;
@@ -1415,13 +1415,13 @@
         position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
         background: 'rgba(18,16,10,0.96)', color: '#fff', padding: '12px 18px', borderRadius: '10px',
         border: '1px solid var(--gold-dim)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', zIndex: '60',
-        fontFamily: 'inherit', fontSize: '14px'
+        fontFamily: 'inherit', fontSize: '14px', lineHeight: '1.45', maxWidth: 'min(90vw, 420px)', textAlign: 'center'
       });
       document.body.appendChild(t);
     }
     t.textContent = msg;
     t.style.opacity = '1';
-    setTimeout(() => { t.style.opacity = '0'; }, 2500);
+    setTimeout(() => { t.style.opacity = '0'; }, 8000);
   }
 
   document.querySelectorAll('details.section-group').forEach(details => {
