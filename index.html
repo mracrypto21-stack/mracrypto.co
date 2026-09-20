@@ -1393,7 +1393,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
     submitBtn.textContent = 'Sūtu...';
     const source = document.getElementById('qSource').value || 'Nezināms avots';
     const url = 'https://api.mracrypto.co/';
-    const payload = new URLSearchParams({ text: text, contact: contact, source: source });
+    const payload = new URLSearchParams({ text: text, contact: contact, source: source, lang: (document.documentElement.getAttribute('lang') || 'lv') });
     fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: payload })
       .then(r => {
         if (!r.ok) throw new Error('HTTP ' + r.status);
