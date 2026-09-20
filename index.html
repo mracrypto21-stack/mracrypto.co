@@ -874,11 +874,25 @@
 .consent-label{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.4;color:#C9AF87;cursor:pointer}
 .consent-label input{width:16px;height:16px;accent-color:#E8A83C;margin:0;flex-shrink:0}
 .consent-label a{color:var(--gold-bright);text-decoration:underline;text-underline-offset:2px}
+
+/* Valodas pārslēdzējs */
+.lang-switcher{position:fixed;top:12px;right:16px;z-index:70;display:flex;gap:6px;align-items:center;background:rgba(18,16,10,.86);border:1px solid var(--line);border-radius:99px;padding:4px 6px}
+.lang-btn{background:transparent;border:1px solid var(--gold-dim);border-radius:99px;padding:4px 12px;color:var(--bronze);font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .25s}
+.lang-btn[aria-pressed="true"]{background:linear-gradient(180deg,rgba(232,168,60,.25),rgba(232,168,60,.12));border-color:var(--gold);color:var(--gold-bright)}
+.lang-btn:hover:not([aria-pressed="true"]){border-color:var(--gold);color:var(--gold)}
+/* EN tulkojumiem var vajadzēt vairakuvietu */
+html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .chat-label{letter-spacing:0.005em}
+
 </style>
 </head>
 <body>
+  <div class="lang-switcher" id="langSwitcher" role="group" aria-label="Language / Valoda">
+    <button type="button" class="lang-btn" data-lang="lv" id="langLv" aria-pressed="false">LV</button>
+    <button type="button" class="lang-btn" data-lang="en" id="langEn" aria-pressed="false">EN</button>
+  </div>
 
-<h1 class="sr-only">@MRACRYPTO — kripto konsultācijas, apmācības un kopiena latviešu valodā</h1>
+
+<h1 class="sr-only" data-i18n="h1">@MRACRYPTO — kripto konsultācijas, apmācības un kopiena latviešu valodā</h1>
 
 <div class="bg-photo"></div>
 <div class="bg-overlay"></div>
@@ -922,7 +936,7 @@
     <details class="section-group fade-up delay-3" data-ga="open_kripto">
       <summary class="section-header">
         <span class="section-emoji"><span style="font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:600;color:#E8A83C">₿</span></span>
-        <h2 class="section-title">Kripto</h2>
+        <h2 class="section-title" data-i18n="sec_crypto">Kripto</h2>
         <span class="chevron section-chevron">›</span>
       </summary>
       <div class="section-content">
@@ -930,11 +944,11 @@
           <details class="start-group" data-ga="open_starts">
           <summary class="start-header">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <h3 class="link-label">Starts kriptovalūtā</h3>
+            <h3 class="link-label" data-i18n="start_title">Starts kriptovalūtā</h3>
             <span class="chevron">›</span>
           </summary>
           
-<div class="start-content">
+<div class="start-content" data-i18n-block="start_bl">
 
   <p class="start-lead">Sveiks! Kriptovalūtu pasaule var šķist sarežģīta, taču, sākot soli pa solim un ievērojot drošības pamatprincipus, visu var ātri apgūt. Šeit ir sakārtots soļu plāns, ienākot šajā pasaulē.</p>
 
@@ -1118,33 +1132,33 @@
 
         <a class="link-plate" href="https://kriptonr1.xyz/" target="_blank" rel="noopener" data-ga="click_ekosistema">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <span class="link-label">Kripto Nr.1 ekosistēma<span class="link-sub">Sāc savu ceļu kripto pasaulē</span></span>
+          <span class="link-label data-i18n="lk_ecosystem">Kripto Nr.1 ekosistēma<span class="link-sub">Sāc savu ceļu kripto pasaulē</span></span>
           <span class="chevron">›</span>
         </a>
 
           <details class="exchange-group" data-ga="open_birzas">
             <summary class="exchange-header">
               <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-              <h3 class="link-label">Kripto biržas</h3>
+              <h3 class="link-label" data-i18n="exc_title">Kripto biržas</h3>
               <span class="chevron">›</span>
             </summary>
             <div class="exchange-content">
 
               <a class="link-plate" href="https://t.co/43Jn4P0doT" target="_blank" rel="noopener" data-ga="click_birza_cryptocom">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          <span class="link-label">Kripto birža Crypto.com</span>
+          <span class="link-label data-i18n="lk_cro">Kripto birža Crypto.com</span>
           <span class="chevron">›</span>
         </a>
 
               <a class="link-plate" href="https://m.bitunix.com/register?vipCode=KRIPTONR1" target="_blank" rel="noopener" data-ga="click_birza_bitunix">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          <span class="link-label">Kripto birža Bitunix</span>
+          <span class="link-label data-i18n="lk_bitunix">Kripto birža Bitunix</span>
           <span class="chevron">›</span>
         </a>
 
               <a class="link-plate" href="https://www.pionex.com/en-US/sign/ref/gxs6W89t" target="_blank" rel="noopener" data-ga="click_birza_pionex">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          <span class="link-label">Kripto birža Pionex</span>
+          <span class="link-label data-i18n="lk_pionex">Kripto birža Pionex</span>
           <span class="chevron">›</span>
         </a>
 
@@ -1152,7 +1166,7 @@
           </details>
         <a class="link-plate" href="https://redirect.sale/tangem/?promocode=KRIPTONR1" target="_blank" rel="noopener" data-ga="click_tangem">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
-          <span class="link-label">Tangem maka iegāde<span class="link-sub">Drošs aparatūras maks kriptovalūtām</span></span>
+          <span class="link-label data-i18n="lk_tangem">Tangem maka iegāde<span class="link-sub">Drošs aparatūras maks kriptovalūtām</span></span>
           <span class="chevron">›</span>
         </a>
 
@@ -1164,44 +1178,44 @@
         <span class="section-emoji" style="display:flex;align-items:center;justify-content:center;width:22px;height:22px;color:#E8A83C">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </span>
-        <h2 class="section-title">Sociālie tīkli</h2>
+        <h2 class="section-title" data-i18n="sec_social">Sociālie tīkli</h2>
         <span class="chevron section-chevron">›</span>
       </summary>
       <div class="section-content">
 
         <a class="link-plate" href="https://www.tiktok.com/@mracrypto" target="_blank" rel="noopener" data-ga="click_tiktok">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-.88-.05A6.33 6.33 0 0 0 5.42 20.9 6.34 6.34 0 0 0 16.34 16V9.55a8.16 8.16 0 0 0 4.77 1.52V7.66a4.85 4.85 0 0 1-1.52-.97z"/></svg>
-          <span class="link-label">TikTok<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
+          <span class="link-label data-i18n="lk_tiktok">TikTok<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
           <span class="chevron">›</span>
         </a>
 
         <a class="link-plate" href="https://www.instagram.com/mracrypto_?igsh=MW1wYmRwcGRkMW9zag%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" data-ga="click_instagram">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          <span class="link-label">Instagram<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
+          <span class="link-label data-i18n="lk_ig">Instagram<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
           <span class="chevron">›</span>
         </a>
 
         <a class="link-plate" href="https://x.com/mracrypto_?s=21" target="_blank" rel="noopener" data-ga="click_x">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.8 2h6.4l4.4 5.9L18.9 2zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20z"/></svg>
-          <span class="link-label">X (Twitter)<span class="link-sub">Kripto jaunumi un notikumi</span></span>
+          <span class="link-label data-i18n="lk_x">X (Twitter)<span class="link-sub">Kripto jaunumi un notikumi</span></span>
           <span class="chevron">›</span>
         </a>
 
         <a class="link-plate" href="https://www.threads.com/@mracrypto_?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener" data-ga="click_threads">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>
-          <span class="link-label">Threads<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
+          <span class="link-label data-i18n="lk_threads">Threads<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
           <span class="chevron">›</span>
         </a>
 
         <a class="link-plate" href="https://youtube.com/@mracryptos?si=oBwZRCCkCShHe4b0" target="_blank" rel="noopener" data-ga="click_youtube">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.9-1.7-.9-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4 0-1.3 0-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.7v1.6c0 1.7.2 3.5.2 3.5s.2 1.5.8 2.2c.8.9 1.9.9 2.4 1 1.7.2 7.4.2 7.4.2s3.9 0 6.7-.2c.4 0 1.3 0 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
-          <span class="link-label">YouTube<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
+          <span class="link-label data-i18n="lk_yt">YouTube<span class="link-sub">Ikdienas kripto klipi un tirgus reakcijas</span></span>
           <span class="chevron">›</span>
         </a>
 
         <a class="link-plate" href="https://t.me/mracryptoo" target="_blank" rel="noopener" data-ga="click_telegram_konts">
           <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.9c-.3-.2-.7-.3-1.4 0L2.9 11.7c-.9.3-.9 1 .1 1.3l4.5 1.4 1.7 5.3c.2.6.4.8.7.8.2 0 .4-.1.6-.3l2.5-2.4 4.6 3.4c.5.4 1 .2 1.2-.4L22 5.9c.2-.6.1-1-.1-1z"/></svg>
-          <span class="link-label">Telegram<span class="link-sub">Personīgais konts</span></span>
+          <span class="link-label data-i18n="lk_tg">Telegram<span class="link-sub">Personīgais konts</span></span>
           <span class="chevron">›</span>
         </a>
 
@@ -1211,20 +1225,20 @@
     <details class="section-group fade-up delay-3" data-ga="open_sadarbiba_section">
       <summary class="section-header">
         <span class="section-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span>
-        <h2 class="section-title">Sadarbība un mentorings</h2>
+        <h2 class="section-title" data-i18n="sec_collab">Sadarbība un mentorings</h2>
         <span class="chevron section-chevron">›</span>
       </summary>
       <div class="section-content">
 
         <a class="link-plate" href="#" onclick="event.preventDefault(); document.getElementById('qSource').value='Sadarbība'; document.getElementById('questionModal').classList.add('open');" data-ga="click_sadarbiba">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-          <span class="link-label">Sadarbība</span>
+          <span class="link-label data-i18n="lk_collab">Sadarbība</span>
           <span class="chevron">›</span>
         </a>
 
         <a class="link-plate" href="#" onclick="event.preventDefault(); document.getElementById('qSource').value='Piesakies sarunai'; document.getElementById('questionModal').classList.add('open');" data-ga="click_piesakies_sarunai">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-          <span class="link-label">Piesakies sarunai</span>
+          <span class="link-label data-i18n="lk_call">Piesakies sarunai</span>
           <span class="chevron">›</span>
         </a>
 
@@ -1236,28 +1250,28 @@
   <div class="about-card">
     <div class="about-header">
       <img class="avatar" src="assets/portrait.png" alt="MrACrypto">
-      <h3>Par mani</h3>
+      <h3 data-i18n="about_title">Par mani</h3>
     </div>
-    <p>Kriptovalūtu un pasīvo ienākumu investors kopš 2021. gada. Mana stiprā puse ir ātri pielāgoties mainīgajiem tirgus apstākļiem, kas palīdz veidot diversificētu un ilgtermiņā ilgtspējīgu investīciju portfeli. Man ir vairāk nekā 10 gadu pieredze pārdošanā un komandu vadībā, kas sniedz stratēģisku redzējumu biznesa attīstībā un partnerībās.</p>
-    <p><strong>Ko mēs varam apspriest konsultācijā?</strong><br>
+    <p data-i18n="about_bio">Kriptovalūtu un pasīvo ienākumu investors kopš 2021. gada. Mana stiprā puse ir ātri pielāgoties mainīgajiem tirgus apstākļiem, kas palīdz veidot diversificētu un ilgtermiņā ilgtspējīgu investīciju portfeli. Man ir vairāk nekā 10 gadu pieredze pārdošanā un komandu vadībā, kas sniedz stratēģisku redzējumu biznesa attīstībā un partnerībās.</p>
+    <p data-i18n="about_intro"><strong>Ko mēs varam apspriest konsultācijā?</strong><br>
     Neatkarīgi no tā, vai sper savus pirmos soļus vai vēlies padziļināt zināšanas, konsultācijas laikā varam fokusēties uz šādām tēmām:</p>
     <ul style="text-align:left;padding-left:20px;">
-      <li>Kripto pamati & Portfelis: Ar ko un kā sākt, individuāla portfeļa izveide.</li>
-      <li>Praktiskie rīki: Centralizētas (CEX) un decentralizētas (DEX) biržas, to lietošana, naudas pārskaitīšana un saņemšana.</li>
-      <li>Tirdzniecība un DeFi: Trading pamati, DeFi pamati, futures treidings un trading botu izmantošana.</li>
-      <li>Drošība un psiholoģija: Tirgus psiholoģija un drošība kripto vidē.</li>
-      <li>Excel konsultācijas un citas tēmas pēc vajadzības.</li>
+      <li data-i18n="about_li1">Kripto pamati & Portfelis: Ar ko un kā sākt, individuāla portfeļa izveide.</li>
+      <li data-i18n="about_li2">Praktiskie rīki: Centralizētas (CEX) un decentralizētas (DEX) biržas, to lietošana, naudas pārskaitīšana un saņemšana.</li>
+      <li data-i18n="about_li3">Tirdzniecība un DeFi: Trading pamati, DeFi pamati, futures treidings un trading botu izmantošana.</li>
+      <li data-i18n="about_li4">Drošība un psiholoģija: Tirgus psiholoģija un drošība kripto vidē.</li>
+      <li data-i18n="about_li5">Excel konsultācijas un citas tēmas pēc vajadzības.</li>
     </ul>
 
     <a class="chat-widget glow-border" href="#" id="consultBtn" aria-label="Pieteikties konsultācijai" style="position:static;display:flex;justify-content:center;" data-ga="click_konsultacija">
       <img class="chat-logo" src="assets/m-logo.png" alt="M" style="width:28px;height:28px;border-radius:50%;display:block;border:2px solid var(--gold-dim);object-fit:cover;background:#000;">
-      <span class="chat-label">Pieteikties konsultācijai</span>
+      <span class="chat-label" data-i18n="consult_btn">Pieteikties konsultācijai</span>
     </a>
 
   </div>
 
   <div class="bubble-window" data-ga="open_portfelis">
-    <div class="bw-title">Manā portfelī atrodas</div>
+    <div class="bw-title" data-i18n="bubble_title">Manā portfelī atrodas</div>
     <div class="bubble-cluster">
       <div class="bubble b-btc" style="color:#F7931A">
         <span class="b-sym" style="color:#F7931A">₿</span><span class="b-name">BTC</span>
@@ -1288,20 +1302,20 @@
 
 
   <div class="contact-card">
-    <h3>Sazinies ar mani</h3>
+    <h3 data-i18n="contact_title">Sazinies ar mani</h3>
     <div class="contact-buttons">
       <a class="contact-btn glow-border" href="https://t.me/mracryptoo" target="_blank" rel="noopener" data-ga="click_contact_telegram">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.9c-.3-.2-.7-.3-1.4 0L2.9 11.7c-.9.3-.9 1 .1 1.3l4.5 1.4 1.7 5.3c.2.6.4.8.7.8.2 0 .4-.1.6-.3l2.5-2.4 4.6 3.4c.5.4 1 .2 1.2-.4L22 5.9c.2-.6.1-1-.1-1z"/></svg>
-        Telegram
+        <span data-i18n="contact_tg">Telegram</span>
       </a>
       <a class="contact-btn glow-border" href="/cdn-cgi/l/email-protection#ff928d9e9c8d868f8b90cdcebf98929e9693d19c9092" data-ga="click_contact_epasts">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        E-pasts
+        <span data-i18n="contact_email">E-pasts</span>
       </a>
     </div>
   </div>
 
-  <div class="footer">Atruna: Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava pašu atbildlība.</div>
+  <div class="footer" data-i18n="footer">Atruna: Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava pašu atbildlība.</div>
 
 </div>
 
@@ -1312,25 +1326,25 @@
 
 <div class="modal-overlay" id="questionModal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <h3 id="modalTitle">Pieteikums vai jautājums</h3>
+    <h3 id="modalTitle" data-i18n="modal_title">Pieteikums vai jautājums</h3>
     <form id="questionForm" novalidate>
-      <label for="qText">Aprakstiet savu vēlmi vai tēmu</label>
-      <textarea id="qText" placeholder="Raksti šeit savu jautājumu..." required></textarea>
+      <label for="qText" data-i18n="label_text">Aprakstiet savu vēlmi vai tēmu</label>
+      <textarea id="qText" placeholder="Raksti šeit savu jautājumu..." data-i18n-ph="ph_text" required></textarea>
 
-      <label for="qContact">Kontakts — telefons, e-pasts vai Telegram @nick</label>
-      <input id="qContact" type="text" placeholder="piemērs: +371 ..., e-pasts, vai @nick" required />
+      <label for="qContact" data-i18n="label_contact">Kontakts — telefons, e-pasts vai Telegram @nick</label>
+      <input id="qContact" type="text" placeholder="piemērs: +371 ..., e-pasts, vai @nick" data-i18n-ph="ph_contact" required />
       <input type="hidden" id="qSource" value="">
 
       <div class="consent-check">
         <label class="consent-label">
           <input type="checkbox" id="qConsent" required>
-          <span>Es piekrītu, ka mani dati tiek apstrādāti saskaņā ar <a href="/privatuma-politika" target="_blank" rel="noopener">privātuma politiku</a>.</span>
+          <span data-i18n="consent">Es piekrītu, ka mani dati tiek apstrādāti saskaņā ar <a href="/privatuma-politika" target="_blank" rel="noopener">privātuma politiku</a>.</span>
         </label>
       </div>
 
       <div class="modal-actions">
-        <button type="button" id="modalClose">Aizvērt</button>
-        <button type="submit" class="primary">Sūtīt</button>
+        <button type="button" id="modalClose" data-i18n="btn_close">Aizvērt</button>
+        <button type="submit" class="primary" data-i18n="btn_send">Sūtīt</button>
       </div>
     </form>
   </div>
@@ -1520,10 +1534,10 @@
 </script>
 
 <div class="cookie-consent" id="cookieConsent" role="dialog" aria-label="Sīkdatņu piekrišana" aria-live="polite">
-  <p>Šī vietne izmanto sīkdatnes, lai analizētu apmeklējumu un uzlabotu saturu (Google Analytics). Vai piekrīti? Vairāk informācijas — <a href="/privatuma-politika" target="_blank" rel="noopener">privātuma politika</a>.</p>
+  <p data-i18n="cookie_text">Šī vietne izmanto sīkdatnes, lai analizētu apmeklējumu un uzlabotu saturu (Google Analytics). Vai piekrīti? Vairāk informācijas — <a href="/privatuma-politika" target="_blank" rel="noopener">privātuma politika</a>.</p>
   <div class="cookie-actions">
-    <button type="button" id="cookieAccept">Piekrītu</button>
-    <button type="button" id="cookieDecline">Noraidīt</button>
+    <button type="button" id="cookieAccept" data-i18n="cookie_accept">Piekrītu</button>
+    <button type="button" id="cookieDecline" data-i18n="cookie_decline">Noraidīt</button>
   </div>
 </div>
 
@@ -1549,6 +1563,251 @@
 
   document.getElementById('cookieAccept').addEventListener('click', function () { decide('accepted'); });
   document.getElementById('cookieDecline').addEventListener('click', function () { decide('declined'); });
+})();
+</script>
+<script type="text/plain" id="i18n-start_bl" aria-hidden="true" hidden>
+<div class="start-content">
+
+  <p class="start-lead">Hello! The world of cryptocurrencies can seem complicated, but by taking it step by step and following core security principles, you can grasp it quickly. Here is an organised step-by-step plan to enter this world.</p>
+
+  <p class="start-cta">Don't feel like reading but want to jump straight into action? <a href="https://kriptonr1.xyz/#produkti" target="_blank" rel="noopener">Courses that will help</a>.</p>
+
+  <h4 class="start-step">Step 1 — Crypto &amp; blockchain basics</h4>
+
+  <h5 class="start-sub">What is cryptocurrency?</h5>
+  <p>A cryptocurrency is a digital or virtual currency that uses cryptography to ensure security. Unlike traditional currencies (such as the euro or the dollar), cryptocurrencies usually have no physical form and are not controlled or issued by a central bank or government body. They exist only in digital form. Cryptocurrencies run on blockchain technology.</p>
+
+  <h5 class="start-sub">What is the blockchain?</h5>
+  <p>Blockchain is a special digital database or ledger that is distributed (decentralised) and continuously updated. It is the technology underlying cryptocurrencies such as Bitcoin or Ethereum, but it can also be used in other ways.</p>
+
+  <h5 class="start-sub">How does the blockchain work?</h5>
+  <ul>
+    <li><strong>Blocks:</strong> information is stored in blocks — each block contains a certain amount of data (e.g. transactions).</li>
+    <li><strong>Chain:</strong> each new block is linked to the previous block, forming a chain — hence the name blockchain.</li>
+    <li><strong>Decentralisation:</strong> instead of data being stored on one central server, the blockchain is copied and maintained on many computers (nodes) across the world at the same time.</li>
+    <li><strong>Immutability:</strong> once a block is added to the chain, it cannot be changed or deleted without modifying all subsequent blocks — this makes fraud practically impossible.</li>
+    <li><strong>Transparency and verifiability:</strong> all blockchain transactions are publicly visible and verifiable (for example, in the case of Bitcoin), while user identity can remain anonymous.</li>
+  </ul>
+
+  <h4 class="start-step">Step 2 — Beginner's plan and security</h4>
+
+  <h5 class="start-sub">2.1. Educate yourself and understand the basics</h5>
+  <p>Before investing a single cent, get familiar with the core concepts. You don't need to be a programmer, but you do need to understand where you put your money. Watch the video: <a href="https://www.youtube.com/watch?v=yvaWxu8CQ60" target="_blank" rel="noopener">Crypto basics for beginners</a>.</p>
+  <ul>
+    <li><strong>What is blockchain?</strong> It is the technology that upholds the security and operation of all cryptocurrencies.</li>
+    <li><strong>Most popular currencies:</strong> start with the largest and most stable ones, such as Bitcoin (BTC) and Ethereum (ETH). They are safer than obscure meme-coin projects.</li>
+  </ul>
+
+  <h5 class="start-sub">2.2. Choose a trustworthy crypto exchange</h5>
+  <p>To buy your first cryptocurrency, you will need an intermediary — an exchange. You can find the safest and most popular platforms worldwide in the <a href="https://coinmarketcap.com/rankings/exchanges/" target="_blank" rel="noopener">CoinMarketCap exchange list</a>. Or choose one of the <a href="https://kriptonr1.xyz/#partneri" target="_blank" rel="noopener">Kripto No.1 partner exchanges</a>.</p>
+  <ul>
+    <li><strong>What is a CEX?</strong> CEX stands for centralized exchange. It is an online platform (Bybit, Bitunix, Binance, etc.) where users can buy, sell and trade cryptocurrencies using an intermediary — the exchange itself. Unlike a DEX, a CEX manages users' funds, keeps an order book and provides customer support.</li>
+    <li><strong>What is a DEX?</strong> DEX stands for decentralized exchange. It is a crypto trading platform (Uniswap, PancakeSwap, etc.) that operates without a central authority or intermediary (such as a bank or company). Users trade their cryptocurrencies directly with each other using smart contracts and blockchain technology.</li>
+  </ul>
+  <p class="start-tip"><strong>Tip:</strong> When registering, you will need to pass identity verification (KYC), which requires a photo of an identity document — this is a normal and mandatory security step.</p>
+
+  <h5 class="start-sub">2.3. Follow iron security rules</h5>
+  <p>In the crypto world there is no customer service that will return lost money if you make a mistake. Always follow these:</p>
+  <ul>
+    <li><strong>Enable two-factor authentication (2FA):</strong> use an app (such as Google Authenticator), not SMS.</li>
+    <li><strong>Never reveal your passwords or seed phrases:</strong> if anyone asks for them, they are scammers.</li>
+  </ul>
+
+  <h5 class="start-sub">2.4. Invest only as much as you are ready to lose</h5>
+  <p>The crypto market is highly volatile — prices rise and fall sharply.</p>
+  <ul>
+    <li>Start with small amounts (money whose loss won't affect your daily life).</li>
+    <li>Don't borrow money to buy cryptocurrencies.</li>
+  </ul>
+
+  <h5 class="start-sub">2.5. Make your first purchase</h5>
+  <ul>
+    <li>Add your bank account or card to the chosen exchange.</li>
+    <li>Make a small deposit (e.g. EUR).</li>
+    <li>Buy your first share of Bitcoin or Ethereum (you don't need to buy a whole Bitcoin — you can buy for 10 or 20 euros).</li>
+  </ul>
+  <p class="start-gold"><strong>Golden rule for beginners:</strong> at first, focus on accumulating Bitcoin and Ethereum and on learning, rather than on quick profit with risky altcoins.</p>
+
+  <h4 class="start-step">Step 3 — Storing cryptocurrency and wallets</h4>
+
+  <h5 class="start-sub">Where to store your crypto?</h5>
+  <p>Where to store your cryptocurrency is one of the most important decisions every crypto user makes. Below is an overview of the different ways to safely store your crypto.</p>
+
+  <p class="start-minihead">1) Crypto wallets — self-custody wallets (you control the private keys yourself)</p>
+  <ul>
+    <li><strong>a) Software wallets</strong> (Rabby, Phantom, MetaMask)
+      <ul>
+        <li>Pros: full control, easy to use.</li>
+        <li>Cons: vulnerable to hackers if your computer or phone is compromised.</li>
+      </ul>
+    </li>
+    <li><strong>b) Hardware wallets</strong> (Tangem, Trezor, Ledger) — <a href="https://tangem.com/en/pricing/?promocode=KRIPTONR1" target="_blank" rel="noopener">Buy a Tangem here</a>.
+      <ul>
+        <li>Pros: maximum security — private keys never leave the device.</li>
+        <li>Cons: costs roughly 50–200 €.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p class="start-minihead">2) Centralized exchanges (CEX wallets)</p>
+  <p class="start-inline">Binance, Bitunix, Bybit, Coinbase</p>
+  <ul>
+    <li>Pros: easy to use, no need to manage private keys.</li>
+    <li>Cons: you don't own your coins (not your keys, not your coins). Risks: hackers, exchange bankruptcies (e.g. FTX).</li>
+  </ul>
+
+  <p class="start-minihead">Recommendations</p>
+  <ul>
+    <li>For beginners: Rabby or MetaMask + backup phrase on paper.</li>
+    <li>For long-term storage: Tangem (hardware wallet).</li>
+    <li>Never keep large amounts on exchanges — only as much as you plan to trade.</li>
+    <li>Store your seed phrase (12 or 24 words) in a safe place. If you lose it, recovery is impossible.</li>
+  </ul>
+
+  <h4 class="start-step">Step 4 — What is a seed phrase and protecting against scammers</h4>
+
+  <h5 class="start-sub">What is a seed phrase?</h5>
+  <p>A seed phrase (often called a backup phrase) is a 12, 24 or 36-word phrase generated by your crypto wallet (e.g. Rabby, Ledger, MetaMask) when you create it. These words are not random — they are chosen from a special list of 2048 fixed English words (BIP-39 standard).</p>
+
+  <h5 class="start-sub">Why is the seed phrase important?</h5>
+  <ul>
+    <li>It is the only key to your wallet.</li>
+    <li>If you lose your phone or computer, you can restore your wallet on another device only with this phrase.</li>
+    <li>If anyone else gets your seed phrase, they can steal all your crypto — even without your password.</li>
+  </ul>
+
+  <h5 class="start-sub">How to store your seed phrase correctly</h5>
+  <ul class="start-yesno">
+    <li><strong>Yes:</strong> write it down on paper and store it in a safe place (a safe, fireproof safe).</li>
+    <li><strong>Yes:</strong> consider keeping several copies in secure places.</li>
+    <li><strong>Yes:</strong> store it offline, away from internet-connected devices (cold storage).</li>
+    <li><strong>No:</strong> do not enter it on unknown websites or scam wallets.</li>
+    <li><strong>No:</strong> do not take a screenshot or photo.</li>
+    <li><strong>No:</strong> do not copy it to Google Drive, e-mails or the cloud.</li>
+  </ul>
+
+  <h5 class="start-sub">Extra security — the most common scams</h5>
+  <ul>
+    <li><strong>Phishing:</strong> fake websites or links that look identical to real exchanges or wallets. Always carefully check URL addresses.</li>
+    <li><strong>Direct Message (DM) scams:</strong> no official support service will ever write to you first on social media (Telegram, Discord) and ask for your seed phrase.</li>
+    <li><strong>Fake airdrops:</strong> offers to receive free coins, where you are asked to connect your wallet and approve a transaction that instantly empties it.</li>
+  </ul>
+
+  <h4 class="start-step">Step 5 — Tools and basic theory (Tools &amp; Basics)</h4>
+  <p class="start-inline">Technical tools and reading charts.</p>
+
+  <h5 class="start-sub">5.1. What is TradingView and how to use it</h5>
+  <ul>
+    <li><strong>What to search on YouTube:</strong> TradingView tutorial for beginners, how to use TradingView.</li>
+    <li><strong>Content:</strong> how to set up a chart, toolbar, indicators, timeframes.</li>
+  </ul>
+
+  <h5 class="start-sub">5.2. Candlesticks</h5>
+  <ul>
+    <li><strong>What to search on YouTube:</strong> How to read candlestick charts, Candlestick patterns explained.</li>
+    <li><strong>Content:</strong> candlestick structure (Open, High, Low, Close), what they mean and how to read buyer and seller strength.</li>
+  </ul>
+
+  <h4 class="start-step">Step 6 — Classic technical analysis (Basic Technical Analysis)</h4>
+  <p class="start-inline">The next step after mastering the basics.</p>
+
+  <h5 class="start-sub">6.1. Support and Resistance levels</h5>
+  <ul>
+    <li><strong>What to search on YouTube:</strong> Support and Resistance basics, How to draw Support and Resistance.</li>
+  </ul>
+
+  <h5 class="start-sub">6.2. Chart patterns</h5>
+  <ul>
+    <li><strong>What to search on YouTube:</strong> Chart patterns for beginners, Top reversal and continuation patterns.</li>
+  </ul>
+
+  <h4 class="start-step">Step 7 — Risk management and market psychology (Risk &amp; Psychology)</h4>
+  <p class="start-inline">The key disciplines that protect your capital and your mind.</p>
+
+  <h5 class="start-sub">Risk Management</h5>
+  <ul>
+    <li><strong>Risk per Trade:</strong> never risk more than 1–2% of your total account balance on a single trade. For example: if your account has 1000 €, the maximum loss on one trade must not exceed 10–20 €.</li>
+    <li><strong>Risk to Reward Ratio (R:R):</strong> how much you plan to earn relative to how much you risk (e.g. 1:2 or 1:3). With an R:R of 1:3, you can be right only 30–40% of the time and still be profitable.</li>
+    <li><strong>Setting Stop Loss (SL) and Take Profit (TP):</strong> where to logically place SL (beyond structure or a level, not in a random place) and where to take profit. Use partial profit taking and turning the trade into a risk-free position (breakeven).</li>
+    <li><strong>Daily Drawdown Limit:</strong> setting a loss limit for the day (e.g. maximum 3% loss per day). Once the limit is reached, trading stops for that day.</li>
+  </ul>
+
+  <h5 class="start-sub">Market psychology and emotional control</h5>
+  <ul>
+    <li><strong>FOMO (Fear Of Missing Out):</strong> never chase a coin that has already risen sharply — it often ends with buying at the very top.</li>
+    <li><strong>Revenge Trading:</strong> trying to get back after a lost trade. If you've reached your daily loss limit, close the platform immediately.</li>
+  </ul>
+
+  <h4 class="start-step">Step 8 — Extra points (trading journal and taxes)</h4>
+  <ul>
+    <li><strong>Trading Journal:</strong> start recording your trades (why you opened them, what the R:R was, what the result was) to analyse your mistakes and grow.</li>
+    <li><strong>Tax basics:</strong> remember to keep track of and record all your trades. Earning a profit and converting it to fiat (EUR) or spending it on purchases may be subject to personal income tax (PIT) according to your country's legislation.</li>
+  </ul>
+
+</div>
+</script>
+
+<script>/* ====== LV / EN valodas pārslēdzējs ====== */
+(function () {
+  if (window.__i18nLoaded) return;
+  window.__i18nLoaded = true;
+
+  var EN = {"h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure hardware wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","about_title":"About me","about_bio":"Crypto and passive-income investor since 2021. My strength is adapting quickly to changing market conditions, which helps build a diversified, long-term sustainable investment portfolio. I have over 10 years of experience in sales and team leadership, providing strategic insight into business development and partnerships.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li5":"Excel consultations and other topics on demand.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","label_text":"Describe your request or topic","ph_text":"Write your question here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"/privatuma-politika\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse traffic and improve content (Google Analytics). Do you accept?","cookie_accept":"Accept","cookie_decline":"Decline"};
+
+  var SAVE_KEY = 'mrc_lang';
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
+  var phs = Array.prototype.slice.call(document.querySelectorAll('[data-i18n-ph]'));
+  var blkEls = Array.prototype.slice.call(document.querySelectorAll('[data-i18n-block]'));
+
+  /* Glabā oriģinālo (LV) saturu — pirmā ielāde */
+  var original = {};
+  els.forEach(function (el) { original[el.dataset.i18n] = original[el.dataset.i18n] || el.innerHTML; });
+  phs.forEach(function (el) { original[el.dataset.i18nPh] = original[el.dataset.i18nPh] || el.getAttribute('placeholder'); });
+  blkEls.forEach(function (el) { original[el.dataset.i18nBlock] = original[el.dataset.i18nBlock] || el.innerHTML; });
+
+  function setBlock(id) {
+    var src = document.getElementById(id);
+    if (!src) return null;
+    var t = src.textContent.trim();
+    t = t.replace(/^\s*\n/, '');
+    return t;
+  }
+  var enBlocks = {};
+  blkEls.forEach(function (el) { enBlocks[el.dataset.i18nBlock] = setBlock('i18n-' + el.dataset.i18nBlock); });
+
+  function setLang(lang, persist) {
+    if (persist !== false) {
+      try { localStorage.setItem(SAVE_KEY, lang); } catch (e) {}
+    }
+    document.documentElement.setAttribute('lang', lang);
+    var btnLv = document.getElementById('langLv');
+    var btnEn = document.getElementById('langEn');
+    if (btnLv) btnLv.setAttribute('aria-pressed', lang === 'lv' ? 'true' : 'false');
+    if (btnEn) btnEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+
+    var isEn = lang === 'en';
+    els.forEach(function (el) {
+      var key = el.dataset.i18n;
+      el.innerHTML = isEn ? (EN[key] || original[key]) : (original[key] || EN[key]);
+    });
+    phs.forEach(function (el) {
+      var key = el.dataset.i18nPh;
+      el.setAttribute('placeholder', isEn ? (EN[key] || original[key]) : (original[key] || EN[key]));
+    });
+    blkEls.forEach(function (el) {
+      var key = el.dataset.i18nBlock;
+      el.innerHTML = isEn ? (enBlocks[key] || original[key]) : (original[key] || enBlocks[key]);
+    });
+  }
+
+  function onBtn() { setLang(this.dataset.lang, true); }
+  var b = document.getElementById('langLv'); if (b) b.addEventListener('click', onBtn);
+  b = document.getElementById('langEn'); if (b) b.addEventListener('click', onBtn);
+
+  var saved = 'lv';
+  try { saved = localStorage.getItem(SAVE_KEY) || 'lv'; } catch (e) {}
+  if (saved !== 'en') saved = 'lv';
+  setLang(saved, false);
 })();
 </script>
 </body>
