@@ -1888,6 +1888,25 @@ document.addEventListener('click', function(e) {
   const start = btn.closest('details.start-group');
   if (start) start.open = false;
 });
+
+/* Reset iekšējos elementus, kad ārējais bloks tiek aizvērts (mobilais tukšums) */
+document.querySelectorAll('.section-group, details, [data-accordion]').forEach(outer => {
+  outer.addEventListener('click', () => {
+    setTimeout(() => {
+      if (outer.hasAttribute('open') === false && !outer.classList.contains('open')) {
+        const innerElements = outer.querySelectorAll('.nested-content, details, .dropdown-content');
+        innerElements.forEach(inner => {
+          inner.style.maxHeight = '';
+          inner.style.height = '';
+          inner.classList.remove('open');
+          if (inner.tagName === 'DETAILS') {
+            inner.open = false;
+          }
+        });
+      }
+    }, 50);
+  });
+});
 </body>
 
 </html>
