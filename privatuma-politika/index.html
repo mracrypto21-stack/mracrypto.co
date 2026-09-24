@@ -132,13 +132,16 @@
   (function(){
     var isModal = window.self !== window.top;
     if (isModal) document.body.classList.add('in-modal');
-    var back = document.getElementById('policyBack');
-    if (back) back.addEventListener('click', function(e){
-      e.preventDefault();
+    /* Event delegation: darbojas gan LV poga (id=policyBack), gan EN saite (.back) */
+    document.addEventListener('click', function(e){
+      var back = e.target.closest('.back');
+      if (!back) return;
       if (isModal) {
+        e.preventDefault();
         try { window.parent.postMessage('mrc-close-policy', '*'); } catch(err){}
       } else {
-        window.location.href = '../';
+        /* pilnas lapas skatā: ļauj saitei iet uz ../ (vai pogai navigēt) */
+        if (back.tagName === 'BUTTON') { e.preventDefault(); window.location.href = '../'; }
       }
     });
   })();
