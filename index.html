@@ -1470,10 +1470,15 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
         document.querySelectorAll('details.section-group').forEach(other => {
           if (other !== details) other.open = false;
         });
-        // Safari repaint fix: piespiedu reflow, lai saturs uzreiz uzzīmētos bez ritināšanas
+        // Safari repaint fix: piespiedu reflow uz konkrētajiem satura elementiem (dubultais rAF)
+        const forceRepaint = () => {
+          details.querySelectorAll('.start-content, .exchange-content, .section-content').forEach(el => {
+            void el.offsetHeight;
+          });
+        };
         requestAnimationFrame(() => {
-          const content = details.querySelector('.section-content');
-          if (content) { void content.offsetHeight; }
+          forceRepaint();
+          requestAnimationFrame(forceRepaint);
         });
       } else {
         // aizvērts: aizver arī savus iekšējos apakš-dropdownus + resetē inline stilus (mobilais tukšums)
