@@ -1464,6 +1464,9 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
         document.querySelectorAll('details.section-group').forEach(other => {
           if (other !== details) other.open = false;
         });
+        // atver pirmo iekšējo dropdown, lai nebūtu tukšuma
+        const firstInner = details.querySelector('details.exchange-group, details.start-group');
+        if (firstInner) firstInner.open = true;
       } else {
         // aizvērts: aizver arī savus iekšējos apakš-dropdownus
         details.querySelectorAll('details.exchange-group, details.start-group').forEach(inner => {
