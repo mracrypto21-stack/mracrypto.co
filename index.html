@@ -1465,9 +1465,12 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
           if (other !== details) other.open = false;
         });
       } else {
-        // aizvērts: aizver arī savus iekšējos apakš-dropdownus
+        // aizvērts: aizver arī savus iekšējos apakš-dropdownus + resetē inline stilus (mobilais tukšums)
         details.querySelectorAll('details.exchange-group, details.start-group').forEach(inner => {
           inner.open = false;
+          inner.style.maxHeight = '';
+          inner.style.height = '';
+          inner.style.overflow = '';
         });
       }
     });
