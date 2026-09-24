@@ -900,6 +900,10 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 /* Aizvēršanas poga "Starts kriptovalūtā" blokā */
 .start-close{display:block;margin:18px auto 0;padding:8px 18px;background:linear-gradient(180deg, rgba(4,2,1,0.6) 0%, rgba(4,2,1,0.75) 100%), url('assets/bg.jpg') center/cover no-repeat;border:1px solid var(--gold-dim);border-radius:99px;color:var(--gold-bright);font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .25s}
 .start-close:hover{background:linear-gradient(180deg,rgba(232,168,60,.3),rgba(232,168,60,.15));border-color:var(--gold);color:var(--gold-bright)}
+
+/* Aizvērti iekšējie bloki fiziski neuzglabā tukšo vietu (mobilais fix) */
+.start-group:not([open]) > .start-content { display: none; }
+.exchange-group:not([open]) > .exchange-content { display: none; }
 </style>
 </head>
 <body>
