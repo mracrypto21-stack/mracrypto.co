@@ -1760,6 +1760,15 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 </div>
 </script>
 
+<div class="policy-overlay" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="policyModalTitle" aria-hidden="true">
+  <div class="policy-modal">
+    <div class="policy-head">
+      <span id="policyModalTitle" data-i18n="policy_title">Privātuma politika</span>
+      <button type="button" class="policy-close" id="policyClose" aria-label="Aizvērt">✕</button>
+    </div>
+    <iframe class="policy-frame" id="policyFrame" src="" title="Privātuma politika" loading="lazy"></iframe>
+  </div>
+</div>
 <script>/* ====== LV / EN valodas pārslēdzējs ====== */
 (function () {
   if (window.__i18nLoaded) return;
@@ -1823,15 +1832,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
   setLang(saved, false);
 })();
 </script>
-<div class="policy-overlay" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="policyModalTitle" aria-hidden="true">
-  <div class="policy-modal">
-    <div class="policy-head">
-      <span id="policyModalTitle" data-i18n="policy_title">Privātuma politika</span>
-      <button type="button" class="policy-close" id="policyClose" aria-label="Aizvērt">✕</button>
-    </div>
-    <iframe class="policy-frame" id="policyFrame" src="" title="Privātuma politika" loading="lazy"></iframe>
-  </div>
-</div>
+
 
 <script>
 (function(){
