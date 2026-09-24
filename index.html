@@ -1763,7 +1763,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
     <li><strong>Tax basics:</strong> remember to keep track of and record all your trades. Earning a profit and converting it to fiat (EUR) or spending it on purchases may be subject to personal income tax (PIT) according to your country's legislation.</li>
   </ul>
 
-</div>
+\n\n    <button type="button" class="start-close" data-close-start aria-label="Close">✕ Close</button>\n</div>
 </script>
 
 <div class="policy-overlay" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="policyModalTitle" aria-hidden="true">
@@ -1876,11 +1876,11 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 </script>
 
 /* Aizvērt "Starts kriptovalūtā" bloku ar ✕ (aizver tikai iekšējo, Kripto paliek) */
-document.querySelectorAll('[data-close-start]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const start = btn.closest('details.start-group');
-    if (start) start.open = false;
-  });
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('[data-close-start]');
+  if (!btn) return;
+  const start = btn.closest('details.start-group');
+  if (start) start.open = false;
 });
 </body>
 
