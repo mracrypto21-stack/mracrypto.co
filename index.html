@@ -904,6 +904,10 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 /* Aizvērti iekšējie bloki fiziski neuzglabā tukšo vietu (mobilais fix) */
 .start-group:not([open]) > .start-content { display: none; }
 .exchange-group:not([open]) > .exchange-content { display: none; }
+
+/* Aizvērts iekšējais bloks pilnībā noņemts no layout (Safari mobilais fix) */
+.start-group:not([open]) { display: none; }
+.exchange-group:not([open]) { display: none; }
 </style>
 </head>
 <body>
