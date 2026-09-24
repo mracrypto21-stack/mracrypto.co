@@ -1470,16 +1470,16 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
         document.querySelectorAll('details.section-group').forEach(other => {
           if (other !== details) other.open = false;
         });
-        // Safari repaint fix: piespiedu reflow uz konkrētajiem satura elementiem (dubultais rAF)
-        const forceRepaint = () => {
+        // Safari repaint fix: piespiedu repaint uz satura elementiem (display flip + setTimeout, ko Safari fiziski nespēj ignorēt)
+        setTimeout(() => {
           details.querySelectorAll('.start-content, .exchange-content, .section-content').forEach(el => {
-            void el.offsetHeight;
+            const prev = el.style.display;
+            el.style.display = 'none';
+            void el.offsetHeight;          // piespiedu reflow tukšai vērtībai
+            el.style.display = prev || '';
+            void el.offsetHeight;          // un atkal pēc atgriešanas
           });
-        };
-        requestAnimationFrame(() => {
-          forceRepaint();
-          requestAnimationFrame(forceRepaint);
-        });
+        }, 0);
       } else {
         // aizvērts: aizver arī savus iekšējos apakš-dropdownus + resetē inline stilus (mobilais tukšums)
         details.querySelectorAll('details.exchange-group, details.start-group').forEach(inner => {
