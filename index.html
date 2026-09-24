@@ -1862,6 +1862,9 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
   document.addEventListener('keydown', function(ev){
     if(ev.key==='Escape' && overlay.classList.contains('open')) closePolicy();
   });
+  window.addEventListener('message', function(ev){
+    if (ev.data === 'mrc-close-policy') closePolicy();
+  });
 })();
 </script>
 </body>

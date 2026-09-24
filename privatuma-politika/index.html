@@ -29,6 +29,13 @@
     .lang-pill{position:fixed;top:14px;right:16px;z-index:70;display:flex;gap:6px;background:rgba(18,16,10,.86);border:1px solid var(--line);border-radius:99px;padding:4px 6px}
     .lang-pill button{background:transparent;border:1px solid var(--gold-dim);border-radius:99px;padding:4px 11px;color:var(--bronze);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
     .lang-pill button[aria-pressed="true"]{background:linear-gradient(180deg,rgba(232,168,60,.25),rgba(232,168,60,.12));border-color:var(--gold);color:var(--gold-bright)}
+  
+    /* Modāļa kontekstā (iframe): slēpjam valodas pārslēdzēju, "Atgriezties" kļūst par pogu */
+    body.in-modal .lang-pill{display:none !important}
+    body.in-modal .back{display:inline-block;margin-top:26px;color:var(--gold-bright);text-decoration:none;cursor:pointer;border:none;background:none;font-family:inherit;font-size:15px}
+    body.in-modal{background:transparent;padding:0}
+    body.in-modal .page{max-width:640px;margin:0 auto;padding:28px 20px}
+
   </style>
 </head>
 <body>
@@ -99,7 +106,7 @@
       <p>Ja tev ir jautājumi par šīs privātuma politikas apguvi vai datu apstrādi, raksti uz <a href="mailto:mracrypto21@gmail.com">mracrypto21@gmail.com</a> — vari pieprasīt savu datu dzēšanu jeb izskatu.</p>
     </div>
 
-    <a class="back" href="../">← Atgriezties uz mracrypto.co</a>
+    <button type="button" class="back" id="policyBack">← Atgriezties uz mracrypto.co</button>
     </div>
   </div>
 <script>
@@ -120,6 +127,21 @@
   if(s!=='lv'&&s!=='en')s='lv';
   apply(s,false);
 })();
+
+  /* Ja ielādēta modāļa iframe: slēpjam valodas pārslēdzēju, "Atgriezties" aizver modāli */
+  (function(){
+    var isModal = window.self !== window.top;
+    if (isModal) document.body.classList.add('in-modal');
+    var back = document.getElementById('policyBack');
+    if (back) back.addEventListener('click', function(e){
+      e.preventDefault();
+      if (isModal) {
+        try { window.parent.postMessage('mrc-close-policy', '*'); } catch(err){}
+      } else {
+        window.location.href = '../';
+      }
+    });
+  })();
 </script>
 </body>
 </html>
