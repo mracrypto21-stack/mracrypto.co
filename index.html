@@ -898,7 +898,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 @media (prefers-reduced-motion:reduce){.policy-overlay{transition:none}}
 
 /* Aizvēršanas poga "Starts kriptovalūtā" blokā */
-.start-close{display:block;margin:18px auto 0;padding:8px 18px;background:linear-gradient(180deg,rgba(232,168,60,.18),rgba(232,168,60,.08));border:1px solid var(--gold-dim);border-radius:99px;color:var(--gold-bright);font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .25s}
+.start-close{display:block;margin:18px auto 0;padding:8px 18px;background:linear-gradient(180deg, rgba(4,2,1,0.6) 0%, rgba(4,2,1,0.75) 100%), url('assets/bg.jpg') center/cover no-repeat;border:1px solid var(--gold-dim);border-radius:99px;color:var(--gold-bright);font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .25s}
 .start-close:hover{background:linear-gradient(180deg,rgba(232,168,60,.3),rgba(232,168,60,.15));border-color:var(--gold);color:var(--gold-bright)}
 </style>
 </head>
@@ -1144,7 +1144,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
   </ul>
 
 
-    <button type="button" class="start-close" data-close-start aria-label="Aizvērt" onclick="this.closest('details.start-group').open=false">✕ Aizvērt</button>
+    <button type="button" class="start-close" data-close-start aria-label="Aizvērt" onclick="var s=this.closest('details.start-group');s.open=false;var p=s.closest('details.section-group');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});">✕ Aizvērt</button>
 </div>
 
         </details>
@@ -1464,9 +1464,6 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
         document.querySelectorAll('details.section-group').forEach(other => {
           if (other !== details) other.open = false;
         });
-        // atver pirmo iekšējo dropdown, lai nebūtu tukšuma
-        const firstInner = details.querySelector('details.exchange-group, details.start-group');
-        if (firstInner) firstInner.open = true;
       } else {
         // aizvērts: aizver arī savus iekšējos apakš-dropdownus
         details.querySelectorAll('details.exchange-group, details.start-group').forEach(inner => {
@@ -1768,7 +1765,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 
 
 
-    <button type="button" class="start-close" data-close-start aria-label="Close" onclick="this.closest('details.start-group').open=false">✕ Close</button>
+    <button type="button" class="start-close" data-close-start aria-label="Close" onclick="var s=this.closest('details.start-group');s.open=false;var p=s.closest('details.section-group');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});">✕ Close</button>
 </div>
 </script>
 
