@@ -112,25 +112,6 @@
     width: 420px;
   }
 
-  .glow-blob {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 560px;
-    height: 560px;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(232,168,60,0.20) 0%, rgba(232,168,60,0.10) 32%, rgba(232,168,60,0.03) 55%, transparent 72%);
-    filter: blur(4px);
-    animation: breathe-glow 6s ease-in-out infinite;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  @keyframes breathe-glow {
-    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.97); }
-    50% { opacity: 0.55; transform: translate(-50%, -50%) scale(1.01); }
-  }
-
   .logo-glow img {
     position: relative;
     z-index: 1;
@@ -923,7 +904,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 <div class="page">
 
   <div class="logo-glow fade-up delay-1">
-    <div class="glow-blob"></div>
+    
     <img src="assets/logo.png" alt="@MRACRYPTO">
   </div>
 
