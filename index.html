@@ -175,6 +175,7 @@
 
   .section-group {
     width: 100%;
+    scroll-margin-top: 16px;
   }
 
   .section-header {
@@ -1461,6 +1462,10 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
             void el.offsetHeight;          // un atkal pēc atgriešanas
           });
         }, 0);
+        // Gluda pārvietošana: novieto jaunatvērto bloku pie ekrāna augšas (scroll-margin-top dod atkāpi)
+        setTimeout(() => {
+          details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
       } else {
         // aizvērts: aizver arī savus iekšējos apakš-dropdownus + resetē inline stilus (mobilais tukšums)
         details.querySelectorAll('details.exchange-group, details.start-group').forEach(inner => {
