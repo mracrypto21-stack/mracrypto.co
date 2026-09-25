@@ -185,6 +185,7 @@
     width: 100%;
     padding: 16px 20px;
     background: linear-gradient(180deg, rgba(18,16,10,0.5), rgba(8,6,3,0.6));
+    backdrop-filter: blur(6px);
     border: 1px solid var(--line);
     border-radius: 10px;
     cursor: pointer;
@@ -451,7 +452,7 @@
   }
 
   .consultation-btn:hover, .consultation-btn:focus-visible {
-    background: rgba(18,16,10,0.95);
+    background: rgba(18,16,10,0.6);
     transform: translateY(-1px);
   }
 
@@ -464,7 +465,8 @@
     align-items: center;
     gap: 8px;
     padding: 11px 18px;
-    background: linear-gradient(180deg, rgba(18,16,10,0.95), rgba(8,6,3,0.95));
+    background: linear-gradient(180deg, rgba(18,16,10,0.5), rgba(8,6,3,0.6));
+    backdrop-filter: blur(6px);
     border: 1px solid var(--gold-dim);
     border-radius: 30px;
     color: var(--cream);
