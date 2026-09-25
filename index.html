@@ -95,6 +95,14 @@
                 radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,0,0,0.05), transparent 60%);
   }
 
+  /* Desktop: vienu toni tumšāks fons; mobilo (pamatne) atstāj gaišu */
+  @media (min-width: 768px) {
+    .bg-overlay {
+      background: linear-gradient(180deg, rgba(4,2,1,0.40) 0%, rgba(4,2,1,0.66) 40%, rgba(4,2,1,0.80) 100%),
+                  radial-gradient(ellipse 80% 40% at 50% 0%, rgba(0,0,0,0.10), transparent 60%);
+    }
+  }
+
   .page {
     position: relative;
     z-index: 2;
