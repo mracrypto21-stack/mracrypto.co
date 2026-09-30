@@ -386,6 +386,24 @@
     font-family: inherit;
   }
 
+  /* Svarīga informācija bloks */
+  .info-block {
+    padding: 18px 20px;
+    background: linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));
+    background-color: rgba(18,16,10,0.55);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--cream);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+    backdrop-filter: blur(6px);
+  }
+  .info-block p { margin: 0 0 12px 0; }
+  .info-block p:last-child { margin-bottom: 0; }
+  .info-block strong { color: #E8A83C; }
+  .info-block a { color: #E8A83C; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
   .contact-card {
     width: 100%;
     margin-top: 14px;
@@ -1291,6 +1309,21 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
       </div>
     </details>
 
+    <details class="section-group fade-up delay-3" data-ga="open_svarigi">
+      <summary class="section-header">
+        <span class="section-emoji" style="color:#E8A83C"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></span>
+        <h2 class="section-title" data-i18n="sec_info">Svarīga informācija</h2>
+        <span class="chevron section-chevron">›</span>
+      </summary>
+      <div class="section-content">
+        <div class="info-block">
+          <p data-i18n="info_scam"><strong>Uzmanies no krāpniekiem!</strong><br>Interneta vidē darbojas daudz viltus profilu, kas uzdodas par mani. Es nekad nerakstīšu pirmais un nepiedāvāšu investēt! Lai nekļūtu par to upuri, spied uz <a href="#" data-goto="social">maniem oficiālajiem sociālajiem tīkliem</a> un pārbaudi. Atceries: es nekad neprasīšu tavas paroles, "seed" frāzes vai privātās atslēgas.</p>
+          <p data-i18n="info_disc"><strong>Atruna:</strong> Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava paša atbildība.</p>
+          <p data-i18n="info_doubt"><strong>Neskaidrību gadījumā:</strong> Ja rodas aizdomīga situācija vai kāds raksta manā vārdā, <a href="#" data-goto="contact">sazinies ar mani</a>.</p>
+        </div>
+      </div>
+    </details>
+
   </div>
 
   <div class="about-card">
@@ -1347,7 +1380,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
   </div>
 
 
-  <div class="contact-card">
+  <div class="contact-card" id="contactCard">
     <h3 data-i18n="contact_title">Sazinies ar mani</h3>
     <div class="contact-buttons">
       <a class="contact-btn glow-border" href="https://t.me/mracryptoo" target="_blank" rel="noopener" data-ga="click_contact_telegram">
@@ -1361,7 +1394,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
     </div>
   </div>
 
-  <div class="footer" data-i18n="footer">Atruna: Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava pašu atbildlība.</div>
+  <div class="footer" data-i18n="footer">Atruna: Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava paša atbildība.</div>
 
 </div>
 
@@ -1826,7 +1859,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
   if (window.__i18nLoaded) return;
   window.__i18nLoaded = true;
 
-  var EN = {"h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure hardware wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_title":"About me","about_bio":"Crypto and passive-income investor since 2021. My strength is adapting quickly to changing market conditions, which helps build a diversified, long-term sustainable investment portfolio. I have over 10 years of experience in sales and team leadership, providing strategic insight into business development and partnerships.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li5":"Excel consultations and other topics on demand.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse traffic and improve content (Google Analytics). Do you accept?","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy"};
+  var EN = {"sec_info":"Important information","info_scam":"<strong>Beware of scammers!</strong><br>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, click on <a href=\"#\" data-goto=\"social\">my official social media</a> and verify. Remember: I will never ask for your passwords, seed phrases or private keys.","info_disc":"<strong>Disclaimer:</strong> The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","info_doubt":"<strong>In case of doubt:</strong> If a suspicious situation arises or someone writes in my name, <a href=\"#\" data-goto=\"contact\">contact me</a>.","h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure hardware wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_title":"About me","about_bio":"Crypto and passive-income investor since 2021. My strength is adapting quickly to changing market conditions, which helps build a diversified, long-term sustainable investment portfolio. I have over 10 years of experience in sales and team leadership, providing strategic insight into business development and partnerships.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li5":"Excel consultations and other topics on demand.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse traffic and improve content (Google Analytics). Do you accept?","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy"};
 
   var SAVE_KEY = 'mrc_lang';
   var els = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
@@ -1947,6 +1980,22 @@ document.querySelectorAll('.section-group, details, [data-accordion]').forEach(o
     }, 50);
   });
 });
+<script>
+/* Saites no bloka "Svarīga informācija": uz Sociālajiem tīkliem (atver) un Sazinies ar mani */
+document.addEventListener('click', function(e) {
+  var a = e.target.closest('[data-goto]');
+  if (!a) return;
+  e.preventDefault();
+  var t = a.getAttribute('data-goto');
+  if (t === 'social') {
+    var d = document.querySelector('details[data-ga="open_socialie"]');
+    if (d) { if (d.open) { d.scrollIntoView({behavior:'smooth', block:'start'}); } else { d.open = true; } }
+  } else if (t === 'contact') {
+    var c = document.getElementById('contactCard');
+    if (c) c.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+});
+</script>
 </body>
 
 </html>
