@@ -404,6 +404,28 @@
   .info-block strong { color: #E8A83C; }
   .info-block a { color: #E8A83C; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
+  .info-video {
+    width: 100%;
+    max-width: 280px;
+    margin: 16px auto 0;
+    padding: 6px;
+    background: linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));
+    background-color: rgba(18,16,10,0.55);
+    border: 1px solid rgba(232,168,60,0.55);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 18px rgba(232,168,60,0.12);
+  }
+  .info-video video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    height: auto;
+    object-fit: cover;
+    border-radius: 11px;
+    background: #000;
+  }
+
   .contact-card {
     width: 100%;
     margin-top: 14px;
@@ -1320,6 +1342,7 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
           <p data-i18n="info_scam"><strong>Uzmanies no krāpniekiem!</strong><br>Interneta vidē darbojas daudz viltus profilu, kas uzdodas par mani. Es nekad nerakstīšu pirmais un nepiedāvāšu investēt! Lai nekļūtu par to upuri, spied uz <a href="#" data-goto="social">maniem oficiālajiem sociālajiem tīkliem</a> un pārbaudi. Atceries: es nekad neprasīšu tavas paroles, "seed" frāzes vai privātās atslēgas.</p>
           <p data-i18n="info_disc"><strong>Atruna:</strong> Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava paša atbildība.</p>
           <p data-i18n="info_doubt"><strong>Neskaidrību gadījumā:</strong> Ja rodas aizdomīga situācija vai kāds raksta manā vārdā, <a href="#" data-goto="contact">sazinies ar mani</a>.</p>
+          <div class="info-video"><video src="assets/info-video.mp4" poster="assets/info-video-poster.jpg" controls playsinline preload="none" width="720" height="1280"></video></div>
         </div>
       </div>
     </details>
@@ -1980,6 +2003,10 @@ document.querySelectorAll('.section-group, details, [data-accordion]').forEach(o
     }, 50);
   });
 });
+<script>
+/* Pauzē video, kad "Svarīga informācija" tiek aizvērta */
+(function(){var d=document.querySelector('details[data-ga="open_svarigi"]');if(!d)return;d.addEventListener('toggle',function(){if(!d.open){d.querySelectorAll('video').forEach(function(v){v.pause();});}});})();
+</script>
 <script>
 /* Saites no bloka "Svarīga informācija": uz Sociālajiem tīkliem (atver) un Sazinies ar mani */
 document.addEventListener('click', function(e) {
