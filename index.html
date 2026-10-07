@@ -108,7 +108,7 @@
     z-index: 2;
     max-width: 480px;
     margin: 0 auto;
-    padding: 48px 24px 64px;
+    padding: 48px 24px 110px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -658,7 +658,7 @@
   }
 
   @media (max-width: 380px) {
-    .page { padding: 36px 18px 48px; }
+    .page { padding: 36px 18px 110px; }
     .logo-glow { width: 300px; }
     .chat-widget span.chat-label { display: none; }
     .chat-widget { padding: 12px; border-radius: 50%; }
@@ -1984,32 +1984,6 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 })();
 </script>
 
-/* Aizvērt "Starts kriptovalūtā" bloku ar ✕ (aizver tikai iekšējo, Kripto paliek) */
-document.addEventListener('click', function(e) {
-  const btn = e.target.closest('[data-close-start]');
-  if (!btn) return;
-  const start = btn.closest('details.start-group');
-  if (start) start.open = false;
-});
-
-/* Reset iekšējos elementus, kad ārējais bloks tiek aizvērts (mobilais tukšums) */
-document.querySelectorAll('.section-group, details, [data-accordion]').forEach(outer => {
-  outer.addEventListener('click', () => {
-    setTimeout(() => {
-      if (outer.hasAttribute('open') === false && !outer.classList.contains('open')) {
-        const innerElements = outer.querySelectorAll('.nested-content, details, .dropdown-content');
-        innerElements.forEach(inner => {
-          inner.style.maxHeight = '';
-          inner.style.height = '';
-          inner.classList.remove('open');
-          if (inner.tagName === 'DETAILS') {
-            inner.open = false;
-          }
-        });
-      }
-    }, 50);
-  });
-});
 <script>
 /* Pauzē video, kad "Svarīga informācija" tiek aizvērta */
 (function(){var d=document.querySelector('details[data-ga="open_svarigi"]');if(!d)return;d.addEventListener('toggle',function(){if(!d.open){d.querySelectorAll('video').forEach(function(v){v.pause();});}});})();
