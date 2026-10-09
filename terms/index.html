@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,36 +26,24 @@
     a{color:var(--gold-bright)}
     .back{display:inline-block;margin-top:26px;color:var(--gold-bright);text-decoration:none;}
     .divider{border-top:1px solid var(--line);margin:44px 0}
-    .lang-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bronze);margin-bottom:10px}
+    .lang-pill{position:fixed;top:14px;right:16px;z-index:70;display:flex;gap:6px;background:rgba(18,16,10,.86);border:1px solid var(--line);border-radius:99px;padding:4px 6px}
+    .lang-pill button{background:transparent;border:1px solid var(--gold-dim);border-radius:99px;padding:4px 11px;color:var(--bronze);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
+    .lang-pill button[aria-pressed="true"]{background:linear-gradient(180deg,rgba(232,168,60,.25),rgba(232,168,60,.12));border-color:var(--gold);color:var(--gold-bright)}
+
+    /* Modāļa kontekstā (iframe): slēpjam valodas pārslēdzēju, "Atgriezties" kļūst par pogu, kas aizver modāli */
+    body.in-modal .lang-pill{display:none !important}
+    body.in-modal .back{display:inline-block;margin-top:26px;color:var(--gold-bright);text-decoration:none;cursor:pointer;border:none;background:none;font-family:inherit;font-size:15px}
+    body.in-modal{background:transparent;padding:0}
+    body.in-modal .page{max-width:640px;margin:0 auto;padding:28px 20px}
   </style>
 </head>
 <body>
+  <div class="lang-pill" role="group" aria-label="Language / Valoda">
+    <button type="button" data-lang="lv" id="plv" aria-pressed="true">LV</button>
+    <button type="button" data-lang="en" id="pen" aria-pressed="false">EN</button>
+  </div>
   <div class="page">
-
-    <div class="lang-label">English</div>
-    <h1>Terms of Service — PostPilot</h1>
-    <div class="updated">Last updated: October 9, 2026</div>
-
-    <p>These Terms of Service apply to <strong>PostPilot</strong>, an internal automation tool built and operated solely by Andrejs Kozlovs to manage the YouTube, TikTok and Instagram channels of <strong>MrACrypto</strong>. PostPilot is not a public product — it has a single operator and is not made available to, or usable by, any other party.</p>
-
-    <h2>1. Single-operator tool</h2>
-    <p>PostPilot is for internal use only, by its owner. It is not publicly accessible and is not offered as a service to third parties.</p>
-
-    <h2>2. YouTube API Services</h2>
-    <p>PostPilot uses YouTube API Services. By using PostPilot, the owner agrees to be bound by the <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube Terms of Service</a>.</p>
-
-    <h2>3. Privacy</h2>
-    <p>See the <a href="https://mracrypto.co/privacy/" target="_blank" rel="noopener">Privacy Policy</a> for details on what data PostPilot stores and how.</p>
-
-    <h2>4. Changes</h2>
-    <p>These Terms may be updated from time to time. The "Last updated" date above reflects the latest revision.</p>
-
-    <h2>5. Contact</h2>
-    <p>Questions: <a href="mailto:mracrypto21@gmail.com">mracrypto21@gmail.com</a></p>
-
-    <div class="divider"></div>
-
-    <div class="lang-label">Latviski</div>
+    <div id="policyBody">
     <h1>Lietošanas noteikumi — PostPilot</h1>
     <div class="updated">Pēdējo reiz atjaunināti: 2026. gada 9. oktobrī</div>
 
@@ -76,7 +64,58 @@
     <h2>5. Kontakti</h2>
     <p>Jautājumi: <a href="mailto:mracrypto21@gmail.com">mracrypto21@gmail.com</a></p>
 
-    <a class="back" href="../">← Back to mracrypto.co</a>
+    <a class="back" href="../" id="policyBack">← Atgriezties uz mracrypto.co</a>
+    </div>
   </div>
+<script>
+(function(){
+  var EN = "<h1>Terms of Service — PostPilot</h1>\n    <div class=\"updated\">Last updated: October 9, 2026</div>\n\n    <p>These Terms of Service apply to <strong>PostPilot</strong>, an internal automation tool built and operated solely by Andrejs Kozlovs to manage the YouTube, TikTok and Instagram channels of <strong>MrACrypto</strong>. PostPilot is not a public product \u2014 it has a single operator and is not made available to, or usable by, any other party.</p>\n\n    <h2>1. Single-operator tool</h2>\n    <p>PostPilot is for internal use only, by its owner. It is not publicly accessible and is not offered as a service to third parties.</p>\n\n    <h2>2. YouTube API Services</h2>\n    <p>PostPilot uses YouTube API Services. By using PostPilot, the owner agrees to be bound by the <a href=\"https://www.youtube.com/t/terms\" target=\"_blank\" rel=\"noopener\">YouTube Terms of Service</a>.</p>\n\n    <h2>3. Privacy</h2>\n    <p>See the <a href=\"https://mracrypto.co/privacy/\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> for details on what data PostPilot stores and how.</p>\n\n    <h2>4. Changes</h2>\n    <p>These Terms may be updated from time to time. The \"Last updated\" date above reflects the latest revision.</p>\n\n    <h2>5. Contact</h2>\n    <p>Questions: <a href=\"mailto:mracrypto21@gmail.com\">mracrypto21@gmail.com</a></p>\n\n    <a class=\"back\" href=\"../\" id=\"policyBack\">\u2190 Back to mracrypto.co</a>";
+
+  var body=document.getElementById('policyBody');
+  var orig=body.innerHTML;
+
+  function apply(lang,persist){
+    if(persist !== false){try{localStorage.setItem('mrc_lang',lang);}catch(e){}}
+    document.documentElement.setAttribute('lang',lang);
+    document.getElementById('plv').setAttribute('aria-pressed',lang==='lv'?'true':'false');
+    document.getElementById('pen').setAttribute('aria-pressed',lang==='en'?'true':'false');
+    body.innerHTML = lang==='en' ? EN : orig;
+  }
+
+  document.getElementById('plv').addEventListener('click',function(){apply('lv',true);});
+  document.getElementById('pen').addEventListener('click',function(){apply('en',true);});
+
+  /* Valodas noteikšana: 1) ?lang=en URL parametrs  2) saglabātā izvēle (localStorage)  3) noklusējums LV */
+  function urlLang(){
+    try{
+      var m = /[?&]lang=(en|lv)\b/i.exec(window.location.search);
+      if(m) return m[1].toLowerCase();
+    }catch(e){}
+    return null;
+  }
+  var initial = urlLang();
+  if(!initial){
+    try{ initial = localStorage.getItem('mrc_lang'); }catch(e){}
+  }
+  if(initial!=='lv' && initial!=='en') initial='lv';
+  apply(initial, false);
+
+  /* Ja ielādēta modāļa iframe: slēpjam valodas pārslēdzēju, "Atgriezties" aizver modāli */
+  (function(){
+    var isModal = window.self !== window.top;
+    if (isModal) document.body.classList.add('in-modal');
+    document.addEventListener('click', function(e){
+      var back = e.target.closest('.back');
+      if (!back) return;
+      if (isModal) {
+        e.preventDefault();
+        try { window.parent.postMessage('mrc-close-policy', '*'); } catch(err){}
+      } else {
+        if (back.tagName === 'BUTTON') { e.preventDefault(); window.location.href = '../'; }
+      }
+    });
+  })();
+})();
+</script>
 </body>
 </html>
