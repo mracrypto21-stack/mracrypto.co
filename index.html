@@ -928,12 +928,34 @@
 .consent-label input{width:16px;height:16px;accent-color:#E8A83C;margin:0;flex-shrink:0}
 .consent-label a{color:var(--gold-bright);text-decoration:underline;text-underline-offset:2px}
 
-/* Valodas pārslēdzējs */
-.lang-switcher{position:fixed;top:12px;right:16px;z-index:70;display:flex;gap:6px;align-items:center;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));
+/* Valodas pārslēdzējs + Dalīties poga — viena kompakta vadības josla augšējā labajā stūrī */
+.top-controls{position:fixed;top:12px;right:16px;z-index:70;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.lang-switcher{display:flex;gap:6px;align-items:center;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));
   background-color: rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:99px;padding:4px 6px}
 .lang-btn{background:transparent;border:1px solid var(--gold-dim);border-radius:99px;padding:4px 12px;color:var(--bronze);font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .25s}
 .lang-btn[aria-pressed="true"]{background:linear-gradient(180deg,rgba(232,168,60,.25),rgba(232,168,60,.12));border-color:var(--gold);color:var(--gold-bright)}
 .lang-btn:hover:not([aria-pressed="true"]){border-color:var(--gold);color:var(--gold)}
+
+/* Dalīties (Share) poga */
+.share-btn{width:44px;height:44px;min-width:44px;min-height:44px;border-radius:99px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.6);backdrop-filter:blur(6px);
+  border:1.5px solid var(--gold);cursor:pointer;transition:all .25s;box-shadow:0 0 0 rgba(232,168,60,0)}
+.share-btn:hover{border-color:var(--gold-bright);box-shadow:0 0 16px rgba(232,168,60,.4)}
+.share-btn svg{width:20px;height:20px;display:block}
+
+/* Dalīties modālis (fallback, ja nav navigator.share) */
+.share-overlay{position:fixed;inset:0;z-index:85;background:rgba(5,3,1,.45);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px}
+.share-overlay.open{display:flex}
+.share-modal{position:relative;width:min(340px,92vw);background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));
+  background-color:rgba(18,16,10,0.75);backdrop-filter:blur(6px);border:1px solid var(--gold-dim);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.6);overflow:hidden}
+.share-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+.share-head span{font-family:'Marcellus',serif;color:var(--gold-bright);font-size:15px;letter-spacing:.02em}
+.share-close{background:none;border:none;color:var(--bronze);font-size:22px;line-height:1;cursor:pointer;padding:2px 8px;border-radius:6px;transition:color .2s}
+.share-close:hover{color:var(--gold-bright)}
+.share-options{display:flex;flex-direction:column;padding:10px}
+.share-option{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--gold-dim);border-radius:10px;margin:4px 0;padding:11px 14px;
+  color:var(--bronze);font-family:inherit;font-size:14px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-decoration:none;min-height:44px;box-sizing:border-box}
+.share-option:hover{border-color:var(--gold);color:var(--gold-bright);background:linear-gradient(180deg,rgba(232,168,60,.12),rgba(232,168,60,.04))}
 /* EN tulkojumiem var vajadzēt vairakuvietu */
 html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .chat-label{letter-spacing:0.005em}
 
@@ -970,9 +992,35 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 </style>
 </head>
 <body>
-  <div class="lang-switcher" id="langSwitcher" role="group" aria-label="Language / Valoda">
-    <button type="button" class="lang-btn" data-lang="lv" id="langLv" aria-pressed="false">LV</button>
-    <button type="button" class="lang-btn" data-lang="en" id="langEn" aria-pressed="false">EN</button>
+  <div class="top-controls" id="topControls">
+    <div class="lang-switcher" id="langSwitcher" role="group" aria-label="Language / Valoda">
+      <button type="button" class="lang-btn" data-lang="lv" id="langLv" aria-pressed="false">LV</button>
+      <button type="button" class="lang-btn" data-lang="en" id="langEn" aria-pressed="false">EN</button>
+    </div>
+    <button type="button" class="share-btn" id="shareBtn" aria-label="Dalīties" title="Dalīties">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="5" r="3" stroke="#E8A83C" stroke-width="1.8"/>
+        <circle cx="6" cy="12" r="3" stroke="#E8A83C" stroke-width="1.8"/>
+        <circle cx="18" cy="19" r="3" stroke="#E8A83C" stroke-width="1.8"/>
+        <path d="M8.6 10.6l6.8-4.2M8.6 13.4l6.8 4.2" stroke="#E8A83C" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="share-overlay" id="shareOverlay" aria-hidden="true">
+    <div class="share-modal" id="shareModal" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+      <div class="share-head">
+        <span id="shareModalTitle">Dalīties</span>
+        <button type="button" class="share-close" id="shareClose" aria-label="Aizvērt">✕</button>
+      </div>
+      <div class="share-options">
+        <button type="button" class="share-option" id="shareCopy">Kopēt saiti</button>
+        <a class="share-option" id="shareTelegram" href="#" target="_blank" rel="noopener">Telegram</a>
+        <a class="share-option" id="shareX" href="#" target="_blank" rel="noopener">X (Twitter)</a>
+        <a class="share-option" id="shareWhatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="share-option" id="shareFacebook" href="#" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
   </div>
 
 
@@ -2003,6 +2051,113 @@ document.addEventListener('click', function(e) {
     if (c) c.scrollIntoView({behavior:'smooth', block:'center'});
   }
 });
+</script>
+<script>
+/* ====== Dalīties / Share poga ====== */
+(function(){
+  var btn = document.getElementById('shareBtn');
+  if (!btn) return;
+  var overlay = document.getElementById('shareOverlay');
+  var closeBtn = document.getElementById('shareClose');
+  var copyBtn = document.getElementById('shareCopy');
+  var titleEl = document.getElementById('shareModalTitle');
+  var shareText = '@MrACrypto \u2013 Crypto & Passive Income Investor | Founder of KRIPTO NR. 1';
+
+  var TXT = {
+    lv: { title: 'Dalīties', copy: 'Kopēt saiti', copied: 'Nokopēts!', aria: 'Dalīties' },
+    en: { title: 'Share', copy: 'Copy link', copied: 'Copied!', aria: 'Share' }
+  };
+
+  function curLang(){ return document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'lv'; }
+  function shareUrl(){ return location.href; }
+
+  function applyTexts(){
+    var t = TXT[curLang()];
+    if (titleEl) titleEl.textContent = t.title;
+    if (copyBtn && !copyBtn.dataset.justCopied) copyBtn.textContent = t.copy;
+    btn.setAttribute('aria-label', t.aria);
+    btn.title = t.aria;
+  }
+
+  function buildLinks(){
+    var u = encodeURIComponent(shareUrl());
+    var txt = encodeURIComponent(shareText);
+    var tg = document.getElementById('shareTelegram');
+    var x = document.getElementById('shareX');
+    var wa = document.getElementById('shareWhatsapp');
+    var fb = document.getElementById('shareFacebook');
+    if (tg) tg.href = 'https://t.me/share/url?url=' + u + '&text=' + txt;
+    if (x) x.href = 'https://twitter.com/intent/tweet?url=' + u + '&text=' + txt;
+    if (wa) wa.href = 'https://wa.me/?text=' + txt + '%20' + u;
+    if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + u + '&quote=' + txt;
+  }
+
+  function openModal(){
+    buildLinks();
+    applyTexts();
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  btn.addEventListener('click', function(){
+    if (navigator.share) {
+      navigator.share({ title: shareText, text: shareText, url: shareUrl() }).catch(function(){});
+    } else {
+      openModal();
+    }
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (overlay) overlay.addEventListener('click', function(e){ if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function(){
+      var t = TXT[curLang()];
+      var toCopy = shareText + '\n' + shareUrl();
+      var done = function(){
+        copyBtn.dataset.justCopied = '1';
+        copyBtn.textContent = t.copied;
+        setTimeout(function(){
+          delete copyBtn.dataset.justCopied;
+          copyBtn.textContent = TXT[curLang()].copy;
+        }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(toCopy).then(done).catch(function(){ fallbackCopy(toCopy); done(); });
+      } else {
+        fallbackCopy(toCopy);
+        done();
+      }
+    });
+  }
+
+  var langLv = document.getElementById('langLv');
+  var langEn = document.getElementById('langEn');
+  if (langLv) langLv.addEventListener('click', applyTexts);
+  if (langEn) langEn.addEventListener('click', applyTexts);
+  applyTexts();
+})();
 </script>
 </body>
 
