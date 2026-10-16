@@ -1008,6 +1008,19 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 .exchange-group:not([open]) > .exchange-content { display: none; }
 
 /* Aizvērts iekšējais bloks pilnībā noņemts no layout (Safari mobilais fix) */
+
+/* === Nelieli vizuāli uzlabojumi (2026-10-16) — atgriešanai: git tag backup-pre-visual-tweaks-20261016 === */
+:root { --bronze: #b8905a; }                        /* mazā teksta kontrasts (bija #9c7442) */
+.footer, .footer-links, .ticker-label, .start-inline { color: #b8905a; }
+.logo-glow { width: 360px; }                        /* bija 420px (~-14%) */
+.tagline { margin-top: 14px; text-shadow: 0 1px 8px rgba(0,0,0,0.75); }
+.link-sub, .footer, .footer-links { text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
+.footer-links { margin-top: -4px; }
+.footer-links a { padding: 15px 4px; }              /* ērtāks nospiešanas laukums */
+.lang-btn { position: relative; }
+.lang-btn::after { content: ""; position: absolute; inset: -9px -3px; }  /* lielāks nospiešanas lauks, izskats nemainās */
+.cookie-actions button, .modal button { min-height: 44px; }
+@media (max-width: 380px) { .logo-glow { width: 260px; } }  /* bija 300px */
 </style>
 </head>
 <body>
