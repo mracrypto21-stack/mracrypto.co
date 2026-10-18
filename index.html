@@ -1618,21 +1618,21 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
         <div class="donate-name">Bitcoin (BTC)</div>
         <span class="donate-badge" data-i18n="don_badge_btc">Bitcoin tīkls</span>
         <code class="donate-addr">bc1qtctflxhrs25t2yr9zr2j9c588juc9k5au782kk</code>
-        <button type="button" class="donate-copy" data-addr="bc1qtctflxhrs25t2yr9zr2j9c588juc9k5au782kk"><span data-i18n="don_btn_btc">Kopēt BTC adresi</span></button>
+        <button type="button" class="donate-copy" data-addr="bc1qtctflxhrs25t2yr9zr2j9c588juc9k5au782kk" data-ga-copy="copy_btc"><span data-i18n="don_btn_btc">Kopēt BTC adresi</span></button>
       </div>
       <div class="donate-item">
         <div class="donate-qr"><div class="donate-qr-in"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&ecc=H&data=0x56d9ddf4c90f9c483ebbe72081f8198f14882725" alt="Ethereum (ETH) QR kods" width="150" height="150" loading="lazy"><span class="donate-qr-logo"><img src="assets/eth.svg" alt="" width="32" height="32"></span></div></div>
         <div class="donate-name">Ethereum (ETH)</div>
         <span class="donate-badge" data-i18n="don_badge_evm">EVM (ERC20, BEP20, Polygon, Arb u.c.)</span>
         <code class="donate-addr">0x56d9ddf4c90f9c483ebbe72081f8198f14882725</code>
-        <button type="button" class="donate-copy" data-addr="0x56d9ddf4c90f9c483ebbe72081f8198f14882725"><span data-i18n="don_btn_eth">Kopēt ETH adresi</span></button>
+        <button type="button" class="donate-copy" data-addr="0x56d9ddf4c90f9c483ebbe72081f8198f14882725" data-ga-copy="copy_eth"><span data-i18n="don_btn_eth">Kopēt ETH adresi</span></button>
       </div>
       <div class="donate-item">
         <div class="donate-qr"><div class="donate-qr-in"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&ecc=H&data=0x56d9ddf4c90f9c483ebbe72081f8198f14882725" alt="USDC / USDT QR kods" width="150" height="150" loading="lazy"><span class="donate-qr-logo"><img src="assets/usdc.svg" alt="" width="32" height="32"></span></div></div>
         <div class="donate-name">USDC / USDT</div>
         <span class="donate-badge" data-i18n="don_badge_evm">EVM (ERC20, BEP20, Polygon, Arb u.c.)</span>
         <code class="donate-addr">0x56d9ddf4c90f9c483ebbe72081f8198f14882725</code>
-        <button type="button" class="donate-copy" data-addr="0x56d9ddf4c90f9c483ebbe72081f8198f14882725"><span data-i18n="don_btn_stable">Kopēt Stablecoin adresi</span></button>
+        <button type="button" class="donate-copy" data-addr="0x56d9ddf4c90f9c483ebbe72081f8198f14882725" data-ga-copy="copy_stablecoin"><span data-i18n="don_btn_stable">Kopēt Stablecoin adresi</span></button>
       </div>
     </div>
     <span hidden id="donateCopiedMsg" data-i18n="don_copied">Nokopēts!</span>
@@ -2272,6 +2272,9 @@ document.addEventListener('click', function(e) {
       var span = b.querySelector('span');
       if (!span || b.dataset.busy) return;
       copyText(b.dataset.addr).then(function(){
+        /* GA4 notikums tikai pēc veiksmīgas kopēšanas (tāpat kā pārējie: window.gtag('event', nosaukums)) */
+        var ev = b.getAttribute('data-ga-copy');
+        if (ev && typeof window.gtag === 'function') window.gtag('event', ev);
         var lang = document.documentElement.getAttribute('lang');
         var prev = span.innerHTML;
         var msg = document.getElementById('donateCopiedMsg');
