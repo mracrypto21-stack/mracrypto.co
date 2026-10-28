@@ -1,0 +1,28 @@
+{
+  "videos": [
+    {
+      "id": "XGZu7vAAfLU",
+      "title": "UZMINI NU?",
+      "type": "short",
+      "published": "2026-10-27T15:29:29+00:00",
+      "thumb": "https://i.ytimg.com/vi/XGZu7vAAfLU/oar2.jpg",
+      "embeddable": true
+    },
+    {
+      "id": "Ehpdpl871oU",
+      "title": "3 KRIPTO NARATĪVI",
+      "type": "short",
+      "published": "2026-10-26T15:42:55+00:00",
+      "thumb": "https://i.ytimg.com/vi/Ehpdpl871oU/oar2.jpg",
+      "embeddable": true
+    },
+    {
+      "id": "VCVUpJ-6MaE",
+      "title": "TIRGUS DAUDZVEIDĪBA",
+      "type": "video",
+      "published": "2026-10-23T14:39:45+00:00",
+      "thumb": "https://i.ytimg.com/vi/VCVUpJ-6MaE/mqdefault.jpg",
+      "embeddable": true
+    }
+  ]
+}
