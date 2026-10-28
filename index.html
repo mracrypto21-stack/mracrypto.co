@@ -831,6 +831,13 @@
 .ticker-change.positive { color: #4ADE80; }
 .ticker-change.negative { color: #F87171; }
 .ticker-divider { width: 1px; height: 16px; background: rgba(232,168,60,0.25); }
+.ticker-item[hidden], .ticker-divider[hidden] { display: none; }
+.ticker-item .ticker-fng { font-weight: 600; white-space: nowrap; }
+.ticker-fng.fng-xfear { color: #E52B2B; }
+.ticker-fng.fng-fear { color: #F87171; }
+.ticker-fng.fng-neutral { color: #FACC15; }
+.ticker-fng.fng-greed { color: #86EFAC; }
+.ticker-fng.fng-xgreed { color: #16A34A; }
 @media (max-width: 420px) { .price-ticker { padding: 10px 14px; gap: 8px 10px; } .ticker-item { font-size: 11px; } }
 
 /* Staigājoša gaisma pa apmali — conic leņķis skrien pa perimetru */
@@ -1213,6 +1220,11 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
     <span class="ticker-label">TOTAL CAP</span>
     <span class="ticker-price" id="capPrice">—</span>
     <span class="ticker-change" id="capChange">—</span>
+  </div>
+  <div class="ticker-divider" id="fngDivider" hidden></div>
+  <div class="ticker-item" id="fngItem" hidden>
+    <span class="ticker-label">Fear &amp; Greed</span>
+    <span class="ticker-fng" id="fngValue"></span>
   </div>
 </div>
 
@@ -1864,6 +1876,89 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 
   updateTicker();
   setInterval(updateTicker, 60000);
+})();
+
+// Fear & Greed indekss (alternative.me) — atjauno reizi dienā, kešs localStorage
+(function() {
+  var KEY = 'fngCache';
+  var URL = 'https://api.alternative.me/fng/?limit=1';
+  var CLASSES = {
+    'extreme fear': 'fng-xfear',
+    'fear': 'fng-fear',
+    'neutral': 'fng-neutral',
+    'greed': 'fng-greed',
+    'extreme greed': 'fng-xgreed'
+  };
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; }
+  }
+  function save(d) {
+    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+  }
+  function show(d) {
+    var cls = CLASSES[String(d.name).toLowerCase()];
+    if (!cls) return false;
+    var el = document.getElementById('fngValue');
+    el.className = 'ticker-fng ' + cls;
+    el.textContent = d.value + ' \u00b7 ' + d.name;
+    document.getElementById('fngItem').hidden = false;
+    document.getElementById('fngDivider').hidden = false;
+    return true;
+  }
+
+  async function updateFng() {
+    var cached = load();
+    var valid = cached && isFinite(cached.value) && cached.name;
+    // Svaigs kešs (līdz nākamajam avota atjauninājumam) — pieprasījumu nesūta
+    if (valid && cached.exp > Date.now()) { show(cached); return; }
+    try {
+      var res = await fetch(URL);
+      var json = await res.json();
+      var row = json.data[0];
+      var d = {
+        value: parseInt(row.value, 10),
+        name: row.value_classification,
+        exp: Date.now() + Math.max(parseInt(row.time_until_update, 10) || 0, 3600) * 1000
+      };
+      if (!isFinite(d.value) || !CLASSES[String(d.name).toLowerCase()]) throw new Error('bad data');
+      save(d);
+      show(d);
+    } catch (e) {
+      // Avots nav pieejams: rāda pēdējo saglabāto vērtību, ja tādas nav — rādītājs paliek paslēpts
+      if (valid) show(cached);
+    }
+  }
+  // Josla vienmēr: BTC + ETH pirmajā rindā, Total Cap + Fear & Greed otrajā.
+  // Ja nesaietas (šaurs ekrāns / garš nosaukums), burtu izmēru samazina pa soļiem līdz 9px.
+  var ticker = document.getElementById('priceTicker');
+  var fitting = false;
+  function layoutOk(items) {
+    var t = items.map(function(i) { return i.getBoundingClientRect().top; });
+    if (Math.abs(t[0] - t[1]) > 3) return false;
+    if (items.length > 3 && Math.abs(t[3] - t[2]) > 3) return false;
+    return true;
+  }
+  function fitTicker() {
+    if (fitting) return;
+    fitting = true;
+    var items = Array.prototype.filter.call(ticker.querySelectorAll('.ticker-item'), function(i) { return !i.hidden; });
+    items.forEach(function(i) { i.style.removeProperty('font-size'); });
+    var size = parseFloat(getComputedStyle(items[0]).fontSize);
+    while (!layoutOk(items) && size > 9) {
+      size -= 0.25;
+      items.forEach(function(i) { i.style.fontSize = size + 'px'; });
+    }
+    fitting = false;
+  }
+  window.addEventListener('resize', fitTicker);
+  window.addEventListener('load', fitTicker);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTicker);
+  new MutationObserver(function() { if (!fitting) fitTicker(); })
+    .observe(ticker, { childList: true, characterData: true, subtree: true });
+  fitTicker();
+
+  updateFng();
 })();
 </script>
 
