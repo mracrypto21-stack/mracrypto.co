@@ -2438,27 +2438,39 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
   overlay.addEventListener('click',function(ev){ if(ev.target===overlay) closeFaq(true); });
   document.addEventListener('keydown',function(ev){ if(ev.key==='Escape' && overlay.classList.contains('open')) closeFaq(true); });
 
-  /* Izklāšana/aizvēršana ar augstuma animāciju (ja pārlūks neatbalsta — vienkārša pārslēgšana) */
-  body.addEventListener('click',function(ev){
-    var sum=ev.target.closest('summary.faq-q');
-    if(!sum) return;
-    var det=sum.parentNode, panel=det.querySelector('.faq-a');
-    if(reduce || !panel.animate) return; /* noklusētā details uzvedība */
-    ev.preventDefault();
+  /* Izklāšana/aizvēršana ar augstuma animāciju (ja pārlūks neatbalsta — vienkārša pārslēgšana).
+     Vienlaikus ir atvērts tikai viens jautājums: atverot citu, iepriekšējais aizveras. */
+  function animate(det, opening, done){
+    var panel=det.querySelector('.faq-a');
     if(panel._anim){ panel._anim.cancel(); panel._anim=null; }
-    if(!det.open){
+    if(reduce || !panel.animate){ det.open=opening; if(done) done(); return; }
+    if(opening){
       det.open=true;
       var h=panel.offsetHeight;
       var a=panel.animate({height:['0px',h+'px']},{duration:250,easing:'ease'});
       panel._anim=a;
-      a.onfinish=a.oncancel=function(){ panel._anim=null; };
+      a.onfinish=function(){ panel._anim=null; if(done) done(); };
+      a.oncancel=function(){ panel._anim=null; };
     }else{
       var h2=panel.offsetHeight;
       var a2=panel.animate({height:[h2+'px','0px']},{duration:250,easing:'ease'});
       panel._anim=a2;
-      a2.onfinish=function(){ det.open=false; panel._anim=null; };
+      a2.onfinish=function(){ det.open=false; panel._anim=null; if(done) done(); };
       a2.oncancel=function(){ panel._anim=null; };
     }
+  }
+  body.addEventListener('click',function(ev){
+    var sum=ev.target.closest('summary.faq-q');
+    if(!sum) return;
+    ev.preventDefault();
+    var det=sum.parentNode;
+    if(det.open){ animate(det,false); return; }
+    body.querySelectorAll('details.faq-item[open]').forEach(function(o){ if(o!==det) animate(o,false); });
+    animate(det,true,function(){
+      /* ja aizvērtais jautājums bija augstāk un atvērtais izkustējies ārpus redzamās daļas — pieved to redzamībā */
+      var r=det.getBoundingClientRect(), b=body.getBoundingClientRect();
+      if(r.top<b.top) body.scrollTo({top:body.scrollTop-(b.top-r.top)-8,behavior:reduce?'auto':'smooth'});
+    });
   });
 
   /* Saites atbilžu tekstos (delegēts, jo tulkošana pārraksta innerHTML) */
