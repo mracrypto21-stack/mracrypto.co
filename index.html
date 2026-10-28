@@ -2015,6 +2015,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     var t = e.target;
     var el = t && t.closest ? t.closest('[data-ga]') : null;
     if (!el) return;
+    if (el.tagName === 'DETAILS') return; /* details skaita toggle klausītājs (atvēršana), lai nebūtu dubultā */
     track(el.getAttribute('data-ga'));
   }, true);
   /* accordion / dropdown atvēršana */
