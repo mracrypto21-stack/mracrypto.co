@@ -876,6 +876,20 @@
 }
 .start-gold { border-left-color: var(--gold-bright); }
 
+/* "Starts kriptovalūtā": posmi kā sakļaujami bloki (stils kā .faq-item / .start-header) */
+.start-stage{margin:0 0 10px;background-color:rgba(18,16,10,.55);border:1px solid var(--line);border-radius:10px;transition:border-color .2s;scroll-margin-top:80px}
+.start-stage:hover{border-color:var(--gold)}
+.start-stage[open]{border-color:var(--gold-dim)}
+.start-stage-head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+.start-stage-head::-webkit-details-marker{display:none}
+.start-stage-title{flex:1;margin:0;color:var(--cream);font-family:inherit;font-size:15px;font-weight:500;line-height:1.4;letter-spacing:.01em}
+.start-stage-head .chevron{transition:transform .25s ease}
+.start-stage[open] > .start-stage-head .chevron{transform:rotate(90deg)}
+.start-stage-body{overflow:hidden}
+.start-stage-in{padding:0 16px 14px}
+.start-stage-in > :first-child{margin-top:0}
+.start-stage-in > :last-child{margin-bottom:0}
+
 /* Sīkdatņu piekrišanas baneris */
 .cookie-consent {
   position: fixed;
@@ -1293,8 +1307,9 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   <p class="start-cta">Nevēlies lasīt, bet ķerties uzreiz pie lietas? <a href="https://kriptonr1.xyz/#produkti" target="_blank" rel="noopener">Mācības, kas noderēs</a>.</p>
 
-  <h4 class="start-step">1. Posms — Kriptovalūtas un blokķēdes pamati</h4>
-
+  <details class="start-stage" data-ga="open_starts_pamati" open>
+    <summary class="start-stage-head"><h4 class="start-stage-title">1. Posms — Kriptovalūtas un blokķēdes pamati</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">Kas ir kriptovalūta?</h5>
   <p>Kriptovalūta ir digitāla vai virtuāla valūta, kas izmanto kriptogrāfiju, lai nodrošinātu drošību. Atšķirībā no tradicionālajām valūtām (piemēram, eiro vai dolāra), kriptovalūtām parasti nav fiziskas formas, un tās netiek kontrolētas vai izdotas centrālās bankas vai valdības iestādes. Tās pastāv tikai digitālā formā. Kriptovalūtas darbojas uz blokķēdes tehnoloģijas (blockchain) pamata.</p>
 
@@ -1309,9 +1324,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>Nemainīgums (immutability):</strong> kad bloks ir pievienots ķēdei, to vairs nevar izmainīt vai izdzēst, neizmainot visus nākamos blokus — tas padara krāpšanu praktiski neiespējamu.</li>
     <li><strong>Caurspīdīgums un pārbaudāmība:</strong> visi blokķēdes darījumi ir publiski redzami un pārbaudāmi (piemēram, Bitcoin gadījumā), bet lietotāju identitāte var palikt anonīma.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">2. Posms — Iesācēja soļu plāns un drošība</h4>
-
+  <details class="start-stage" data-ga="open_starts_plans">
+    <summary class="start-stage-head"><h4 class="start-stage-title">2. Posms — Iesācēja soļu plāns un drošība</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">2.1. Izglītojies un saproti pamatlietas</h5>
   <p>Pirms ieguldi kaut centu, iepazīsties ar pamatjēdzieniem. Tev nav jābūt programmētājam, bet ir jāsaprot, kur tu liec savu naudu. Noskaties video: <a href="https://www.youtube.com/watch?v=yvaWxu8CQ60" target="_blank" rel="noopener">Kripto pamati iesācējiem</a>.</p>
   <ul>
@@ -1348,9 +1366,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li>Nopērc savu pirmo Bitcoin vai Ethereum daļu (tev nav jāpērk pilns Bitcoin — var pirkt par 10 vai 20 eiro).</li>
   </ul>
   <p class="start-gold"><strong>Zelta likums iesācējam:</strong> sākumā koncentrējies uz Bitcoin un Ethereum uzkrāšanu un mācīšanos, nevis uz ātru peļņu ar riskantām altcoin monētām.</p>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">3. Posms — Kriptovalūtas glabāšana un maki</h4>
-
+  <details class="start-stage" data-ga="open_starts_maki">
+    <summary class="start-stage-head"><h4 class="start-stage-title">3. Posms — Kriptovalūtas glabāšana un maki</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">Kur glabāt kriptovalūtu?</h5>
   <p>Kur glabāt kriptovalūtu, ir viens no svarīgākajiem lēmumiem, ko pieņem katrs kripto lietotājs. Zemāk ir pārskats ar dažādiem veidiem, kur vari droši glabāt savu kriptovalūtu.</p>
 
@@ -1384,9 +1405,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li>Nekad neliec lielas summas uz biržām — tikai tik daudz, cik plāno tirgot.</li>
     <li>Saglabā savu seed phrase (12 vai 24 vārdi) drošā vietā. Ja to pazaudē, piekļuvi atgūt nav iespējams.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">4. Posms — Kas ir seed phrase un drošība pret krāpniekiem</h4>
-
+  <details class="start-stage" data-ga="open_starts_seed">
+    <summary class="start-stage-head"><h4 class="start-stage-title">4. Posms — Kas ir seed phrase un drošība pret krāpniekiem</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">Kas ir seed phrase?</h5>
   <p>Seed phrase jeb atkopšanas frāze (bieži saukta par backup phrase) ir 12, 24 vai 36 vārdu gara frāze, kuru ģenerē tavs kriptovalūtas maks (piemēram, Rabby, Ledger, MetaMask), kad tu to izveido. Šie vārdi nav nejauši — tie ir izvēlēti no speciāla saraksta ar 2048 angļu valodā fiksētiem vārdiem (BIP-39 standarts).</p>
 
@@ -1413,8 +1437,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>Direct Messages (DM) blēži:</strong> neviens oficiāls atbalsta dienests nekad pirmais nerakstīs tev sociālajos tīklos (Telegram, Discord) un neprasīs tavu seed frāzi.</li>
     <li><strong>Viltus viedie līgumi (Scam Airdrops):</strong> piedāvājumi saņemt bezmaksas monētas, kur tev prasa savienot maku un apstiprināt darījumu, kas acumirklī iztukšo tavu maku.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">5. Posms — Rīki un pamata teorija (Tools &amp; Basics)</h4>
+  <details class="start-stage" data-ga="open_starts_riki">
+    <summary class="start-stage-head"><h4 class="start-stage-title">5. Posms — Rīki un pamata teorija (Tools &amp; Basics)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <p class="start-inline">Tehniskie instrumenti un grafiku lasīšana.</p>
 
   <h5 class="start-sub">5.1. Kas ir TradingView un tā lietošana</h5>
@@ -1428,8 +1456,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>Ko meklēt YouTube:</strong> How to read candlestick charts, Candlestick patterns explained.</li>
     <li><strong>Saturs:</strong> sveces uzbūve (Open, High, Low, Close), ko tās nozīmē un kā nolasīt pircēju un pārdevēju spēku.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">6. Posms — Klasiskā tehniskā analīze (Basic Technical Analysis)</h4>
+  <details class="start-stage" data-ga="open_starts_ta">
+    <summary class="start-stage-head"><h4 class="start-stage-title">6. Posms — Klasiskā tehniskā analīze (Basic Technical Analysis)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <p class="start-inline">Nākamais solis pēc pamatu apguves.</p>
 
   <h5 class="start-sub">6.1. Atbalsta un pretestības līmeņi (Support &amp; Resistance)</h5>
@@ -1441,8 +1473,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   <ul>
     <li><strong>Ko meklēt YouTube:</strong> Chart patterns for beginners, Top reversal and continuation patterns.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">7. Posms — Riska vadība un tirgus psiholoģija (Risk &amp; Psychology)</h4>
+  <details class="start-stage" data-ga="open_starts_risks">
+    <summary class="start-stage-head"><h4 class="start-stage-title">7. Posms — Riska vadība un tirgus psiholoģija (Risk &amp; Psychology)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <p class="start-inline">Galvenās disciplīnas, kas pasargā kapitālu un prātu.</p>
 
   <h5 class="start-sub">Riska vadība (Risk Management)</h5>
@@ -1458,15 +1494,19 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>FOMO (Fear Of Missing Out — bailes palaist garām):</strong> nekad nedzenies pakaļ monētai, kas jau ir strauji uzlēkusi — tas bieži beidzas ar iepirkšanu pašā augšpunktā.</li>
     <li><strong>Atriebības tirdzniecība (Revenge Trading):</strong> mēģinājumi atspēlēties pēc zaudēta darījuma. Ja esi sasniedzis dienas zaudējumu limitu, nekavējoties aizver platformu.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">8. Posms — Papildu punkti (tirdzniecības žurnāls un nodokļi)</h4>
+  <details class="start-stage" data-ga="open_starts_papildu">
+    <summary class="start-stage-head"><h4 class="start-stage-title">8. Posms — Papildu punkti (tirdzniecības žurnāls un nodokļi)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <ul>
     <li><strong>Tirdzniecības žurnāls (Trading Journal):</strong> sāc pierakstīt savus darījumus (kāpēc atvēri, kāds bija R:R, kāds bija rezultāts), lai analizētu savas kļūdas un izaugsmi.</li>
     <li><strong>Nodokļu pamati:</strong> atceries sekot līdzi un uzskaitīt visus darījumus. Peļņas gūšana un tās konvertēšana fiat naudā (EUR) vai izmantošana pirkumos var tikt aplikta ar iedzīvotāju ienākuma nodokli (IIN) saskaņā ar valsts likumdošanu.</li>
   </ul>
+    </div></div>
+  </details>
 
-
-    <button type="button" class="start-close" data-close-start aria-label="Aizvērt" onclick="var s=this.closest('details.start-group');s.open=false;var p=s.closest('details.section-group');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});">✕ Aizvērt</button>
 </div>
 
         </details>
@@ -2104,8 +2144,9 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   <p class="start-cta">Don't feel like reading but want to jump straight into action? <a href="https://kriptonr1.xyz/#produkti" target="_blank" rel="noopener">Courses that will help</a>.</p>
 
-  <h4 class="start-step">Step 1 — Crypto &amp; blockchain basics</h4>
-
+  <details class="start-stage" data-ga="open_starts_pamati" open>
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 1 — Crypto &amp; blockchain basics</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">What is cryptocurrency?</h5>
   <p>A cryptocurrency is a digital or virtual currency that uses cryptography to ensure security. Unlike traditional currencies (such as the euro or the dollar), cryptocurrencies usually have no physical form and are not controlled or issued by a central bank or government body. They exist only in digital form. Cryptocurrencies run on blockchain technology.</p>
 
@@ -2120,9 +2161,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>Immutability:</strong> once a block is added to the chain, it cannot be changed or deleted without modifying all subsequent blocks — this makes fraud practically impossible.</li>
     <li><strong>Transparency and verifiability:</strong> all blockchain transactions are publicly visible and verifiable (for example, in the case of Bitcoin), while user identity can remain anonymous.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">Step 2 — Beginner's plan and security</h4>
-
+  <details class="start-stage" data-ga="open_starts_plans">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 2 — Beginner's plan and security</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">2.1. Educate yourself and understand the basics</h5>
   <p>Before investing a single cent, get familiar with the core concepts. You don't need to be a programmer, but you do need to understand where you put your money. Watch the video: <a href="https://www.youtube.com/watch?v=yvaWxu8CQ60" target="_blank" rel="noopener">Crypto basics for beginners</a>.</p>
   <ul>
@@ -2159,9 +2203,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li>Buy your first share of Bitcoin or Ethereum (you don't need to buy a whole Bitcoin — you can buy for 10 or 20 euros).</li>
   </ul>
   <p class="start-gold"><strong>Golden rule for beginners:</strong> at first, focus on accumulating Bitcoin and Ethereum and on learning, rather than on quick profit with risky altcoins.</p>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">Step 3 — Storing cryptocurrency and wallets</h4>
-
+  <details class="start-stage" data-ga="open_starts_maki">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 3 — Storing cryptocurrency and wallets</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">Where to store your crypto?</h5>
   <p>Where to store your cryptocurrency is one of the most important decisions every crypto user makes. Below is an overview of the different ways to safely store your crypto.</p>
 
@@ -2195,9 +2242,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li>Never keep large amounts on exchanges — only as much as you plan to trade.</li>
     <li>Store your seed phrase (12 or 24 words) in a safe place. If you lose it, recovery is impossible.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">Step 4 — What is a seed phrase and protecting against scammers</h4>
-
+  <details class="start-stage" data-ga="open_starts_seed">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 4 — What is a seed phrase and protecting against scammers</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">What is a seed phrase?</h5>
   <p>A seed phrase (often called a backup phrase) is a 12, 24 or 36-word phrase generated by your crypto wallet (e.g. Rabby, Ledger, MetaMask) when you create it. These words are not random — they are chosen from a special list of 2048 fixed English words (BIP-39 standard).</p>
 
@@ -2224,8 +2274,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>Direct Message (DM) scams:</strong> no official support service will ever write to you first on social media (Telegram, Discord) and ask for your seed phrase.</li>
     <li><strong>Fake airdrops:</strong> offers to receive free coins, where you are asked to connect your wallet and approve a transaction that instantly empties it.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">Step 5 — Tools and basic theory (Tools &amp; Basics)</h4>
+  <details class="start-stage" data-ga="open_starts_riki">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 5 — Tools and basic theory (Tools &amp; Basics)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <p class="start-inline">Technical tools and reading charts.</p>
 
   <h5 class="start-sub">5.1. What is TradingView and how to use it</h5>
@@ -2239,8 +2293,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>What to search on YouTube:</strong> How to read candlestick charts, Candlestick patterns explained.</li>
     <li><strong>Content:</strong> candlestick structure (Open, High, Low, Close), what they mean and how to read buyer and seller strength.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">Step 6 — Classic technical analysis (Basic Technical Analysis)</h4>
+  <details class="start-stage" data-ga="open_starts_ta">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 6 — Classic technical analysis (Basic Technical Analysis)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <p class="start-inline">The next step after mastering the basics.</p>
 
   <h5 class="start-sub">6.1. Support and Resistance levels</h5>
@@ -2252,8 +2310,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   <ul>
     <li><strong>What to search on YouTube:</strong> Chart patterns for beginners, Top reversal and continuation patterns.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">Step 7 — Risk management and market psychology (Risk &amp; Psychology)</h4>
+  <details class="start-stage" data-ga="open_starts_risks">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 7 — Risk management and market psychology (Risk &amp; Psychology)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <p class="start-inline">The key disciplines that protect your capital and your mind.</p>
 
   <h5 class="start-sub">Risk Management</h5>
@@ -2269,16 +2331,19 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <li><strong>FOMO (Fear Of Missing Out):</strong> never chase a coin that has already risen sharply — it often ends with buying at the very top.</li>
     <li><strong>Revenge Trading:</strong> trying to get back after a lost trade. If you've reached your daily loss limit, close the platform immediately.</li>
   </ul>
+    </div></div>
+  </details>
 
-  <h4 class="start-step">Step 8 — Extra points (trading journal and taxes)</h4>
+  <details class="start-stage" data-ga="open_starts_papildu">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Step 8 — Extra points (trading journal and taxes)</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
   <ul>
     <li><strong>Trading Journal:</strong> start recording your trades (why you opened them, what the R:R was, what the result was) to analyse your mistakes and grow.</li>
     <li><strong>Tax basics:</strong> remember to keep track of and record all your trades. Earning a profit and converting it to fiat (EUR) or spending it on purchases may be subject to personal income tax (PIT) according to your country's legislation.</li>
   </ul>
+    </div></div>
+  </details>
 
-
-
-    <button type="button" class="start-close" data-close-start aria-label="Close" onclick="var s=this.closest('details.start-group');s.open=false;var p=s.closest('details.section-group');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});">✕ Close</button>
 </div>
 </script>
 
@@ -2432,6 +2497,69 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   try { saved = localStorage.getItem(SAVE_KEY) || 'lv'; } catch (e) {}
   if (saved !== 'en') saved = 'lv';
   setLang(saved, false);
+})();
+</script>
+
+<script>
+/* "Starts kriptovalūtā" posmi: vienlaikus atvērts viens, augstuma animācija kā FAQ (delegēts, jo tulkošana pārraksta innerHTML) */
+(function(){
+  var box=document.querySelector('[data-i18n-block="start_bl"]');
+  if(!box) return;
+  var group=box.closest('details.start-group');
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var userOpened=null;
+  function animate(det, opening, done){
+    var panel=det.querySelector('.start-stage-body');
+    if(panel._anim){ panel._anim.cancel(); panel._anim=null; }
+    if(reduce || !panel.animate){ det.open=opening; if(done) done(); return; }
+    if(opening){
+      det.open=true;
+      var h=panel.offsetHeight;
+      var a=panel.animate({height:['0px',h+'px']},{duration:250,easing:'ease'});
+      panel._anim=a;
+      a.onfinish=function(){ panel._anim=null; if(done) done(); };
+      a.oncancel=function(){ panel._anim=null; };
+    }else{
+      var h2=panel.offsetHeight;
+      var a2=panel.animate({height:[h2+'px','0px']},{duration:250,easing:'ease'});
+      panel._anim=a2;
+      a2.onfinish=function(){ det.open=false; panel._anim=null; if(done) done(); };
+      a2.oncancel=function(){ panel._anim=null; };
+    }
+  }
+  box.addEventListener('click',function(ev){
+    var sum=ev.target.closest('summary.start-stage-head');
+    if(!sum || !box.contains(sum)) return;
+    ev.preventDefault();
+    var det=sum.parentNode;
+    if(det.open){ animate(det,false); return; }
+    userOpened=det;
+    box.querySelectorAll('details.start-stage[open]').forEach(function(o){ if(o!==det) animate(o,false); });
+    animate(det,true,function(){
+      /* ja aizvērtais posms bija augstāk, atvērtā virsraksts var būt izkustējies uz augšu — pieved to redzamībā */
+      var r=det.getBoundingClientRect();
+      if(r.top<72) window.scrollBy({top:r.top-80,behavior:reduce?'auto':'smooth'});
+    });
+  });
+  /* GA4: tikai lietotāja atvēršana (programmatiska atiestatīšana un valodas maiņa nesaskaitās) */
+  box.addEventListener('toggle',function(ev){
+    var d=ev.target;
+    if(!d.classList || !d.classList.contains('start-stage')) return;
+    if(d.open && d===userOpened){
+      userOpened=null;
+      var n=d.getAttribute('data-ga');
+      if(n && typeof window.gtag==='function') window.gtag('event',n);
+    }
+  },true);
+  /* bloks aizvērts -> nākamreiz atkal atvērts 1. posms, pārējie aizvērti */
+  if(group) group.addEventListener('toggle',function(){
+    if(group.open) return;
+    box.querySelectorAll('details.start-stage').forEach(function(d,i){
+      var p=d.querySelector('.start-stage-body');
+      if(p && p._anim){ p._anim.cancel(); p._anim=null; }
+      d.open=(i===0);
+    });
+  });
 })();
 </script>
 
