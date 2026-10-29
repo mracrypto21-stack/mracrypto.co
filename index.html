@@ -733,6 +733,17 @@
     color: var(--bronze);
   }
 
+  /* Popup atvērts: fona lapa nekustas (JS uzliek html.modal-lock); garš popup saturs ritinās pašā logā */
+  html.modal-lock { overflow-y: scroll; }
+  html.modal-lock body { position: fixed; left: 0; right: 0; width: 100%; }
+  .modal-overlay .modal {
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
   @media (max-width: 380px) {
     .page { padding: 36px 18px 110px; }
     .logo-glow { width: 300px; }
@@ -2564,6 +2575,30 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 </script>
 
 
+<script>
+/* Jautājuma/pieteikuma popup (#questionModal): kamēr atvērts, fona lapa nekustas; aizverot lapa paliek tieši tajā pašā vietā.
+   Vienots visiem ieejas punktiem (Ir jautājums?, konsultācija, Sadarbība, Piesakies sarunai): seko klasei 'open', tāpēc nav jāmaina atvērēji. */
+(function(){
+  var m=document.getElementById('questionModal');
+  if(!m) return;
+  var de=document.documentElement, b=document.body, y=0, locked=false;
+  function lock(){
+    if(locked) return; locked=true;
+    y=window.pageYOffset||de.scrollTop||0;
+    b.style.top=(-y)+'px';
+    de.classList.add('modal-lock');
+  }
+  function unlock(){
+    if(!locked) return; locked=false;
+    de.classList.remove('modal-lock');
+    b.style.top='';
+    try{ window.scrollTo({top:y,left:0,behavior:'instant'}); }catch(_){ window.scrollTo(0,y); }
+  }
+  new MutationObserver(function(){ if(m.classList.contains('open')) lock(); else unlock(); })
+    .observe(m,{attributes:true,attributeFilter:['class']});
+  if(m.classList.contains('open')) lock();
+})();
+</script>
 <script>
 (function(){
   var overlay=document.getElementById('policyModal');
