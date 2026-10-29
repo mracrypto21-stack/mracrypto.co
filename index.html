@@ -1882,6 +1882,18 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
 <script>
 (function() {
+  // Total Cap 24 h izmaiņa: VPS stundā publicē assets/total-cap.json (rēķināta no mūsu stundas punktiem,
+  // tā pati vērtība, kas ikrīta analīzē). Nav faila vai tas vecāks par 6 h -> procentu nerāda.
+  async function getCapChange() {
+    try {
+      const r = await fetch('assets/total-cap.json', {cache: 'no-cache'});
+      const j = await r.json();
+      const age = Date.now() - Date.parse(j.t);
+      if (typeof j.chg24 === 'number' && isFinite(j.chg24) && age < 6 * 3600 * 1000) return j.chg24;
+    } catch (e) {}
+    return null;
+  }
+
   async function updateTicker() {
     try {
       const priceRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
@@ -1892,7 +1904,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       const btc = priceData.bitcoin;
       const eth = priceData.ethereum;
       const cap = globalData.data.total_market_cap.usd;
-      const capChange = globalData.data.market_cap_change_percentage_24h_usd;
+      const capChange = await getCapChange();
 
       document.getElementById('btcPrice').textContent = '$' + btc.usd.toLocaleString('en-US', {maximumFractionDigits: 0});
       document.getElementById('ethPrice').textContent = '$' + eth.usd.toLocaleString('en-US', {maximumFractionDigits: 0});
