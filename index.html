@@ -1882,40 +1882,60 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
 <script>
 (function() {
-  // Total Cap 24 h izmaiņa: VPS stundā publicē assets/total-cap.json (rēķināta no mūsu stundas punktiem,
-  // tā pati vērtība, kas ikrīta analīzē). Nav faila vai tas vecāks par 6 h -> procentu nerāda.
-  async function getCapChange() {
+  // Rezerves dati: VPS stundā publicē assets/total-cap.json (BTC, ETH, Total Cap summa + Total 24 h izmaiņa,
+  // rēķināta no mūsu stundas punktiem, tā pati vērtība, kas ikrīta analīzē). Vecāks par 6 h -> neizmanto.
+  async function fetchJson(url, opts) {
+    const r = await fetch(url, opts);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }
+  async function getBackup() {
     try {
-      const r = await fetch('assets/total-cap.json', {cache: 'no-cache'});
-      const j = await r.json();
+      const j = await fetchJson('assets/total-cap.json', {cache: 'no-cache'});
       const age = Date.now() - Date.parse(j.t);
-      if (typeof j.chg24 === 'number' && isFinite(j.chg24) && age < 6 * 3600 * 1000) return j.chg24;
-    } catch (e) {}
-    return null;
+      return (age < 6 * 3600 * 1000) ? j : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  function num(v) {
+    return (typeof v === 'number' && isFinite(v)) ? v : null;
+  }
+  function setPrice(id, text) {
+    const el = document.getElementById(id);
+    if (el && text) el.textContent = text;
   }
 
+  // Katrs lauks (BTC, ETH, Total Cap) tiek aizpildīts atsevišķi: vispirms dzīvie dati no CoinGecko,
+  // ja to nav (429, CORS, tīkls) -> vērtība no total-cap.json, ja arī tās nav -> paliek "—".
   async function updateTicker() {
-    try {
-      const priceRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
-      const priceData = await priceRes.json();
-      const globalRes = await fetch('https://api.coingecko.com/api/v3/global');
-      const globalData = await globalRes.json();
+    const results = await Promise.allSettled([
+      fetchJson('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true'),
+      fetchJson('https://api.coingecko.com/api/v3/global'),
+      getBackup()
+    ]);
+    const live = results[0].status === 'fulfilled' ? (results[0].value || {}) : {};
+    const glob = results[1].status === 'fulfilled' ? results[1].value : null;
+    const bk = results[2].status === 'fulfilled' ? results[2].value : null;
+    if (results[0].status === 'rejected') console.error('Ticker live prices failed:', results[0].reason);
+    if (results[1].status === 'rejected') console.error('Ticker live global failed:', results[1].reason);
 
-      const btc = priceData.bitcoin;
-      const eth = priceData.ethereum;
-      const cap = globalData.data.total_market_cap.usd;
-      const capChange = await getCapChange();
+    [['btc', 'bitcoin', 'btcPrice', 'btcChange'], ['eth', 'ethereum', 'ethPrice', 'ethChange']].forEach(function(c) {
+      const l = live[c[1]];
+      const b = bk && bk[c[0]];
+      const src = (l && num(l.usd) !== null) ? {usd: l.usd, chg: l.usd_24h_change} :
+                  (b && num(b.usd) !== null) ? {usd: b.usd, chg: b.chg24} : null;
+      if (!src) return;
+      setPrice(c[2], '$' + src.usd.toLocaleString('en-US', {maximumFractionDigits: 0}));
+      setChange(c[3], num(src.chg));
+    });
 
-      document.getElementById('btcPrice').textContent = '$' + btc.usd.toLocaleString('en-US', {maximumFractionDigits: 0});
-      document.getElementById('ethPrice').textContent = '$' + eth.usd.toLocaleString('en-US', {maximumFractionDigits: 0});
-      document.getElementById('capPrice').textContent = '$' + (cap / 1e12).toFixed(2) + 'T';
-
-      setChange('btcChange', btc.usd_24h_change);
-      setChange('ethChange', eth.usd_24h_change);
-      setChange('capChange', capChange);
-    } catch (e) {
-      console.error('Ticker update failed:', e);
-    }
+    let cap = null;
+    try { cap = num(glob.data.total_market_cap.usd); } catch (e) {}
+    if (cap === null && bk) cap = num(bk.total);
+    if (cap !== null) setPrice('capPrice', '$' + (cap / 1e12).toFixed(2) + 'T');
+    // Total Cap izmaiņa vienmēr no total-cap.json (nevis /global), lai sakristu ar ikrīta analīzi
+    setChange('capChange', bk ? num(bk.chg24) : null);
   }
 
   function setChange(id, value) {
