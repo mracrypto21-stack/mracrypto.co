@@ -88,22 +88,44 @@
     source();
   }
   function visible(e) { return e && !e.hidden; }
+  /* avota norāde ar saitēm (CoinGecko API noteikumi prasa atribūciju; EN: "Powered by CoinGecko"). GA: open_avots_panelis_* */
+  function link(name, url, ga) {
+    var a = document.createElement('a');
+    a.href = url; a.target = '_blank'; a.rel = 'noopener nofollow'; a.textContent = name; a.setAttribute('data-ga', ga);
+    return a;
+  }
   function source() {
-    var L = lang(), t = T[L], names = [];
-    var chartsShown = Array.prototype.some.call(panel.querySelectorAll('.au-chart'), visible);
-    if (chartsShown) names.push('CoinGecko');
-    if (visible(panel.querySelector('.lp-fng'))) names.push('Alternative.me');
-    var s = t.src + ': ' + names.join(t.and);
-    if (tc) {
-      try {
-        var p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Riga', hourCycle: 'h23', day: 'numeric', month: 'numeric', hour: 'numeric', minute: 'numeric' }).formatToParts(new Date(tc.t));
-        var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
-        s += ' \u00b7 ' + t.upd + ' ' + pad(+o.day) + '.' + pad(+o.month) + '. ' + pad(+o.hour % 24) + ':' + o.minute;
-      } catch (e) {}
-    }
-    s += ' \u00b7 ' + t.riga + '.';
+    var L = lang(), t = T[L];
+    var cg = Array.prototype.some.call(panel.querySelectorAll('.au-chart'), visible);
+    var am = visible(panel.querySelector('.lp-fng'));
     var src = panel.querySelector('.lp-src');
-    if (src) { src.textContent = names.length ? s : ''; if (src.hidden !== !names.length) src.hidden = !names.length; }  /* tikai ja mainās (citādi hidden novērotājs ieciklētos) */
+    if (!src) return;
+    var cgA = link('CoinGecko', 'https://www.coingecko.com/en/api', 'open_avots_panelis_coingecko');
+    var amA = link('Alternative.me', 'https://alternative.me', 'open_avots_panelis_alternativeme');
+    var parts = [];   /* DOM mezgli un teksts pa secību */
+    if (L === 'en') {
+      if (cg) { parts.push('Powered by ', cgA); if (am) parts.push(t.and, amA); }
+      else if (am) parts.push('Data: ', amA);
+    } else {
+      if (cg || am) parts.push(t.src + ': ');
+      if (cg) parts.push(cgA);
+      if (cg && am) parts.push(t.and);
+      if (am) parts.push(amA);
+    }
+    if (parts.length) {
+      var rest = '';
+      if (tc) {
+        try {
+          var p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Riga', hourCycle: 'h23', day: 'numeric', month: 'numeric', hour: 'numeric', minute: 'numeric' }).formatToParts(new Date(tc.t));
+          var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
+          rest += ' \u00b7 ' + t.upd + ' ' + pad(+o.day) + '.' + pad(+o.month) + '. ' + pad(+o.hour % 24) + ':' + o.minute;
+        } catch (e) {}
+      }
+      parts.push(rest + ' \u00b7 ' + t.riga + '.');
+    }
+    src.textContent = '';
+    parts.forEach(function (x) { src.appendChild(typeof x === 'string' ? document.createTextNode(x) : x); });
+    if (src.hidden !== !parts.length) src.hidden = !parts.length;   /* tikai ja mainās (hidden novērotājs) */
   }
   /* viss panelis ir redzams tikai tad, ja redzama vismaz viena daļa */
   function sync() {
