@@ -1,9 +1,12 @@
-/* Cenas grafiki ikrīta kripto analīzes blokos: BTC, ETH un Kopējais tirgus (Total Cap).
+/* Cenas grafiki mājaslapā: ikrīta kripto analīzes bloki (BTC, ETH, Total Cap) un galvenās lapas tirgus panelis (#livePanel).
    Dati: assets/btc-chart.json, assets/eth-chart.json, assets/totalcap-chart.json (tos stundā ieraksta VPS cron;
    apmeklētāja pārlūks CoinGecko NEpiesaista). Ja fails nav pieejams, ir bojāts, nepilns vai vecāks par 6 h,
    attiecīgais grafiks paliek paslēpts (nav tukša bloka).
-   Fragments assets/daily-analysis.html satur tikai <div class="au-chart" data-asset="btc|eth|total" hidden> ar pogām;
-   šis skripts to aizpilda. Viena loģika visiem trim grafikiem; atšķirības ir tikai ASSETS konfigurācijā. */
+   Marķējums (<div class="au-chart" data-asset="btc|eth|total" hidden>) ir fragmentā vai index.html; šis skripts to aizpilda.
+   Viena loģika visiem grafikiem; atšķirības ir ASSETS konfigurācijā un atribūtos:
+     data-lang="lv|en|auto"  auto = seko lapas valodai (panelī)
+     data-mini               mazais līnijas grafiks bez asīm (panelī): zīmē līniju, uzraksta cenu (.lp-price) un 24 h diapazonu (.au-hilo)
+   Periods katrai grupai (analīze / panelis) ir savs, dati ir kopīgi. */
 (function () {
   'use strict';
   if (window.btcChartInit) return;
@@ -14,6 +17,7 @@
     btc: {
       url: 'assets/btc-chart.json', need: RANGES, grid: 1, div: 1,
       ga: { '1d': 'open_btcgrafiks_diena', '1w': 'open_btcgrafiks_nedela', '1m': 'open_btcgrafiks_menesis' },
+      gaLp: { '1d': 'open_panelis_btc_diena', '1w': 'open_panelis_btc_nedela', '1m': 'open_panelis_btc_menesis' },
       label: { lv: 'Bitcoin cenas grafiks, ASV dolāros', en: 'Bitcoin price chart, US dollars' }
     },
     eth: {
@@ -34,8 +38,21 @@
   var NS = 'http://www.w3.org/2000/svg';
   var HOUR = 3600 * 1000;
 
-  var st = {};   /* st[asset] = {data, avail, range, ready, loading, ro} */
-  Object.keys(ASSETS).forEach(function (k) { st[k] = { data: null, avail: [], range: '1d', ready: false, loading: false, ro: null }; });
+  var st = {};   /* st[asset] = {data, avail, ready, loading, ro}  (kopīgs visām grupām) */
+  Object.keys(ASSETS).forEach(function (k) { st[k] = { data: null, avail: [], ready: false, loading: false, ro: null }; });
+  var rng = {};  /* rng[grupa + ':' + asset] = izvēlētais periods; grupa: 'lp' (panelis) vai 'au' (analīze) */
+
+  function groupOf(box) { return box.closest && box.closest('#livePanel') ? 'lp' : 'au'; }
+  function assetOf(box) { var k = box.getAttribute('data-asset') || 'btc'; return ASSETS[k] ? k : 'btc'; }
+  function rangeOf(box) {
+    var s = st[assetOf(box)], r = rng[groupOf(box) + ':' + assetOf(box)] || '1d';
+    return s.avail.indexOf(r) < 0 ? s.avail[0] : r;
+  }
+  function langOf(box) {
+    var l = box.getAttribute('data-lang');
+    if (l === 'auto' || !l) l = document.documentElement.getAttribute('lang');
+    return l === 'en' ? 'en' : 'lv';
+  }
 
   /* ---------- laiks (Rīgas josla, kā pārējā lapa) ---------- */
   var fmtParts = null;
@@ -102,28 +119,47 @@
     return e;
   }
 
-  function assetOf(box) { var k = box.getAttribute('data-asset') || 'btc'; return ASSETS[k] ? k : 'btc'; }
-
   /* ---------- zīmēšana ---------- */
   function draw(box) {
     var key = assetOf(box), a = ASSETS[key], s = st[key];
     var plot = box.querySelector('.au-plot');
-    var raw = s.data && s.data.r[s.range];
+    var range = rangeOf(box), mini = box.hasAttribute('data-mini');
+    var raw = s.data && s.data.r[mini ? '1d' : range];
     if (!plot || !raw) return;
     var W = Math.floor(plot.clientWidth);
-    if (W < 120) return;                                   /* bloks aizvērts / paslēpts: ResizeObserver uzzīmēs, kad kļūs redzams */
-    var lang = box.getAttribute('data-lang') === 'en' ? 'en' : 'lv';
-    var H = Math.max(170, Math.min(240, Math.round(W * 0.62)));
-    var fs = 11, mL = 0, mR = 14, mT = 10, mB = 22, i;
+    if (W < (mini ? 60 : 120)) return;                     /* bloks aizvērts / paslēpts: ResizeObserver uzzīmēs, kad kļūs redzams */
+    plot._w = W;
+    var lang = langOf(box);
     var pts = raw.map(function (p) { return [p[0], p[1] / a.div]; });
-
-    var lo = Infinity, hi = -Infinity;
+    var last = pts[pts.length - 1][1];
+    var lo = Infinity, hi = -Infinity, i;
     for (i = 0; i < pts.length; i++) { if (pts[i][1] < lo) lo = pts[i][1]; if (pts[i][1] > hi) hi = pts[i][1]; }
-    var pad_ = (hi - lo) * 0.08 || hi * 0.002;
-    lo -= pad_; hi += pad_;
-    var yt = yTicks(lo, hi, Math.max(3, Math.floor((H - mT - mB) / 30)), a.grid);
-    for (i = 0; i < yt.length; i++) mL = Math.max(mL, money(yt[i], lang, a).length);
-    mL = Math.round(mL * 6.4 + 8);                         /* vietas cenu uzrakstiem ($) */
+
+    /* cena un 24 h diapazons tekstā (ja marķējumā ir šādi elementi) */
+    var pe = box.querySelector('.lp-price');
+    if (pe) pe.textContent = money(last, lang, a);
+    var he = box.querySelector('.au-hilo');
+    if (he) {   /* īss diapazons vienā rindā: "24 h: 2 183 – 2 275 $" (LV), "24h: $2,183 – $2,275" (EN) */
+      var ml = money(lo, lang, a), mh = money(hi, lang, a);
+      if (lang === 'lv') ml = ml.replace(/\u00a0(T\u00a0)?\$$/, '');
+      he.textContent = (lang === 'en' ? '24h: ' : '24 h: ') + ml + ' \u2013 ' + mh;
+    }
+
+    var H, fs = 11, mL = 0, mR = 14, mT = 10, mB = 22, yt = [], xt = [];
+    if (mini) {
+      H = Math.max(52, Math.min(72, Math.round(W * 0.40)));
+      mL = 4; mR = 8; mT = 8; mB = 8;
+      var pm = (hi - lo) * 0.1 || hi * 0.002;
+      lo -= pm; hi += pm;
+    } else {
+      H = groupOf(box) === 'lp' ? Math.max(118, Math.min(150, Math.round(W * 0.42)))    /* panelī zemāks grafiks */
+                                : Math.max(170, Math.min(240, Math.round(W * 0.62)));
+      var pad_ = (hi - lo) * 0.08 || hi * 0.002;
+      lo -= pad_; hi += pad_;
+      yt = yTicks(lo, hi, Math.max(3, Math.floor((H - mT - mB) / 30)), a.grid);
+      for (i = 0; i < yt.length; i++) mL = Math.max(mL, money(yt[i], lang, a).length);
+      mL = Math.round(mL * 6.4 + 8);                       /* vietas cenu uzrakstiem ($) */
+    }
 
     var t0 = pts[0][0], t1 = pts[pts.length - 1][0];
     var pw = W - mL - mR, ph = H - mT - mB;
@@ -134,23 +170,27 @@
     svg.style.display = 'block';
     svg.style.maxWidth = '100%';
 
-    for (i = 0; i < yt.length; i++) {
-      var y = Y(yt[i]);
-      svg.appendChild(el('line', { x1: mL, x2: W - mR, y1: y, y2: y, stroke: GRID, 'stroke-width': 1 }));
-      svg.appendChild(el('text', { x: mL - 6, y: y + 4, 'text-anchor': 'end', fill: TXT, 'font-size': fs }, money(yt[i], lang, a)));
-    }
-    var xt = xTicks(t0, t1, s.range, Math.max(2, Math.floor(pw / 44)));
-    for (i = 0; i < xt.length; i++) {
-      var x = X(xt[i].t);
-      if (x < mL + 14 || x > W - mR - 14) continue;
-      svg.appendChild(el('line', { x1: x, x2: x, y1: mT + ph, y2: mT + ph + 4, stroke: GRID, 'stroke-width': 1 }));
-      svg.appendChild(el('text', { x: x, y: H - 5, 'text-anchor': 'middle', fill: TXT, 'font-size': fs },
-        s.range === '1d' ? pad(xt[i].h) + ':00' : dayLabel(xt[i], lang)));
+    if (!mini) {
+      for (i = 0; i < yt.length; i++) {
+        var y = Y(yt[i]);
+        svg.appendChild(el('line', { x1: mL, x2: W - mR, y1: y, y2: y, stroke: GRID, 'stroke-width': 1 }));
+        svg.appendChild(el('text', { x: mL - 6, y: y + 4, 'text-anchor': 'end', fill: TXT, 'font-size': fs }, money(yt[i], lang, a)));
+      }
+      xt = xTicks(t0, t1, range, Math.max(2, Math.floor(pw / 44)));
+      for (i = 0; i < xt.length; i++) {
+        var x = X(xt[i].t);
+        if (x < mL + 14 || x > W - mR - 14) continue;
+        svg.appendChild(el('line', { x1: x, x2: x, y1: mT + ph, y2: mT + ph + 4, stroke: GRID, 'stroke-width': 1 }));
+        svg.appendChild(el('text', { x: x, y: H - 5, 'text-anchor': 'middle', fill: TXT, 'font-size': fs },
+          range === '1d' ? pad(xt[i].h) + ':00' : dayLabel(xt[i], lang)));
+      }
+    } else {
+      svg.appendChild(el('line', { x1: mL, x2: W - mR, y1: mT + ph, y2: mT + ph, stroke: GRID, 'stroke-width': 1 }));
     }
     var d = '';
     for (i = 0; i < pts.length; i++) d += (i ? 'L' : 'M') + X(pts[i][0]).toFixed(1) + ' ' + Y(pts[i][1]).toFixed(1);
-    svg.appendChild(el('path', { d: d, fill: 'none', stroke: LINE, 'stroke-width': 1.8, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
-    var lx = X(t1), ly = Y(pts[pts.length - 1][1]);
+    svg.appendChild(el('path', { d: d, fill: 'none', stroke: LINE, 'stroke-width': mini ? 1.6 : 1.8, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }));
+    var lx = X(t1), ly = Y(last);
     svg.appendChild(el('circle', { cx: lx, cy: ly, r: 5, fill: LINE, 'fill-opacity': 0.25 }));
     svg.appendChild(el('circle', { cx: lx, cy: ly, r: 2.6, fill: LINE }));
 
@@ -159,25 +199,23 @@
   }
 
   function boxes(key, hiddenOnly) {
-    var all = document.querySelectorAll('#auBox .au-chart' + (hiddenOnly ? '[hidden]' : ':not([hidden])')), out = [];
+    var all = document.querySelectorAll('.au-chart' + (hiddenOnly ? '[hidden]' : ':not([hidden])')), out = [];
     for (var i = 0; i < all.length; i++) if (assetOf(all[i]) === key) out.push(all[i]);
     return out;
   }
   function drawAsset(key) { boxes(key, false).forEach(draw); }
+  function drawAll() { Object.keys(ASSETS).forEach(drawAsset); }
 
-  function setPressed(key) {
-    var s = st[key];
-    boxes(key, false).forEach(function (b) {
-      var btns = b.querySelectorAll('.au-rng'), n = 0, i, r;
-      for (i = 0; i < btns.length; i++) {
-        r = btns[i].getAttribute('data-r');
-        btns[i].setAttribute('aria-pressed', r === s.range ? 'true' : 'false');
-        btns[i].style.display = s.avail.indexOf(r) < 0 ? 'none' : '';   /* periods, ko dati vēl neaptver, nav redzams */
-        if (s.avail.indexOf(r) >= 0) n++;
-      }
-      var row = b.querySelector('.au-rngs');
-      if (row) row.style.display = n < 2 ? 'none' : '';              /* ja ir tikai viens periods, pārslēga nav */
-    });
+  function setPressed(box) {
+    var s = st[assetOf(box)], cur = rangeOf(box), btns = box.querySelectorAll('.au-rng'), n = 0, i, r;
+    for (i = 0; i < btns.length; i++) {
+      r = btns[i].getAttribute('data-r');
+      btns[i].setAttribute('aria-pressed', r === cur ? 'true' : 'false');
+      btns[i].style.display = s.avail.indexOf(r) < 0 ? 'none' : '';   /* periods, ko dati vēl neaptver, nav redzams */
+      if (s.avail.indexOf(r) >= 0) n++;
+    }
+    var row = box.querySelector('.au-rngs');
+    if (row) row.style.display = n < 2 ? 'none' : '';                /* ja ir tikai viens periods, pārslēga nav */
   }
 
   /* ---------- dati ---------- */
@@ -207,10 +245,10 @@
     var s = st[key];
     boxes(key, true).forEach(function (b) {
       b.hidden = false;
-      if (s.ro) s.ro.observe(b.querySelector('.au-plot'));
+      var pl = b.querySelector('.au-plot');
+      if (s.ro && pl) s.ro.observe(pl);
     });
-    if (s.avail.indexOf(s.range) < 0) s.range = s.avail[0];
-    setPressed(key);
+    boxes(key, false).forEach(setPressed);
     drawAsset(key);
   }
 
@@ -226,7 +264,13 @@
         var avail = validate(j, cfg);
         if (!avail || !avail.length) throw new Error('bad');
         s.data = j; s.avail = avail; s.ready = true;
-        if (typeof ResizeObserver === 'function') s.ro = new ResizeObserver(function () { drawAsset(key); });
+        /* pārzīmē tikai tad, ja mainījies platums (augstums mainās paša zīmējuma dēļ; citādi Safari met "ResizeObserver loop" brīdinājumu) */
+        if (typeof ResizeObserver === 'function') s.ro = new ResizeObserver(function (es) {
+          es.forEach(function (en) {
+            var pl = en.target, box = pl.closest('.au-chart');
+            if (box && Math.floor(pl.clientWidth) !== pl._w) requestAnimationFrame(function () { draw(box); });   /* ne RO atzvana laikā */
+          });
+        });
         else window.addEventListener('resize', function () { drawAsset(key); });
         show(key);
       })
@@ -238,19 +282,23 @@
 
   /* 1D / 1W / 1M pārslēgi (GA tikai pie īstas pārslēgšanas, nevis klikšķa uz jau izvēlēto) */
   document.addEventListener('click', function (e) {
-    var b = e.target && e.target.closest ? e.target.closest('#auBox .au-rng') : null;
+    var b = e.target && e.target.closest ? e.target.closest('.au-chart .au-rng') : null;
     if (!b) return;
     var box = b.closest('.au-chart');
-    if (!box) return;
     var key = assetOf(box), s = st[key];
     if (!s.ready) return;
-    var r = b.getAttribute('data-r');
-    if (s.avail.indexOf(r) < 0 || r === s.range) return;
-    s.range = r;
-    setPressed(key);
-    drawAsset(key);
-    if (typeof window.gtag === 'function') window.gtag('event', ASSETS[key].ga[r]);
+    var r = b.getAttribute('data-r'), g = groupOf(box);
+    if (s.avail.indexOf(r) < 0 || r === rangeOf(box)) return;
+    rng[g + ':' + key] = r;
+    boxes(key, false).forEach(function (x) { if (groupOf(x) === g) { setPressed(x); draw(x); } });
+    var names = g === 'lp' ? ASSETS[key].gaLp : ASSETS[key].ga;
+    if (names && typeof window.gtag === 'function') window.gtag('event', names[r]);
   });
+
+  /* lapas valoda mainās (LV/EN poga) -> pārzīmē grafikus, kas seko valodai */
+  if (typeof MutationObserver === 'function') {
+    new MutationObserver(function () { drawAll(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  }
 
   window.btcChartInit = init;
   init();

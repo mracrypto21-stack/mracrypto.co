@@ -1284,6 +1284,73 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   <div class="divider fade-up delay-2"></div>
 
+<style>
+/* Tirgus panelis (Fear & Greed + BTC / ETH / Total Cap grafiki); saturu aizpilda assets/live-panel.js un assets/btc-chart.js */
+#livePanel{width:100%;margin:0 0 14px;padding:12px 14px 10px;display:flex;flex-direction:column;gap:10px;text-align:left;
+  background:linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);backdrop-filter:blur(6px);
+  border:1px solid var(--line);border-radius:10px}
+#livePanel[hidden],#livePanel [hidden]{display:none !important}
+#livePanel .lp-title{margin:0;font-family:'Marcellus',serif;font-size:15px;font-weight:400;line-height:1.2;color:var(--gold-bright);letter-spacing:.02em}
+#livePanel .lp-part:not([hidden]) ~ .lp-part:not([hidden]){border-top:1px solid var(--line);padding-top:10px}
+#livePanel .lp-fng{display:flex;align-items:center;gap:14px}
+#livePanel .lp-gauge{flex:0 0 46%;max-width:150px}
+#livePanel .lp-fng-txt{flex:1;min-width:0}
+#livePanel .lp-fng-val{font-size:19px;font-weight:600;line-height:1.25}
+#livePanel .lp-fng-sub{margin-top:2px;font-size:11.5px;line-height:1.3;color:#C9AF87}
+#livePanel .lp-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;margin:0 0 5px}
+#livePanel .lp-name{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#C9AF87}
+#livePanel .lp-price{font-size:18px;font-weight:600;line-height:1.25;color:var(--cream)}
+#livePanel .lp-chg{font-size:12px;font-weight:600}
+#livePanel .au-rngs{display:flex;gap:6px;margin:0 0 4px}
+#livePanel .au-rng{position:relative;background:transparent;border:1px solid var(--gold-dim);border-radius:99px;padding:2px 11px;color:var(--bronze);font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.03em;line-height:1.4;cursor:pointer;transition:all .25s;-webkit-tap-highlight-color:transparent}
+#livePanel .au-rng::after{content:"";position:absolute;inset:-9px -3px}
+#livePanel .au-rng[aria-pressed="true"]{background:linear-gradient(180deg,rgba(232,168,60,.25),rgba(232,168,60,.12));border-color:var(--gold);color:var(--gold-bright)}
+@media (hover:hover){#livePanel .au-rng:hover:not([aria-pressed="true"]){border-color:var(--gold);color:var(--gold)}}
+#livePanel .au-plot{width:100%;overflow:hidden}
+#livePanel .lp-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#livePanel .lp-mini{min-width:0;padding:7px 9px 6px;border:1px solid var(--line);border-radius:10px;background:rgba(8,6,3,0.35)}
+#livePanel .lp-mini .lp-head{margin:0}
+#livePanel .lp-mini .lp-head{gap:0 6px}
+#livePanel .lp-mini .lp-price{font-size:16px}
+#livePanel .lp-mini .lp-chg{font-size:11px}
+#livePanel .au-hilo{margin:2px 0 0;font-size:10.5px;line-height:1.3;color:#8F7650}
+#livePanel .lp-src{margin:0;font-size:10.5px;line-height:1.35;color:#8F7650}
+</style>
+<section class="live-panel fade-up delay-3" id="livePanel" aria-label="Tirgus pārskats" hidden>
+  <h2 class="lp-title" data-lp="title">Tirgus pārskats</h2>
+  <div class="lp-part lp-fng" hidden>
+    <div class="lp-gauge"></div>
+    <div class="lp-fng-txt">
+      <div class="lp-fng-val"></div>
+      <div class="lp-fng-sub" data-lp="fng">Bailu un alkatības indekss</div>
+    </div>
+  </div>
+  <div class="lp-part au-chart" data-asset="btc" data-lang="auto" hidden>
+    <div class="lp-head"><span class="lp-name">BTC</span><span class="lp-price"></span><span class="lp-chg" data-for="btc"></span></div>
+    <div class="au-rngs" role="group" aria-label="BTC">
+      <button type="button" class="au-rng" data-r="1d" aria-pressed="true">1D</button><button type="button" class="au-rng" data-r="1w" aria-pressed="false">1W</button><button type="button" class="au-rng" data-r="1m" aria-pressed="false">1M</button>
+    </div>
+    <div class="au-plot"></div>
+  </div>
+  <div class="lp-part lp-mini-grid">
+    <div class="au-chart lp-mini" data-asset="eth" data-mini data-lang="auto" hidden>
+      <div class="lp-head"><span class="lp-name">ETH</span></div>
+      <div class="lp-head"><span class="lp-price"></span><span class="lp-chg" data-for="eth"></span></div>
+      <div class="au-plot"></div>
+      <p class="au-hilo"></p>
+    </div>
+    <div class="au-chart lp-mini" data-asset="total" data-mini data-lang="auto" hidden>
+      <div class="lp-head"><span class="lp-name">Total Cap</span></div>
+      <div class="lp-head"><span class="lp-price"></span><span class="lp-chg" data-for="total"></span></div>
+      <div class="au-plot"></div>
+      <p class="au-hilo"></p>
+    </div>
+  </div>
+  <p class="lp-src" hidden></p>
+</section>
+<script src="assets/btc-chart.js?v=3" defer></script>
+<script src="assets/live-panel.js?v=1" defer></script>
+
   <div class="links fade-up delay-3">
 
     <details class="section-group fade-up delay-3" id="analysisSection" data-ga="open_analize_section">
