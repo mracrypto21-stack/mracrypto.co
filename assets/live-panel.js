@@ -101,7 +101,7 @@
     var src = panel.querySelector('.lp-src');
     if (!src) return;
     var cgA = link('CoinGecko', 'https://www.coingecko.com/en/api', 'open_avots_panelis_coingecko');
-    var amA = link('Alternative.me', 'https://alternative.me', 'open_avots_panelis_alternativeme');
+    var amA = link('Alternative.me', 'https://alternative.me/crypto/fear-and-greed-index/', 'open_avots_panelis_alternativeme');
     var parts = [];   /* DOM mezgli un teksts pa secību */
     if (L === 'en') {
       if (cg) { parts.push('Powered by ', cgA); if (am) parts.push(t.and, amA); }
