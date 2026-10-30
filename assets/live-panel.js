@@ -14,10 +14,10 @@
 
   var T = {
     lv: { title: 'Tirgus pārskats', fng: 'Bailu un alkatības indekss', h24: '24 h',
-          src: 'Dati', and: ' un ', upd: 'atjaunots', riga: 'Laiki pēc Rīgas laika',
+          src: 'Dati', and: ' un ', upd: 'atjaunots',
           cls: { 'extreme fear': 'Ļoti lielas bailes', 'fear': 'Bailes', 'neutral': 'Neitrāls', 'greed': 'Alkatība', 'extreme greed': 'Ļoti liela alkatība' } },
     en: { title: 'Market overview', fng: 'Fear & Greed Index', h24: '24h',
-          src: 'Data', and: ' and ', upd: 'updated', riga: 'Times in Riga time',
+          src: 'Data', and: ' and ', upd: 'updated',
           cls: { 'extreme fear': 'Extreme Fear', 'fear': 'Fear', 'neutral': 'Neutral', 'greed': 'Greed', 'extreme greed': 'Extreme Greed' } }
   };
   /* tie paši toņi, kas cenu joslas Fear & Greed vērtībai */
@@ -121,7 +121,7 @@
           rest += ' \u00b7 ' + t.upd + ' ' + pad(+o.day) + '.' + pad(+o.month) + '. ' + pad(+o.hour % 24) + ':' + o.minute;
         } catch (e) {}
       }
-      parts.push(rest + ' \u00b7 ' + t.riga + '.');
+      parts.push(rest);
     }
     src.textContent = '';
     parts.forEach(function (x) { src.appendChild(typeof x === 'string' ? document.createTextNode(x) : x); });
