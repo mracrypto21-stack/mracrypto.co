@@ -81,13 +81,14 @@
     position: fixed;
     inset: 0;
     z-index: 0;
-    background-image: url('assets/bg.jpg');
+    background-image: url('assets/bg-1920.61ce8a66.webp');
     background-size: cover;
     background-position: center;
   }
 
   /* Fona raksts klusāks (variants A): attēla spilgtums ×0.66; pārklājums un viss pārējais nemainās */
   .bg-photo { filter: brightness(0.66); }
+  @media (max-width: 600px) { .bg-photo { background-image: url('assets/bg-800.27e7e367.webp'); } }
 
   .bg-overlay {
     position: fixed;
@@ -127,8 +128,10 @@
     position: relative;
     z-index: 1;
     width: 100%;
+    height: auto;
     display: block;
   }
+  picture.pic { display: block; line-height: 0; flex-shrink: 0; }
 
   /* Ielādes animācijas */
   .fade-up {
@@ -1252,7 +1255,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   <div class="logo-glow fade-up delay-1">
     
-    <img src="assets/logo.png" alt="@MRACRYPTO">
+    <picture class="pic"><source type="image/webp" srcset="assets/logo-720.54db4019.webp"><img src="assets/logo-720.888b3961.png" alt="@MRACRYPTO" width="720" height="720" fetchpriority="high"></picture>
   </div>
 
 <div class="price-ticker" id="priceTicker">
@@ -1733,7 +1736,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   <div class="about-card" id="aboutCard">
     <div class="about-header">
-      <img class="avatar" src="assets/portrait.png" alt="MrACrypto">
+      <picture class="pic"><source type="image/webp" srcset="assets/portrait-240.856fef79.webp"><img class="avatar" src="assets/portrait-240.4bd82899.png" alt="MrACrypto" width="120" height="120"></picture>
       <h3 data-i18n="about_title">Par mani</h3>
     </div>
     <p data-i18n="about_bio">Kriptovalūtu un pasīvo ienākumu investors kopš 2021. gada. Mana stiprā puse ir ātri pielāgoties mainīgajiem tirgus apstākļiem, kas palīdz veidot diversificētu un ilgtermiņā ilgtspējīgu investīciju portfeli. Man ir vairāk nekā 10 gadu pieredze pārdošanā un komandu vadībā, kas sniedz stratēģisku redzējumu biznesa attīstībā un partnerībās.</p>
