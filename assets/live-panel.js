@@ -13,7 +13,7 @@
   var NS = 'http://www.w3.org/2000/svg';
 
   var T = {
-    lv: { title: 'Tirgus pārskats', fng: 'Bailu un alkatības indekss', h24: '24 h',
+    lv: { title: 'Tirgus pārskats', fng: 'Baiļu un alkatības indekss', h24: '24 h',
           src: 'Dati', and: ' un ', upd: 'atjaunots',
           cls: { 'extreme fear': 'Ļoti lielas bailes', 'fear': 'Bailes', 'neutral': 'Neitrāls', 'greed': 'Alkatība', 'extreme greed': 'Ļoti liela alkatība' } },
     en: { title: 'Market overview', fng: 'Fear & Greed Index', h24: '24h',
