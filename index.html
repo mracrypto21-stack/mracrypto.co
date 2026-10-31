@@ -1394,7 +1394,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   <p class="start-cta">Nevēlies lasīt, bet ķerties uzreiz pie lietas? <a href="https://kriptonr1.xyz/#produkti" target="_blank" rel="noopener">Mācības, kas noderēs</a>.</p>
 
-  <details class="start-stage" data-ga="open_starts_pamati" open>
+  <details class="start-stage" data-ga="open_starts_pamati">
     <summary class="start-stage-head"><h4 class="start-stage-title">1. Posms — Kriptovalūtas un blokķēdes pamati</h4><span class="chevron">›</span></summary>
     <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">Kas ir kriptovalūta?</h5>
@@ -2231,7 +2231,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   <p class="start-cta">Don't feel like reading but want to jump straight into action? <a href="https://kriptonr1.xyz/#produkti" target="_blank" rel="noopener">Courses that will help</a>.</p>
 
-  <details class="start-stage" data-ga="open_starts_pamati" open>
+  <details class="start-stage" data-ga="open_starts_pamati">
     <summary class="start-stage-head"><h4 class="start-stage-title">Step 1 — Crypto &amp; blockchain basics</h4><span class="chevron">›</span></summary>
     <div class="start-stage-body"><div class="start-stage-in">
   <h5 class="start-sub">What is cryptocurrency?</h5>
@@ -2638,13 +2638,13 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       if(n && typeof window.gtag==='function') window.gtag('event',n);
     }
   },true);
-  /* bloks aizvērts -> nākamreiz atkal atvērts 1. posms, pārējie aizvērti */
+  /* bloks aizvērts -> nākamreiz visi posmi aizvērti */
   if(group) group.addEventListener('toggle',function(){
     if(group.open) return;
-    box.querySelectorAll('details.start-stage').forEach(function(d,i){
+    box.querySelectorAll('details.start-stage').forEach(function(d){
       var p=d.querySelector('.start-stage-body');
       if(p && p._anim){ p._anim.cancel(); p._anim=null; }
-      d.open=(i===0);
+      d.open=false;
     });
   });
 })();
