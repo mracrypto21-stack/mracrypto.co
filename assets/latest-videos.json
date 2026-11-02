@@ -1,6 +1,14 @@
 {
   "videos": [
     {
+      "id": "nBVbqeqxl8s",
+      "title": "AI TĀ IR IKDIENA",
+      "type": "short",
+      "published": "2026-11-02T15:34:07+00:00",
+      "thumb": "https://i.ytimg.com/vi/nBVbqeqxl8s/oar2.jpg",
+      "embeddable": true
+    },
+    {
       "id": "uYxzPcVACO8",
       "title": "BINANCE HACK",
       "type": "short",
@@ -14,14 +22,6 @@
       "type": "short",
       "published": "2026-10-29T15:36:35+00:00",
       "thumb": "https://i.ytimg.com/vi/EzD5HIFDxGk/oar2.jpg",
-      "embeddable": true
-    },
-    {
-      "id": "QBcJK7NgRsg",
-      "title": "JA MAN BŪTU 100$",
-      "type": "short",
-      "published": "2026-10-28T15:41:44+00:00",
-      "thumb": "https://i.ytimg.com/vi/QBcJK7NgRsg/oar2.jpg",
       "embeddable": true
     }
   ]
