@@ -1,7 +1,8 @@
 /* Tirgus panelis galvenajā lapā (#livePanel): Fear & Greed mērītājs + BTC / ETH / Total Cap grafiki.
    Cenu grafikus zīmē assets/btc-chart.js (viens kods visiem grafikiem); šis skripts dara pārējo:
    - Fear & Greed pusapļa mērītājs no assets/fng.json (stundā to ieraksta VPS cron; avots alternative.me);
-   - 24 h izmaiņa (%) no assets/total-cap.json (tas pats fails, kas cenu joslai);
+   - 24 h izmaiņa (%) un cena (BTC, ETH, Total Cap) no assets/total-cap.json (tas pats fails, ko lasa cenu josla, tāpēc skaitļi vienmēr sakrīt;
+     cenu grafika engine to rāda kā window.lpLive; ja faila nav / tas vecāks par 6 h -> grafika pēdējais punkts);
    - paneļa daļu redzamība (katra daļa paslēpta, ja tās fails nav pieejams / ir vecāks par 6 h; ja nav neviena, paslēpts viss panelis);
    - avota rinda un valoda LV/EN.
    Apmeklētāja pārlūks NEpiesaista CoinGecko, alternative.me vai citus ārējos pakalpojumus: tiek lasīti tikai šīs lapas faili. */
@@ -143,18 +144,33 @@
   function getJson(url) {
     return fetch(url, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); });
   }
-  getJson('assets/fng.json').then(function (j) {
-    var ok = j && j.v === 1 && fresh(j.t) && typeof j.value === 'number' && j.value >= 0 && j.value <= 100 && COL[j.cls] && j.ts > 0 &&
-      Date.now() / 1000 - j.ts < 48 * 3600;   /* paša indeksa mērījums nedrīkst būt vecāks par 2 dienām */
-    if (!ok) throw new Error('bad');
-    fng = j;
-    panel.querySelector('.lp-fng').hidden = false;
-    texts(); sync();
-  }).catch(function () {});
-  getJson('assets/total-cap.json').then(function (j) {
-    if (!j || !fresh(j.t)) throw new Error('bad');
-    tc = j; texts(); sync();
-  }).catch(function () {});
+  function posNum(v) { return typeof v === 'number' && isFinite(v) && v > 0 ? v : null; }
+  function loadFng() {
+    return getJson('assets/fng.json').then(function (j) {
+      var ok = j && j.v === 1 && fresh(j.t) && typeof j.value === 'number' && j.value >= 0 && j.value <= 100 && COL[j.cls] && j.ts > 0 &&
+        Date.now() / 1000 - j.ts < 48 * 3600;   /* paša indeksa mērījums nedrīkst būt vecāks par 2 dienām */
+      return ok ? j : null;
+    }, function () { return null; }).then(function (j) {
+      fng = j;
+      var part = panel.querySelector('.lp-fng');
+      if (part.hidden !== !j) part.hidden = !j;   /* tikai ja mainās (hidden novērotājs) */
+      texts(); sync();
+    });
+  }
+  function loadTc() {
+    return getJson('assets/total-cap.json').then(function (j) { return j && fresh(j.t) ? j : null; }, function () { return null; })
+      .then(function (j) {
+        tc = j;
+        /* cenas BTC/ETH/Total panelī = tās pašas, ko rāda cenu josla (Total: USD -> triljoni) */
+        var prev = JSON.stringify(window.lpLive || null);
+        window.lpLive = j ? { btc: posNum(j.btc && j.btc.usd), eth: posNum(j.eth && j.eth.usd), total: posNum(j.total) ? j.total / 1e12 : null } : null;
+        texts(); sync();
+        if (JSON.stringify(window.lpLive) !== prev && typeof window.btcChartRedraw === 'function') window.btcChartRedraw();
+      });
+  }
+  loadFng();
+  loadTc();
+  setInterval(function () { loadFng(); loadTc(); }, 5 * 60 * 1000);   /* tikai šīs lapas faili; tāds pats ritms kā cenu joslai */
 
   /* daļas parādās, kad assets/btc-chart.js noņem tām hidden -> pārskaita */
   if (typeof MutationObserver === 'function') {

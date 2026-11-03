@@ -137,7 +137,10 @@
 
     /* cena un 24 h diapazons tekstā (ja marķējumā ir šādi elementi) */
     var pe = box.querySelector('.lp-price');
-    if (pe) pe.textContent = money(last, lang, a);
+    if (pe) {   /* panelī cena = tas pats skaitlis, ko rāda cenu josla (assets/total-cap.json, window.lpLive); ja tā nav -> grafika pēdējais punkts */
+      var ov = window.lpLive && window.lpLive[key];
+      pe.textContent = money(typeof ov === 'number' && isFinite(ov) && ov > 0 ? ov : last, lang, a);
+    }
     var he = box.querySelector('.au-hilo');
     if (he) {   /* īss diapazons vienā rindā: "24 h: 2 183 – 2 275 $" (LV), "24h: $2,183 – $2,275" (EN) */
       var ml = money(lo, lang, a), mh = money(hi, lang, a);
@@ -301,5 +304,6 @@
   }
 
   window.btcChartInit = init;
+  window.btcChartRedraw = drawAll;   /* live-panel.js pārzīmē cenas, kad atjaunojas total-cap.json */
   init();
 })();
