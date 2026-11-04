@@ -899,10 +899,11 @@
 .start-stage[open]{border-color:var(--gold-dim)}
 .start-stage-head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
 .start-stage-head::-webkit-details-marker{display:none}
-.start-stage-title{flex:1;margin:0;color:var(--cream);font-family:inherit;font-size:15px;font-weight:500;line-height:1.4;letter-spacing:.01em}
+.start-stage-title{flex:1;margin:0;color:var(--cream);font-family:inherit;font-size:13.5px;font-weight:500;line-height:1.4;letter-spacing:.01em}
 .start-stage-head .chevron{transition:transform .25s ease}
 .start-stage[open] > .start-stage-head .chevron{transform:rotate(90deg)}
 .start-stage-body{overflow:hidden}
+#auBox .au-group{scroll-margin-top:80px}  /* kā .start-stage: virsraksts neslēpjas zem fiksētajām LV/EN + dalīšanās pogām */
 .start-stage-in{padding:0 16px 14px}
 .start-stage-in > :first-child{margin-top:0}
 .start-stage-in > :last-child{margin-bottom:0}
@@ -2609,11 +2610,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     if(det.open){ animate(det,false); return; }
     userOpened=det;
     box.querySelectorAll('details.start-stage[open]').forEach(function(o){ if(o!==det) animate(o,false); });
-    animate(det,true,function(){
-      /* ja aizvērtais posms bija augstāk, atvērtā virsraksts var būt izkustējies uz augšu — pieved to redzamībā */
-      var r=det.getBoundingClientRect();
-      if(r.top<72) window.scrollBy({top:r.top-80,behavior:reduce?'auto':'smooth'});
-    });
+    animate(det,true);  /* ritināšanu uz virsrakstu veic kopīgais skripts zemāk ("Iekšējie dropdowni: ritināšana") */
   });
   /* GA4: tikai lietotāja atvēršana (programmatiska atiestatīšana un valodas maiņa nesaskaitās) */
   box.addEventListener('toggle',function(ev){
@@ -2634,6 +2631,39 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       d.open=false;
     });
   });
+})();
+</script>
+<script>
+/* Iekšējie dropdowni: ritināšana. Kad lietotājs ATVER analīzes dropdownu (BTC, ETH, Total Cap, ASV notikumi) vai "Starts" posmu,
+   lapa pārritinās tā, ka atvērtā virsraksts ir augšā (kā lielajiem blokiem: scrollIntoView block:start; atkāpi dod CSS scroll-margin-top).
+   Delegēts uz document: analīzes saturs tiek ielādēts/pārģenerēts no assets/daily-analysis.html, posmu HTML pārraksta valodas pārslēdzējs.
+   Tikai klikšķis (arī Enter/Space uz summary); aizverot, lapas ielādē un programmatiski ritināšanas nav. GA netiek skarts. */
+(function(){
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var token=0;
+  function docTop(el){ return el.getBoundingClientRect().top+window.pageYOffset; }
+  function schedule(det, minDelay){
+    var my=++token, t0=Date.now(), last=null, same=0;
+    function frame(){
+      if(my!==token || !det.open) return;                 /* jauns klikšķis vai nu aizvērts -> atcelt */
+      var y=docTop(det);
+      same=(last!==null && Math.abs(y-last)<0.5)?same+1:0;
+      last=y;
+      if(same>=2 || Date.now()-t0>900){                  /* izkārtojums nostabilizējies (animācija + citu aizvēršanās beigusies) */
+        det.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+        return;
+      }
+      requestAnimationFrame(frame);
+    }
+    setTimeout(function(){ requestAnimationFrame(frame); }, minDelay);
+  }
+  document.addEventListener('click',function(ev){
+    var sum=ev.target.closest && ev.target.closest('#auBox summary.au-head, summary.start-stage-head');
+    if(!sum) return;
+    var det=sum.parentNode;
+    if(!det || det.open) return;                          /* aizvēršana -> bez ritināšanas */
+    schedule(det, det.classList.contains('start-stage') ? 260 : 40);   /* posmu animācija 250 ms */
+  },true);
 })();
 </script>
 
