@@ -907,6 +907,16 @@
 .start-stage-in{padding:0 16px 14px}
 .start-stage-in > :first-child{margin-top:0}
 .start-stage-in > :last-child{margin-bottom:0}
+/* Bloks "AI strādā manā vietā": dropdowni izmanto to pašu .start-stage* kodu; šeit tikai teksta/atstarpju apvalks */
+.ai-stages{font-size:13.5px;line-height:1.7;color:#C9AF87;text-align:left}
+.ai-stages p{margin:0 0 10px}
+.ai-stages .start-stage:last-child{margin-bottom:0}
+.ai-close{margin:0;font-size:14px;line-height:1.6;color:#C9AF87;text-align:left}
+.ai-close strong{color:#E8A83C}
+.ai-cta{display:flex;justify-content:center}
+#aiInterestBtn.glow-border{position:relative !important;bottom:auto !important;right:auto !important}
+#aiInterestBtn.chat-widget{padding:11px 18px;border-radius:30px}
+#aiInterestBtn.chat-widget span.chat-label{display:inline}
 
 /* Sīkdatņu piekrišanas baneris */
 .cookie-consent {
@@ -1694,6 +1704,50 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       </div>
     </details>
 
+    <details class="section-group fade-up delay-3" data-ga="open_ai_bloks">
+      <summary class="section-header">
+        <span class="section-emoji" style="display:flex;align-items:center;justify-content:center;width:22px;height:22px;color:#E8A83C">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+        </span>
+        <h2 class="section-title" data-i18n="sec_ai">AI strādā manā vietā</h2>
+        <span class="chevron section-chevron">›</span>
+      </summary>
+      <div class="section-content">
+
+<div class="ai-stages" data-i18n-block="ai_bl">
+  <details class="start-stage" data-ga="open_ai_ko_dara">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Ko AI jau dara</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>Montē video un pievieno efektus. Publicē saturu TikTok, Instagram, YouTube un X platformās pēc maniem noteikumiem. Sagatavo ikrīta analīzi, nedēļas pārskatus un apkopo sociālo tīklu statistiku. Arī šo mājaslapu uztur AI aģents.</p></div></div>
+  </details>
+
+  <details class="start-stage" data-ga="open_ai_redzams">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Redzams šajā lapā</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>Cenu josla un grafiki atjaunojas automātiski katru stundu. Ikrīta kripto analīze tiek sagatavota automātiski katru rītu. Tas nav solījums, tas ir dzīvs piemērs, ko vari apskatīt tepat lapā.</p></div></div>
+  </details>
+
+  <details class="start-stage" data-ga="open_ai_kontrole">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Ko kontrolēju pats</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>AI sagatavo un izpilda, bet galīgos lēmumus pieņemu es: ko un kad publicēt un kā tam jāizskatās. Katru izmaiņu vispirms pārbaudu priekšskatījumā, un tā nonāk lapā tikai pēc mana apstiprinājuma.</p></div></div>
+  </details>
+
+  <details class="start-stage" data-ga="open_ai_sava">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Gribi savu automatizāciju?</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>Ja kāds tavs darbs atkārtojas katru dienu vai nedēļu, to bieži var automatizēt. Palīdzu saprast, ko vērts automatizēt un kā to sākt.</p></div></div>
+  </details>
+</div>
+
+        <p class="ai-close" data-i18n="ai_close"><strong>Un tas ir tikai sākums.</strong> AI man arī uztur Appsmith dashboard, apkopo Google Analytics datus, taisa rezerves kopijas un pārņem vēl daudz ko, ko agrāk darīju pats. Ja kāds process atkārtojas, to var automatizēt. Varbūt arī tavu.</p>
+
+        <div class="ai-cta">
+          <a class="chat-widget glow-border" href="#" id="aiInterestBtn" onclick="event.preventDefault(); event.stopImmediatePropagation(); document.getElementById('qSource').value='AI bloks: Ir interese'; document.getElementById('questionModal').classList.add('open');" data-ga="open_ai_interese">
+            <img class="chat-logo" src="assets/m-logo.png" alt="M" style="width:36px;height:36px;border-radius:50%;display:block;border:2px solid var(--gold-dim);object-fit:cover;background:#000;">
+            <span class="chat-label" data-i18n="ai_btn">Ir interese</span>
+          </a>
+        </div>
+
+      </div>
+    </details>
+
     <details class="section-group fade-up delay-3" data-ga="open_sadarbiba_section">
       <summary class="section-header">
         <span class="section-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span>
@@ -2212,6 +2266,27 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   document.getElementById('cookieDecline').addEventListener('click', function () { decide('declined'); });
 })();
 </script>
+<script type="text/plain" id="i18n-ai_bl" aria-hidden="true" hidden>
+  <details class="start-stage" data-ga="open_ai_ko_dara">
+    <summary class="start-stage-head"><h4 class="start-stage-title">What the AI already does</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>It edits videos and adds effects. It publishes content on TikTok, Instagram, YouTube and X following my rules. It prepares the morning analysis and weekly reports, and compiles social media statistics. This website is also maintained by an AI agent.</p></div></div>
+  </details>
+
+  <details class="start-stage" data-ga="open_ai_redzams">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Visible on this page</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>The price bar and charts refresh automatically every hour. The morning crypto analysis is prepared automatically every morning. This is not a promise, it is a live example you can see right here on the page.</p></div></div>
+  </details>
+
+  <details class="start-stage" data-ga="open_ai_kontrole">
+    <summary class="start-stage-head"><h4 class="start-stage-title">What I control myself</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>The AI prepares and carries out the work, but I make the final decisions: what to publish, when, and how it should look. I check every change in a preview first, and it reaches the page only after my approval.</p></div></div>
+  </details>
+
+  <details class="start-stage" data-ga="open_ai_sava">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Want your own automation?</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><p>If some of your work repeats every day or every week, it can often be automated. I can help you work out what is worth automating and how to get started.</p></div></div>
+  </details>
+</script>
 <script type="text/plain" id="i18n-start_bl" aria-hidden="true" hidden>
 <div class="start-content">
 
@@ -2516,7 +2591,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   if (window.__i18nLoaded) return;
   window.__i18nLoaded = true;
 
-  var EN = {"sec_info":"Important information","info_scam":"<strong>Beware of scammers!</strong><br>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, click on <a href=\"#\" data-goto=\"social\">my official social media</a> and verify. Remember: I will never ask for your passwords, seed phrases or private keys.","info_disc":"<strong>Disclaimer:</strong> The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","info_doubt":"<strong>In case of doubt:</strong> If a suspicious situation arises or someone writes in my name, <a href=\"#\" data-goto=\"contact\">contact me</a>.","h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","footer_privacy":"Privacy Policy","footer_terms":"Terms of Service","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure hardware wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_title":"About me","about_bio":"Crypto and passive-income investor since 2021. My strength is adapting quickly to changing market conditions, which helps build a diversified, long-term sustainable investment portfolio. I have over 10 years of experience in sales and team leadership, providing strategic insight into business development and partnerships.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li_ai":"AI and process automation: Building autonomous AI agents, configuring background task systems and smart research systems that streamline daily work and data analysis.","about_li5":"Excel consultations and other topics on demand.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","don_title":"Enjoying the content?","don_desc":"If you find these guides and tools helpful, feel free to support the development of mracrypto.co. Tap a coin to see the QR code and address.","don_badge_btc":"Bitcoin network","don_badge_evm":"EVM (ERC20, BEP20, Polygon, Arb etc.)","don_btn_btc":"Copy BTC address","don_btn_eth":"Copy ETH address","don_btn_stable":"Copy stablecoin address","don_copied":"Copied!","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse traffic and improve content (Google Analytics). Do you accept?","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy","sec_analysis":"Morning crypto analysis","vid_title":"Latest videos","vid_watch":"Watch on YouTube","faq_link":"Frequently asked questions ›","faq_title":"Frequently asked questions about consultations","faq_q1":"How much can you earn with cryptocurrencies?","faq_a1":"Profit cannot be guaranteed, and the market is very volatile. Crypto offers no guaranteed income, and you can lose part or all of what you invest. In the consultation I help you understand how to invest prudently and manage risk.","faq_q2":"What amount can I start with?","faq_a2":"You can start with a small amount, for example €10–20. Only invest what you are prepared to lose, and never borrow money to buy crypto.","faq_q3":"Do I need any prior knowledge?","faq_a3":"No, it is not required. I will provide everything you need during the consultation. All you need is internet access and a device: a phone, computer or tablet.","faq_q4":"How does the consultation work?","faq_a4":"The consultation takes place in person or remotely via Zoom or a Telegram call. It lasts 1 hour.","faq_q5":"How much does it cost?","faq_a5":"One consultation (1 hour) costs €70/$70.","faq_q6":"How can I pay?","faq_a6":"You can pay by bank transfer or in cryptocurrency.","faq_q7":"What can I consult about?","faq_a7":"About all the topics described in the \"<a href=\"#\" data-faq-goto=\"about\">About me</a>\" section: crypto basics and portfolio, exchanges (CEX/DEX), trading and DeFi, security and psychology, AI and process automation, Excel and other topics on demand.","faq_q8":"How should I prepare?","faq_a8":"Before the consultation you can send me the questions and topics you are interested in. Then we agree on a suitable time.","faq_q9":"Do you guarantee profit?","faq_a9":"No. Consultations are for informational and educational purposes only and are not financial advice. You make your own investment decisions.","faq_q10":"How do I apply?","faq_a10":"Apply by pressing the \"<a href=\"#\" data-faq-goto=\"apply\">Book a consultation</a>\" button, or write an e-mail or a Telegram message in the \"<a href=\"#\" data-faq-goto=\"contact\">Get in touch</a>\" section."};
+  var EN = {"sec_info":"Important information","info_scam":"<strong>Beware of scammers!</strong><br>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, click on <a href=\"#\" data-goto=\"social\">my official social media</a> and verify. Remember: I will never ask for your passwords, seed phrases or private keys.","info_disc":"<strong>Disclaimer:</strong> The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","info_doubt":"<strong>In case of doubt:</strong> If a suspicious situation arises or someone writes in my name, <a href=\"#\" data-goto=\"contact\">contact me</a>.","h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","footer_privacy":"Privacy Policy","footer_terms":"Terms of Service","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","sec_ai":"AI works for me","ai_close":"<strong>And this is just the beginning.</strong> AI also maintains my Appsmith dashboard, collects Google Analytics data, makes backups and takes over a lot of other things I used to do myself. If a process repeats, it can be automated. Maybe even yours.","ai_btn":"I'm interested","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure hardware wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_title":"About me","about_bio":"Crypto and passive-income investor since 2021. My strength is adapting quickly to changing market conditions, which helps build a diversified, long-term sustainable investment portfolio. I have over 10 years of experience in sales and team leadership, providing strategic insight into business development and partnerships.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li_ai":"AI and process automation: Building autonomous AI agents, configuring background task systems and smart research systems that streamline daily work and data analysis.","about_li5":"Excel consultations and other topics on demand.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","don_title":"Enjoying the content?","don_desc":"If you find these guides and tools helpful, feel free to support the development of mracrypto.co. Tap a coin to see the QR code and address.","don_badge_btc":"Bitcoin network","don_badge_evm":"EVM (ERC20, BEP20, Polygon, Arb etc.)","don_btn_btc":"Copy BTC address","don_btn_eth":"Copy ETH address","don_btn_stable":"Copy stablecoin address","don_copied":"Copied!","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse traffic and improve content (Google Analytics). Do you accept?","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy","sec_analysis":"Morning crypto analysis","vid_title":"Latest videos","vid_watch":"Watch on YouTube","faq_link":"Frequently asked questions ›","faq_title":"Frequently asked questions about consultations","faq_q1":"How much can you earn with cryptocurrencies?","faq_a1":"Profit cannot be guaranteed, and the market is very volatile. Crypto offers no guaranteed income, and you can lose part or all of what you invest. In the consultation I help you understand how to invest prudently and manage risk.","faq_q2":"What amount can I start with?","faq_a2":"You can start with a small amount, for example €10–20. Only invest what you are prepared to lose, and never borrow money to buy crypto.","faq_q3":"Do I need any prior knowledge?","faq_a3":"No, it is not required. I will provide everything you need during the consultation. All you need is internet access and a device: a phone, computer or tablet.","faq_q4":"How does the consultation work?","faq_a4":"The consultation takes place in person or remotely via Zoom or a Telegram call. It lasts 1 hour.","faq_q5":"How much does it cost?","faq_a5":"One consultation (1 hour) costs €70/$70.","faq_q6":"How can I pay?","faq_a6":"You can pay by bank transfer or in cryptocurrency.","faq_q7":"What can I consult about?","faq_a7":"About all the topics described in the \"<a href=\"#\" data-faq-goto=\"about\">About me</a>\" section: crypto basics and portfolio, exchanges (CEX/DEX), trading and DeFi, security and psychology, AI and process automation, Excel and other topics on demand.","faq_q8":"How should I prepare?","faq_a8":"Before the consultation you can send me the questions and topics you are interested in. Then we agree on a suitable time.","faq_q9":"Do you guarantee profit?","faq_a9":"No. Consultations are for informational and educational purposes only and are not financial advice. You make your own investment decisions.","faq_q10":"How do I apply?","faq_a10":"Apply by pressing the \"<a href=\"#\" data-faq-goto=\"apply\">Book a consultation</a>\" button, or write an e-mail or a Telegram message in the \"<a href=\"#\" data-faq-goto=\"contact\">Get in touch</a>\" section."};
 
   var SAVE_KEY = 'mrc_lang';
   var els = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
@@ -2578,9 +2653,9 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 <script>
 /* "Starts kriptovalūtā" posmi: vienlaikus atvērts viens, augstuma animācija kā FAQ (delegēts, jo tulkošana pārraksta innerHTML) */
 (function(){
-  var box=document.querySelector('[data-i18n-block="start_bl"]');
-  if(!box) return;
-  var group=box.closest('details.start-group');
+  /* Tas pats kods apkalpo arī bloka "AI strādā manā vietā" dropdownus (ai_bl) */
+  document.querySelectorAll('[data-i18n-block="start_bl"], [data-i18n-block="ai_bl"]').forEach(function(box){
+  var group=box.closest('details.start-group, details.section-group');
   var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var userOpened=null;
   function animate(det, opening, done){
@@ -2630,6 +2705,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       if(p && p._anim){ p._anim.cancel(); p._anim=null; }
       d.open=false;
     });
+  });
   });
 })();
 </script>
