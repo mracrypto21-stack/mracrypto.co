@@ -1798,6 +1798,10 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <p data-i18n="about_ai">Pēdējā laikā aktīvi strādāju ar AI aģentiem un veidoju darba procesu automatizācijas: video montāža, satura publicēšana, datu analīze un pārskati, arī šīs mājaslapas uzturēšana. Tā ir tikai neliela daļa no visa, ko AI dara manā vietā.</p>
     <p data-i18n="about_intro"><strong>Ko mēs varam apspriest konsultācijā?</strong><br>
     Neatkarīgi no tā, vai sper savus pirmos soļus vai vēlies padziļināt zināšanas, konsultācijas laikā varam fokusēties uz šādām tēmām:</p>
+    <div class="kons-stages" data-i18n-block="kons_bl" style="width:100%;text-align:left;">
+  <details class="start-stage" data-ga="open_konsultaciju_temas">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Konsultāciju tēmas</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
     <ul style="text-align:left;padding-left:20px;">
       <li data-i18n="about_li1">Kripto pamati & Portfelis: Ar ko un kā sākt, individuāla portfeļa izveide.</li>
       <li data-i18n="about_li2">Praktiskie rīki: Centralizētas (CEX) un decentralizētas (DEX) biržas, to lietošana, naudas pārskaitīšana un saņemšana.</li>
@@ -1806,6 +1810,9 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       <li data-i18n="about_li_ai">AI un procesu automatizācija: Autonomu AI aģentu izveide, fona uzdevumu sistēmu konfigurēšana un viedas izpētes sistēmas, kas optimizē ikdienas darbu un datu analīzi.</li>
       <li data-i18n="about_li5">Excel konsultācijas un citas tēmas pēc vajadzības.</li>
     </ul>
+    </div></div>
+  </details>
+    </div>
 
     <a href="#" class="faq-link" id="faqOpen" role="button" aria-haspopup="dialog" data-ga="open_faq"><span data-i18n="faq_link">Biežāk uzdotie jautājumi ›</span></a>
 
@@ -2288,6 +2295,21 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <div class="start-stage-body"><div class="start-stage-in"><p>If some of your work repeats every day or every week, it can often be automated. I can help you work out what is worth automating and how to get started.</p></div></div>
   </details>
 </script>
+<script type="text/plain" id="i18n-kons_bl" aria-hidden="true" hidden>
+  <details class="start-stage" data-ga="open_konsultaciju_temas">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Consultation topics</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in">
+    <ul style="text-align:left;padding-left:20px;">
+      <li data-i18n="about_li1">Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.</li>
+      <li data-i18n="about_li2">Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.</li>
+      <li data-i18n="about_li3">Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.</li>
+      <li data-i18n="about_li4">Security and psychology: Market psychology and safety in the crypto world.</li>
+      <li data-i18n="about_li_ai">AI and process automation: Building autonomous AI agents, configuring background task systems and smart research systems that streamline daily work and data analysis.</li>
+      <li data-i18n="about_li5">Excel consultations and other topics on demand.</li>
+    </ul>
+    </div></div>
+  </details>
+</script>
 <script type="text/plain" id="i18n-start_bl" aria-hidden="true" hidden>
 <div class="start-content">
 
@@ -2655,7 +2677,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 /* "Starts kriptovalūtā" posmi: vienlaikus atvērts viens, augstuma animācija kā FAQ (delegēts, jo tulkošana pārraksta innerHTML) */
 (function(){
   /* Tas pats kods apkalpo arī bloka "AI strādā manā vietā" dropdownus (ai_bl) */
-  document.querySelectorAll('[data-i18n-block="start_bl"], [data-i18n-block="ai_bl"]').forEach(function(box){
+  document.querySelectorAll('[data-i18n-block="start_bl"], [data-i18n-block="ai_bl"], [data-i18n-block="kons_bl"]').forEach(function(box){
   var group=box.closest('details.start-group, details.section-group');
   var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var userOpened=null;
