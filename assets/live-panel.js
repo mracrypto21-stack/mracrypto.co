@@ -16,7 +16,7 @@
   var T = {
     lv: { title: 'Tirgus pārskats', fng: 'Baiļu un alkatības indekss', h24: '24 h',
           src: 'Dati', and: ' un ', upd: 'atjaunots',
-          cls: { 'extreme fear': 'Ļoti lielas bailes', 'fear': 'Bailes', 'neutral': 'Neitrāls', 'greed': 'Alkatība', 'extreme greed': 'Ļoti liela alkatība' } },
+          cls: { 'extreme fear': 'Ekstrēmas bailes', 'fear': 'Bailes', 'neutral': 'Neitrāls', 'greed': 'Alkatība', 'extreme greed': 'Ļoti liela alkatība' } },
     en: { title: 'Market overview', fng: 'Fear & Greed Index', h24: '24h',
           src: 'Data', and: ' and ', upd: 'updated',
           cls: { 'extreme fear': 'Extreme Fear', 'fear': 'Fear', 'neutral': 'Neutral', 'greed': 'Greed', 'extreme greed': 'Extreme Greed' } }
