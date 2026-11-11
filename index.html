@@ -2537,43 +2537,43 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       <button type="button" class="faq-close" id="faqClose" aria-label="Aizvērt / Close">✕</button>
     </div>
     <div class="faq-body" id="faqBody">
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_nopelnit">
         <summary class="faq-q"><span data-i18n="faq_q1">Cik var nopelnīt ar kriptovalūtām?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a1">Peļņu nevar garantēt, un tirgus ir ļoti svārstīgs. Kripto nav garantēti ienākumi, un var arī zaudēt daļu vai visu ieguldīto. Konsultācijā palīdzu saprast, kā ieguldīt apdomīgi un pārvaldīt risku.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_summa">
         <summary class="faq-q"><span data-i18n="faq_q2">Ar kādu summu varu sākt?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a2">Var sākt ar nelielu summu, piemēram, 10–20 €. Ieguldi tikai tik, cik esi gatavs zaudēt, un neaizņemies naudu kripto pirkšanai.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_zinasanas">
         <summary class="faq-q"><span data-i18n="faq_q3">Vai man vajag iepriekšējas zināšanas?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a3">Nē, nav vajadzīgas. Visu nepieciešamo sniegšu konsultācijā. Vajag tikai internetu un ierīci: telefonu, datoru vai planšeti.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_konsultacija">
         <summary class="faq-q"><span data-i18n="faq_q4">Kā notiek konsultācija?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a4">Konsultācija notiek klātienē vai attālināti, izmantojot Zoom vai Telegram zvanu. Tā ilgst 1 stundu.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_cena">
         <summary class="faq-q"><span data-i18n="faq_q5">Cik tā maksā?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a5">Viena konsultācija (1 stunda) maksā 70 €/$.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_apmaksa">
         <summary class="faq-q"><span data-i18n="faq_q6">Kā var samaksāt?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a6">Var maksāt ar bankas pārskaitījumu vai kriptovalūtā.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_temas">
         <summary class="faq-q"><span data-i18n="faq_q7">Par ko var konsultēties?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a7">Par visām tēmām, kas aprakstītas sadaļā "<a href="#" data-faq-goto="about">Par mani</a>": kripto pamati un portfelis, biržas (CEX/DEX), trading un DeFi, drošība un psiholoģija, AI un procesu automatizācija, Excel un citas tēmas pēc vajadzības.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_sagatavoties">
         <summary class="faq-q"><span data-i18n="faq_q8">Kā sagatavoties?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a8">Pirms konsultācijas vari atsūtīt man sev interesējošos jautājumus un tēmas. Tad vienojamies par piemērotu laiku.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_pelna">
         <summary class="faq-q"><span data-i18n="faq_q9">Vai tu garantē peļņu?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a9">Nē. Konsultācijas ir tikai informatīvas un izglītojošas, un tās nav finanšu padoms. Lēmumus par ieguldījumiem pieņem pats.</div></div>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-ga="open_buj_pieteikties">
         <summary class="faq-q"><span data-i18n="faq_q10">Kā pieteikties?</span><span class="chevron">›</span></summary>
         <div class="faq-a"><div class="faq-a-in" data-i18n="faq_a10">Piesakies, nospiežot pogu "<a href="#" data-faq-goto="apply">Pieteikties konsultācijai</a>", vai raksti sadaļā "<a href="#" data-faq-goto="contact">Sazinies ar mani</a>" e-pastu vai Telegram ziņu.</div></div>
       </details>
@@ -2893,6 +2893,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     ev.preventDefault();
     var det=sum.parentNode;
     if(det.open){ animate(det,false); return; }
+    var gaEv=det.getAttribute('data-ga'); if(gaEv && typeof window.gtag==='function') window.gtag('event',gaEv); /* GA: tikai atverot */
     body.querySelectorAll('details.faq-item[open]').forEach(function(o){ if(o!==det) animate(o,false); });
     animate(det,true,function(){
       /* ja aizvērtais jautājums bija augstāk un atvērtais izkustējies ārpus redzamās daļas — pieved to redzamībā */
