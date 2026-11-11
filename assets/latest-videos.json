@@ -1,6 +1,14 @@
 {
   "videos": [
     {
+      "id": "mCYZMy81BYQ",
+      "title": "5 RĪKI KRIPTOVALŪTĀ",
+      "type": "short",
+      "published": "2026-11-11T15:31:48+00:00",
+      "thumb": "https://i.ytimg.com/vi/mCYZMy81BYQ/maxresdefault.jpg",
+      "embeddable": true
+    },
+    {
       "id": "x221YxWt3pk",
       "title": "ESI PIRMAIS",
       "type": "short",
@@ -14,14 +22,6 @@
       "type": "short",
       "published": "2026-11-09T15:35:17+00:00",
       "thumb": "https://i.ytimg.com/vi/rbHiMelrU0c/oar2.jpg",
-      "embeddable": true
-    },
-    {
-      "id": "xAxHCder3KQ",
-      "title": "DYOR",
-      "type": "video",
-      "published": "2026-11-06T15:39:34+00:00",
-      "thumb": "https://i.ytimg.com/vi/xAxHCder3KQ/maxresdefault.jpg",
       "embeddable": true
     }
   ]
