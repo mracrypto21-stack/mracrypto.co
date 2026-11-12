@@ -1200,6 +1200,10 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 .vid-yt:hover,.vid-yt:active{background:linear-gradient(180deg,rgba(232,168,60,.45),rgba(232,168,60,.25))}
 @media (prefers-reduced-motion:reduce){.policy-overlay{transition:none}}
 
+/* Noderīgi video: iekšējais dropdown bloka "Jaunākie video" apakšā (.start-stage kods; kartītes = esošie .vid-* stili) */
+#nvBox{width:100%;margin-top:14px;text-align:left}
+#nvBox .start-stage{margin-bottom:0}
+
 /* Aizvēršanas poga "Starts kriptovalūtā" blokā */
 .start-close{display:block;margin:18px auto 0;padding:8px 18px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));
   background-color: rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--gold-dim);border-radius:99px;color:var(--gold-bright);font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .25s}
@@ -1862,6 +1866,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       <div class="vid-card is-skel" aria-hidden="true"><div class="vid-thumb"></div><div class="vid-title"></div></div>
       <div class="vid-card is-skel" aria-hidden="true"><div class="vid-thumb"></div><div class="vid-title"></div></div>
     </div>
+    <div class="nv-stages" id="nvBox" data-i18n-block="nv_bl">
+  <details class="start-stage" data-ga="open_noderigi_video">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Noderīgi video</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><div class="vid-grid"></div></div></div>
+  </details>
+    </div>
   </div>
 
   <div class="donate-card" id="donateCard">
@@ -2296,6 +2306,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     <div class="start-stage-body"><div class="start-stage-in"><p>If some of your work repeats every day or every week, it can often be automated. I can help you work out what is worth automating and how to get started.</p></div></div>
   </details>
 </script>
+<script type="text/plain" id="i18n-nv_bl" aria-hidden="true" hidden>
+  <details class="start-stage" data-ga="open_noderigi_video">
+    <summary class="start-stage-head"><h4 class="start-stage-title">Useful videos</h4><span class="chevron">›</span></summary>
+    <div class="start-stage-body"><div class="start-stage-in"><div class="vid-grid"></div></div></div>
+  </details>
+</script>
 <script type="text/plain" id="i18n-kons_bl" aria-hidden="true" hidden>
   <details class="start-stage" data-ga="open_konsultaciju_temas">
     <summary class="start-stage-head"><h4 class="start-stage-title">Consultation topics</h4><span class="chevron">›</span></summary>
@@ -2678,7 +2694,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 /* "Starts kriptovalūtā" posmi: vienlaikus atvērts viens, augstuma animācija kā FAQ (delegēts, jo tulkošana pārraksta innerHTML) */
 (function(){
   /* Tas pats kods apkalpo arī bloka "AI strādā manā vietā" dropdownus (ai_bl) */
-  document.querySelectorAll('[data-i18n-block="start_bl"], [data-i18n-block="ai_bl"], [data-i18n-block="kons_bl"]').forEach(function(box){
+  document.querySelectorAll('[data-i18n-block="start_bl"], [data-i18n-block="ai_bl"], [data-i18n-block="kons_bl"], [data-i18n-block="nv_bl"]').forEach(function(box){
   var group=box.closest('details.start-group, details.section-group');
   var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var userOpened=null;
@@ -3052,6 +3068,50 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     var d=ev.data; if(typeof d==='string'){ try{ d=JSON.parse(d); }catch(e){ return; } }
     if(d && d.event==='onError') showFallback();
   });
+
+  /* ---- Noderīgi video: dropdown zem trim jaunākajiem (stage kods + i18n bloks nv_bl), statisks saraksts līdz 10 video ----
+     Pievienot video = pievienot vienu rindu sarakstam NV. t:'max' = sīktēls maxresdefault (ja nav oar2). ga = GA notikuma beigas (a-z_).
+     Kartītes un sīktēli tiek izveidoti tikai pirmajā atvēršanā (valodas maiņa pārraksta bloku -> nākamajā atvēršanā veidojas no jauna). */
+  var NV=[
+    {id:'zj_rUxTsyjQ',ga:'nodokli',  lv:'KRIPTOVALŪTU NODOKĻI',      en:'CRYPTO TAXES'},
+    {id:'mCYZMy81BYQ',ga:'riki',     lv:'5 RĪKI KRIPTOVALŪTĀ',       en:'5 CRYPTO TOOLS',t:'max'},
+    {id:'nBVbqeqxl8s',ga:'ai_agents',lv:'AI AĢENTS IKDIENAS DARBOS', en:'AI AGENT IN DAILY WORK'},
+    {id:'nH2OTf3EkKo',ga:'cik_sakt', lv:'AR CIK VAR SĀKT?',          en:'HOW MUCH TO START WITH?'},
+    {id:'SahEkO98aqM',ga:'padoms',   lv:'LABS PADOMS VAI NE?',       en:'GOOD ADVICE OR NOT?'}
+  ];
+  var nvBox=document.getElementById('nvBox');
+  if(nvBox){
+    var nvLang=function(){ return document.documentElement.getAttribute('lang')==='en'?'en':'lv'; };
+    var nvBuild=function(g){
+      var L=nvLang();
+      NV.slice(0,10).forEach(function(v,i){
+        var a=document.createElement('a');
+        a.className='vid-card'; a.href='https://www.youtube.com/shorts/'+v.id;
+        a.target='_blank'; a.rel='noopener'; a.setAttribute('data-ga','play_noderigi_'+v.ga); a.setAttribute('data-nv',i);
+        var th=document.createElement('div'); th.className='vid-thumb';
+        var img=document.createElement('img'); img.alt=v[L]; img.loading='lazy'; img.decoding='async';
+        img.onerror=function(){ img.onerror=null; img.src='https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg'; };
+        img.src='https://i.ytimg.com/vi/'+v.id+'/'+(v.t==='max'?'maxresdefault':'oar2')+'.jpg';
+        var pl=document.createElement('span'); pl.className='vid-play'; pl.setAttribute('aria-hidden','true');
+        pl.innerHTML='<svg viewBox="0 0 10 10"><path d="M1 0.5v9l8-4.5z"/></svg>';
+        th.appendChild(img); th.appendChild(pl);
+        var t=document.createElement('div'); t.className='vid-title'; t.textContent=v[L];
+        a.appendChild(th); a.appendChild(t); g.appendChild(a);
+      });
+    };
+    /* capture: kartītes jābūt gatavām, pirms stage skripts mēra augstumu animācijai */
+    nvBox.addEventListener('click',function(ev){
+      var sum=ev.target.closest('summary.start-stage-head'); if(!sum) return;
+      var g=sum.parentNode.querySelector('.vid-grid'); if(g && !g.firstChild) nvBuild(g);
+    },true);
+    nvBox.addEventListener('click',function(ev){
+      var a=ev.target.closest('a.vid-card'); if(!a) return;
+      var v=NV[+a.getAttribute('data-nv')]; if(!v) return;
+      if(ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey||ev.button===1) return;
+      ev.preventDefault();
+      openVideo({id:v.id,type:'short',title:v[nvLang()],embeddable:true},a);
+    });
+  }
 })();
 </script>
 
