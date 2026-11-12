@@ -1,6 +1,14 @@
 {
   "videos": [
     {
+      "id": "zj_rUxTsyjQ",
+      "title": "NODOKĻI KRIPTOVALŪTĀ",
+      "type": "short",
+      "published": "2026-11-12T15:31:50+00:00",
+      "thumb": "https://i.ytimg.com/vi/zj_rUxTsyjQ/oar2.jpg",
+      "embeddable": true
+    },
+    {
       "id": "mCYZMy81BYQ",
       "title": "5 RĪKI KRIPTOVALŪTĀ",
       "type": "short",
@@ -14,14 +22,6 @@
       "type": "short",
       "published": "2026-11-10T15:42:57+00:00",
       "thumb": "https://i.ytimg.com/vi/x221YxWt3pk/oar2.jpg",
-      "embeddable": true
-    },
-    {
-      "id": "rbHiMelrU0c",
-      "title": "BANKA VS KRIPTO",
-      "type": "short",
-      "published": "2026-11-09T15:35:17+00:00",
-      "thumb": "https://i.ytimg.com/vi/rbHiMelrU0c/oar2.jpg",
       "embeddable": true
     }
   ]
