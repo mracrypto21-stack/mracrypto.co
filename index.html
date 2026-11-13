@@ -245,6 +245,10 @@
     border-color: var(--gold-dim);
   }
 
+  /* Hover kā dropdownam "Konsultāciju tēmas" (.start-stage): zelta apmale, pāreja .2s; atvērtajam paliek gold-dim */
+  .section-header { transition: border-color .2s; }
+  .section-header:hover { border-color: var(--gold); }
+
   .section-content {
     display: flex;
     flex-direction: column;
