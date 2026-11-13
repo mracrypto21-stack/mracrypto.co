@@ -1,6 +1,14 @@
 {
   "videos": [
     {
+      "id": "umsEzEH37L8",
+      "title": "KRIPTO MAKI",
+      "type": "video",
+      "published": "2026-11-13T15:34:40+00:00",
+      "thumb": "https://i.ytimg.com/vi/umsEzEH37L8/maxresdefault.jpg",
+      "embeddable": true
+    },
+    {
       "id": "zj_rUxTsyjQ",
       "title": "NODOKĻI KRIPTOVALŪTĀ",
       "type": "short",
@@ -14,14 +22,6 @@
       "type": "short",
       "published": "2026-11-11T15:31:48+00:00",
       "thumb": "https://i.ytimg.com/vi/mCYZMy81BYQ/maxresdefault.jpg",
-      "embeddable": true
-    },
-    {
-      "id": "x221YxWt3pk",
-      "title": "ESI PIRMAIS",
-      "type": "short",
-      "published": "2026-11-10T15:42:57+00:00",
-      "thumb": "https://i.ytimg.com/vi/x221YxWt3pk/oar2.jpg",
       "embeddable": true
     }
   ]
