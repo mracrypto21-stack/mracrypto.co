@@ -248,6 +248,9 @@
   /* Hover kā dropdownam "Konsultāciju tēmas" (.start-stage): zelta apmale, pāreja .2s; atvērtajam paliek gold-dim */
   .section-header { transition: border-color .2s; }
   .section-header:hover { border-color: var(--gold); }
+  /* Analīzes bloka iekšējie dropdowni (#auBox .au-group, CSS no VPS fragmenta): tas pats hover; atvērtajam paliek gold-dim */
+  #auBox .au-group { transition: border-color .2s; }
+  #auBox .au-group:not([open]):hover { border-color: var(--gold); }
 
   .section-content {
     display: flex;
