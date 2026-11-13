@@ -1439,6 +1439,11 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   border-color:rgba(255,200,100,0.78);box-shadow:0 0 16px rgba(232,168,60,0.22),0 0 3px rgba(255,200,100,0.35),inset 0 0 0 1px rgba(255,200,100,0.08)}
 #livePanel .lp-title{position:relative}
 #livePanel .lp-title::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:linear-gradient(90deg,rgba(255,200,100,0.75),rgba(232,168,60,0.35) 70%,rgba(232,168,60,0))}
+/* Tirgus pārskats: saliekamā daļa "Vairāk" (ETH + Total Cap) = esošais .start-stage dropdowns kā "Konsultāciju tēmas" */
+#lpMore{width:100%;text-align:left}
+#lpMore .start-stage{margin:0}
+#lpMore .start-stage-title{color:var(--gold-bright)}
+#lpMore .start-stage-in{padding:0 6px 6px}
 </style>
 <section class="live-panel fade-up delay-3" id="livePanel" aria-label="Tirgus pārskats" hidden>
   <h2 class="lp-title" data-lp="title">Tirgus pārskats</h2>
@@ -1456,19 +1461,26 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     </div>
     <div class="au-plot"></div>
   </div>
-  <div class="lp-part lp-mini-grid">
-    <div class="au-chart lp-mini" data-asset="eth" data-mini data-lang="auto" hidden>
-      <div class="lp-head"><span class="lp-name">ETH</span></div>
-      <div class="lp-head"><span class="lp-price"></span><span class="lp-chg" data-for="eth"></span></div>
-      <div class="au-plot"></div>
-      <p class="au-hilo"></p>
-    </div>
-    <div class="au-chart lp-mini" data-asset="total" data-mini data-lang="auto" hidden>
-      <div class="lp-head"><span class="lp-name">Total Cap</span></div>
-      <div class="lp-head"><span class="lp-price"></span><span class="lp-chg" data-for="total"></span></div>
-      <div class="au-plot"></div>
-      <p class="au-hilo"></p>
-    </div>
+  <div class="lp-more" id="lpMore">
+    <details class="start-stage" data-ga="open_tirgus_parskats_vairak">
+      <summary class="start-stage-head"><h4 class="start-stage-title" data-i18n="lp_more">Vairāk</h4><span class="chevron">›</span></summary>
+      <div class="start-stage-body"><div class="start-stage-in">
+      <div class="lp-part lp-mini-grid">
+        <div class="au-chart lp-mini" data-asset="eth" data-mini data-lang="auto" hidden>
+          <div class="lp-head"><span class="lp-name">ETH</span></div>
+          <div class="lp-head"><span class="lp-price"></span><span class="lp-chg" data-for="eth"></span></div>
+          <div class="au-plot"></div>
+          <p class="au-hilo"></p>
+        </div>
+        <div class="au-chart lp-mini" data-asset="total" data-mini data-lang="auto" hidden>
+          <div class="lp-head"><span class="lp-name">Total Cap</span></div>
+          <div class="lp-head"><span class="lp-price"></span><span class="lp-chg" data-for="total"></span></div>
+          <div class="au-plot"></div>
+          <p class="au-hilo"></p>
+        </div>
+      </div>
+      </div></div>
+    </details>
   </div>
   <p class="lp-src" hidden></p>
 </section>
@@ -2734,7 +2746,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   if (window.__i18nLoaded) return;
   window.__i18nLoaded = true;
 
-  var EN = {"sec_info":"Important information","info_scam":"<strong>Beware of scammers!</strong><br>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, click on <a href=\"#\" data-goto=\"social\">my official social media</a> and verify. Remember: I will never ask for your passwords, seed phrases or private keys.","info_disc":"<strong>Disclaimer:</strong> The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","info_doubt":"<strong>In case of doubt:</strong> If a suspicious situation arises or someone writes in my name, <a href=\"#\" data-goto=\"contact\">contact me</a>.","h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","footer_privacy":"Privacy Policy","footer_terms":"Terms of Service","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","sec_ai":"AI works for me","ai_close":"<strong>And this is just the beginning.</strong> AI also maintains my dashboard, collects data and takes over a lot of other things I used to do myself. If a process repeats, it can be automated. Maybe even yours.","ai_btn":"I'm interested","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure hardware wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_eyebrow":"ABOUT ME","about_sub":"Crypto investor since 2021 and AI workflow builder.","ab1_t":"Quick adaptation and diversification","ab1_x":"I adapt quickly to changing market conditions and build a diversified, sustainable long-term investment portfolio.","ab2_t":"Strategic leadership","ab2_x":"10+ years of experience in sales and team leadership gives me a strategic view on business development and partnerships.","ab3_t":"AI and automation","ab3_x":"I build AI agent workflows for video editing, content publishing, data analysis and even maintaining this website. And this is only the beginning.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li_ai":"AI and process automation: Building autonomous AI agents, configuring background task systems and smart research systems that streamline daily work and data analysis.","about_li5":"Other topics as needed.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","don_title":"Enjoying the content?","don_desc":"If you find these guides and tools helpful, feel free to support the development of mracrypto.co. Tap a coin to see the QR code and address.","don_badge_btc":"Bitcoin network","don_badge_evm":"EVM (ERC20, BEP20, Polygon, Arb etc.)","don_btn_btc":"Copy BTC address","don_btn_eth":"Copy ETH address","don_btn_stable":"Copy stablecoin address","don_copied":"Copied!","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse traffic and improve content (Google Analytics). Do you accept?","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy","sec_analysis":"Morning crypto analysis","vid_title":"Latest videos","vid_watch":"Watch on YouTube","faq_link":"Frequently asked questions ›","faq_title":"Frequently asked questions about consultations","faq_q1":"How much can you earn with cryptocurrencies?","faq_a1":"Profit cannot be guaranteed, and the market is very volatile. Crypto offers no guaranteed income, and you can lose part or all of what you invest. In the consultation I help you understand how to invest prudently and manage risk.","faq_q2":"What amount can I start with?","faq_a2":"You can start with a small amount, for example €10–20. Only invest what you are prepared to lose, and never borrow money to buy crypto.","faq_q3":"Do I need any prior knowledge?","faq_a3":"No, it is not required. I will provide everything you need during the consultation. All you need is internet access and a device: a phone, computer or tablet.","faq_q4":"How does the consultation work?","faq_a4":"The consultation takes place in person or remotely via Zoom or a Telegram call. It lasts 1 hour.","faq_q5":"How much does it cost?","faq_a5":"One consultation (1 hour) costs €70/$70.","faq_q6":"How can I pay?","faq_a6":"You can pay by bank transfer or in cryptocurrency.","faq_q7":"What can I consult about?","faq_a7":"About all the topics described in the \"<a href=\"#\" data-faq-goto=\"about\">About me</a>\" section: crypto basics and portfolio, exchanges (CEX/DEX), trading and DeFi, security and psychology, AI and process automation, Excel and other topics on demand.","faq_q8":"How should I prepare?","faq_a8":"Before the consultation you can send me the questions and topics you are interested in. Then we agree on a suitable time.","faq_q9":"Do you guarantee profit?","faq_a9":"No. Consultations are for informational and educational purposes only and are not financial advice. You make your own investment decisions.","faq_q10":"How do I apply?","faq_a10":"Apply by pressing the \"<a href=\"#\" data-faq-goto=\"apply\">Book a consultation</a>\" button, or write an e-mail or a Telegram message in the \"<a href=\"#\" data-faq-goto=\"contact\">Get in touch</a>\" section."};
+  var EN = {"lp_more":"More","sec_info":"Important information","info_scam":"<strong>Beware of scammers!</strong><br>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, click on <a href=\"#\" data-goto=\"social\">my official social media</a> and verify. Remember: I will never ask for your passwords, seed phrases or private keys.","info_disc":"<strong>Disclaimer:</strong> The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","info_doubt":"<strong>In case of doubt:</strong> If a suspicious situation arises or someone writes in my name, <a href=\"#\" data-goto=\"contact\">contact me</a>.","h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","footer_privacy":"Privacy Policy","footer_terms":"Terms of Service","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","sec_ai":"AI works for me","ai_close":"<strong>And this is just the beginning.</strong> AI also maintains my dashboard, collects data and takes over a lot of other things I used to do myself. If a process repeats, it can be automated. Maybe even yours.","ai_btn":"I'm interested","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure hardware wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_eyebrow":"ABOUT ME","about_sub":"Crypto investor since 2021 and AI workflow builder.","ab1_t":"Quick adaptation and diversification","ab1_x":"I adapt quickly to changing market conditions and build a diversified, sustainable long-term investment portfolio.","ab2_t":"Strategic leadership","ab2_x":"10+ years of experience in sales and team leadership gives me a strategic view on business development and partnerships.","ab3_t":"AI and automation","ab3_x":"I build AI agent workflows for video editing, content publishing, data analysis and even maintaining this website. And this is only the beginning.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li_ai":"AI and process automation: Building autonomous AI agents, configuring background task systems and smart research systems that streamline daily work and data analysis.","about_li5":"Other topics as needed.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","don_title":"Enjoying the content?","don_desc":"If you find these guides and tools helpful, feel free to support the development of mracrypto.co. Tap a coin to see the QR code and address.","don_badge_btc":"Bitcoin network","don_badge_evm":"EVM (ERC20, BEP20, Polygon, Arb etc.)","don_btn_btc":"Copy BTC address","don_btn_eth":"Copy ETH address","don_btn_stable":"Copy stablecoin address","don_copied":"Copied!","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse traffic and improve content (Google Analytics). Do you accept?","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy","sec_analysis":"Morning crypto analysis","vid_title":"Latest videos","vid_watch":"Watch on YouTube","faq_link":"Frequently asked questions ›","faq_title":"Frequently asked questions about consultations","faq_q1":"How much can you earn with cryptocurrencies?","faq_a1":"Profit cannot be guaranteed, and the market is very volatile. Crypto offers no guaranteed income, and you can lose part or all of what you invest. In the consultation I help you understand how to invest prudently and manage risk.","faq_q2":"What amount can I start with?","faq_a2":"You can start with a small amount, for example €10–20. Only invest what you are prepared to lose, and never borrow money to buy crypto.","faq_q3":"Do I need any prior knowledge?","faq_a3":"No, it is not required. I will provide everything you need during the consultation. All you need is internet access and a device: a phone, computer or tablet.","faq_q4":"How does the consultation work?","faq_a4":"The consultation takes place in person or remotely via Zoom or a Telegram call. It lasts 1 hour.","faq_q5":"How much does it cost?","faq_a5":"One consultation (1 hour) costs €70/$70.","faq_q6":"How can I pay?","faq_a6":"You can pay by bank transfer or in cryptocurrency.","faq_q7":"What can I consult about?","faq_a7":"About all the topics described in the \"<a href=\"#\" data-faq-goto=\"about\">About me</a>\" section: crypto basics and portfolio, exchanges (CEX/DEX), trading and DeFi, security and psychology, AI and process automation, Excel and other topics on demand.","faq_q8":"How should I prepare?","faq_a8":"Before the consultation you can send me the questions and topics you are interested in. Then we agree on a suitable time.","faq_q9":"Do you guarantee profit?","faq_a9":"No. Consultations are for informational and educational purposes only and are not financial advice. You make your own investment decisions.","faq_q10":"How do I apply?","faq_a10":"Apply by pressing the \"<a href=\"#\" data-faq-goto=\"apply\">Book a consultation</a>\" button, or write an e-mail or a Telegram message in the \"<a href=\"#\" data-faq-goto=\"contact\">Get in touch</a>\" section."};
 
   var SAVE_KEY = 'mrc_lang';
   var els = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
@@ -2797,7 +2809,8 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 /* "Starts kriptovalūtā" posmi: vienlaikus atvērts viens, augstuma animācija kā FAQ (delegēts, jo tulkošana pārraksta innerHTML) */
 (function(){
   /* Tas pats kods apkalpo arī bloka "AI strādā manā vietā" dropdownus (ai_bl) */
-  document.querySelectorAll('[data-i18n-block="start_bl"], [data-i18n-block="ai_bl"], [data-i18n-block="kons_bl"], [data-i18n-block="nv_bl"]').forEach(function(box){
+  document.querySelectorAll('[data-i18n-block="start_bl"], [data-i18n-block="ai_bl"], [data-i18n-block="kons_bl"], [data-i18n-block="nv_bl"], #lpMore').forEach(function(box){
+  var viaBlock=box.hasAttribute('data-i18n-block');  /* #lpMore nav tulkošanas bloks: tā details jau skaita vispārīgais GA klausītājs (toggle) */
   var group=box.closest('details.start-group, details.section-group');
   var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var userOpened=null;
@@ -2836,6 +2849,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     if(!d.classList || !d.classList.contains('start-stage')) return;
     if(d.open && d===userOpened){
       userOpened=null;
+      if(!viaBlock) return;
       var n=d.getAttribute('data-ga');
       if(n && typeof window.gtag==='function') window.gtag('event',n);
     }
@@ -2850,6 +2864,30 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     });
   });
   });
+})();
+</script>
+<script>
+/* Tirgus pārskats "Vairāk": mazie grafiki (ETH, Total Cap) atrodas aizvērtā details, kur platums = 0 un tie netiek zīmēti.
+   Tieši pirms atvēršanas (pirms animācijas augstuma mērījuma) uz mirkli atver, liek assets/btc-chart.js pārzīmēt un aizver:
+   grafiks, cena un 24 h diapazons ir gatavi, un animācija nepārlec. */
+(function(){
+  var box=document.getElementById('lpMore'); if(!box) return;
+  var grid=box.querySelector('.lp-mini-grid');
+  box.addEventListener('click',function(ev){
+    var sum=ev.target.closest && ev.target.closest('summary.start-stage-head');
+    if(!sum) return;
+    var d=sum.parentNode;
+    if(d.open || typeof window.btcChartRedraw!=='function') return;
+    d.open=true;
+    try{ window.btcChartRedraw(); }catch(e){}
+    d.open=false;
+  },true);
+  /* ja neviens mazais grafiks nav pieejams (grid.hidden), nav ko rādīt: paslēp arī "Vairāk" */
+  if(grid && typeof MutationObserver==='function'){
+    var sync=function(){ if(box.hidden!==grid.hidden) box.hidden=grid.hidden; };
+    new MutationObserver(sync).observe(grid,{attributes:true,attributeFilter:['hidden']});
+    sync();
+  }
 })();
 </script>
 <script>
