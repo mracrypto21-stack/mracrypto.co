@@ -448,6 +448,27 @@
     color: #C9AF87;
     text-align: left;
   }
+  /* Par mani: poga zem dropdowna, pilna platuma, zelta fons */
+  #consultBtn.chat-widget {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 12px 0 0;
+    justify-content: center;
+    padding: 11px 18px;
+    border-radius: 30px;
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #17110a;
+    font-weight: 600;
+    transform: none;
+    animation: none;
+    will-change: auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+  #consultBtn.chat-widget:hover, #consultBtn.chat-widget:focus-visible { background: var(--gold-bright); border-color: var(--gold-bright); transform: none; }
+  #consultBtn.chat-widget span.chat-label { display: inline; }
+  #faqOpen.faq-link { margin: 12px 0 0; }
   .ab-cols {
     width: 100%;
     display: grid;
@@ -1901,12 +1922,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   </details>
     </div>
 
-    <a href="#" class="faq-link" id="faqOpen" role="button" aria-haspopup="dialog" data-ga="open_faq"><span data-i18n="faq_link">Biežāk uzdotie jautājumi ›</span></a>
-
     <a class="chat-widget glow-border" href="#" id="consultBtn" aria-label="Pieteikties konsultācijai" style="position:static;display:flex;justify-content:center;" data-ga="click_konsultacija">
       <img class="chat-logo" src="assets/m-logo.png" alt="M" style="width:28px;height:28px;border-radius:50%;display:block;border:2px solid var(--gold-dim);object-fit:cover;background:#000;">
       <span class="chat-label" data-i18n="consult_btn">Pieteikties konsultācijai</span>
     </a>
+
+    <a href="#" class="faq-link" id="faqOpen" role="button" aria-haspopup="dialog" data-ga="open_faq"><span data-i18n="faq_link">Biežāk uzdotie jautājumi ›</span></a>
 
   </div>
 
