@@ -1347,6 +1347,10 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 .lang-btn::after { content: ""; position: absolute; inset: -9px -3px; }  /* lielāks nospiešanas lauks, izskats nemainās */
 .cookie-actions button, .modal button { min-height: 44px; }
 @media (max-width: 380px) { .logo-glow { width: 260px; } }  /* bija 300px */
+/* Telefons: galvenais logo ~25% mazāks (360 -> 270 px; <=380 px: 260 -> 195 px). Logo attēlam ir caurspīdīgas malas (augšā 10%, apakšā 11,4% no platuma),
+   tāpēc ar margin kompensē: redzamās atstarpes augšā un zem logo paliek tādas pašas kā līdz šim, cenu josla un tagline pacelas par logo samazinājumu. Dators (>600 px) nemainās. */
+@media (max-width: 600px) { .logo-glow { width: 270px; margin: 9px 0 10px; } }
+@media (max-width: 380px) { .logo-glow { width: 195px; margin: 6px 0 7px; } }
 </style>
 </head>
 <body>
