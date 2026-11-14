@@ -1025,6 +1025,8 @@
 .ai-shot picture{display:block;line-height:0}
 .ai-shot img{display:block;width:100%;height:auto;aspect-ratio:800/441;border:1px solid var(--line);border-radius:10px;background:#1a1a1c}
 .ai-shot figcaption{margin:6px 0 0;font-size:12px;line-height:1.5;color:#C9AF87;text-align:left}
+.ai-stages a.ai-vlink{color:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer}  /* saite uz "Jaunākie video": izskatās kā teksts ar zemsvītru */
+#vidBlock{scroll-margin-top:64px}  /* virsraksts neslēpjas zem fiksētajām LV/EN + dalīšanās pogām */
 .ai-close{margin:0;font-size:14px;line-height:1.6;color:#C9AF87;text-align:left}
 .ai-close strong{color:#E8A83C}
 .ai-cta{display:flex;justify-content:center}
@@ -1860,7 +1862,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 <div class="ai-stages" data-i18n-block="ai_bl">
   <details class="start-stage" data-ga="open_ai_ko_dara">
     <summary class="start-stage-head"><h4 class="start-stage-title">Ko AI jau dara</h4><span class="chevron">›</span></summary>
-    <div class="start-stage-body"><div class="start-stage-in"><p>Montē video (arī tos, kas redzami šajā lapā) un pievieno efektus. Publicē saturu TikTok, Instagram, YouTube un X platformās pēc maniem noteikumiem. Sagatavo ikrīta analīzi, nedēļas pārskatus un apkopo sociālo tīklu statistiku. Arī šo mājaslapu uztur AI aģents.</p></div></div>
+    <div class="start-stage-body"><div class="start-stage-in"><p>Montē <a href="#vidBlock" class="ai-vlink" data-goto="videos" data-ga="open_ai_video_saite">video</a> (arī tos, kas redzami šajā lapā) un pievieno efektus. Publicē saturu TikTok, Instagram, YouTube un X platformās pēc maniem noteikumiem. Sagatavo ikrīta analīzi, nedēļas pārskatus un apkopo sociālo tīklu statistiku. Arī šo mājaslapu uztur AI aģents.</p></div></div>
   </details>
 
   <details class="start-stage" data-ga="open_ai_redzams">
@@ -2433,7 +2435,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 <script type="text/plain" id="i18n-ai_bl" aria-hidden="true" hidden>
   <details class="start-stage" data-ga="open_ai_ko_dara">
     <summary class="start-stage-head"><h4 class="start-stage-title">What the AI already does</h4><span class="chevron">›</span></summary>
-    <div class="start-stage-body"><div class="start-stage-in"><p>Edits videos (including those shown on this page) and adds effects. It publishes content on TikTok, Instagram, YouTube and X following my rules. It prepares the morning analysis and weekly reports, and compiles social media statistics. This website is also maintained by an AI agent.</p></div></div>
+    <div class="start-stage-body"><div class="start-stage-in"><p>Edits <a href="#vidBlock" class="ai-vlink" data-goto="videos" data-ga="open_ai_video_saite">videos</a> (including those shown on this page) and adds effects. It publishes content on TikTok, Instagram, YouTube and X following my rules. It prepares the morning analysis and weekly reports, and compiles social media statistics. This website is also maintained by an AI agent.</p></div></div>
   </details>
 
   <details class="start-stage" data-ga="open_ai_redzams">
@@ -3303,6 +3305,9 @@ document.addEventListener('click', function(e) {
   } else if (t === 'contact') {
     var c = document.getElementById('contactCard');
     if (c) c.scrollIntoView({behavior:'smooth', block:'center'});
+  } else if (t === 'videos') {
+    var v = document.getElementById('vidBlock');
+    if (v) v.scrollIntoView({behavior:'smooth', block:'start'});
   }
 });
 </script>
