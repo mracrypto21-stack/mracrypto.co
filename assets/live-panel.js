@@ -14,10 +14,10 @@
   var NS = 'http://www.w3.org/2000/svg';
 
   var T = {
-    lv: { title: 'Tirgus pārskats', fng: 'Baiļu un alkatības indekss', h24: '24 h',
+    lv: { title: 'Tirgus pārskats', fng: 'Baiļu un alkatības indekss', h24: '24 h', p1w: '7 d', p1m: '30 d',
           src: 'Dati', and: ' un ', upd: 'atjaunots',
           cls: { 'extreme fear': 'Ekstrēmas bailes', 'fear': 'Bailes', 'neutral': 'Neitrāls', 'greed': 'Alkatība', 'extreme greed': 'Ļoti liela alkatība' } },
-    en: { title: 'Market overview', fng: 'Fear & Greed Index', h24: '24h',
+    en: { title: 'Market overview', fng: 'Fear & Greed Index', h24: '24h', p1w: '7 d', p1m: '30 d',
           src: 'Data', and: ' and ', upd: 'updated',
           cls: { 'extreme fear': 'Extreme Fear', 'fear': 'Fear', 'neutral': 'Neutral', 'greed': 'Greed', 'extreme greed': 'Extreme Greed' } }
   };
@@ -72,13 +72,19 @@
     var L = lang();
     var els = panel.querySelectorAll('.lp-chg');
     for (var i = 0; i < els.length; i++) {
-      var v = map[els[i].getAttribute('data-for')];
-      if (typeof v !== 'number' || !isFinite(v) || Math.abs(v) > 60) { els[i].textContent = ''; continue; }
-      var s = (v >= 0 ? '+' : '\u2212') + Math.abs(v).toFixed(1).replace('.', L === 'lv' ? ',' : '.') + '% ' + T[L].h24;
+      var v = map[els[i].getAttribute('data-for')], lab = T[L].h24;
+      /* grafikam ar perioda pārslēgu (BTC): 1W / 1M -> izmaiņa no paša grafika datiem (assets/btc-chart.js), paraksts 7 d / 30 d; 1D = 24 h kā līdz šim */
+      var pc = typeof window.btcChartPeriod === 'function' ? window.btcChartPeriod(els[i].closest('.au-chart')) : null;
+      if (pc && typeof pc.pct === 'number' && isFinite(pc.pct)) { v = pc.pct; lab = T[L]['p' + pc.r]; }
+      else if (typeof v === 'number' && Math.abs(v) > 60) v = null;
+      if (typeof v !== 'number' || !isFinite(v)) { els[i].textContent = ''; continue; }
+      var s = (v >= 0 ? '+' : '\u2212') + Math.abs(v).toFixed(1).replace('.', L === 'lv' ? ',' : '.') + '% ' + lab;
       els[i].textContent = s;
       els[i].style.color = v >= 0 ? UP : DOWN;
     }
   }
+
+  window.lpFillChanges = fillChanges;   /* assets/btc-chart.js to izsauc pēc perioda pārslēgšanas / pārzīmēšanas */
 
   /* ---------- teksti, avota rinda, redzamība ---------- */
   function texts() {

@@ -199,6 +199,7 @@
 
     plot.textContent = '';
     plot.appendChild(svg);
+    if (!mini && typeof window.lpFillChanges === 'function' && box.querySelector('.lp-chg')) window.lpFillChanges();   /* % blakus cenai seko izvēlētajam periodam */
   }
 
   function boxes(key, hiddenOnly) {
@@ -303,6 +304,20 @@
     new MutationObserver(function () { drawAll(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   }
 
+  /* izmaiņa (%) izvēlētajam periodam no TĀ PAŠA grafika datiem (pirmais -> pēdējais punkts); live-panel.js to rāda blakus cenai.
+     null = 1D (tur paliek 24 h no total-cap.json), mazie grafiki (tiem nav pārslēga), dati vēl nav ielādēti vai perioda nav */
+  window.btcChartPeriod = function (box) {
+    if (!box || box.hasAttribute('data-mini')) return null;
+    var s = st[assetOf(box)];
+    if (!s || !s.ready || !s.data) return null;
+    var r = rangeOf(box);
+    if (r === '1d') return null;
+    var raw = s.data.r[r];
+    if (!raw || raw.length < 2) return null;
+    var f = raw[0][1], l = raw[raw.length - 1][1];
+    if (!(f > 0) || !(l > 0)) return null;
+    return { pct: (l - f) / f * 100, r: r };
+  };
   window.btcChartInit = init;
   window.btcChartRedraw = drawAll;   /* live-panel.js pārzīmē cenas, kad atjaunojas total-cap.json */
   init();
