@@ -1,6 +1,14 @@
 {
   "videos": [
     {
+      "id": "XCpA6N8mHNg",
+      "title": "KAS IR KRIPTO?",
+      "type": "short",
+      "published": "2026-11-18T15:30:15+00:00",
+      "thumb": "https://i.ytimg.com/vi/XCpA6N8mHNg/oar2.jpg",
+      "embeddable": true
+    },
+    {
       "id": "30Gp8AzDi4c",
       "title": "KUR TU ZAUDĒ NAUDU",
       "type": "short",
@@ -14,14 +22,6 @@
       "type": "video",
       "published": "2026-11-13T15:34:40+00:00",
       "thumb": "https://i.ytimg.com/vi/umsEzEH37L8/maxresdefault.jpg",
-      "embeddable": true
-    },
-    {
-      "id": "zj_rUxTsyjQ",
-      "title": "NODOKĻI KRIPTOVALŪTĀ",
-      "type": "short",
-      "published": "2026-11-12T15:31:50+00:00",
-      "thumb": "https://i.ytimg.com/vi/zj_rUxTsyjQ/oar2.jpg",
       "embeddable": true
     }
   ]
