@@ -1,6 +1,14 @@
 {
   "videos": [
     {
+      "id": "9w4cKP188TE",
+      "title": "KRIPTO VAI PENSIJA?",
+      "type": "short",
+      "published": "2026-11-20T15:34:17+00:00",
+      "thumb": "https://i.ytimg.com/vi/9w4cKP188TE/oar2.jpg",
+      "embeddable": true
+    },
+    {
       "id": "XCpA6N8mHNg",
       "title": "KAS IR KRIPTO?",
       "type": "short",
@@ -14,14 +22,6 @@
       "type": "short",
       "published": "2026-11-16T15:34:27+00:00",
       "thumb": "https://i.ytimg.com/vi/30Gp8AzDi4c/oar2.jpg",
-      "embeddable": true
-    },
-    {
-      "id": "umsEzEH37L8",
-      "title": "KRIPTO MAKI",
-      "type": "video",
-      "published": "2026-11-13T15:34:40+00:00",
-      "thumb": "https://i.ytimg.com/vi/umsEzEH37L8/maxresdefault.jpg",
       "embeddable": true
     }
   ]
