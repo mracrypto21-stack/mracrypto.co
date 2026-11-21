@@ -1333,6 +1333,24 @@ html:not([lang="en"]) #auBox .au-en{display:none}
 #auBox > div > :last-child{margin-bottom:0}
 #auBox .au-date{margin:0 0 2px}
 
+/* Sāc šeit: 5 vienādas kartītes (6 kolonnu režģis, katra kartīte span 2; 4. un 5. centrēta apakšējā rindā; vienāds augstums: grid-auto-rows:1fr + min-height); tieši virs bloka "Jaunākie video" / "Noderīgi video" */
+.sac-block{width:100%;margin-top:14px;padding:20px 12px 22px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;text-align:center}
+.sac-block h3{font-family:'Marcellus',serif;font-size:18px;color:var(--gold);font-weight:400;letter-spacing:.02em;margin:0 0 18px;text-shadow:0 2px 14px rgba(232,168,60,0.22)}
+.sac-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;margin:0}
+.sac-card{grid-column:span 2;min-height:150px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;padding:12px 10px;background:rgba(255,255,255,0.05);border:1px solid var(--line);border-radius:12px;text-align:left;color:var(--cream);text-decoration:none;-webkit-tap-highlight-color:transparent}
+a.sac-card{cursor:pointer;transition:border-color .2s ease,background-color .2s ease}
+a.sac-card:hover,a.sac-card:focus-visible{border-color:var(--gold);background:rgba(255,255,255,0.08);outline:none}
+.sac-num{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--btn-orange);color:#17110a;font-size:13px;font-weight:600;line-height:1}
+.sac-t{font-size:13.5px;font-weight:500;line-height:1.25;color:var(--cream);overflow-wrap:anywhere}
+.sac-s{font-size:11.5px;line-height:1.4;color:#C9AF87;overflow-wrap:anywhere}
+.sac-card:nth-child(4){grid-column:2 / span 2}
+.sac-card:nth-child(5){grid-column:4 / span 2}
+/* saite "Atpakaļ uz Sāc šeit" (script to izveido tikai pēc kartītes klikšķa, mērķa beigās; citādi DOM tās nav): kā "Mācības, kas noderēs" (.start-cta a: zeltaina, pasvītrota), pa kreisi, 16 px virs */
+p.sac-back-wrap{margin:16px 0 0;font-size:13.5px;line-height:1.7;text-align:left}
+.sac-back{color:var(--gold-bright);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.sac-back:hover,.sac-back:focus-visible{color:#FFE0A0}
+.exchange-content > p.sac-back-wrap,.section-content > p.sac-back-wrap{margin-top:2px}  /* flex kolonnu atstarpe 14 px + 2 = 16 px */
+
 /* Jaunākie video (3 kartītes + popup atskaņotājs) */
 .vid-block{width:100%;margin-top:14px;padding:20px 16px 24px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;text-align:center}
 .vid-block[hidden]{display:none}
@@ -2059,6 +2077,17 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     </div>
   </div>
 
+
+  <div class="sac-block" id="sacSeit">
+    <h3 data-i18n="sac_title">Sāc šeit</h3>
+    <div class="sac-grid">
+      <a class="sac-card" href="#" data-sac="starts" data-stage="open_starts_pamati" data-ga="click_sac_seit_1"><span class="sac-num" aria-hidden="true">1</span><span class="sac-t" data-i18n="sac_1t">Kas ir kripto</span><span class="sac-s" data-i18n="sac_1s">Video iesācējam</span></a>
+      <a class="sac-card" href="#" data-sac="exchanges" data-ga="click_sac_seit_2"><span class="sac-num" aria-hidden="true">2</span><span class="sac-t" data-i18n="sac_2t">Kur nopirkt</span><span class="sac-s" data-i18n="sac_2s">Platformu izvēle</span></a>
+      <a class="sac-card" href="#" data-sac="starts" data-stage="open_starts_maki" data-ga="click_sac_seit_3"><span class="sac-num" aria-hidden="true">3</span><span class="sac-t" data-i18n="sac_3t">Kā glabāt</span><span class="sac-s" data-i18n="sac_3s">Drošība un maks</span></a>
+      <a class="sac-card" href="#analysisSection" data-sac="analysis" data-ga="click_sac_seit_4"><span class="sac-num" aria-hidden="true">4</span><span class="sac-t" data-i18n="sac_4t">Ikdienas analīze</span><span class="sac-s" data-i18n="sac_4s">Seko tirgum katru rītu</span></a>
+      <a class="sac-card" href="#" data-sac="videos" data-ga="click_sac_seit_5"><span class="sac-num" aria-hidden="true">5</span><span class="sac-t" data-i18n="sac_5t">Noderīgi video</span><span class="sac-s" data-i18n="sac_5s">Visi video vienuviet</span></a>
+    </div>
+  </div>
 
   <div class="vid-block" id="vidBlock">
     <h3 data-i18n="vid_title">Jaunākie video</h3>
@@ -2832,7 +2861,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   if (window.__i18nLoaded) return;
   window.__i18nLoaded = true;
 
-  var EN = {"aff_note":"Some links are affiliate links","lp_more":"More","sec_info":"Important information","info_scam":"<strong>Beware of scammers!</strong><br>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, click on <a href=\"#\" data-goto=\"social\">my official social media</a> and verify. Remember: I will never ask for your passwords, seed phrases or private keys.","info_disc":"<strong>Disclaimer:</strong> The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","info_doubt":"<strong>In case of doubt:</strong> If a suspicious situation arises or someone writes in my name, <a href=\"#\" data-goto=\"contact\">contact me</a>.","h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","footer_privacy":"Privacy Policy","footer_terms":"Terms of Service","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","sec_ai":"AI works for me","ai_close":"<strong>And this is just the beginning.</strong> AI also maintains my dashboard, collects data and takes over a lot of other things I used to do myself. If a process repeats, it can be automated. Maybe even yours.","ai_btn":"I'm interested","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_kraken":"Kraken exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure cold wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_eyebrow":"ABOUT ME","about_sub":"Crypto investor since 2021 and AI workflow builder.","ab1_t":"Quick adaptation and diversification","ab1_x":"I adapt quickly to changing market conditions and build a diversified, sustainable long-term investment portfolio.","ab2_t":"Strategic leadership","ab2_x":"10+ years of experience in sales and team leadership gives me a strategic view on business development and partnerships.","ab3_t":"AI and automation","ab3_x":"I build AI agent workflows for video editing, content publishing, data analysis and even maintaining this website. And this is only the beginning.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li_ai":"AI and process automation: Building autonomous AI agents, configuring background task systems and smart research systems that streamline daily work and data analysis.","about_li5":"Other topics as needed.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","don_title":"Enjoying the content?","don_desc":"If you find these guides and tools helpful, feel free to support the development of mracrypto.co. Tap a coin to see the QR code and address.","don_badge_btc":"Bitcoin network","don_badge_evm":"EVM (ERC20, BEP20, Polygon, Arb etc.)","don_btn_btc":"Copy BTC address","don_btn_eth":"Copy ETH address","don_btn_stable":"Copy stablecoin address","don_copied":"Copied!","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse visits and improve content. <a href=\"/privacy/#website\" target=\"_blank\" rel=\"noopener\">Privacy policy</a>","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy","sec_analysis":"Morning crypto analysis","vid_title":"Latest videos","vid_watch":"Watch on YouTube","faq_link":"Frequently asked questions ›","faq_title":"Frequently asked questions about consultations","faq_q1":"How much can you earn with cryptocurrencies?","faq_a1":"Profit cannot be guaranteed, and the market is very volatile. Crypto offers no guaranteed income, and you can lose part or all of what you invest. In the consultation I help you understand how to invest prudently and manage risk.","faq_q2":"What amount can I start with?","faq_a2":"You can start with a small amount, for example €10–20. Only invest what you are prepared to lose, and never borrow money to buy crypto.","faq_q3":"Do I need any prior knowledge?","faq_a3":"No, it is not required. I will provide everything you need during the consultation. All you need is internet access and a device: a phone, computer or tablet.","faq_q4":"How does the consultation work?","faq_a4":"The consultation takes place in person or remotely via Zoom or a Telegram call. It lasts 1 hour.","faq_q5":"How much does it cost?","faq_a5":"One consultation (1 hour) costs €70/$70.","faq_q6":"How can I pay?","faq_a6":"You can pay by bank transfer or in cryptocurrency.","faq_q7":"What can I consult about?","faq_a7":"About all the topics described in the \"<a href=\"#\" data-faq-goto=\"about\">About me</a>\" section: crypto basics and portfolio, exchanges (CEX/DEX), trading and DeFi, security and psychology, AI and process automation, Excel and other topics on demand.","faq_q8":"How should I prepare?","faq_a8":"Before the consultation you can send me the questions and topics you are interested in. Then we agree on a suitable time.","faq_q9":"Do you guarantee profit?","faq_a9":"No. Consultations are for informational and educational purposes only and are not financial advice. You make your own investment decisions.","faq_q10":"How do I apply?","faq_a10":"Apply by pressing the \"<a href=\"#\" data-faq-goto=\"apply\">Book a consultation</a>\" button, or write an e-mail or a Telegram message in the \"<a href=\"#\" data-faq-goto=\"contact\">Get in touch</a>\" section."};
+  var EN = {"aff_note":"Some links are affiliate links","lp_more":"More","sec_info":"Important information","info_scam":"<strong>Beware of scammers!</strong><br>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, click on <a href=\"#\" data-goto=\"social\">my official social media</a> and verify. Remember: I will never ask for your passwords, seed phrases or private keys.","info_disc":"<strong>Disclaimer:</strong> The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","info_doubt":"<strong>In case of doubt:</strong> If a suspicious situation arises or someone writes in my name, <a href=\"#\" data-goto=\"contact\">contact me</a>.","h1":"@MRACRYPTO — crypto consulting, education & community in Latvian","footer_privacy":"Privacy Policy","footer_terms":"Terms of Service","sec_crypto":"Crypto","sec_social":"Social media","sec_collab":"Collaboration &amp; mentoring","sec_ai":"AI works for me","ai_close":"<strong>And this is just the beginning.</strong> AI also maintains my dashboard, collects data and takes over a lot of other things I used to do myself. If a process repeats, it can be automated. Maybe even yours.","ai_btn":"I'm interested","start_title":"Start in crypto","exc_title":"Crypto exchanges","lk_ecosystem":"Kripto No.1 ecosystem<span class=\"link-sub\">Start your crypto journey</span>","lk_cro":"Crypto.com exchange","lk_bitunix":"Bitunix exchange","lk_pionex":"Pionex exchange","lk_kraken":"Kraken exchange","lk_tangem":"Get a Tangem wallet<span class=\"link-sub\">Secure cold wallet for crypto</span>","lk_tiktok":"TikTok<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_ig":"Instagram<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_x":"X (Twitter)<span class=\"link-sub\">Crypto news &amp; events</span>","lk_threads":"Threads<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_yt":"YouTube<span class=\"link-sub\">Daily crypto clips &amp; market reactions</span>","lk_tg":"Telegram<span class=\"link-sub\">Personal account</span>","lk_collab":"Collaboration","lk_call":"Book a call","chat_q":"Any questions?","about_eyebrow":"ABOUT ME","about_sub":"Crypto investor since 2021 and AI workflow builder.","ab1_t":"Quick adaptation and diversification","ab1_x":"I adapt quickly to changing market conditions and build a diversified, sustainable long-term investment portfolio.","ab2_t":"Strategic leadership","ab2_x":"10+ years of experience in sales and team leadership gives me a strategic view on business development and partnerships.","ab3_t":"AI and automation","ab3_x":"I build AI agent workflows for video editing, content publishing, data analysis and even maintaining this website. And this is only the beginning.","about_intro":"<strong>What can we cover in a consultation?</strong><br>\n    Whether you are taking your first steps or want to deepen your knowledge, during a consultation we can focus on these topics:","about_li1":"Crypto basics &amp; Portfolio: What and how to start, building a personal portfolio.","about_li2":"Practical tools: Centralized (CEX) and decentralized (DEX) exchanges, how to use them, sending and receiving money.","about_li3":"Trading and DeFi: Trading basics, DeFi basics, futures trading and using trading bots.","about_li4":"Security and psychology: Market psychology and safety in the crypto world.","about_li_ai":"AI and process automation: Building autonomous AI agents, configuring background task systems and smart research systems that streamline daily work and data analysis.","about_li5":"Other topics as needed.","consult_btn":"Book a consultation","bubble_title":"My portfolio holds","contact_title":"Get in touch","contact_tg":"Telegram","contact_email":"Email","don_title":"Enjoying the content?","don_desc":"If you find these guides and tools helpful, feel free to support the development of mracrypto.co. Tap a coin to see the QR code and address.","don_badge_btc":"Bitcoin network","don_badge_evm":"EVM (ERC20, BEP20, Polygon, Arb etc.)","don_btn_btc":"Copy BTC address","don_btn_eth":"Copy ETH address","don_btn_stable":"Copy stablecoin address","don_copied":"Copied!","footer":"Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.","modal_title":"Request or question","ph_text":"Write here...","label_contact":"Contact — phone, e-mail or Telegram @nick","ph_contact":"e.g. +371 ..., e-mail, or @nick","consent":"I consent to my data being processed in accordance with the <a href=\"#\" class=\"policy-open\" role=\"button\" aria-haspopup=\"dialog\">privacy policy</a>.","btn_close":"Close","btn_send":"Send","cookie_text":"This site uses cookies to analyse visits and improve content. <a href=\"/privacy/#website\" target=\"_blank\" rel=\"noopener\">Privacy policy</a>","cookie_accept":"Accept","cookie_decline":"Decline","policy_title":"Privacy Policy","sec_analysis":"Morning crypto analysis","vid_title":"Latest videos","vid_watch":"Watch on YouTube","faq_link":"Frequently asked questions ›","faq_title":"Frequently asked questions about consultations","faq_q1":"How much can you earn with cryptocurrencies?","faq_a1":"Profit cannot be guaranteed, and the market is very volatile. Crypto offers no guaranteed income, and you can lose part or all of what you invest. In the consultation I help you understand how to invest prudently and manage risk.","faq_q2":"What amount can I start with?","faq_a2":"You can start with a small amount, for example €10–20. Only invest what you are prepared to lose, and never borrow money to buy crypto.","faq_q3":"Do I need any prior knowledge?","faq_a3":"No, it is not required. I will provide everything you need during the consultation. All you need is internet access and a device: a phone, computer or tablet.","faq_q4":"How does the consultation work?","faq_a4":"The consultation takes place in person or remotely via Zoom or a Telegram call. It lasts 1 hour.","faq_q5":"How much does it cost?","faq_a5":"One consultation (1 hour) costs €70/$70.","faq_q6":"How can I pay?","faq_a6":"You can pay by bank transfer or in cryptocurrency.","faq_q7":"What can I consult about?","faq_a7":"About all the topics described in the \"<a href=\"#\" data-faq-goto=\"about\">About me</a>\" section: crypto basics and portfolio, exchanges (CEX/DEX), trading and DeFi, security and psychology, AI and process automation, Excel and other topics on demand.","faq_q8":"How should I prepare?","faq_a8":"Before the consultation you can send me the questions and topics you are interested in. Then we agree on a suitable time.","faq_q9":"Do you guarantee profit?","faq_a9":"No. Consultations are for informational and educational purposes only and are not financial advice. You make your own investment decisions.","faq_q10":"How do I apply?","faq_a10":"Apply by pressing the \"<a href=\"#\" data-faq-goto=\"apply\">Book a consultation</a>\" button, or write an e-mail or a Telegram message in the \"<a href=\"#\" data-faq-goto=\"contact\">Get in touch</a>\" section.","sac_title":"Start here","sac_1t":"What is crypto","sac_1s":"A video for beginners","sac_2t":"Where to buy","sac_2s":"Choosing a platform","sac_3t":"How to store","sac_3s":"Security and wallet","sac_4t":"Daily analysis","sac_4s":"Follow the market every morning","sac_5t":"Useful videos","sac_5s":"All videos in one place"};
 
   var SAVE_KEY = 'mrc_lang';
   var els = Array.prototype.slice.call(document.querySelectorAll('[data-i18n]'));
@@ -3343,6 +3372,130 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 })();
 </script>
 
+<script>
+/* Sāc šeit: katra kartīte VISPIRMS aizver visus citus atvērtos dropdownus (tas pats, ko dara lapas klausītāji, kad lietotājs pats atver bloku: details.open=false;
+   "Noderīgi video" posmu aizver ar summary klikšķi, lai stage skripts to animē), tad atver mērķi (ja jau atvērts - neaizver) un ritina uz to.
+   1 -> "Kripto" > "Starts kriptovalūtā" > "1. Posms"; 3 -> tas pats > "3. Posms"; 2 -> "Kripto" + "Kripto biržas"; 4 -> "Ikrīta kripto analīze"; 5 -> "Noderīgi video".
+   Atvēršanu un tās open_* GA veic esošie klausītāji. GA: click_sac_seit_1..5 = data-ga (kopīgais klikšķu klausītājs); open_sac_seit = bloks pirmo reizi redzams (>=40 %), vienreiz uz lapas ielādi. */
+(function(){
+  var box=document.getElementById('sacSeit'); if(!box) return;
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function docTop(el){ return el.getBoundingClientRect().top+window.pageYOffset; }
+  /* fiksētā josla (LV/EN + Dalīties, augšā pa labi) telefonā pārklāj lapas saturu: mērķim jābūt zem tās (desktopā josla ir ārpus satura kolonnas) */
+  function clearOff(el,off){
+    var c=document.getElementById('topControls'), cr=c&&c.getBoundingClientRect(), r=el.getBoundingClientRect();
+    return (cr && cr.left<r.right && cr.right>r.left)?Math.max(off,cr.bottom+12):off;
+  }
+  /* posma atvēršanu ritina arī lapas stage skripts (det.scrollIntoView, CSS scroll-margin-top 80 px): lai abi nonāk vienā vietā, uz 2,5 s uzliek to pašu atkāpi inline */
+  function openStage(st,sm){
+    st.style.scrollMarginTop=clearOff(sm,80)+'px';
+    setTimeout(function(){ st.style.scrollMarginTop=''; },2500);
+    if(!st.open) intClick(sm);   /* kā lietotājs: stage skripts aizver pārējos posmus, animē, sūta open_* un ritina */
+  }
+  /* ritina, kad mērķa pozīcija ir nostabilizējusies (citi bloki aizveras, atvērtais bloks pats ritina pēc 60 ms); off = atkāpe no ekrāna augšas */
+  function settleScroll(el,off){
+    var t0=Date.now(), last=null, same=0;
+    (function frame(){
+      var y=docTop(el);
+      same=(last!==null && Math.abs(y-last)<0.5)?same+1:0; last=y;
+      if((same>=3 && Date.now()-t0>200) || Date.now()-t0>1200){
+        window.scrollTo({top:Math.max(0,y-clearOff(el,off)),behavior:reduce?'auto':'smooth'}); return;
+      }
+      requestAnimationFrame(frame);
+    })();
+  }
+  function openDet(d,cb){
+    if(d.open){ cb(); return; }
+    d.addEventListener('toggle',function f(){ d.removeEventListener('toggle',f); cb(); });
+    d.open=true;
+  }
+  function closeOthers(target){
+    document.querySelectorAll('details.section-group[open], details.exchange-group[open], details.start-group[open]').forEach(function(d){
+      if(!d.contains(target)) d.open=false;
+    });
+    var nb=document.getElementById('nvBox');
+    if(nb && !nb.contains(target)){
+      var o=nb.querySelector('details.start-stage[open]'), s=o && o.querySelector('summary');
+      if(s) intClick(s);
+    }
+  }
+  /* ---- saite "↑ Atpakaļ uz Sāc šeit": tikai sadaļai, ko tikko atvēra kartīte; DOM tā tiek izveidota un izņemta (paslēpta saite mainītu :last-child atstarpes) ---- */
+  var backEl=null, targetDet=null, internal=0;
+  function clearBack(){ if(backEl && backEl.parentNode) backEl.parentNode.removeChild(backEl); backEl=null; targetDet=null; }
+  function showBack(host,det){
+    clearBack(); if(!host) return;
+    var en=document.documentElement.getAttribute('lang')==='en', p=document.createElement('p');
+    p.className='sac-back-wrap';
+    p.innerHTML='<a class="sac-back" href="#sacSeit" data-ga="click_atpakal_sac_seit">'+(en?'↑ Back to "Start here"':'↑ Atpakaļ uz "Sāc šeit"')+'</a>';
+    host.appendChild(p); backEl=p; targetDet=det;
+  }
+  function intClick(sm){ internal++; try{ sm.click(); }finally{ internal--; } }   /* programmatisks summary klikšķis nav lietotāja darbība */
+  /* lietotājs pats atver/aizver kādu dropdownu (summary klikšķis) vai pārslēdz valodu -> saite pazūd */
+  document.addEventListener('click',function(ev){
+    if(internal || !backEl) return;
+    var t=ev.target; if(!t || !t.closest) return;
+    if(t.closest('summary') || t.closest('#langLv,#langEn')) clearBack();
+  },true);
+  /* mērķis aizvērās (arī ne ar summary klikšķi, piem., citu lielo bloku atver cita saite) -> saite pazūd */
+  document.addEventListener('toggle',function(ev){ if(targetDet && ev.target===targetDet && !targetDet.open) clearBack(); },true);
+  function kripto(){ return document.querySelector('details.section-group[data-ga="open_kripto"]'); }
+  box.addEventListener('click',function(ev){
+    var a=ev.target.closest('[data-sac]'); if(!a || !box.contains(a)) return;
+    ev.preventDefault();
+    var t=a.getAttribute('data-sac'), k, el;
+    clearBack();
+    if(t==='analysis'){
+      el=document.getElementById('analysisSection'); if(!el) return;
+      closeOthers(el);
+      showBack(el.querySelector('.section-content'),el);
+      openDet(el,function(){ settleScroll(el,80); });
+    }else if(t==='videos'){
+      var nb=document.getElementById('nvBox'); if(!nb || !nb.offsetParent) return;
+      var det=nb.querySelector('details.start-stage'), sum=nb.querySelector('summary'); if(!det || !sum) return;
+      closeOthers(nb);
+      showBack(det.querySelector('.start-stage-in'),det);
+      openStage(det,sum);
+      settleScroll(sum,80);
+    }else if(t==='starts'){
+      /* posma ID = data-ga (start_bl saturu valodas maiņa pārraksta, tāpēc elements tiek meklēts klikšķa brīdī) */
+      var ga=a.getAttribute('data-stage');
+      var stageEl=function(){ return document.querySelector('[data-i18n-block="start_bl"] details.start-stage[data-ga="'+ga+'"]'); };
+      k=kripto(); var g=document.querySelector('details.start-group[data-ga="open_starts"]'); el=stageEl(); if(!k || !g || !el) return;
+      closeOthers(el);
+      showBack(el.querySelector('.start-stage-in'),el);
+      openDet(k,function(){ openDet(g,function(){
+        var st=stageEl(); if(!st) return;
+        var sm=st.querySelector('summary');
+        if(!sm) return;
+        openStage(st,sm);
+        settleScroll(sm,80);
+      }); });
+    }else if(t==='exchanges'){
+      k=kripto(); el=document.querySelector('details.exchange-group[data-ga="open_birzas"]'); if(!k || !el) return;
+      closeOthers(el);
+      showBack(el.querySelector('.exchange-content'),el);
+      openDet(k,function(){ openDet(el,function(){ settleScroll(el,80); }); });
+    }
+  });
+  /* "↑ Atpakaļ uz Sāc šeit": ritina uz bloku ar to pašu atkāpi, neko neaizver (saites ir atvērto sadaļu beigās; delegēts, jo posmu/video saturu pārraksta valodas maiņa) */
+  document.addEventListener('click',function(ev){
+    var a=ev.target.closest && ev.target.closest('a.sac-back'); if(!a) return;
+    ev.preventDefault();
+    clearBack();   /* saite pazūd; mērķis paliek atvērts. Izņemšana paceļ bloku, tāpēc pozīciju mēra PĒC tās */
+    window.scrollTo({top:Math.max(0,docTop(box)-clearOff(box,80)),behavior:reduce?'auto':'smooth'});
+  });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        io.disconnect();
+        if(typeof window.gtag==='function') window.gtag('event','open_sac_seit');
+      });
+    },{threshold:0.4});
+    io.observe(box);
+  }
+})();
+</script>
 <script>
 /* Pauzē video, kad "Svarīga informācija" tiek aizvērta */
 (function(){var d=document.querySelector('details[data-ga="open_svarigi"]');if(!d)return;d.addEventListener('toggle',function(){if(!d.open){d.querySelectorAll('video').forEach(function(v){v.pause();});}});})();
