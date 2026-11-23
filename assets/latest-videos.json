@@ -1,6 +1,14 @@
 {
   "videos": [
     {
+      "id": "vDQebLQYiuU",
+      "title": "BANKA VS KRIPTO MAKS",
+      "type": "short",
+      "published": "2026-11-23T15:30:47+00:00",
+      "thumb": "https://i.ytimg.com/vi/vDQebLQYiuU/oar2.jpg",
+      "embeddable": true
+    },
+    {
       "id": "2oFyMADWkK0",
       "title": "MRACRYPTO RECAP",
       "type": "short",
@@ -14,14 +22,6 @@
       "type": "short",
       "published": "2026-11-20T15:34:17+00:00",
       "thumb": "https://i.ytimg.com/vi/9w4cKP188TE/oar2.jpg",
-      "embeddable": true
-    },
-    {
-      "id": "XCpA6N8mHNg",
-      "title": "KAS IR KRIPTO?",
-      "type": "short",
-      "published": "2026-11-18T15:30:15+00:00",
-      "thumb": "https://i.ytimg.com/vi/XCpA6N8mHNg/oar2.jpg",
       "embeddable": true
     }
   ]
