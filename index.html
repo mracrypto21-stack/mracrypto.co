@@ -415,7 +415,7 @@
 
   .about-card {
     width: 100%;
-    margin-top: 32px;
+    margin-top: 14px;
     padding: 20px;
     background: linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));
     background-color: rgba(18,16,10,0.55);
@@ -1348,7 +1348,7 @@ html:not([lang="en"]) #auBox .au-en{display:none}
 #auBox .etf-plot svg rect[data-d]{transition:opacity .12s}
 
 /* Sāc šeit: 5 vienādas kartītes (6 kolonnu režģis, katra kartīte span 2; 4. un 5. centrēta apakšējā rindā; vienāds augstums: grid-auto-rows:1fr + min-height); tieši virs bloka "Jaunākie video" / "Noderīgi video" */
-.sac-block{width:100%;margin-top:14px;padding:20px 12px 22px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;text-align:center}
+.sac-block{width:100%;margin-top:32px;padding:20px 12px 22px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;text-align:center}
 .sac-block h3{font-family:'Marcellus',serif;font-size:18px;color:var(--gold);font-weight:400;letter-spacing:.02em;margin:0 0 18px;text-shadow:0 2px 14px rgba(232,168,60,0.22)}
 .sac-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;margin:0}
 .sac-card{grid-column:span 2;min-height:150px;display:flex;flex-direction:column;align-items:flex-start;gap:0;min-width:0;padding:12px 10px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);border:1px solid var(--gold-dim);border-radius:12px;text-align:left;color:var(--cream);text-decoration:none;-webkit-tap-highlight-color:transparent}
@@ -1997,6 +1997,17 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 
   </div>
 
+  <div class="sac-block" id="sacSeit">
+    <h3 data-i18n="sac_title">Sāc šeit</h3>
+    <div class="sac-grid">
+      <a class="sac-card" href="#" data-sac="starts" data-stage="open_starts_pamati" data-ga="click_sac_seit_1" data-ga-open="open_sac_seit_kas_ir_kripto"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="sac-t" data-i18n="sac_1t">Kas ir kripto</span><span class="sac-s" data-i18n="sac_1s">Kriptovalūtas un blokķēdes pamati</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
+      <a class="sac-card" href="#" data-sac="exchanges" data-ga="click_sac_seit_2" data-ga-open="open_sac_seit_kur_nopirkt"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span><span class="sac-t" data-i18n="sac_2t">Kur nopirkt</span><span class="sac-s" data-i18n="sac_2s">Platformu izvēle</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
+      <a class="sac-card" href="#" data-sac="starts" data-stage="open_starts_maki" data-ga="click_sac_seit_3" data-ga-open="open_sac_seit_ka_glabat"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span><span class="sac-t" data-i18n="sac_3t">Kā glabāt</span><span class="sac-s" data-i18n="sac_3s">Drošība un maks</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
+      <a class="sac-card" href="#analysisSection" data-sac="analysis" data-ga="click_sac_seit_4" data-ga-open="open_sac_seit_ikdienas_analize"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="sac-t" data-i18n="sac_4t">Ikdienas analīze</span><span class="sac-s" data-i18n="sac_4s">Seko tirgum katru rītu</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
+      <a class="sac-card" href="#" data-sac="videos" data-ga="click_sac_seit_5" data-ga-open="open_sac_seit_noderigi_video"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg></span><span class="sac-t" data-i18n="sac_5t">Noderīgi video</span><span class="sac-s" data-i18n="sac_5s">Visi video vienuviet</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
+    </div>
+  </div>
+
   <div class="about-card" id="aboutCard">
     <div class="about-header">
       <picture class="pic"><source type="image/webp" srcset="assets/portrait-240.856fef79.webp"><img class="avatar" src="assets/portrait-240.4bd82899.png" alt="MrACrypto" width="120" height="120"></picture>
@@ -2068,17 +2079,6 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     </div>
   </div>
 
-
-  <div class="sac-block" id="sacSeit">
-    <h3 data-i18n="sac_title">Sāc šeit</h3>
-    <div class="sac-grid">
-      <a class="sac-card" href="#" data-sac="starts" data-stage="open_starts_pamati" data-ga="click_sac_seit_1" data-ga-open="open_sac_seit_kas_ir_kripto"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="sac-t" data-i18n="sac_1t">Kas ir kripto</span><span class="sac-s" data-i18n="sac_1s">Kriptovalūtas un blokķēdes pamati</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
-      <a class="sac-card" href="#" data-sac="exchanges" data-ga="click_sac_seit_2" data-ga-open="open_sac_seit_kur_nopirkt"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span><span class="sac-t" data-i18n="sac_2t">Kur nopirkt</span><span class="sac-s" data-i18n="sac_2s">Platformu izvēle</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
-      <a class="sac-card" href="#" data-sac="starts" data-stage="open_starts_maki" data-ga="click_sac_seit_3" data-ga-open="open_sac_seit_ka_glabat"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></span><span class="sac-t" data-i18n="sac_3t">Kā glabāt</span><span class="sac-s" data-i18n="sac_3s">Drošība un maks</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
-      <a class="sac-card" href="#analysisSection" data-sac="analysis" data-ga="click_sac_seit_4" data-ga-open="open_sac_seit_ikdienas_analize"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="sac-t" data-i18n="sac_4t">Ikdienas analīze</span><span class="sac-s" data-i18n="sac_4s">Seko tirgum katru rītu</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
-      <a class="sac-card" href="#" data-sac="videos" data-ga="click_sac_seit_5" data-ga-open="open_sac_seit_noderigi_video"><span class="sac-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg></span><span class="sac-t" data-i18n="sac_5t">Noderīgi video</span><span class="sac-s" data-i18n="sac_5s">Visi video vienuviet</span><span class="sac-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
-    </div>
-  </div>
 
   <div class="vid-block" id="vidBlock">
     <h3 data-i18n="vid_title">Jaunākie video</h3>
