@@ -1342,6 +1342,7 @@ html:not([lang="en"]) #auBox .au-en{display:none}
 #auBox .etf-last span + .etf-d{margin-left:8px}
 #auBox .etf-box .au-cap{margin:0}
 #auBox .etf-upd{white-space:nowrap}
+#auBox .etf-box .etf-info{margin:0}
 #auBox .etf-plot{width:100%;overflow:hidden}
 #auBox .etf-plot svg{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #auBox .etf-plot svg rect[data-d]{transition:opacity .12s}
@@ -3248,8 +3249,8 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   var MON_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var NS='http://www.w3.org/2000/svg', NB='\u00a0', MINUS='\u2212';
   var I18N={
-    lv:{title:'ETF dati', tin:'ieplūde', tout:'izplūde', upd:'atjaunots', nodata:'dati nav', cap:'Data provided by ', per:'ETF datu periods', coin:'ETF monēta', lab:'Spot ETF neto pieplūde, ASV dolāros'},
-    en:{title:'ETF data', tin:'inflow', tout:'outflow', upd:'updated', nodata:'no data', cap:'Data provided by ', per:'ETF data period', coin:'ETF coin', lab:'Spot ETF net flow, US dollars'}
+    lv:{info:'Kripto ETF ir biržā tirgots fonds, kas seko kriptovalūtas, piemēram, Bitcoin vai Ethereum, cenai. Tā daļas pērk kā akcijas, bet fonda pārvaldnieks (piemēram, BlackRock vai Fidelity) rūpējas par pašu monētu iegādi un glabāšanu. Šeit ir ASV ETF dati; ES privātie investori tos parasti nevar nopirkt, bet Eiropā ir līdzīgi produkti (ETP).', title:'ETF dati', tin:'ieplūde', tout:'izplūde', upd:'atjaunots', nodata:'dati nav', cap:'Data provided by ', per:'ETF datu periods', coin:'ETF monēta', lab:'Spot ETF neto pieplūde, ASV dolāros'},
+    en:{info:'A crypto ETF is an exchange-traded fund that tracks the price of a cryptocurrency such as Bitcoin or Ethereum. Its shares are bought like stocks, while the fund manager (for example, BlackRock or Fidelity) takes care of buying and holding the coins. These are US ETF figures; EU retail investors usually cannot buy these funds, but Europe has similar products (ETPs).', title:'ETF data', tin:'inflow', tout:'outflow', upd:'updated', nodata:'no data', cap:'Data provided by ', per:'ETF data period', coin:'ETF coin', lab:'Spot ETF net flow, US dollars'}
   };
   var ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>';
   var data=null;   /* {BTC:{'2026-11-25':v,...},...} + latest */
@@ -3459,6 +3460,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
         '<p class="etf-last"></p>'+
         '<div class="etf-plot"></div>'+
         '<p class="au-cap">'+T.cap+'<a href="https://sosovalue.com/developer" target="_blank" rel="noopener nofollow" data-ga="click_avots_sosovalue">SoSoValue</a>'+updText(lang)+'</p>'+
+        '<p class="etf-info">'+T.info+'</p>'+
       '</div></div>';
     det._st={p:'1d',c:'BTC',sel:null}; det._lang=lang;
     /* pārējās analīzes rindas aizveras, kad šī atveras (un otrādi to dara to ontoggle); GA tikai pēc lietotāja klikšķa */
