@@ -1548,6 +1548,11 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 #livePanel .lp-mini .lp-chg{font-size:11px}
 #livePanel .au-hilo{margin:2px 0 0;font-size:10.5px;line-height:1.3;color:#8F7650}
 #livePanel .lp-src{margin:0;font-size:10.5px;line-height:1.35;color:#8F7650}
+/* Grafiku hover/tap (assets/btc-chart.js): cena + laiks perioda pogu rindas labajā malā (absolūti, izkārtojums nemainās); mazajos grafikos tas uz brīdi aizstāj "24 h" rindu */
+.au-chart .au-rngs{position:relative}
+.au-tip{position:absolute;right:0;top:0;bottom:0;display:flex;align-items:center;justify-content:flex-end;white-space:nowrap;pointer-events:none;font-size:11px;line-height:1.3;color:var(--cream);font-variant-numeric:tabular-nums}
+.au-tip-top{top:-2px;bottom:auto}
+#livePanel .au-tip{font-size:10.5px}
 #livePanel .lp-src a{color:#C9AF87;text-decoration:underline;text-underline-offset:2px}
 /* Panelis izceļas no fona: spožāka zelta apmale, viegls mirdzums, gandrīz melns fons, zelta līnija zem virsraksta (tikai izskats; izmēri nemainās) */
 #livePanel{background:linear-gradient(180deg,rgba(8,6,4,0.92),rgba(8,6,4,0.92));background-color:rgba(8,6,4,0.92);
@@ -1599,7 +1604,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   </div>
   <p class="lp-src" hidden></p>
 </section>
-<script src="assets/btc-chart.js?v=5" defer></script>
+<script src="assets/btc-chart.js?v=6" defer></script>
 <script src="assets/live-panel.js?v=8" defer></script>
 
   <div class="links fade-up delay-3">

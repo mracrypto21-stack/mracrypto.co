@@ -197,10 +197,112 @@
     svg.appendChild(el('circle', { cx: lx, cy: ly, r: 5, fill: LINE, 'fill-opacity': 0.25 }));
     svg.appendChild(el('circle', { cx: lx, cy: ly, r: 2.6, fill: LINE }));
 
+    /* uzejot ar peli / pieskaroties: plāna zeltaina vertikāla līnija + krēmkrāsas punkts uz grafika līnijas (sk. "hover / tap" zemāk) */
+    var xl = el('line', { x1: 0, x2: 0, y1: mT, y2: mT + ph, stroke: '#E8A83C', 'stroke-opacity': 0.5, 'stroke-width': 1, 'shape-rendering': 'crispEdges' });
+    var xd = el('circle', { cx: 0, cy: 0, r: 3.2, fill: LINE });
+    xl.setAttribute('display', 'none'); xd.setAttribute('display', 'none');
+    svg.appendChild(xl); svg.appendChild(xd);
+    svg.style.touchAction = 'pan-y pinch-zoom';   /* vertikālā ritināšana strādā pāri grafikam, horizontālo vilkšanu pārņem grafiks */
+    svg.style.webkitUserSelect = 'none'; svg.style.userSelect = 'none'; svg.style.webkitTapHighlightColor = 'transparent';
+    plot._ch = { svg: svg, pts: pts, X: X, Y: Y, t0: t0, t1: t1, W: W, mL: mL, pw: pw, xl: xl, xd: xd, a: a, range: range, mini: mini, lang: lang };
+    box._hilo = he ? he.textContent : null;
+
     plot.textContent = '';
     plot.appendChild(svg);
+    wire(plot);
+    applySel(box);
     if (!mini && typeof window.lpFillChanges === 'function' && box.querySelector('.lp-chg')) window.lpFillChanges();   /* % blakus cenai seko izvēlētajam periodam */
   }
+
+  /* ---------- hover / tap: cena un laiks izvēlētajā punktā ----------
+     Pele: izvēle = tuvākais punkts zem kursora, aiziet -> pazūd. Pieskāriens: izvēle paliek, līdz pieskaras citam punktam vai vietai ārpus grafika;
+     velkot horizontāli, seko pirkstam (vertikāla vilkšana ritina lapu: touch-action pan-y). Lielajos grafikos cena un laiks ir fiksētā vietā perioda pogu rindas labajā malā
+     (absolūti pozicionēts, izkārtojums nemainās), mazajos (ETH, Total Cap) tas uz brīdi aizstāj "24 h: ..." rindu. Periods / pārzīmēšana: izvēle tiek saglabāta pēc laika (pārzīmēšana)
+     vai noņemta (perioda maiņa). Jaunu GA notikumu nav. */
+  function stampText(ms, range, lang) {
+    var p = riga(ms), hm = pad(p.h) + ':' + pad(p.n);
+    if (range === '1d') return hm;
+    return (lang === 'en' ? p.d + ' ' + MON_EN[p.m - 1] : pad(p.d) + '.' + pad(p.m) + '.') + ' ' + hm;
+  }
+  function nearest(pts, t) {
+    var lo = 0, hi = pts.length - 1, m;
+    while (hi - lo > 1) { m = (lo + hi) >> 1; if (pts[m][0] <= t) lo = m; else hi = m; }
+    return Math.abs(pts[hi][0] - t) < Math.abs(pts[lo][0] - t) ? hi : lo;
+  }
+  function tipHost(box) {
+    var row = box.querySelector('.au-rngs');
+    if (row && row.style.display !== 'none' && row.offsetParent !== null) return row;
+    box.style.position = 'relative';
+    return box;
+  }
+  function setTip(box, text) {
+    var he = box.querySelector('.au-hilo');
+    if (he) {   /* mazie grafiki: uz brīdi "cena · laiks" "24 h: ..." rindas vietā */
+      if (text) { he.textContent = text; he.style.color = 'var(--cream)'; }
+      else { he.textContent = box._hilo == null ? '' : box._hilo; he.style.color = ''; }
+      return;
+    }
+    var tip = box._tip, host = tipHost(box);
+    if (!tip) { tip = box._tip = document.createElement('span'); tip.setAttribute('aria-hidden', 'true'); }
+    if (tip.parentNode !== host) { tip.className = 'au-tip' + (host === box ? ' au-tip-top' : ''); host.appendChild(tip); }
+    tip.textContent = text || '';
+  }
+  function applySel(box) {
+    var plot = box.querySelector('.au-plot'), c = plot && plot._ch;
+    if (!c) return;
+    var t = box._selT, i = (t == null) ? -1 : nearest(c.pts, t);
+    if (i < 0 || t < c.t0 - 1 || t > c.t1 + 1) {
+      c.xl.setAttribute('display', 'none'); c.xd.setAttribute('display', 'none'); setTip(box, null); return;
+    }
+    var x = Math.floor(c.X(c.pts[i][0])) + 0.5, y = c.Y(c.pts[i][1]);   /* līnija uz pikseļa vidus (ass 1 px), ≤0,5 px no punkta */
+    c.xl.setAttribute('x1', x); c.xl.setAttribute('x2', x);
+    c.xd.setAttribute('cx', c.X(c.pts[i][0]).toFixed(1)); c.xd.setAttribute('cy', y.toFixed(1));
+    c.xl.removeAttribute('display'); c.xd.removeAttribute('display');
+    setTip(box, money(c.pts[i][1], c.lang, c.a) + ' \u00b7 ' + stampText(c.pts[i][0], c.range, c.lang));
+  }
+  function clearSel(box) { if (box._selT != null) { box._selT = null; applySel(box); } }
+  function selectAtX(box, clientX) {
+    var plot = box.querySelector('.au-plot'), c = plot && plot._ch;
+    if (!c) return false;
+    var r = c.svg.getBoundingClientRect();
+    if (!r.width) return false;
+    var x = (clientX - r.left) * (c.W / r.width);
+    if (x < c.mL - 1 || x > c.mL + c.pw + 1) return false;
+    var t = c.t0 + Math.max(0, Math.min(1, (x - c.mL) / c.pw)) * (c.t1 - c.t0), i = nearest(c.pts, t);
+    if (box._selT !== c.pts[i][0]) { box._selT = c.pts[i][0]; applySel(box); }
+    return true;
+  }
+  function wire(plot) {
+    if (plot._wired) return;
+    plot._wired = true;
+    var box = plot.closest('.au-chart');
+    if (!box) return;
+    plot.addEventListener('pointerdown', function (e) { box._pt = e.pointerType; box._x0 = e.clientX; box._y0 = e.clientY; box._drag = false; }, true);
+    plot.addEventListener('pointermove', function (e) {
+      if (!plot._ch) return;
+      if (e.pointerType === 'mouse') { if (!selectAtX(box, e.clientX)) clearSel(box); return; }
+      if (!box._drag) {   /* pirksts: tikai horizontāla vilkšana (vertikāla ir lapas ritināšana) */
+        var dx = Math.abs(e.clientX - box._x0), dy = Math.abs(e.clientY - box._y0);
+        if (dx >= 6 && dx > dy) box._drag = true; else return;
+      }
+      selectAtX(box, e.clientX);
+    });
+    plot.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') clearSel(box); });
+    plot.addEventListener('pointerup', function () { box._drag = false; });
+    plot.addEventListener('pointercancel', function () { box._drag = false; });
+    plot.addEventListener('click', function (e) {   /* pieskāriens (pele jau izvēlas ar hover) */
+      if (box._pt === 'mouse') return;
+      selectAtX(box, e.clientX);
+    });
+  }
+  document.addEventListener('pointerdown', function (e) {   /* pieskāriens ārpus grafika noņem izvēli */
+    var all = document.querySelectorAll('.au-chart'), i, pl;
+    for (i = 0; i < all.length; i++) {
+      if (all[i]._selT == null) continue;
+      pl = all[i].querySelector('.au-plot');
+      if (!pl || !pl.contains(e.target)) clearSel(all[i]);
+    }
+  }, true);
 
   function boxes(key, hiddenOnly) {
     var all = document.querySelectorAll('.au-chart' + (hiddenOnly ? '[hidden]' : ':not([hidden])')), out = [];
@@ -294,7 +396,7 @@
     var r = b.getAttribute('data-r'), g = groupOf(box);
     if (s.avail.indexOf(r) < 0 || r === rangeOf(box)) return;
     rng[g + ':' + key] = r;
-    boxes(key, false).forEach(function (x) { if (groupOf(x) === g) { setPressed(x); draw(x); } });
+    boxes(key, false).forEach(function (x) { if (groupOf(x) === g) { x._selT = null; setPressed(x); draw(x); } });   /* mainot periodu izvēle pazūd */
     var names = g === 'lp' ? ASSETS[key].gaLp : ASSETS[key].ga;
     if (names && typeof window.gtag === 'function') window.gtag('event', names[r]);
   });
