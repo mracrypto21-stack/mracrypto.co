@@ -3248,8 +3248,8 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   var MON_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var NS='http://www.w3.org/2000/svg', NB='\u00a0', MINUS='\u2212';
   var I18N={
-    lv:{title:'ETF dati', upd:'atjaunots', nodata:'dati nav', cap:'Data provided by ', per:'ETF datu periods', coin:'ETF monēta', lab:'Spot ETF neto pieplūde, ASV dolāros'},
-    en:{title:'ETF data', upd:'updated', nodata:'no data', cap:'Data provided by ', per:'ETF data period', coin:'ETF coin', lab:'Spot ETF net flow, US dollars'}
+    lv:{title:'ETF dati', tin:'ieplūde', tout:'izplūde', upd:'atjaunots', nodata:'dati nav', cap:'Data provided by ', per:'ETF datu periods', coin:'ETF monēta', lab:'Spot ETF neto pieplūde, ASV dolāros'},
+    en:{title:'ETF data', tin:'inflow', tout:'outflow', upd:'updated', nodata:'no data', cap:'Data provided by ', per:'ETF data period', coin:'ETF coin', lab:'Spot ETF net flow, US dollars'}
   };
   var ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>';
   var data=null;   /* {BTC:{'2026-11-25':v,...},...} + latest */
@@ -3441,13 +3441,18 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     return t?' \u00b7 <span class="etf-upd">'+I18N[lang].upd+' '+t+'</span>':'';
   }
 
+  /* virsraksts: "ETF dati (ieplūde / izplūde)"; ieplūde = tā pati zaļā kā 24 h % virsrakstos (#4ADE80), izplūde = #F87171; iekavas un slīpsvītra kā pārējā virsraksta teksts */
+  function titleHtml(T){
+    return T.title+' (<span style="color:'+GREEN+'">'+T.tin+'</span> / <span style="color:'+RED+'">'+T.tout+'</span>)';
+  }
+
   function build(lang){
     var T=I18N[lang];
     var det=document.createElement('details');
     det.className='au-group etf-row';
     det.setAttribute('data-ga','open_etf_plusmas');
     det.innerHTML=
-      '<summary class="au-head"><span class="au-ico">'+ICON+'</span><h4 class="au-ttl" style="font-weight:500">'+T.title+'</h4><span class="chevron au-chev">\u203a</span></summary>'+
+      '<summary class="au-head"><span class="au-ico">'+ICON+'</span><h4 class="au-ttl" style="font-weight:500">'+titleHtml(T)+'</h4><span class="chevron au-chev">\u203a</span></summary>'+
       '<div class="au-body"><div class="etf-box">'+
         '<div class="au-rngs etf-periods" role="group" aria-label="'+T.per+'"><button type="button" class="au-rng" data-p="1d" aria-pressed="true">1D</button><button type="button" class="au-rng" data-p="1w" aria-pressed="false">1W</button><button type="button" class="au-rng" data-p="1m" aria-pressed="false">1M</button></div>'+
         '<div class="au-rngs etf-coins" role="group" aria-label="'+T.coin+'" hidden>'+COINS.map(function(c,i){ return '<button type="button" class="au-rng" data-c="'+c+'" aria-pressed="'+(i?'false':'true')+'">'+c+'</button>'; }).join('')+'</div>'+
