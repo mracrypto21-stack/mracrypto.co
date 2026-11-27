@@ -1332,6 +1332,16 @@ html:not([lang="en"]) #auBox .au-en{display:none}
 #auBox > div > :first-child{margin-top:0}
 #auBox > div > :last-child{margin-bottom:0}
 #auBox .au-date{margin:0 0 2px}
+/* ETF dati (analīzes rinda; rindu pievieno skripts "ETF dati" zemāk; pogas/paraksts izmanto esošās .au-rngs/.au-rng/.au-cap) */
+#auBox .etf-box{display:flex;flex-direction:column;gap:14px}
+#auBox .etf-box .au-rngs{margin:0}
+#auBox .etf-box [hidden]{display:none}
+#auBox .etf-last{margin:0;font-size:15px;font-weight:600;line-height:1.3;color:#F3E9D4}
+#auBox .etf-last:empty{display:none}
+#auBox .etf-last .etf-d{font-size:12px;font-weight:400;color:#C9AF87}
+#auBox .etf-last span + .etf-d{margin-left:8px}
+#auBox .etf-box .au-cap{margin:0}
+#auBox .etf-plot{width:100%;overflow:hidden}
 
 /* Sāc šeit: 5 vienādas kartītes (6 kolonnu režģis, katra kartīte span 2; 4. un 5. centrēta apakšējā rindā; vienāds augstums: grid-auto-rows:1fr + min-height); tieši virs bloka "Jaunākie video" / "Noderīgi video" */
 .sac-block{width:100%;margin-top:14px;padding:20px 12px 22px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;text-align:center}
@@ -3219,6 +3229,237 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       var c=null; try{ c=localStorage.getItem(KEY); }catch(e){}
       if(ok(c)) box.innerHTML=c; else sec.hidden=true;  /* nav nedz svaigu, nedz saglabātu analīzi */
     });
+})();
+</script>
+<script>
+/* ETF dati (analīzes bloka rinda zem "Kopējais tirgus (Total Cap)"): dienas spot ETF neto pieplūde/aizplūde BTC, ETH, SOL, XRP.
+   Datus raksta VPS skripts uz assets/etf-flows.json (tikai kopējie dienas skaitļi; SoSoValue atļauja 27.11.2026);
+   apmeklētāja pārlūks SoSoValue nepieslēdzas, lasa tikai šo lapas failu. Ja fails nav pieejams vai ir bojāts, rinda netiek pievienota.
+   daily-analysis.html tiek pārģenerēts katru dienu, tāpēc rindu pievieno šis kods pēc analīzes ielādes (MutationObserver uz #auBox). */
+(function(){
+  var box=document.getElementById('auBox');
+  if(!box) return;
+  var COINS=['BTC','ETH','SOL','XRP'], GREEN='#4ADE80', RED='#F87171', GRID='rgba(232,168,60,0.14)', TXT='#C9AF87', NAME='#F3E9D4', MUTED='#8F7650';
+  var MON_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var NS='http://www.w3.org/2000/svg', NB='\u00a0', MINUS='\u2212';
+  var I18N={
+    lv:{title:'ETF dati', nodata:'dati nav', cap:'Data provided by ', per:'ETF datu periods', coin:'ETF monēta', lab:'Spot ETF neto pieplūde, ASV dolāros'},
+    en:{title:'ETF data', nodata:'no data', cap:'Data provided by ', per:'ETF data period', coin:'ETF coin', lab:'Spot ETF net flow, US dollars'}
+  };
+  var ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>';
+  var data=null;   /* {BTC:{'2026-11-25':v,...},...} + latest */
+
+  function pad(n){ return (n<10?'0':'')+n; }
+  function dnum(s){ var p=s.split('-'); return Date.UTC(+p[0],+p[1]-1,+p[2])/86400000; }
+  function fmtDate(s){ var p=s.split('-'); return p[2]+'.'+p[1]+'.'+p[0]; }
+  function dayLabel(s,lang){ var p=s.split('-'); return lang==='en' ? (+p[2])+' '+MON_EN[+p[1]-1] : p[2]+'.'+p[1]+'.'; }
+  function grp(n,sep){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,sep); }
+
+  /* "+125,4 M $" / "−453,1 M $" (LV), "+$125.4M" / "−$453.1M" (EN); nulle bez zīmes */
+  function money(v,lang,signed){
+    var m=Math.abs(v)/1e6, r=Math.round(m*10)/10, neg=v<0&&r!==0, sg=r===0?'':(neg?MINUS:(signed?'+':''));
+    if(r===0) return lang==='en' ? '$0M' : '0'+NB+'M'+NB+'$';
+    var ip=Math.floor(r), fp=Math.round((r-ip)*10);
+    if(lang==='en') return sg+'$'+grp(ip,',')+(fp?'.'+fp:'.0')+'M';
+    return sg+grp(ip,NB)+','+fp+NB+'M'+NB+'$';
+  }
+  /* ass: bez "$" LV, ar "$" EN; līdz 1 zīmei aiz komata, tikai ja vajag */
+  function axisFmt(v,lang){
+    if(v===0) return '0';
+    var m=Math.abs(v)/1e6, r=Math.round(m*10)/10, ip=Math.floor(r), fp=Math.round((r-ip)*10), s;
+    s=lang==='en' ? grp(ip,',')+(fp?'.'+fp:'') : grp(ip,NB)+(fp?','+fp:'');
+    return (v<0?MINUS:'')+(lang==='en'?'$'+s+'M':s+NB+'M');
+  }
+  function col(v){ return v>0?GREEN:(v<0?RED:TXT); }
+
+  function el(name,attrs,text){
+    var e=document.createElementNS(NS,name), k;
+    for(k in attrs) e.setAttribute(k,attrs[k]);
+    if(text!=null) e.textContent=text;
+    return e;
+  }
+  function track(name){ if(name && typeof window.gtag==='function') window.gtag('event',name); }
+
+  function parse(j){
+    if(!j || typeof j!=='object' || !j.coins || typeof j.coins!=='object') return null;
+    var out={}, latest=null, n=0;
+    COINS.forEach(function(c){
+      var rows=j.coins[c], m={};
+      if(rows!==undefined && !Array.isArray(rows)) throw new Error('bad');
+      (rows||[]).forEach(function(r){
+        if(!Array.isArray(r)||r.length!==2||typeof r[0]!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(r[0])||typeof r[1]!=='number'||!isFinite(r[1])) throw new Error('bad');
+        m[r[0]]=r[1]; n++;
+        if(!latest||r[0]>latest) latest=r[0];
+      });
+      out[c]=m;
+    });
+    if(!n||!latest) return null;
+    out.latest=latest;
+    return out;
+  }
+
+  /* ---------- zīmēšana ---------- */
+  function draw1d(st,plot,lang){
+    var W=Math.floor(plot.clientWidth);
+    if(W<120) return;
+    plot._w=W;
+    var T=I18N[lang], BH=14, GAP=12, nameW=34, i, vals=[], mx=0, labels=[], maxLen=0;
+    for(i=0;i<COINS.length;i++){
+      var v=data[COINS[i]][data.latest];
+      vals.push(v);
+      labels.push(v===undefined?T.nodata:money(v,lang,true));
+      if(v!==undefined){ mx=Math.max(mx,Math.abs(v)); }
+      maxLen=Math.max(maxLen,labels[i].length);
+    }
+    var amtW=Math.round(maxLen*6.7)+4, x0=nameW+8, x1=W-amtW-8, cx=(x0+x1)/2, half=(x1-x0)/2-1;
+    var H=COINS.length*BH+(COINS.length-1)*GAP;
+    var svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img','aria-label':T.lab});
+    svg.style.display='block'; svg.style.maxWidth='100%';
+    svg.appendChild(el('line',{x1:cx,x2:cx,y1:0,y2:H,stroke:TXT,'stroke-opacity':0.55,'stroke-width':1}));
+    for(i=0;i<COINS.length;i++){
+      var y=i*(BH+GAP), v=vals[i];
+      svg.appendChild(el('text',{x:0,y:y+BH-3,fill:NAME,'font-size':12,'font-weight':600},COINS[i]));
+      if(v!==undefined && v!==0 && mx>0){
+        var w=Math.max(1.5,Math.abs(v)/mx*half);
+        svg.appendChild(el('rect',{x:(v>0?cx:cx-w).toFixed(1),y:y,width:w.toFixed(1),height:BH,rx:2,fill:v>0?GREEN:RED}));
+      }
+      svg.appendChild(el('text',{x:W,y:y+BH-3,'text-anchor':'end',fill:v===undefined?MUTED:col(v),'font-size':12,'font-weight':v===undefined?400:600},labels[i]));
+    }
+    plot.textContent=''; plot.appendChild(svg);
+  }
+
+  function ticks(lo,hi,maxN){
+    var m=[1,2,2.5,5], mag=Math.pow(10,Math.floor(Math.log((hi-lo)/maxN)/Math.LN10)-1), i, step, a, b, out, k;
+    for(;;mag*=10){
+      for(i=0;i<m.length;i++){
+        step=m[i]*mag; a=Math.floor(lo/step+1e-9); b=Math.ceil(hi/step-1e-9);
+        if(b-a+1<=maxN){ out=[]; for(k=a;k<=b;k++) out.push(+(k*step).toFixed(3)); return out; }
+      }
+    }
+  }
+
+  function drawBars(st,plot,lang){
+    var W=Math.floor(plot.clientWidth);
+    if(W<120) return;
+    plot._w=W;
+    var T=I18N[lang], N=st.p==='1w'?7:30, end=dnum(data.latest), start=end-(N-1), m=data[st.c], i, pts=[], lo=0, hi=0;
+    Object.keys(m).forEach(function(d){ var k=dnum(d); if(k>=start && k<=end){ pts.push([k-start,m[d]]); lo=Math.min(lo,m[d]); hi=Math.max(hi,m[d]); } });
+    if(!pts.length){ plot.textContent=''; var p=document.createElement('p'); p.className='au-cap'; p.textContent=T.nodata; plot.appendChild(p); return; }
+    var H=Math.max(170,Math.min(240,Math.round(W*0.62))), fs=11, mR=14, mT=10, mB=22, mL;
+    if(lo===0&&hi===0){ hi=1e6; lo=-1e6; }
+    var pd=(hi-lo)*0.08; if(lo<0) lo-=pd; if(hi>0) hi+=pd;
+    var yt=ticks(lo,hi,Math.max(3,Math.floor((H-mT-mB)/30)));
+    lo=yt[0]; hi=yt[yt.length-1];
+    mL=0; for(i=0;i<yt.length;i++) mL=Math.max(mL,axisFmt(yt[i],lang).length);
+    mL=Math.round(mL*6.4+8);
+    var pw=W-mL-mR, ph=H-mT-mB, slot=pw/N, bw=Math.max(2,Math.min(slot*0.62,28));
+    function X(k){ return mL+(k+0.5)*slot; }
+    function Y(v){ return mT+(hi-v)/(hi-lo)*ph; }
+    var svg=el('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img','aria-label':T.lab+' ('+st.c+')'});
+    svg.style.display='block'; svg.style.maxWidth='100%';
+    for(i=0;i<yt.length;i++){
+      var y=Y(yt[i]);
+      svg.appendChild(el('line',{x1:mL,x2:W-mR,y1:y,y2:y,stroke:yt[i]===0?TXT:GRID,'stroke-opacity':yt[i]===0?0.55:1,'stroke-width':1}));
+      svg.appendChild(el('text',{x:mL-6,y:y+4,'text-anchor':'end',fill:TXT,'font-size':fs},axisFmt(yt[i],lang)));
+    }
+    var steps=[1,2,3,5,7,10,15], lab=Math.max(2,Math.floor(pw/48)), sp=steps[steps.length-1];
+    for(i=0;i<steps.length;i++){ if(Math.ceil(N/steps[i])<=lab){ sp=steps[i]; break; } }
+    for(i=N-1;i>=0;i-=sp){
+      var dt=new Date((start+i)*86400000), ds=dt.getUTCFullYear()+'-'+pad(dt.getUTCMonth()+1)+'-'+pad(dt.getUTCDate()), x=X(i);
+      if(x<mL+14||x+16>W) continue;   /* uzraksts (~30 px) paliek redzamā laukumā; pēdējā diena tiek iezīmēta */
+      svg.appendChild(el('line',{x1:x,x2:x,y1:mT+ph,y2:mT+ph+4,stroke:GRID,'stroke-width':1}));
+      svg.appendChild(el('text',{x:x,y:H-5,'text-anchor':'middle',fill:TXT,'font-size':fs},dayLabel(ds,lang)));
+    }
+    var y0=Y(0);
+    for(i=0;i<pts.length;i++){
+      var v=pts[i][1]; if(v===0) continue;
+      var yv=Y(v), top=Math.min(y0,yv), h=Math.max(1,Math.abs(yv-y0));
+      svg.appendChild(el('rect',{x:(X(pts[i][0])-bw/2).toFixed(1),y:top.toFixed(1),width:bw.toFixed(1),height:h.toFixed(1),rx:Math.min(2,bw/2),fill:v>0?GREEN:RED}));
+    }
+    plot.textContent=''; plot.appendChild(svg);
+  }
+
+  function lastLine(st,lang){
+    var T=I18N[lang];
+    if(st.p==='1d') return '<span class="etf-d">'+fmtDate(data.latest)+'</span>';
+    var m=data[st.c], ds=Object.keys(m).sort(), d=ds[ds.length-1];
+    if(!d) return '<span style="color:'+MUTED+';font-weight:400">'+T.nodata+'</span>';
+    return '<span style="color:'+col(m[d])+'">'+money(m[d],lang,true)+'</span><span class="etf-d">'+fmtDate(d)+'</span>';
+  }
+
+  function render(row){
+    var st=row._st, lang=row._lang, plot=row.querySelector('.etf-plot');
+    var coinRow=row.querySelector('.etf-coins'), last=row.querySelector('.etf-last');
+    row.querySelectorAll('.etf-periods .au-rng').forEach(function(b){ b.setAttribute('aria-pressed',b.getAttribute('data-p')===st.p?'true':'false'); });
+    row.querySelectorAll('.etf-coins .au-rng').forEach(function(b){ b.setAttribute('aria-pressed',b.getAttribute('data-c')===st.c?'true':'false'); });
+    coinRow.hidden=st.p==='1d';
+    last.innerHTML=lastLine(st,lang);
+    plot._w=0;
+    if(st.p==='1d') draw1d(st,plot,lang); else drawBars(st,plot,lang);
+  }
+
+  function build(lang){
+    var T=I18N[lang];
+    var det=document.createElement('details');
+    det.className='au-group etf-row';
+    det.setAttribute('data-ga','open_etf_plusmas');
+    det.innerHTML=
+      '<summary class="au-head"><span class="au-ico">'+ICON+'</span><h4 class="au-ttl" style="font-weight:500">'+T.title+'</h4><span class="chevron au-chev">\u203a</span></summary>'+
+      '<div class="au-body"><div class="etf-box">'+
+        '<div class="au-rngs etf-periods" role="group" aria-label="'+T.per+'"><button type="button" class="au-rng" data-p="1d" aria-pressed="true">1D</button><button type="button" class="au-rng" data-p="1w" aria-pressed="false">1W</button><button type="button" class="au-rng" data-p="1m" aria-pressed="false">1M</button></div>'+
+        '<div class="au-rngs etf-coins" role="group" aria-label="'+T.coin+'" hidden>'+COINS.map(function(c,i){ return '<button type="button" class="au-rng" data-c="'+c+'" aria-pressed="'+(i?'false':'true')+'">'+c+'</button>'; }).join('')+'</div>'+
+        '<p class="etf-last"></p>'+
+        '<div class="etf-plot"></div>'+
+        '<p class="au-cap">'+T.cap+'<a href="https://sosovalue.com/developer" target="_blank" rel="noopener nofollow" data-ga="click_avots_sosovalue">SoSoValue</a></p>'+
+      '</div></div>';
+    det._st={p:'1d',c:'BTC'}; det._lang=lang;
+    /* pārējās analīzes rindas aizveras, kad šī atveras (un otrādi to dara to ontoggle); GA tikai pēc lietotāja klikšķa */
+    det.querySelector('summary').addEventListener('click',function(){ det.setAttribute('data-u','1'); });
+    det.addEventListener('toggle',function(){
+      if(det.open){
+        var sib=det.parentNode.children, i;
+        for(i=0;i<sib.length;i++){ if(sib[i]!==det && sib[i].open) sib[i].open=false; }
+        if(det.getAttribute('data-u')==='1') track('open_etf_plusmas');
+        render(det);
+      }
+      det.removeAttribute('data-u');
+    });
+    det.addEventListener('click',function(ev){
+      var b=ev.target.closest?ev.target.closest('.au-rng'):null;
+      if(!b||!det.contains(b)) return;
+      var st=det._st, p=b.getAttribute('data-p'), c=b.getAttribute('data-c');
+      if(p){ if(p===st.p) return; st.p=p; track('open_etf_'+p); }
+      else if(c){ if(c===st.c) return; st.c=c; track('open_etf_'+c.toLowerCase()); }
+      else return;
+      render(det);
+    });
+    var plot=det.querySelector('.etf-plot');
+    if(typeof ResizeObserver==='function'){
+      new ResizeObserver(function(es){
+        var w=Math.floor(es[0].contentRect.width);
+        if(w>=120 && w!==plot._w) render(det);   /* pārzīmē tikai, ja mainījies platums (aizvērts -> atvērts, pagriešana) */
+      }).observe(plot);
+    }else{
+      window.addEventListener('resize',function(){ if(det.open) render(det); });
+    }
+    return det;
+  }
+
+  function inject(){
+    if(!data) return;
+    ['lv','en'].forEach(function(lang){
+      var root=box.querySelector('.au-'+lang), stack=root&&root.querySelector('.au-stack');
+      if(!stack||stack.querySelector('.etf-row')) return;
+      var row=build(lang), tot=stack.querySelector('details[data-ga="open_analize_total"]');
+      if(tot&&tot.nextSibling) stack.insertBefore(row,tot.nextSibling); else stack.appendChild(row);
+    });
+  }
+
+  if(typeof MutationObserver==='function') new MutationObserver(inject).observe(box,{childList:true});
+  fetch('assets/etf-flows.json',{cache:'no-cache'})
+    .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+    .then(function(j){ data=parse(j); inject(); })
+    .catch(function(){ data=null; });   /* nav faila vai bojāts -> rinda "ETF dati" netiek rādīta */
 })();
 </script>
 <script>
