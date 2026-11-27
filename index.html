@@ -1438,6 +1438,74 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
    tāpēc ar margin kompensē: redzamās atstarpes augšā un zem logo paliek tādas pašas kā līdz šim, cenu josla un tagline pacelas par logo samazinājumu. Dators (>600 px) nemainās. */
 @media (max-width: 600px) { .logo-glow { width: 270px; margin: 9px 0 10px; } }
 @media (max-width: 380px) { .logo-glow { width: 195px; margin: 6px 0 7px; } }
+
+/* ===== Uznirstošie logi: tumšs necaurspīdīgs logs uz izpludināta tumša slāņa; peldošās pogas un pogu rindas: matēts stikls =====
+   Slānis aiz loga (aizsegs) = rgba(5,3,1,.65) + blur(6px) (publicētā lapa jau izmanto to pašu aizsega mehānismu: opacity / display + animācija);
+   pats logs: rgba(12,9,4,.92), bez backdrop-filter. */
+:root{
+  --glass-bg:rgba(30,22,10,.55);
+  --glass-inset:inset 0 1px 0 rgba(255,255,255,.22);
+  --glass-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 28px rgba(0,0,0,.55);
+}
+.modal-overlay,.share-overlay,.policy-overlay,.faq-overlay,.don-overlay,.vid-overlay{
+  background:rgba(5,3,1,.65);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.modal,.share-modal,.faq-modal,.policy-modal,.don-modal,.vid-modal{
+  background:rgba(12,9,4,.92);
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  border:1px solid rgba(232,168,60,.7);
+  box-shadow:var(--glass-shadow);
+}
+/* logu galvenes: vienots fons ar logu, bez otra tonējuma / filtra virs loga */
+.policy-head,.faq-head,.don-head,.vid-head{
+  background:none;background-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;
+}
+
+/* Peldošās pogas: "Ir jautājums?", Dalīties, LV/EN pārslēgs - tāds pats matēts stikls (apmale un mirdzums nemainās) */
+a.chat-widget[data-ga="click_jautajums"],.lang-switcher,.share-btn{
+  background:var(--glass-bg);
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);
+}
+a.chat-widget[data-ga="click_jautajums"]{box-shadow:var(--glass-inset),0 4px 18px rgba(0,0,0,.55)}
+.lang-switcher{box-shadow:var(--glass-inset)}
+.share-btn{box-shadow:var(--glass-inset),0 0 0 rgba(232,168,60,0)}
+.share-btn:hover{box-shadow:var(--glass-inset),0 0 16px rgba(232,168,60,.4)}
+/* dalīties poga: apmales krāsa = neaktīvā EN poga (#C9791A); biezums, ikona, hover (zelta apmale + mirdzums) nemainās */
+.share-btn{border-color:#C9791A}
+
+/* Slīdošs stikla burbulis pogu rindās (1D/1W/1M, BTC/ETH/SOL/XRP, LV/EN). Burbuli veido un pārvieto skripts (glass-bubble) */
+.au-rngs,.lang-switcher{position:relative}
+.au-rngs .au-rng,.lang-switcher .lang-btn{z-index:1}
+.glass-bubble{
+  position:absolute;left:0;top:0;width:0;height:0;box-sizing:border-box;border-radius:99px;
+  pointer-events:none;z-index:0;opacity:0;will-change:translate,scale;
+  border:1px solid rgba(232,168,60,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.03) 50%,rgba(255,255,255,.09));
+  box-shadow:inset 0 1px 1px rgba(255,230,180,.45),inset 0 -2px 3px rgba(255,230,180,.12),0 4px 12px rgba(0,0,0,.6);
+}
+.glass-bubble.on{opacity:1}
+.lang-switcher .lang-btn[aria-pressed="true"],
+.au-rngs .au-rng[aria-pressed="true"],
+#auBox .au-rngs .au-rng[aria-pressed="true"],
+#livePanel .au-rngs .au-rng[aria-pressed="true"]{
+  background:transparent;border-color:transparent;color:#FFD98A;
+}
+
+/* Jautājuma loga poga "Sūtīt" / "Send" (.primary): zelta fons, tumšs teksts; hover / nospiešana: gaišāks zelts. Izmēri, apmales biezums un darbība nemainās ("Aizvērt" nemainās) */
+.modal button.primary{
+  background:#E8A83C;border-color:#E8A83C;color:#0B0804;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  transition:border-color .25s ease,background-color .25s ease,transform .2s ease;
+}
+.modal button.primary:hover,.modal button.primary:active{
+  background:#FFD98A;border-color:#FFD98A;color:#0B0804;
+}
+
+/* Kamēr atvērts jebkurš uznirstošais logs, apaļā dalīšanās poga nav redzama (vieta saglabājas, aizverot parādās turpat) */
+html:has(.modal-overlay.open,.share-overlay.open,.policy-overlay.open,.faq-overlay.open,.don-overlay.open,.vid-overlay.open) .share-btn{
+  opacity:0;visibility:hidden;pointer-events:none;
+}
+
 </style>
 </head>
 <body>
@@ -3974,6 +4042,74 @@ document.addEventListener('click', function(e) {
   if (langLv) langLv.addEventListener('click', applyTexts);
   if (langEn) langEn.addEventListener('click', applyTexts);
   applyTexts();
+})();
+</script>
+<script>
+/* Slīdošs stikla burbulis pogu rindās (.au-rngs: 1D/1W/1M un BTC/ETH/SOL/XRP tirgus pārskatā, analīzē un ETF blokā; .lang-switcher: LV/EN).
+   Katrā rindā viens <span.glass-bubble>, kas stāv zem izvēlētās pogas (aria-pressed="true"). Mainoties izvēlei, tas pārslīd uz jauno pogu
+   0,35 s ar cubic-bezier(.34,1.4,.5,1), kustībā palielinās līdz 1,12. Citos gadījumos (bloka atvēršana, valodas maiņa, pagriešana, izmēra / fonta
+   izmaiņas, rindas parādīšanās) burbulis tiek uzreiz novietots pareizi bez animācijas. Pogu klikšķu loģika un GA netiek aiztikti. */
+(function(){
+  var SEL='.au-rngs, .lang-switcher', EASE='cubic-bezier(.34,1.4,.5,1)', DUR=350, SCALE=1.12;
+  var mqReduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+  var ro=window.ResizeObserver?new ResizeObserver(schedule):null, queued=false;
+
+  function pressed(row){
+    var bs=row.children, i, b;
+    for(i=0;i<bs.length;i++){ b=bs[i];
+      if(b.getAttribute&&b.getAttribute('aria-pressed')==='true'&&b.offsetWidth>0&&(b.classList.contains('au-rng')||b.classList.contains('lang-btn'))) return b;
+    }
+    return null;
+  }
+  function geom(row,el){
+    var rr=row.getBoundingClientRect(), er=el.getBoundingClientRect();
+    return {x:er.left-rr.left-row.clientLeft, y:er.top-rr.top-row.clientTop, w:er.width, h:er.height};
+  }
+  function css(g){ return {translate:g.x+'px '+g.y+'px', width:g.w+'px', height:g.h+'px'}; }
+  function stop(s){ if(s.anims){ s.anims.forEach(function(a){ a.cancel(); }); s.anims=null; } }
+  function running(s){ return !!(s.anims&&s.anims[0]&&s.anims[0].playState==='running'); }
+
+  function sync(row){
+    var s=row._gb||(row._gb={el:null,last:null,anims:null}), bub=s.el, btn, g, from, f;
+    if(!bub||bub.parentNode!==row){
+      bub=s.el=document.createElement('span'); bub.className='glass-bubble'; bub.setAttribute('aria-hidden','true');
+      row.appendChild(bub); s.last=null;
+      if(ro){ ro.observe(row); }
+    }
+    if(ro){ var kids=row.children, k; for(k=0;k<kids.length;k++) if(kids[k]!==bub) ro.observe(kids[k]); }
+    btn=row.offsetWidth>0?pressed(row):null;
+    if(!btn){ stop(s); bub.classList.remove('on'); s.last=null; return; }
+    g=geom(row,btn);
+    if(s.last&&s.last.b===btn&&Math.abs(s.last.x-g.x)<.25&&Math.abs(s.last.y-g.y)<.25&&Math.abs(s.last.w-g.w)<.25&&Math.abs(s.last.h-g.h)<.25) return;
+    if(s.last&&s.last.b!==btn&&bub.classList.contains('on')&&bub.animate&&!(mqReduce&&mqReduce.matches)){
+      if(running(s)){ from=geom(row,bub); f=parseFloat(getComputedStyle(bub).scale)||1; from.x+=from.w*(1-1/f)/2; from.y+=from.h*(1-1/f)/2; from.w/=f; from.h/=f; }
+      else from={x:s.last.x,y:s.last.y,w:s.last.w,h:s.last.h};
+      stop(s);
+      /* pozīcija un izmērs: pārslīd ar atsperes līkni; mēroga "uzpūtums" 1 -> 1,12 -> 1 atsevišķi pa visu kustības ilgumu */
+      s.anims=[bub.animate([css(from),css(g)],{duration:DUR,easing:EASE}),
+               bub.animate([{scale:'1',easing:'ease-out'},{scale:String(SCALE),offset:.5,easing:'ease-in'},{scale:'1'}],{duration:DUR,easing:'linear'})];
+      s.anims[0].onfinish=s.anims[0].oncancel=function(){ s.anims=null; };
+    } else stop(s);
+    bub.style.translate=g.x+'px '+g.y+'px'; bub.style.width=g.w+'px'; bub.style.height=g.h+'px';
+    bub.classList.add('on');
+    s.last={b:btn,x:g.x,y:g.y,w:g.w,h:g.h};
+  }
+  function syncAll(){ queued=false; var rows=document.querySelectorAll(SEL), i; for(i=0;i<rows.length;i++) sync(rows[i]); }
+  function schedule(){ if(queued) return; queued=true; (window.requestAnimationFrame||setTimeout)(syncAll); }
+
+  new MutationObserver(function(recs){
+    var i, r, j, own;
+    for(i=0;i<recs.length;i++){ r=recs[i];
+      if(r.target.classList&&r.target.classList.contains('glass-bubble')) continue;
+      if(r.type==='childList'){ own=true; for(j=0;j<r.addedNodes.length;j++) if(!(r.addedNodes[j].classList&&r.addedNodes[j].classList.contains('glass-bubble'))) own=false;
+        if(own&&r.removedNodes.length===0) continue; }
+      schedule(); return;
+    }
+  }).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['aria-pressed','style','hidden','class','open','lang']});
+  window.addEventListener('resize',schedule); window.addEventListener('orientationchange',function(){ schedule(); setTimeout(schedule,250); });
+  window.addEventListener('pageshow',schedule); window.addEventListener('load',schedule);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
 })();
 </script>
 </body>
