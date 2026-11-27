@@ -1341,7 +1341,10 @@ html:not([lang="en"]) #auBox .au-en{display:none}
 #auBox .etf-last .etf-d{font-size:12px;font-weight:400;color:#C9AF87}
 #auBox .etf-last span + .etf-d{margin-left:8px}
 #auBox .etf-box .au-cap{margin:0}
+#auBox .etf-upd{white-space:nowrap}
 #auBox .etf-plot{width:100%;overflow:hidden}
+#auBox .etf-plot svg{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#auBox .etf-plot svg rect[data-d]{transition:opacity .12s}
 
 /* Sāc šeit: 5 vienādas kartītes (6 kolonnu režģis, katra kartīte span 2; 4. un 5. centrēta apakšējā rindā; vienāds augstums: grid-auto-rows:1fr + min-height); tieši virs bloka "Jaunākie video" / "Noderīgi video" */
 .sac-block{width:100%;margin-top:14px;padding:20px 12px 22px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;text-align:center}
@@ -3235,7 +3238,9 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
 /* ETF dati (analīzes bloka rinda zem "Kopējais tirgus (Total Cap)"): dienas spot ETF neto pieplūde/aizplūde BTC, ETH, SOL, XRP.
    Datus raksta VPS skripts uz assets/etf-flows.json (tikai kopējie dienas skaitļi; SoSoValue atļauja 27.11.2026);
    apmeklētāja pārlūks SoSoValue nepieslēdzas, lasa tikai šo lapas failu. Ja fails nav pieejams vai ir bojāts, rinda netiek pievienota.
-   daily-analysis.html tiek pārģenerēts katru dienu, tāpēc rindu pievieno šis kods pēc analīzes ielādes (MutationObserver uz #auBox). */
+   daily-analysis.html tiek pārģenerēts katru dienu, tāpēc rindu pievieno šis kods pēc analīzes ielādes (MutationObserver uz #auBox).
+   1W/1M: uzejot ar peli (vai telefonā pieskaroties) dienai, virs grafika redzama šīs dienas summa, citi stabiņi 45% blāvāki;
+   aizmugurē katrai dienai ar datiem ir caurspīdīgs kolonnas laukums (.etf-hit) visā grafika augstumā. Apakšā: atsauce + "atjaunots" no faila lauka "updated". */
 (function(){
   var box=document.getElementById('auBox');
   if(!box) return;
@@ -3243,8 +3248,8 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   var MON_EN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var NS='http://www.w3.org/2000/svg', NB='\u00a0', MINUS='\u2212';
   var I18N={
-    lv:{title:'ETF dati', nodata:'dati nav', cap:'Data provided by ', per:'ETF datu periods', coin:'ETF monēta', lab:'Spot ETF neto pieplūde, ASV dolāros'},
-    en:{title:'ETF data', nodata:'no data', cap:'Data provided by ', per:'ETF data period', coin:'ETF coin', lab:'Spot ETF net flow, US dollars'}
+    lv:{title:'ETF dati', upd:'atjaunots', nodata:'dati nav', cap:'Data provided by ', per:'ETF datu periods', coin:'ETF monēta', lab:'Spot ETF neto pieplūde, ASV dolāros'},
+    en:{title:'ETF data', upd:'updated', nodata:'no data', cap:'Data provided by ', per:'ETF data period', coin:'ETF coin', lab:'Spot ETF net flow, US dollars'}
   };
   var ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>';
   var data=null;   /* {BTC:{'2026-11-25':v,...},...} + latest */
@@ -3252,6 +3257,14 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   function pad(n){ return (n<10?'0':'')+n; }
   function dnum(s){ var p=s.split('-'); return Date.UTC(+p[0],+p[1]-1,+p[2])/86400000; }
   function fmtDate(s){ var p=s.split('-'); return p[2]+'.'+p[1]+'.'+p[0]; }
+  /* "27.11. 11:10" pēc Rīgas laika (tāpat kā Tirgus pārskatā) */
+  function rigaStamp(ms){
+    try{
+      var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Riga',hourCycle:'h23',day:'numeric',month:'numeric',hour:'numeric',minute:'numeric'}).formatToParts(new Date(ms)), o={};
+      p.forEach(function(x){ o[x.type]=x.value; });
+      return pad(+o.day)+'.'+pad(+o.month)+'. '+pad(+o.hour%24)+':'+pad(+o.minute);
+    }catch(e){ return ''; }
+  }
   function dayLabel(s,lang){ var p=s.split('-'); return lang==='en' ? (+p[2])+' '+MON_EN[+p[1]-1] : p[2]+'.'+p[1]+'.'; }
   function grp(n,sep){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,sep); }
 
@@ -3295,6 +3308,8 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     });
     if(!n||!latest) return null;
     out.latest=latest;
+    var u=new Date(j.updated);
+    out.updated=(typeof j.updated==='string' && !isNaN(u.getTime()))?u.getTime():null;   /* nav derīga laika -> uzraksts bez "atjaunots" */
     return out;
   }
 
@@ -3343,7 +3358,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     if(W<120) return;
     plot._w=W;
     var T=I18N[lang], N=st.p==='1w'?7:30, end=dnum(data.latest), start=end-(N-1), m=data[st.c], i, pts=[], lo=0, hi=0;
-    Object.keys(m).forEach(function(d){ var k=dnum(d); if(k>=start && k<=end){ pts.push([k-start,m[d]]); lo=Math.min(lo,m[d]); hi=Math.max(hi,m[d]); } });
+    Object.keys(m).forEach(function(d){ var k=dnum(d); if(k>=start && k<=end){ pts.push([k-start,m[d],d]); lo=Math.min(lo,m[d]); hi=Math.max(hi,m[d]); } });
     if(!pts.length){ plot.textContent=''; var p=document.createElement('p'); p.className='au-cap'; p.textContent=T.nodata; plot.appendChild(p); return; }
     var H=Math.max(170,Math.min(240,Math.round(W*0.62))), fs=11, mR=14, mT=10, mB=22, mL;
     if(lo===0&&hi===0){ hi=1e6; lo=-1e6; }
@@ -3374,7 +3389,12 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     for(i=0;i<pts.length;i++){
       var v=pts[i][1]; if(v===0) continue;
       var yv=Y(v), top=Math.min(y0,yv), h=Math.max(1,Math.abs(yv-y0));
-      svg.appendChild(el('rect',{x:(X(pts[i][0])-bw/2).toFixed(1),y:top.toFixed(1),width:bw.toFixed(1),height:h.toFixed(1),rx:Math.min(2,bw/2),fill:v>0?GREEN:RED}));
+      svg.appendChild(el('rect',{x:(X(pts[i][0])-bw/2).toFixed(1),y:top.toFixed(1),width:bw.toFixed(1),height:h.toFixed(1),rx:Math.min(2,bw/2),fill:v>0?GREEN:RED,'data-d':pts[i][2]}));
+    }
+    /* caurspīdīgs kolonnas laukums katrai dienai AR datiem (visa dienas kolonna, visā grafika augstumā; arī 0 vai ļoti mazam stabiņam);
+       dienām bez datiem (brīvdienas) laukuma nav -> izvēles nav */
+    for(i=0;i<pts.length;i++){
+      svg.appendChild(el('rect',{x:(mL+pts[i][0]*slot).toFixed(2),y:0,width:slot.toFixed(2),height:H,fill:'#000','fill-opacity':0,'class':'etf-hit','data-hit':pts[i][2]}));
     }
     plot.textContent=''; plot.appendChild(svg);
   }
@@ -3382,9 +3402,26 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
   function lastLine(st,lang){
     var T=I18N[lang];
     if(st.p==='1d') return '<span class="etf-d">'+fmtDate(data.latest)+'</span>';
-    var m=data[st.c], ds=Object.keys(m).sort(), d=ds[ds.length-1];
+    var m=data[st.c], ds=Object.keys(m).sort(), d=(st.sel && m[st.sel]!==undefined)?st.sel:ds[ds.length-1];
     if(!d) return '<span style="color:'+MUTED+';font-weight:400">'+T.nodata+'</span>';
     return '<span style="color:'+col(m[d])+'">'+money(m[d],lang,true)+'</span><span class="etf-d">'+fmtDate(d)+'</span>';
+  }
+
+  /* izvēlētā diena (1W/1M): virs grafika tās summa, pārējie stabiņi 45% blāvāki; st.sel = null -> pēdējā diena, visi spilgti */
+  function applySel(row){
+    var st=row._st, svg=row.querySelector('.etf-plot svg'), sel=st.sel;
+    row.querySelector('.etf-last').innerHTML=lastLine(st,row._lang);
+    if(!svg) return;
+    var bars=svg.querySelectorAll('rect[data-d]'), i;
+    for(i=0;i<bars.length;i++) bars[i].setAttribute('opacity',(!sel||bars[i].getAttribute('data-d')===sel)?'1':'0.55');
+  }
+  function setSel(row,d){
+    var st=row._st;
+    if(st.p==='1d') d=null;
+    if(d===undefined||d==='') d=null;
+    if(st.sel===d) return;
+    st.sel=d;
+    applySel(row);
   }
 
   function render(row){
@@ -3393,9 +3430,15 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
     row.querySelectorAll('.etf-periods .au-rng').forEach(function(b){ b.setAttribute('aria-pressed',b.getAttribute('data-p')===st.p?'true':'false'); });
     row.querySelectorAll('.etf-coins .au-rng').forEach(function(b){ b.setAttribute('aria-pressed',b.getAttribute('data-c')===st.c?'true':'false'); });
     coinRow.hidden=st.p==='1d';
-    last.innerHTML=lastLine(st,lang);
     plot._w=0;
     if(st.p==='1d') draw1d(st,plot,lang); else drawBars(st,plot,lang);
+    applySel(row);
+  }
+
+  /* " · atjaunots 27.11. 11:10" (EN " · updated ..."); ja "updated" nav derīgs -> nekā; laiks nelūst uz pusēm (nowrap), telefonā iet nākamajā rindā */
+  function updText(lang){
+    var t=data&&data.updated?rigaStamp(data.updated):'';
+    return t?' \u00b7 <span class="etf-upd">'+I18N[lang].upd+' '+t+'</span>':'';
   }
 
   function build(lang){
@@ -3410,9 +3453,9 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
         '<div class="au-rngs etf-coins" role="group" aria-label="'+T.coin+'" hidden>'+COINS.map(function(c,i){ return '<button type="button" class="au-rng" data-c="'+c+'" aria-pressed="'+(i?'false':'true')+'">'+c+'</button>'; }).join('')+'</div>'+
         '<p class="etf-last"></p>'+
         '<div class="etf-plot"></div>'+
-        '<p class="au-cap">'+T.cap+'<a href="https://sosovalue.com/developer" target="_blank" rel="noopener nofollow" data-ga="click_avots_sosovalue">SoSoValue</a></p>'+
+        '<p class="au-cap">'+T.cap+'<a href="https://sosovalue.com/developer" target="_blank" rel="noopener nofollow" data-ga="click_avots_sosovalue">SoSoValue</a>'+updText(lang)+'</p>'+
       '</div></div>';
-    det._st={p:'1d',c:'BTC'}; det._lang=lang;
+    det._st={p:'1d',c:'BTC',sel:null}; det._lang=lang;
     /* pārējās analīzes rindas aizveras, kad šī atveras (un otrādi to dara to ontoggle); GA tikai pēc lietotāja klikšķa */
     det.querySelector('summary').addEventListener('click',function(){ det.setAttribute('data-u','1'); });
     det.addEventListener('toggle',function(){
@@ -3422,6 +3465,7 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
         if(det.getAttribute('data-u')==='1') track('open_etf_plusmas');
         render(det);
       }
+      det._st.sel=null;   /* atverot/aizverot rindu atgriežas pēdējā diena */
       det.removeAttribute('data-u');
     });
     det.addEventListener('click',function(ev){
@@ -3431,9 +3475,25 @@ a.vid-card:active{transform:translateY(0) scale(0.97)}
       if(p){ if(p===st.p) return; st.p=p; track('open_etf_'+p); }
       else if(c){ if(c===st.c) return; st.c=c; track('open_etf_'+c.toLowerCase()); }
       else return;
+      st.sel=null;   /* mainot periodu vai monētu atgriežas pēdējā diena */
       render(det);
     });
     var plot=det.querySelector('.etf-plot');
+    /* pele: izvēle = kolonna zem kursora, aiziet -> pēdējā diena. Pieskāriens (telefons): izvēle paliek līdz citai dienai vai pieskārienam ārpus grafika.
+       Izvēli dara 'click' (ne pointerdown), tāpēc velkot pāri grafikam lapa ritinās un izvēle nemainās. */
+    function hitOf(t){ var d=t&&t.getAttribute?t.getAttribute('data-hit'):null; return d||null; }
+    plot.addEventListener('pointerdown',function(ev){ det._pt=ev.pointerType; },true);
+    plot.addEventListener('pointermove',function(ev){ if(ev.pointerType==='mouse') setSel(det,hitOf(ev.target)); });
+    plot.addEventListener('pointerleave',function(ev){ if(ev.pointerType==='mouse') setSel(det,null); });
+    plot.addEventListener('click',function(ev){
+      if(det._pt==='mouse'){ det._pt=null; return; }
+      det._pt=null;
+      var d=hitOf(ev.target);
+      if(d) setSel(det,d);
+    });
+    document.addEventListener('pointerdown',function(ev){
+      if(det._st.sel && !(ev.target&&ev.target.closest&&ev.target.closest('.etf-plot svg')===plot.querySelector('svg'))) setSel(det,null);
+    },true);
     if(typeof ResizeObserver==='function'){
       new ResizeObserver(function(es){
         var w=Math.floor(es[0].contentRect.width);
