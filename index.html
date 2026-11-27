@@ -1506,6 +1506,32 @@ html:has(.modal-overlay.open,.share-overlay.open,.policy-overlay.open,.faq-overl
   opacity:0;visibility:hidden;pointer-events:none;
 }
 
+
+/* ===== Logo atspīduma efekts (augšējais lielais logo): vienreiz pārslīd diagonāls atspīdums pa logo formu + viegls mirdzums =====
+   .logo-shine = slānis virs logo (pointer-events:none), maska = pats logo attēls (arī -webkit-), tāpēc atspīdums redzams tikai pa kroni, burtiem un uzrakstu, ārpus tiem nekā nav.
+   Atspīdums (::before) ir gradients tieši logo izmērā un pārslīd ar transform (no kreisās ārpus logo uz labo ārpus logo). Miera stāvoklī slānis ir display:none,
+   tāpēc logo paliek pikselī identisks esošajam. */
+.logo-glow .logo-shine{
+  display:none;position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+  -webkit-mask-image:url(assets/logo-540.11b9fecf.webp);mask-image:url(assets/logo-540.11b9fecf.webp);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+}
+.logo-glow .logo-shine::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 38%,rgba(255,217,138,0.55) 46%,rgba(255,248,225,0.95) 50%,rgba(255,217,138,0.55) 54%,transparent 62%);
+  transform:translateX(-100%);
+}
+.logo-glow.logo-shining .logo-shine{display:block}
+.logo-glow.logo-shining .logo-shine::before{animation:logoShine .9s ease-in-out 1}
+.logo-glow.logo-shining img{animation:logoGlow .9s ease-in-out 1}
+@keyframes logoShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+@keyframes logoGlow{
+  0%{filter:drop-shadow(0 0 0 rgba(232,168,60,0))}
+  50%{filter:drop-shadow(0 0 16px rgba(232,168,60,0.7))}
+  100%{filter:drop-shadow(0 0 0 rgba(232,168,60,0))}
+}
 </style>
 </head>
 <body>
@@ -1551,6 +1577,7 @@ html:has(.modal-overlay.open,.share-overlay.open,.policy-overlay.open,.faq-overl
   <div class="logo-glow fade-up delay-1">
     
     <picture class="pic"><source type="image/webp" srcset="assets/logo-540.11b9fecf.webp 540w, assets/logo-720.54db4019.webp 720w" sizes="(max-width:380px) 195px, (max-width:600px) 270px, 360px"><img src="assets/logo-720.888b3961.png" alt="@MRACRYPTO" width="720" height="720" fetchpriority="high"></picture>
+    <span class="logo-shine" aria-hidden="true"></span>
   </div>
 
 <div class="price-ticker" id="priceTicker">
@@ -4110,6 +4137,21 @@ document.addEventListener('click', function(e) {
   window.addEventListener('pageshow',schedule); window.addEventListener('load',schedule);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(schedule);
   schedule();
+})();
+</script>
+<script>
+/* Logo atspīdums: vienreiz uz katru iedarbināšanu. Pele (pointerenter, mouse/pen) -> uzreiz; pieskāriens (touch) -> pie pirksta pacelšanas (pointerup),
+   tāpēc lapas ritināšana pār logo (browser pārņem žestu -> pointercancel) efektu neiedarbina un netiek traucēta (nav preventDefault, pasīvi klausītāji). Kamēr efekts notiek, jauns nesākas;
+   pats no sevis neatkārtojas. Pašu animāciju veido CSS (.logo-shining uz .logo-glow). */
+(function(){
+  var box=document.querySelector('.logo-glow'), fx=box&&box.querySelector('.logo-shine'); if(!fx) return;
+  var busy=false, timer=0;
+  try{ var m=(getComputedStyle(fx).maskImage||getComputedStyle(fx).webkitMaskImage||'').match(/url\("?([^")]+)"?\)/); if(m){ var w=new Image(); w.src=m[1]; } }catch(e){}   /* maska ielādēta jau iepriekš (parasti tas pats fails, ko izmanto logo attēls) */
+  function end(){ busy=false; clearTimeout(timer); box.classList.remove('logo-shining'); }
+  function go(){ if(busy) return; busy=true; box.classList.add('logo-shining'); timer=setTimeout(end,1200); }
+  fx.addEventListener('animationend',function(e){ if(e.animationName==='logoShine') end(); });
+  box.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse'||e.pointerType==='pen') go(); },{passive:true});
+  box.addEventListener('pointerup',function(e){ if(e.pointerType==='touch') go(); },{passive:true});
 })();
 </script>
 </body>
