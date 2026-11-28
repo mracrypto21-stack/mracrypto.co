@@ -294,10 +294,8 @@
 
   /* Hover kā dropdownam "Konsultāciju tēmas" (.start-stage): zelta apmale, pāreja .2s; atvērtajam paliek gold-dim */
   .section-header { transition: border-color .2s; }
-  .section-header:hover { border-color: var(--gold); }
   /* Analīzes bloka iekšējie dropdowni (#auBox .au-group, CSS no VPS fragmenta): tas pats hover; atvērtajam paliek gold-dim */
   #auBox .au-group { transition: border-color .2s; }
-  #auBox .au-group:not([open]):hover { border-color: var(--gold); }
 
   .section-content {
     display: flex;
@@ -331,13 +329,6 @@
     letter-spacing: 0.01em;
     backdrop-filter: blur(6px);
     transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
-  }
-
-  .link-plate:hover, .link-plate:focus-visible {
-    border-color: var(--gold);
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 8px 24px rgba(232,168,60,0.16);
-    outline: none;
   }
 
   .link-plate:active {
@@ -648,7 +639,6 @@
     -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: transparent;
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
   }
-  .don-card:hover, .don-card:focus-visible { border-color: var(--gold); transform: translateY(-2px) scale(1.01); box-shadow: 0 8px 24px rgba(232,168,60,0.16); outline: none; }
   .don-card:active { transform: translateY(0) scale(0.97); }
   .don-card-ico { display: block; width: 44px; height: 44px; line-height: 0; }
   .don-card-ico img { width: 100%; height: 100%; display: block; }
@@ -704,13 +694,6 @@
     font-weight: 500;
     text-align: center;
     transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
-  }
-
-  .contact-btn:hover, .contact-btn:focus-visible {
-    border-color: var(--gold);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(232,168,60,0.16);
-    outline: none;
   }
 
   .contact-btn svg {
@@ -880,7 +863,6 @@
   }
 
   .modal button:hover {
-    border-color: var(--gold);
     transform: translateY(-1px);
   }
 
@@ -990,7 +972,6 @@
   letter-spacing: 0.01em;
 }
 .exchange-header::-webkit-details-marker { display: none; }
-.exchange-header:hover { border-color: var(--gold); }
 .exchange-group[open] > .exchange-header .chevron { transform: rotate(90deg); }
 .exchange-group[open] > .exchange-header { border-color: var(--gold-dim); }
 .exchange-content { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
@@ -1007,7 +988,6 @@
   color: var(--cream); font-size: 15px; font-weight: 500; letter-spacing: 0.01em;
 }
 .start-header::-webkit-details-marker { display: none; }
-.start-header:hover { border-color: var(--gold); }
 .start-group[open] > .start-header .chevron { transform: rotate(90deg); }
 .start-group[open] > .start-header { border-color: var(--gold-dim); }
 .start-content {
@@ -1046,7 +1026,6 @@
 
 /* "Starts kriptovalūtā": posmi kā sakļaujami bloki (stils kā .faq-item / .start-header) */
 .start-stage{margin:0 0 10px;background-color:rgba(18,16,10,.55);border:1px solid var(--line);border-radius:10px;transition:border-color .2s;scroll-margin-top:80px}
-.start-stage:hover{border-color:var(--gold)}
 .start-stage[open]{border-color:var(--gold-dim)}
 .start-stage-head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
 .start-stage-head::-webkit-details-marker{display:none}
@@ -1130,15 +1109,13 @@
 }
 .cookie-actions button:hover { transform: translateY(-1px); }
 #cookieAccept { border-color: var(--gold-dim); }
-#cookieAccept:hover { border-color: var(--gold); }
-#cookieDecline:hover { border-color: var(--bronze); }
 
 /* Baneris mazāks un īsāks: mazāks teksts, zemākas vienādas pogas (loģika nemainās) */
 .cookie-consent { padding: 8px 12px; font-size: 12px; line-height: 1.4; }
 .cookie-consent p { margin: 0 0 6px; }
 .cookie-consent .cookie-actions { gap: 8px; }
 .cookie-consent .cookie-actions button { min-height: 36px; padding: 0 12px; font-size: 12.5px; border-color: var(--gold-dim); }
-.cookie-consent .cookie-actions button:hover { border-color: var(--gold); transform: none; }
+.cookie-consent .cookie-actions button:hover { transform: none; }
 
 /* ===== Portfeļa burbuļu klasteris ===== */
 .bubble-window{
@@ -1251,7 +1228,6 @@
 .share-options{display:flex;flex-direction:column;padding:10px}
 .share-option{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--gold-dim);border-radius:10px;margin:4px 0;padding:11px 14px;
   color:var(--bronze);font-family:inherit;font-size:14px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:all .2s;text-decoration:none;min-height:44px;box-sizing:border-box}
-.share-option:hover{border-color:var(--gold);color:var(--gold-bright);background:linear-gradient(180deg,rgba(232,168,60,.12),rgba(232,168,60,.04))}
 /* EN tulkojumiem var vajadzēt vairakuvietu */
 html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .chat-label{letter-spacing:0.005em}
 
@@ -1290,7 +1266,6 @@ html[lang="en"] .section-title, html[lang="en"] .link-label, html[lang="en"] .ch
 .faq-close:focus:not(:focus-visible){outline:none}
 .faq-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:14px;display:flex;flex-direction:column;gap:10px}
 .faq-item{flex-shrink:0;background-color:rgba(18,16,10,.55);border:1px solid var(--line);border-radius:10px;transition:border-color .2s}
-.faq-item:hover{border-color:var(--gold)}
 .faq-item[open]{border-color:var(--gold-dim)}
 .faq-q{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;list-style:none;color:var(--cream);font-size:14px;font-weight:500;line-height:1.4;letter-spacing:.01em;-webkit-tap-highlight-color:transparent}
 .faq-q::-webkit-details-marker{display:none}
@@ -1353,7 +1328,6 @@ html:not([lang="en"]) #auBox .au-en{display:none}
 .sac-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;margin:0}
 .sac-card{grid-column:span 2;min-height:150px;display:flex;flex-direction:column;align-items:flex-start;gap:0;min-width:0;padding:12px 10px;background:linear-gradient(180deg, rgba(18,16,10,0.2), rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);border:1px solid var(--gold-dim);border-radius:12px;text-align:left;color:var(--cream);text-decoration:none;-webkit-tap-highlight-color:transparent}
 a.sac-card{cursor:pointer;transition:border-color .25s ease}
-a.sac-card:hover,a.sac-card:focus-visible{border-color:var(--gold);outline:none}
 .sac-ic{display:block;flex-shrink:0;width:28px;height:28px;margin-bottom:10px;color:#C48428}
 .sac-ic svg{display:block;width:28px;height:28px}
 .sac-go{display:block;flex-shrink:0;width:16px;height:16px;margin-top:auto;align-self:flex-end;color:#C48428}
@@ -1382,8 +1356,6 @@ p.sac-back-wrap{margin:16px 0 0;font-size:13.5px;line-height:1.7;text-align:left
 .vid-play{position:absolute;right:6px;bottom:6px;width:26px;height:26px;border-radius:50%;background:rgba(8,6,3,.72);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;color:var(--gold)}
 .vid-play svg{width:10px;height:10px;margin-left:1px;display:block;fill:currentColor}
 .vid-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:calc(2 * 1.3em);font-size:11px;line-height:1.3;text-align:left;overflow-wrap:anywhere;color:var(--cream)}
-a.vid-card:hover,a.vid-card:focus-visible{transform:translateY(-2px) scale(1.01);outline:none}
-a.vid-card:hover .vid-thumb,a.vid-card:focus-visible .vid-thumb{border-color:var(--gold);box-shadow:0 8px 24px rgba(232,168,60,0.16)}
 a.vid-card:active{transform:translateY(0) scale(0.97)}
 .vid-card.is-skel{pointer-events:none}
 .vid-card.is-skel .vid-thumb{background:rgba(232,168,60,.06)}
@@ -1532,6 +1504,104 @@ html:has(.modal-overlay.open,.share-overlay.open,.policy-overlay.open,.faq-overl
   50%{filter:drop-shadow(0 0 16px rgba(232,168,60,0.7))}
   100%{filter:drop-shadow(0 0 0 rgba(232,168,60,0))}
 }
+
+/* ===== Stikla efekts: bloki un dropdown izvēles, kas agrāk iekrāsojās dzeltenā apmalē =====
+   Fons virs esošā: gradients (--gl 0 -> 1, reģistrēts @property, tāpēc pāreja 0.25 s arī gradientam); apmale rgba(232,168,60,.55) esošajā biezumā; ēna iekšā + ārā.
+   Dators: pele (@media hover:hover) un tastatūra (:focus-visible); izvēršamiem blokiem tikai aizvērtā stāvoklī (:not([open])).
+   Telefons: klase .gl-tap (skripts zemāk) parādās uzreiz pirksta pieskāriena brīdī un pazūd uzreiz, atlaižot/kustinot pirkstu (bez pārejām); izvēršamiem blokiem tikai uz virsraksta rindas; :hover uz skārienekrāniem vairs nav (nepielīp). */
+@property --gl{syntax:'<number>';inherits:false;initial-value:0}
+.section-header{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,box-shadow .25s,--gl .25s}
+html #auBox details.au-group{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),none;transition:border-color .25s,box-shadow .25s,--gl .25s}
+.link-plate{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,transform .2s,box-shadow .25s,--gl .25s}
+.exchange-header{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,box-shadow .25s,--gl .25s}
+.start-header{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,box-shadow .25s,--gl .25s}
+.start-stage{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),none;transition:border-color .25s,box-shadow .25s,--gl .25s}
+.faq-item{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),none;transition:border-color .25s,box-shadow .25s,--gl .25s}
+.don-card{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:transform .25s,border-color .25s,box-shadow .25s,--gl .25s}
+.contact-btn{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,transform .2s,box-shadow .25s,--gl .25s}
+a.sac-card{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,box-shadow .25s,--gl .25s}
+.share-option{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),none;transition:border-color .25s,box-shadow .25s,color .25s,--gl .25s}
+html #auBox .au-share{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),none;transition:border-color .25s,box-shadow .25s,transform .2s,--gl .25s}
+.cookie-consent .cookie-actions button#cookieAccept,.cookie-consent .cookie-actions button#cookieDecline{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,box-shadow .25s,transform .2s,--gl .25s}
+.modal button:not(.primary){background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0)))),linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));transition:border-color .25s,box-shadow .25s,transform .2s,--gl .25s}
+@media (hover:hover){
+.section-group:not([open]) > .section-header:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+html #auBox details.au-group:not([open]):hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.link-plate:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transform:translateY(-2px) scale(1.01)}
+.exchange-group:not([open]) > .exchange-header:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.start-group:not([open]) > .start-header:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.start-stage:not([open]):hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.faq-item:not([open]):hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.don-card:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transform:translateY(-2px) scale(1.01)}
+.contact-btn:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transform:translateY(-2px)}
+a.sac-card:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.share-option:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);color:var(--gold-bright)}
+html #auBox .au-share:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.cookie-consent .cookie-actions button#cookieAccept:hover,.cookie-consent .cookie-actions button#cookieDecline:hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+.modal button:not(.primary):hover{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+}
+.section-group:not([open]) > .section-header:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+html #auBox details.au-group:not([open]):has(> .au-head:focus-visible){--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.link-plate:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transform:translateY(-2px) scale(1.01);outline:none}
+.exchange-group:not([open]) > .exchange-header:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.start-group:not([open]) > .start-header:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.start-stage:not([open]):has(> .start-stage-head:focus-visible){--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.faq-item:not([open]):has(> .faq-q:focus-visible){--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.don-card:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transform:translateY(-2px) scale(1.01);outline:none}
+.contact-btn:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transform:translateY(-2px);outline:none}
+a.sac-card:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.share-option:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);color:var(--gold-bright);outline:none}
+html #auBox .au-share:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.cookie-consent .cookie-actions button#cookieAccept:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.cookie-consent .cookie-actions button#cookieDecline:focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+.modal button:not(.primary):focus-visible{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);outline:none}
+/* Izvēršamo bloku virsraksta rinda (telefonā stikls tikai uz tās): atpūtā caurspīdīgs slānis, radius = bloka radius - 1px apmale */
+html #auBox details.au-group > .au-head,.start-stage > .start-stage-head,.faq-item > .faq-q{background-image:linear-gradient(180deg,rgba(255,230,180,calc(.16*var(--gl,0))),rgba(255,255,255,calc(.02*var(--gl,0))) 50%,rgba(255,230,180,calc(.08*var(--gl,0))));border-radius:9px}
+.section-group > .section-header.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,box-shadow 0s,--gl 0s}
+html #auBox details.au-group > .au-head.gl-tap{--gl:1;box-shadow:0 0 0 1px rgba(232,168,60,.55),inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:box-shadow 0s,--gl 0s}
+.link-plate.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,transform .2s,box-shadow 0s,--gl 0s}
+.exchange-group > .exchange-header.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,box-shadow 0s,--gl 0s}
+.start-group > .start-header.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,box-shadow 0s,--gl 0s}
+.start-stage > .start-stage-head.gl-tap{--gl:1;box-shadow:0 0 0 1px rgba(232,168,60,.55),inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:box-shadow 0s,--gl 0s}
+.faq-item > .faq-q.gl-tap{--gl:1;box-shadow:0 0 0 1px rgba(232,168,60,.55),inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:box-shadow 0s,--gl 0s}
+.don-card.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:transform .25s,border-color 0s,box-shadow 0s,--gl 0s}
+.contact-btn.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,transform .2s,box-shadow 0s,--gl 0s}
+a.sac-card.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,box-shadow 0s,--gl 0s}
+.share-option.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);color:var(--gold-bright);transition:border-color 0s,box-shadow 0s,color 0s,--gl 0s}
+html #auBox .au-share.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,box-shadow 0s,transform .2s,--gl 0s}
+.cookie-consent .cookie-actions button#cookieAccept.gl-tap,.cookie-consent .cookie-actions button#cookieDecline.gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,box-shadow 0s,transform .2s,--gl 0s}
+.modal button:not(.primary).gl-tap{--gl:1;border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7);transition:border-color 0s,box-shadow 0s,transform .2s,--gl 0s}
+.section-group > .section-header.gl-kill{transition:border-color 0s,box-shadow 0s,--gl 0s}
+html #auBox details.au-group > .au-head.gl-kill{transition:box-shadow 0s,--gl 0s}
+.link-plate.gl-kill{transition:border-color 0s,transform .2s,box-shadow 0s,--gl 0s}
+.exchange-group > .exchange-header.gl-kill{transition:border-color 0s,box-shadow 0s,--gl 0s}
+.start-group > .start-header.gl-kill{transition:border-color 0s,box-shadow 0s,--gl 0s}
+.start-stage > .start-stage-head.gl-kill{transition:box-shadow 0s,--gl 0s}
+.faq-item > .faq-q.gl-kill{transition:box-shadow 0s,--gl 0s}
+.don-card.gl-kill{transition:transform .25s,border-color 0s,box-shadow 0s,--gl 0s}
+.contact-btn.gl-kill{transition:border-color 0s,transform .2s,box-shadow 0s,--gl 0s}
+a.sac-card.gl-kill{transition:border-color 0s,box-shadow 0s,--gl 0s}
+.share-option.gl-kill{transition:border-color 0s,box-shadow 0s,color 0s,--gl 0s}
+html #auBox .au-share.gl-kill{transition:border-color 0s,box-shadow 0s,transform .2s,--gl 0s}
+.cookie-consent .cookie-actions button#cookieAccept.gl-kill,.cookie-consent .cookie-actions button#cookieDecline.gl-kill{transition:border-color 0s,box-shadow 0s,transform .2s,--gl 0s}
+.modal button:not(.primary).gl-kill{transition:border-color 0s,box-shadow 0s,transform .2s,--gl 0s}
+/* tastatūras fokuss uz aizvērta bloka virsraksta: stikls aizstāj pārlūka kontūru; atvērtam blokam kontūra paliek */
+.section-group:not([open]) > .section-header:focus-visible,.exchange-group:not([open]) > .exchange-header:focus-visible,.start-group:not([open]) > .start-header:focus-visible,
+html #auBox details.au-group:not([open]) > .au-head:focus-visible,.start-stage:not([open]) > .start-stage-head:focus-visible,.faq-item:not([open]) > .faq-q:focus-visible{outline:none}
+/* nospiešana (kā līdz šim) ir svarīgāka par pieskāriena pacelšanu */
+.link-plate:active,.don-card:active{transform:translateY(0) scale(0.97)}
+a.vid-card:active{transform:translateY(0) scale(0.97)}
+/* Video kartītes: stikls tikai uz sīktēla apmales un ēnas (pats attēls netiek aizklāts); kartītes kustība kā līdz šim */
+@media (hover:hover){
+a.vid-card:hover{transform:translateY(-2px) scale(1.01)}
+a.vid-card:hover .vid-thumb{border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+}
+a.vid-card:focus-visible{transform:translateY(-2px) scale(1.01);outline:none}
+a.vid-card:focus-visible .vid-thumb,a.vid-card.gl-tap .vid-thumb{border-color:rgba(232,168,60,.55);box-shadow:inset 0 1px 1px rgba(255,230,180,.55),inset 0 -2px 3px rgba(255,230,180,.15),0 6px 16px rgba(0,0,0,.7)}
+a.vid-card.gl-tap .vid-thumb{transition:border-color 0s,box-shadow 0s}
+a.vid-card.gl-kill .vid-thumb{transition:border-color 0s,box-shadow 0s}
+a.vid-card:active{transform:translateY(0) scale(0.97)}
+
 </style>
 </head>
 <body>
@@ -4152,6 +4222,44 @@ document.addEventListener('click', function(e) {
   fx.addEventListener('animationend',function(e){ if(e.animationName==='logoShine') end(); });
   box.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse'||e.pointerType==='pen') go(); },{passive:true});
   box.addEventListener('pointerup',function(e){ if(e.pointerType==='touch') go(); },{passive:true});
+})();
+</script>
+<script>
+/* Stikla efekts, kamēr pirksts spiež (telefons). pointerdown (touch) -> klase .gl-tap UZ VIENA bloka (tuvākā, ko pieskārās; izvēršamam blokam - uz virsraksta rindas) uzreiz, bez pārejas.
+   pointerup / pointercancel / pirksta kustība > 6 px / lapas ritināšana / otrs pirksts -> efekts pazūd uzreiz (.gl-kill = 0 s pārejas uz vienu kadru, tad klase tiek noņemta).
+   Nav aiztures, minimāla rādīšanas laika, izzušanas pārejas; nav preventDefault, klausītāji pasīvi - bloku atvēršana un saites notiek kā līdz šim. Pele: tikai CSS :hover. */
+(function(){
+  var MAP=['.section-header','.start-header','.exchange-header','.link-plate','.don-card','.contact-btn','a.sac-card','a.vid-card','.share-option','#auBox .au-share',
+    '.cookie-consent .cookie-actions button','.modal button:not(.primary)','#auBox details.au-group > .au-head','.start-stage > .start-stage-head','.faq-item > .faq-q'];
+  var cur=null, pid=-1, sx=0, sy=0, MOVE=6;
+  function pick(t){
+    var best=null, i, el;
+    for(i=0;i<MAP.length;i++){ el=t.closest(MAP[i]); if(el&&(!best||best.contains(el))) best=el; }
+    return best;
+  }
+  function release(){
+    var el=cur; cur=null; pid=-1; if(!el) return;
+    el.classList.remove('gl-tap'); el.classList.add('gl-kill');
+    setTimeout(function(){ if(el!==cur) el.classList.remove('gl-kill'); },80);
+  }
+  document.addEventListener('pointerdown',function(e){
+    if(e.pointerType!=='touch'){ return; }
+    if(cur){ release(); return; }                       /* otrs pirksts (tuvināšana/ritināšana) -> nekas */
+    if(e.isPrimary===false) return;
+    var t=e.target; if(!t||!t.closest) return;
+    var el=pick(t); if(!el) return;
+    el.classList.remove('gl-kill'); el.classList.add('gl-tap');
+    cur=el; pid=e.pointerId; sx=e.clientX; sy=e.clientY;
+  },{passive:true,capture:true});
+  document.addEventListener('pointermove',function(e){
+    if(!cur||e.pointerId!==pid) return;
+    if(Math.abs(e.clientX-sx)>MOVE||Math.abs(e.clientY-sy)>MOVE) release();
+  },{passive:true,capture:true});
+  ['pointerup','pointercancel','touchend','touchcancel','contextmenu','dragstart'].forEach(function(n){ document.addEventListener(n,release,{passive:true,capture:true}); });
+  document.addEventListener('touchmove',function(){ if(cur) release(); },{passive:true,capture:true});
+  window.addEventListener('scroll',function(){ if(cur) release(); },{passive:true,capture:true});
+  window.addEventListener('blur',release); window.addEventListener('pageshow',release); window.addEventListener('pagehide',release);
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) release(); });
 })();
 </script>
 </body>
