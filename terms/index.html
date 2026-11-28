@@ -1,120 +1,255 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Terms of Service | PostPilot — @MRACRYPTO</title>
-  <meta name="description" content="Terms of Service for PostPilot, the internal tool used to manage the MrACrypto YouTube, TikTok and Instagram channels.">
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
-  <style>
-    :root{
-      --gold-bright:#FFC864;--gold:#E8A83C;--gold-dim:#C9791A;--bronze:#9c7442;--cream:#F3E9D4;--line:rgba(232,168,60,0.2);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      margin:0;padding:48px 22px;
-      background:linear-gradient(180deg, rgba(18,16,10,0.92), rgba(8,6,3,0.96)),#050301;
-      color:var(--cream);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-      font-size:15px;line-height:1.7;
-    }
-    .page{max-width:680px;margin:0 auto}
-    h1{font-size:24px;color:var(--gold);letter-spacing:.01em;margin-bottom:6px}
-    .updated{font-size:12px;color:var(--bronze);margin-bottom:28px}
-    h2{font-size:17px;color:var(--gold);margin:26px 0 8px}
-    p{margin:0 0 14px;color:var(--cream)}
-    li{color:#E8D5B5;margin-bottom:6px}
-    a{color:var(--gold-bright)}
-    .back{display:inline-block;margin-top:26px;color:var(--gold-bright);text-decoration:none;}
-    .divider{border-top:1px solid var(--line);margin:44px 0}
-    .lang-pill{position:fixed;top:14px;right:16px;z-index:70;display:flex;gap:6px;background:rgba(18,16,10,.86);border:1px solid var(--line);border-radius:99px;padding:4px 6px}
-    .lang-pill button{background:transparent;border:1px solid var(--gold-dim);border-radius:99px;padding:4px 11px;color:var(--bronze);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
-    .lang-pill button[aria-pressed="true"]{background:linear-gradient(180deg,rgba(232,168,60,.25),rgba(232,168,60,.12));border-color:var(--gold);color:var(--gold-bright)}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lietošanas noteikumi | @MRACRYPTO</title>
+<meta name="description" content="Lietošanas noteikumi vietnei mracrypto.co: informatīvs saturs, bez peļņas garantijām, konsultācijas, ziedojumi un saites.">
+<meta name="theme-color" content="#0a0703">
+<link rel="canonical" href="https://mracrypto.co/terms/">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<style>
+  @font-face{font-family:'Marcellus';font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/marcellus-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+  @font-face{font-family:'Marcellus';font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/marcellus-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+  @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 600;font-display:swap;src:url('../assets/fonts/spacegrotesk-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+  @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 600;font-display:swap;src:url('../assets/fonts/spacegrotesk-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 
-    /* Modāļa kontekstā (iframe): slēpjam valodas pārslēdzēju, "Atgriezties" kļūst par pogu, kas aizver modāli */
-    body.in-modal .lang-pill{display:none !important}
-    body.in-modal .back{display:inline-block;margin-top:26px;color:var(--gold-bright);text-decoration:none;cursor:pointer;border:none;background:none;font-family:inherit;font-size:15px}
-    body.in-modal{background:transparent;padding:0}
-    body.in-modal .page{max-width:640px;margin:0 auto;padding:28px 20px}
-  </style>
+  :root{
+    --gold-bright:#FFC864;--gold:#E8A83C;--gold-dim:#C9791A;--bronze:#b8905a;--cream:#F3E9D4;--line:rgba(232,168,60,0.2);
+    --glass-bg:rgba(30,22,10,.55);--glass-inset:inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  *{box-sizing:border-box}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
+  html,body{margin:0;padding:0;background:#000;color:var(--cream);font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow-x:hidden}
+
+  /* Fons = kā sākumlapā */
+  body{position:relative}
+  .bg-photo,body::after{position:absolute;left:0;right:0;z-index:0;pointer-events:none;background-image:url('../assets/bg-1920.61ce8a66.webp');background-size:cover;background-repeat:no-repeat}
+  .bg-photo{top:0;height:820px;background-position:center 30%;filter:brightness(0.66);opacity:0.5;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 28%,rgba(0,0,0,0.55) 58%,rgba(0,0,0,0.15) 82%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 0%,#000 28%,rgba(0,0,0,0.55) 58%,rgba(0,0,0,0.15) 82%,transparent 100%)}
+  body::after{content:"";bottom:0;height:620px;background-position:center 65%;filter:brightness(0.66);opacity:0.16;
+    -webkit-mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.7) 35%,rgba(0,0,0,0.25) 70%,transparent 100%);
+            mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.7) 35%,rgba(0,0,0,0.25) 70%,transparent 100%)}
+  @media (max-width:600px){.bg-photo,body::after{background-image:url('../assets/bg-800.27e7e367.webp')}}
+
+  .page{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:48px 24px 110px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  @media (max-width:380px){.page{padding:36px 18px 110px}}
+
+  /* Galvene: logo + tagline (kā sākumlapā) */
+  .logo-glow{position:relative;width:360px}
+  .logo-glow img{position:relative;z-index:1;width:100%;height:auto;display:block}
+  picture.pic{display:block;line-height:0;flex-shrink:0}
+  .fade-up{opacity:0;transform:translateY(18px);animation:fadeUp .32s ease-out forwards;will-change:transform,opacity}
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+  .delay-1{animation-delay:.05s}.delay-2{animation-delay:.1s}.delay-3{animation-delay:.15s}
+  .tagline{margin-top:14px;font-family:'Marcellus',serif;font-size:15.5px;color:var(--bronze);letter-spacing:.02em;max-width:340px;line-height:1.6;text-wrap:balance;text-shadow:0 1px 8px rgba(0,0,0,.75)}
+  .divider{width:60px;height:1px;margin:26px 0 28px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent)}
+  @media (max-width:600px){.logo-glow{width:270px;margin:9px 0 10px}}
+  @media (max-width:380px){.logo-glow{width:195px;margin:6px 0 7px}}
+  .logo-glow .logo-shine{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+    -webkit-mask-image:url(../assets/logo-540.11b9fecf.webp);mask-image:url(../assets/logo-540.11b9fecf.webp);
+    -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+  .logo-glow .logo-shine::before{content:"";position:absolute;inset:0;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,217,138,0.55) 46%,rgba(255,248,225,0.95) 50%,rgba(255,217,138,0.55) 54%,transparent 62%);transform:translateX(-100%)}
+  .logo-glow.logo-shining .logo-shine{display:block}
+  .logo-glow.logo-shining .logo-shine::before{animation:logoShine .9s ease-in-out 1}
+  .logo-glow.logo-shining img{animation:logoGlow .9s ease-in-out 1}
+  @keyframes logoShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+  @keyframes logoGlow{0%{filter:drop-shadow(0 0 0 rgba(232,168,60,0))}50%{filter:drop-shadow(0 0 16px rgba(232,168,60,0.7))}100%{filter:drop-shadow(0 0 0 rgba(232,168,60,0))}}
+
+  /* LV/EN slēdzis (kā sākumlapā) */
+  .top-controls{position:fixed;top:12px;right:16px;z-index:70;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lang-switcher{position:relative;display:flex;gap:6px;align-items:center;background:var(--glass-bg);-webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);
+    border:1px solid var(--line);border-radius:99px;padding:4px 6px;box-shadow:var(--glass-inset)}
+  .lang-btn{position:relative;z-index:1;background:transparent;border:1px solid var(--gold-dim);border-radius:99px;padding:4px 12px;color:var(--bronze);font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .25s}
+  .lang-btn::after{content:"";position:absolute;inset:-9px -3px}
+  .lang-btn[aria-pressed="true"]{background:transparent;border-color:transparent;color:#FFD98A}
+  .lang-btn:hover:not([aria-pressed="true"]){border-color:var(--gold);color:var(--gold)}
+  .glass-bubble{position:absolute;left:0;top:0;width:0;height:0;box-sizing:border-box;border-radius:99px;pointer-events:none;z-index:0;opacity:0;will-change:translate,scale;
+    border:1px solid rgba(232,168,60,.95);background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.03) 50%,rgba(255,255,255,.09));
+    box-shadow:inset 0 1px 1px rgba(255,230,180,.45),inset 0 -2px 3px rgba(255,230,180,.12),0 4px 12px rgba(0,0,0,.6)}
+  .glass-bubble.on{opacity:1}
+
+  /* Dokumenta kartīte (tāda pati stikla kartīte kā "Par mani") */
+  .doc-card{width:100%;padding:22px 20px;background:linear-gradient(180deg,rgba(18,16,10,0.2),rgba(8,6,3,0.3));background-color:rgba(18,16,10,0.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    border:1px solid var(--line);border-radius:12px;text-align:left}
+  .doc-card h1{font-family:'Marcellus',serif;font-weight:400;font-size:24px;line-height:1.25;color:var(--gold-bright);letter-spacing:.02em;margin:0 0 6px}
+  .doc-card h2{font-family:'Marcellus',serif;font-weight:400;font-size:16px;line-height:1.35;color:var(--gold);letter-spacing:.02em;margin:24px 0 8px}
+  .doc-card .updated{font-size:12px;color:var(--bronze);margin:0 0 18px}
+  .doc-card p{font-size:13.5px;line-height:1.65;color:#C9AF87;margin:0 0 12px}
+  .doc-card p.intro{margin-bottom:4px}
+  .doc-card ul{font-size:13.5px;line-height:1.65;color:#C9AF87;margin:0 0 12px;padding-left:20px}
+  .doc-card li{margin-bottom:6px;color:#C9AF87}
+  .doc-card strong{color:var(--cream);font-weight:600}
+  .doc-card a{color:var(--gold-bright);text-decoration:underline;text-underline-offset:2px}
+  .doc-card .contact{background:rgba(232,168,60,0.06);border-left:3px solid var(--gold-dim);padding:10px 14px;border-radius:6px;margin-top:8px}
+  .doc-card .contact p{margin:0}
+  .back{display:inline-block;margin-top:22px;color:var(--gold-bright);text-decoration:none;background:none;border:none;padding:8px 0;cursor:pointer;font-family:inherit;font-size:14px}
+  .back:hover{text-decoration:underline;text-underline-offset:3px}
+  #policyBody{width:100%;display:flex;flex-direction:column;align-items:center}
+
+  /* Kājene (kā sākumlapā) */
+  .footer{margin-top:40px;font-size:11px;color:#b8905a;letter-spacing:.04em;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+  .footer-links{margin-top:6px;font-size:11px;color:#b8905a;letter-spacing:.04em;text-align:center;display:flex;justify-content:center;gap:14px;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+  .footer-links a{color:var(--bronze);text-decoration:underline;text-underline-offset:2px;padding:15px 4px}
+  .footer-links a:hover{color:var(--gold-bright)}
+
+  /* Iframe modālis (sākumlapas privātuma logs): bez galvenes, kājenes, valodas slēdža; fons caurspīdīgs */
+  html.in-modal,body.in-modal{background:transparent}
+  body.in-modal .top-controls,body.in-modal .logo-glow,body.in-modal .tagline,body.in-modal .divider,body.in-modal .footer,body.in-modal .footer-links,body.in-modal .bg-photo{display:none !important}
+  body.in-modal::after{display:none}
+  body.in-modal .page{max-width:640px;padding:28px 20px}
+  body.in-modal .doc-card{background:none;border:none;padding:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+</style>
 </head>
 <body>
-  <div class="lang-pill" role="group" aria-label="Language / Valoda">
-    <button type="button" data-lang="lv" id="plv" aria-pressed="true">LV</button>
-    <button type="button" data-lang="en" id="pen" aria-pressed="false">EN</button>
+  <div class="top-controls" id="topControls">
+    <div class="lang-switcher" id="langSwitcher" role="group" aria-label="Language / Valoda">
+      <button type="button" class="lang-btn" data-lang="lv" id="plv" aria-pressed="true">LV</button>
+      <button type="button" class="lang-btn" data-lang="en" id="pen" aria-pressed="false">EN</button>
+    </div>
   </div>
+
+  <div class="bg-photo"></div>
+
   <div class="page">
-    <div id="policyBody">
-    <h1>Lietošanas noteikumi — PostPilot</h1>
-    <div class="updated">Pēdējo reiz atjaunināti: 2026. gada 9. oktobrī</div>
+    <div class="logo-glow fade-up delay-1">
+      <picture class="pic"><source type="image/webp" srcset="../assets/logo-540.11b9fecf.webp 540w, ../assets/logo-720.54db4019.webp 720w" sizes="(max-width:380px) 195px, (max-width:600px) 270px, 360px"><img src="../assets/logo-720.888b3961.png" alt="@MRACRYPTO" width="720" height="720" fetchpriority="high"></picture>
+      <span class="logo-shine" aria-hidden="true"></span>
+    </div>
+    <div class="tagline fade-up delay-2">Crypto & Passive Income Investor&nbsp;| Est.&nbsp;2021. Founder of KRIPTO NR. 1 - 🇱🇻&nbsp;Latvia's crypto media&nbsp;| 🤖 AI & Automation</div>
+    <div class="divider fade-up delay-2"></div>
 
-    <p>Šie lietošanas noteikumi attiecas uz <strong>PostPilot</strong> — iekšēju automatizācijas rīku, ko izveidojis un pārvalda tikai Andrejs Kozlovs, lai pārvaldītu <strong>MrACrypto</strong> YouTube, TikTok un Instagram kanālus. PostPilot nav publisks produkts — tam ir viens operators, un tas nav pieejams vai izmantojams citām personām.</p>
+    <div id="policyBody"></div>
 
-    <h2>1. Viena operatora rīks</h2>
-    <p>PostPilot ir paredzēts tikai iekšējai lietošanai, ko veic tā īpašnieks. Tas nav publiski pieejams un netiek piedāvāts kā pakalpojums trešajām pusēm.</p>
-
-    <h2>2. YouTube API Services</h2>
-    <p>PostPilot izmanto YouTube API Services. Lietojot PostPilot, īpašnieks piekrīt <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube Terms of Service</a>.</p>
-
-    <h2>3. Privātums</h2>
-    <p>Skatīt <a href="https://mracrypto.co/privacy/" target="_blank" rel="noopener">Privātuma politiku</a> par to, kādus datus PostPilot glabā un kā.</p>
-
-    <h2>4. Izmaiņas</h2>
-    <p>Šie noteikumi var tikt laiku pa laikam atjaunināti. Augstāk norādītais datums atspoguļo jaunāko redakciju.</p>
-
-    <h2>5. Kontakti</h2>
-    <p>Jautājumi: <a href="mailto:mracrypto21@gmail.com">mracrypto21@gmail.com</a></p>
-
-    <a class="back" href="../" id="policyBack">← Atgriezties uz mracrypto.co</a>
+    <div class="footer" id="ftText"></div>
+    <div class="footer-links">
+      <a href="/privacy/" id="ftPriv">Privātuma politika</a>
+      <a href="/terms/" id="ftTerms">Lietošanas noteikumi</a>
     </div>
   </div>
 <script>
 (function(){
-  var EN = "<h1>Terms of Service — PostPilot</h1>\n    <div class=\"updated\">Last updated: October 9, 2026</div>\n\n    <p>These Terms of Service apply to <strong>PostPilot</strong>, an internal automation tool built and operated solely by Andrejs Kozlovs to manage the YouTube, TikTok and Instagram channels of <strong>MrACrypto</strong>. PostPilot is not a public product \u2014 it has a single operator and is not made available to, or usable by, any other party.</p>\n\n    <h2>1. Single-operator tool</h2>\n    <p>PostPilot is for internal use only, by its owner. It is not publicly accessible and is not offered as a service to third parties.</p>\n\n    <h2>2. YouTube API Services</h2>\n    <p>PostPilot uses YouTube API Services. By using PostPilot, the owner agrees to be bound by the <a href=\"https://www.youtube.com/t/terms\" target=\"_blank\" rel=\"noopener\">YouTube Terms of Service</a>.</p>\n\n    <h2>3. Privacy</h2>\n    <p>See the <a href=\"https://mracrypto.co/privacy/\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> for details on what data PostPilot stores and how.</p>\n\n    <h2>4. Changes</h2>\n    <p>These Terms may be updated from time to time. The \"Last updated\" date above reflects the latest revision.</p>\n\n    <h2>5. Contact</h2>\n    <p>Questions: <a href=\"mailto:mracrypto21@gmail.com\">mracrypto21@gmail.com</a></p>\n\n    <a class=\"back\" href=\"../\" id=\"policyBack\">\u2190 Back to mracrypto.co</a>";
+  var DATA = {"body": {"lv": "<div class=\"doc-card\" id=\"website\"><h1>Lietošanas noteikumi<\/h1>\n<div class=\"updated\">Pēdējo reizi atjaunināti: 2026. gada 28. novembrī<\/div>\n<p class=\"intro\">Šie noteikumi attiecas uz vietnes mracrypto.co lietošanu.<\/p>\n\n<h2>1. Informatīvs un izglītojošs saturs<\/h2>\n<p>Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava paša atbildība.<\/p>\n\n<h2>2. Peļņa nav garantēta<\/h2>\n<p>Peļņu nevar garantēt, un tirgus ir ļoti svārstīgs. Kripto nav garantēti ienākumi, un var arī zaudēt daļu vai visu ieguldīto. Ieguldi tikai tik, cik esi gatavs zaudēt, un neaizņemies naudu kripto pirkšanai.<\/p>\n\n<h2>3. Uzmanies no krāpniekiem<\/h2>\n<p>Interneta vidē darbojas daudz viltus profilu, kas uzdodas par mani. Es nekad nerakstīšu pirmais un nepiedāvāšu investēt! Lai nekļūtu par to upuri, pārbaudi manus oficiālos sociālos tīklus vietnes sadaļā \"Sociālie tīkli\". Es nekad neprasīšu tavas paroles, \"seed\" frāzes vai privātās atslēgas.<\/p>\n\n<h2>4. Partneru (atsauču) un promo saites<\/h2>\n<p>Dažas saites vietnē ir partneru saites. Dažām saitēm ir pievienots promo kods (piemēram, Tangem iegādes saitei). Par reģistrāciju vai pirkumu, kas veikts, izmantojot šīs saites, es varu saņemt atlīdzību.<\/p>\n\n<h2>5. Konsultācijas<\/h2>\n<ul>\n  <li>Konsultācija notiek klātienē vai attālināti, izmantojot Zoom vai Telegram zvanu. Tā ilgst 1 stundu.<\/li>\n  <li>Viena konsultācija (1 stunda) maksā 70 €/$.<\/li>\n  <li>Var maksāt ar bankas pārskaitījumu vai kriptovalūtā.<\/li>\n  <li>Konsultācijas ir tikai informatīvas un izglītojošas, un tās nav finanšu padoms. Peļņa netiek garantēta. Lēmumus par ieguldījumiem pieņem pats.<\/li>\n  <li>Pieteikties var, nospiežot pogu \"Pieteikties konsultācijai\", vai rakstot e-pastu vai Telegram ziņu sadaļā \"Sazinies ar mani\".<\/li>\n<\/ul>\n\n<h2>6. Brīvprātīgi ziedojumi<\/h2>\n<p>Ja šis saturs vai rīki bija noderīgi, vari brīvprātīgi atbalstīt mracrypto.co projekta attīstību. Monētu QR kodi un maku adreses ir redzami vietnes ziedojumu blokā.<\/p>\n\n<h2>7. Ārējās saites<\/h2>\n<p>Vietnē ir saites uz ārējām vietnēm un pakalpojumiem (piemēram, kripto biržām, sociālajiem tīkliem un Tangem). Tās pārvalda to īpašnieki, nevis šī vietne.<\/p>\n\n<h2>8. Kontakti<\/h2>\n<p>Jautājumi: <a href=\"mailto:mracrypto21@gmail.com\">mracrypto21@gmail.com<\/a><\/p><\/div>\n<button type=\"button\" class=\"back\" id=\"policyBack\">← Atgriezties uz mracrypto.co<\/button>", "en": "<div class=\"doc-card\" id=\"website\"><h1>Terms of Service<\/h1>\n<div class=\"updated\">Last updated: November 28, 2026<\/div>\n<p class=\"intro\">These terms apply to the use of the website mracrypto.co.<\/p>\n\n<h2>1. Informational and educational content<\/h2>\n<p>The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.<\/p>\n\n<h2>2. No guarantee of profit<\/h2>\n<p>Profit cannot be guaranteed, and the market is very volatile. Crypto offers no guaranteed income, and you can lose part or all of what you invest. Only invest what you are prepared to lose, and never borrow money to buy crypto.<\/p>\n\n<h2>3. Beware of scammers<\/h2>\n<p>There are many fake profiles online pretending to be me. I will never message you first and I will never offer you an investment! To avoid becoming a victim, check my official social media in the \"Social media\" section of the website. I will never ask for your passwords, seed phrases or private keys.<\/p>\n\n<h2>4. Affiliate (referral) and promo links<\/h2>\n<p>Some links on the website are affiliate links. Some links carry a promo code (for example, the Tangem purchase link). I may receive a commission for registrations or purchases made through these links.<\/p>\n\n<h2>5. Consultations<\/h2>\n<ul>\n  <li>The consultation takes place in person or remotely via Zoom or a Telegram call. It lasts 1 hour.<\/li>\n  <li>One consultation (1 hour) costs €70/$70.<\/li>\n  <li>You can pay by bank transfer or in cryptocurrency.<\/li>\n  <li>Consultations are for informational and educational purposes only and are not financial advice. Profit is not guaranteed. You make your own investment decisions.<\/li>\n  <li>Apply by pressing the \"Book a consultation\" button, or write an e-mail or a Telegram message in the \"Get in touch\" section.<\/li>\n<\/ul>\n\n<h2>6. Voluntary donations<\/h2>\n<p>If you find this content or these tools helpful, feel free to voluntarily support the development of mracrypto.co. The coin QR codes and wallet addresses are shown in the donation block of the website.<\/p>\n\n<h2>7. External links<\/h2>\n<p>The website contains links to external websites and services (for example crypto exchanges, social networks and Tangem). They are operated by their owners, not by this website.<\/p>\n\n<h2>8. Contact<\/h2>\n<p>Questions: <a href=\"mailto:mracrypto21@gmail.com\">mracrypto21@gmail.com<\/a><\/p><\/div>\n<button type=\"button\" class=\"back\" id=\"policyBack\">← Back to mracrypto.co<\/button>"}, "title": {"lv": "Lietošanas noteikumi | @MRACRYPTO", "en": "Terms of Service | @MRACRYPTO"}, "ft": {"lv": {"footer": "Atruna: Šajā vietnē un manis sniegtā informācija ir paredzēta tikai informatīviem un izglītojošiem mērķiem un nav uzskatāma par finanšu konsultāciju. Viss saturs balstās uz personīgo pieredzi. Jebkuri lēmumi par ieguldījumiem vai rīcību ir tava paša atbildība.", "priv": "Privātuma politika", "terms": "Lietošanas noteikumi"}, "en": {"footer": "Disclaimer: The information provided on this site and by me is intended for informational and educational purposes only and is not to be considered financial advice. All content is based on personal experience. Any decisions about investments or actions are your own responsibility.", "priv": "Privacy Policy", "terms": "Terms of Service"}}};
+  var body = document.getElementById('policyBody');
 
-  var body=document.getElementById('policyBody');
-  var orig=body.innerHTML;
-
-  function apply(lang,persist){
-    if(persist !== false){try{localStorage.setItem('mrc_lang',lang);}catch(e){}}
-    document.documentElement.setAttribute('lang',lang);
-    document.getElementById('plv').setAttribute('aria-pressed',lang==='lv'?'true':'false');
-    document.getElementById('pen').setAttribute('aria-pressed',lang==='en'?'true':'false');
-    body.innerHTML = lang==='en' ? EN : orig;
+  function apply(lang, persist){
+    if (persist !== false){ try{ localStorage.setItem('mrc_lang', lang); }catch(e){} }
+    document.documentElement.setAttribute('lang', lang);
+    document.getElementById('plv').setAttribute('aria-pressed', lang === 'lv' ? 'true' : 'false');
+    document.getElementById('pen').setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    body.innerHTML = DATA.body[lang];
+    document.title = DATA.title[lang];
+    var f = DATA.ft[lang];
+    document.getElementById('ftText').innerHTML = f.footer;
+    document.getElementById('ftPriv').textContent = f.priv;
+    document.getElementById('ftTerms').textContent = f.terms;
   }
+  document.getElementById('plv').addEventListener('click', function(){ apply('lv', true); });
+  document.getElementById('pen').addEventListener('click', function(){ apply('en', true); });
 
-  document.getElementById('plv').addEventListener('click',function(){apply('lv',true);});
-  document.getElementById('pen').addEventListener('click',function(){apply('en',true);});
-
-  /* Valodas noteikšana: 1) ?lang=en URL parametrs  2) saglabātā izvēle (localStorage)  3) noklusējums LV */
+  /* Valodas noteikšana: 1) ?lang=en|lv  2) localStorage['mrc_lang'] (kopīgs ar sākumlapu)  3) noklusējums LV */
   function urlLang(){
-    try{
-      var m = /[?&]lang=(en|lv)\b/i.exec(window.location.search);
-      if(m) return m[1].toLowerCase();
-    }catch(e){}
+    try{ var m = /[?&]lang=(en|lv)\b/i.exec(window.location.search); if (m) return m[1].toLowerCase(); }catch(e){}
     return null;
   }
   var initial = urlLang();
-  if(!initial){
-    try{ initial = localStorage.getItem('mrc_lang'); }catch(e){}
-  }
-  if(initial!=='lv' && initial!=='en') initial='lv';
+  if (!initial){ try{ initial = localStorage.getItem('mrc_lang'); }catch(e){} }
+  if (initial !== 'lv' && initial !== 'en') initial = 'lv';
   apply(initial, false);
 
-  /* Ja ielādēta modāļa iframe: slēpjam valodas pārslēdzēju, "Atgriezties" aizver modāli */
-  (function(){
-    var isModal = window.self !== window.top;
-    if (isModal) document.body.classList.add('in-modal');
-    document.addEventListener('click', function(e){
-      var back = e.target.closest('.back');
-      if (!back) return;
-      if (isModal) {
-        e.preventDefault();
-        try { window.parent.postMessage('mrc-close-policy', '*'); } catch(err){}
-      } else {
-        if (back.tagName === 'BUTTON') { e.preventDefault(); window.location.href = '../'; }
-      }
-    });
-  })();
+  /* Iframe modālis: "Atgriezties" aizver logu (postMessage uz sākumlapu) */
+  var isModal = window.self !== window.top;
+  if (isModal){ document.body.classList.add('in-modal'); document.documentElement.classList.add('in-modal'); }
+  document.addEventListener('click', function(e){
+    var back = e.target.closest('.back'); if (!back) return;
+    if (isModal){ e.preventDefault(); try{ window.parent.postMessage('mrc-close-policy', '*'); }catch(err){} }
+    else { e.preventDefault(); window.location.href = '../'; }
+  });
+})();
+</script>
+<script>
+/* Slīdošs stikla burbulis pogu rindās (.au-rngs: 1D/1W/1M un BTC/ETH/SOL/XRP tirgus pārskatā, analīzē un ETF blokā; .lang-switcher: LV/EN).
+   Katrā rindā viens <span.glass-bubble>, kas stāv zem izvēlētās pogas (aria-pressed="true"). Mainoties izvēlei, tas pārslīd uz jauno pogu
+   0,35 s ar cubic-bezier(.34,1.4,.5,1), kustībā palielinās līdz 1,12. Citos gadījumos (bloka atvēršana, valodas maiņa, pagriešana, izmēra / fonta
+   izmaiņas, rindas parādīšanās) burbulis tiek uzreiz novietots pareizi bez animācijas. Pogu klikšķu loģika un GA netiek aiztikti. */
+(function(){
+  var SEL='.lang-switcher', EASE='cubic-bezier(.34,1.4,.5,1)', DUR=350, SCALE=1.12;
+  var mqReduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+  var ro=window.ResizeObserver?new ResizeObserver(schedule):null, queued=false;
+
+  function pressed(row){
+    var bs=row.children, i, b;
+    for(i=0;i<bs.length;i++){ b=bs[i];
+      if(b.getAttribute&&b.getAttribute('aria-pressed')==='true'&&b.offsetWidth>0&&(b.classList.contains('au-rng')||b.classList.contains('lang-btn'))) return b;
+    }
+    return null;
+  }
+  function geom(row,el){
+    var rr=row.getBoundingClientRect(), er=el.getBoundingClientRect();
+    return {x:er.left-rr.left-row.clientLeft, y:er.top-rr.top-row.clientTop, w:er.width, h:er.height};
+  }
+  function css(g){ return {translate:g.x+'px '+g.y+'px', width:g.w+'px', height:g.h+'px'}; }
+  function stop(s){ if(s.anims){ s.anims.forEach(function(a){ a.cancel(); }); s.anims=null; } }
+  function running(s){ return !!(s.anims&&s.anims[0]&&s.anims[0].playState==='running'); }
+
+  function sync(row){
+    var s=row._gb||(row._gb={el:null,last:null,anims:null}), bub=s.el, btn, g, from, f;
+    if(!bub||bub.parentNode!==row){
+      bub=s.el=document.createElement('span'); bub.className='glass-bubble'; bub.setAttribute('aria-hidden','true');
+      row.appendChild(bub); s.last=null;
+      if(ro){ ro.observe(row); }
+    }
+    if(ro){ var kids=row.children, k; for(k=0;k<kids.length;k++) if(kids[k]!==bub) ro.observe(kids[k]); }
+    btn=row.offsetWidth>0?pressed(row):null;
+    if(!btn){ stop(s); bub.classList.remove('on'); s.last=null; return; }
+    g=geom(row,btn);
+    if(s.last&&s.last.b===btn&&Math.abs(s.last.x-g.x)<.25&&Math.abs(s.last.y-g.y)<.25&&Math.abs(s.last.w-g.w)<.25&&Math.abs(s.last.h-g.h)<.25) return;
+    if(s.last&&s.last.b!==btn&&bub.classList.contains('on')&&bub.animate&&!(mqReduce&&mqReduce.matches)){
+      if(running(s)){ from=geom(row,bub); f=parseFloat(getComputedStyle(bub).scale)||1; from.x+=from.w*(1-1/f)/2; from.y+=from.h*(1-1/f)/2; from.w/=f; from.h/=f; }
+      else from={x:s.last.x,y:s.last.y,w:s.last.w,h:s.last.h};
+      stop(s);
+      /* pozīcija un izmērs: pārslīd ar atsperes līkni; mēroga "uzpūtums" 1 -> 1,12 -> 1 atsevišķi pa visu kustības ilgumu */
+      s.anims=[bub.animate([css(from),css(g)],{duration:DUR,easing:EASE}),
+               bub.animate([{scale:'1',easing:'ease-out'},{scale:String(SCALE),offset:.5,easing:'ease-in'},{scale:'1'}],{duration:DUR,easing:'linear'})];
+      s.anims[0].onfinish=s.anims[0].oncancel=function(){ s.anims=null; };
+    } else stop(s);
+    bub.style.translate=g.x+'px '+g.y+'px'; bub.style.width=g.w+'px'; bub.style.height=g.h+'px';
+    bub.classList.add('on');
+    s.last={b:btn,x:g.x,y:g.y,w:g.w,h:g.h};
+  }
+  function syncAll(){ queued=false; var rows=document.querySelectorAll(SEL), i; for(i=0;i<rows.length;i++) sync(rows[i]); }
+  function schedule(){ if(queued) return; queued=true; (window.requestAnimationFrame||setTimeout)(syncAll); }
+
+  new MutationObserver(function(recs){
+    var i, r, j, own;
+    for(i=0;i<recs.length;i++){ r=recs[i];
+      if(r.target.classList&&r.target.classList.contains('glass-bubble')) continue;
+      if(r.type==='childList'){ own=true; for(j=0;j<r.addedNodes.length;j++) if(!(r.addedNodes[j].classList&&r.addedNodes[j].classList.contains('glass-bubble'))) own=false;
+        if(own&&r.removedNodes.length===0) continue; }
+      schedule(); return;
+    }
+  }).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['aria-pressed','style','hidden','class','open','lang']});
+  window.addEventListener('resize',schedule); window.addEventListener('orientationchange',function(){ schedule(); setTimeout(schedule,250); });
+  window.addEventListener('pageshow',schedule); window.addEventListener('load',schedule);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(schedule);
+  schedule();
+})();
+</script>
+<script>
+/* Logo atspīdums: vienreiz uz katru iedarbināšanu. Pele (pointerenter, mouse/pen) -> uzreiz; pieskāriens (touch) -> pie pirksta pacelšanas (pointerup),
+   tāpēc lapas ritināšana pār logo (browser pārņem žestu -> pointercancel) efektu neiedarbina un netiek traucēta (nav preventDefault, pasīvi klausītāji). Kamēr efekts notiek, jauns nesākas;
+   pats no sevis neatkārtojas. Pašu animāciju veido CSS (.logo-shining uz .logo-glow). */
+(function(){
+  var box=document.querySelector('.logo-glow'), fx=box&&box.querySelector('.logo-shine'); if(!fx) return;
+  var busy=false, timer=0;
+  try{ var m=(getComputedStyle(fx).maskImage||getComputedStyle(fx).webkitMaskImage||'').match(/url\("?([^")]+)"?\)/); if(m){ var w=new Image(); w.src=m[1]; } }catch(e){}   /* maska ielādēta jau iepriekš (parasti tas pats fails, ko izmanto logo attēls) */
+  function end(){ busy=false; clearTimeout(timer); box.classList.remove('logo-shining'); }
+  function go(){ if(busy) return; busy=true; box.classList.add('logo-shining'); timer=setTimeout(end,1200); }
+  fx.addEventListener('animationend',function(e){ if(e.animationName==='logoShine') end(); });
+  box.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse'||e.pointerType==='pen') go(); },{passive:true});
+  box.addEventListener('pointerup',function(e){ if(e.pointerType==='touch') go(); },{passive:true});
 })();
 </script>
 </body>
